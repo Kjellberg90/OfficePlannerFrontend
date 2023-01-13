@@ -8,6 +8,7 @@ const AppRouter = () => {
         <Routes>
             <Route element={<Layout />}>
                 <Route index element={<Welcome />}/>
+                <Route path="test" element={<Test />}/>
             </Route>
         </Routes>
 
