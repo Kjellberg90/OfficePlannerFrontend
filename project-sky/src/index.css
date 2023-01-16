@@ -12,6 +12,18 @@ body {
   background-color: var(--primary-color);
 }
 
-h1{
+h1 {
   color: var(--secondary-color);
 }
+
+timeDateLayout {
+  color: var(--secondary-color);
+}
+
+ .layoutHeader {
+  height: 100px;
+  max-width: 1620px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+ }
