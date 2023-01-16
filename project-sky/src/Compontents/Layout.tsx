@@ -24,9 +24,11 @@ const Layout = () => {
 
   return (
       <Fragment>
-        <div className="layoutHeader">
-          <img src={epirocLogo} alt="test" height="80px"/>
-          <h1 className="timeDateLayout">{currentDateTime} {time.toLocaleTimeString()}</h1>
+        <div className="headerContainer">
+          <div className="layoutHeader">
+            <img src={epirocLogo} alt="test" height="80px"/>
+            <h1 className="timeDateLayout">{currentDateTime} {time.toLocaleTimeString()}</h1>
+          </div>
         </div>
         <Outlet />
       </Fragment>
