@@ -1,0 +1,71 @@
+{
+  "rooms": [
+    {
+      "id": 1,
+      "roomName": "United",
+      "seating": 6,
+      "available": false,
+      "bookedBy": "DQT 6",
+      "startTime": "08:00:00 AM",
+      "endTime": "03:00:00 PM"
+    },
+    {
+      "id": 2,
+      "roomName": "Inspired A",
+      "seating": 4,
+      "available": true,
+      "bookedBy": null,
+      "startTime": null,
+      "endTime": null
+    },
+    {
+      "id": 3,
+      "roomName": "Inspired B",
+      "seating": 4,
+      "available": false,
+      "bookedBy": "Phoenix 4",
+      "startTime": "09:30:00 AM",
+      "endTime": "04:00:00 PM"
+    },
+    {
+      "id": 4,
+      "roomName": "Committment",
+      "seating": 6,
+      "available": false,
+      "bookedBy": "Everest 6",
+      "startTime": "07:30:00 AM",
+      "endTime": "02:30:00 PM"
+    },
+    {
+      "id": 5,
+      "roomName": "Collaboration",
+      "seating": 6,
+      "available": true,
+      "bookedBy": null
+    },
+    {
+      "id": 6,
+      "roomName": "Innovation",
+      "seating": 8,
+      "available": false,
+      "bookedBy": "ConCor 7",
+      "startTime": "08:00:00 AM",
+      "endTime": "04:00:00 PM"
+    }
+  ],
+  "groups": [
+    { "groupName": "DQT 6" },
+    { "groupName": "Phoenix 4" },
+    { "groupName": "Bazinga 4" },
+    { "groupName": "ConSys 4" },
+    { "groupName": "PAST 6" },
+    { "groupName": "Heimdall 6" },
+    { "groupName": "Battery 5" },
+    { "groupName": "ConCore 7" },
+    { "groupName": "Everest 6" },
+    { "groupName": "Portal 2" }
+
+  ]
+}
+
+
