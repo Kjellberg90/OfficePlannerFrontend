@@ -35,7 +35,8 @@ timeDateLayout {
 
  .layoutHeader {
   height: 100px;
-  width: 1620px;
+  width: 100%;
+  max-width: 1620px;
   display: flex;
   justify-content: space-around;
   align-items: center;
