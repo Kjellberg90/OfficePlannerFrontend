@@ -3,12 +3,20 @@
   --secondary-color: #FFC72C;
 }
 
+
+
+#root {
+  width: 1620px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
 }
 
 body {
+  display: flex;
+  justify-content: center;
   background-color: var(--primary-color);
 }
 
@@ -20,10 +28,19 @@ timeDateLayout {
   color: var(--secondary-color);
 }
 
+.headerContainer {
+  display: flex;
+  justify-content: center;
+ }
+
  .layoutHeader {
   height: 100px;
+  width: 100%;
   max-width: 1620px;
   display: flex;
   justify-content: space-around;
   align-items: center;
  }
+
+ 
+ 
