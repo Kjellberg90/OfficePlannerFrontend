@@ -2,6 +2,10 @@ import { Fragment } from "react"
 import { Outlet } from "react-router-dom"
 import epirocLogo from '../shared/epiroclogo.svg'
 import { useState, useEffect } from "react"
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
+
 
 const Layout = () => {
 
@@ -24,12 +28,16 @@ const Layout = () => {
 
   return (
       <Fragment>
-        <div className="headerContainer">
-          <div className="layoutHeader">
-            <img src={epirocLogo} alt="test" height="80px"/>
-            <h1 className="timeDateLayout">{currentDateTime} {time.toLocaleTimeString()}</h1>
-          </div>
-        </div>
+            <Container className="layoutHeader">
+                <Row>
+                  <Col className="layoutColumn">
+                    <img src={epirocLogo} alt="test" height="80px"/>
+                  </Col> 
+                  <Col className="layoutColumn">
+                    <h1 className="timeDateLayout">{currentDateTime} {time.toLocaleTimeString()}</h1>
+                  </Col>
+                </Row>
+            </Container>
         <Outlet />
       </Fragment>
   );
