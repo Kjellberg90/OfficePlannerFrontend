@@ -24,6 +24,13 @@ h1 {
   color: var(--secondary-color);
 }
 
+
+/* Tillfälligt bara för att visa json datat */
+h3 {
+  color: var(--secondary-color);
+}
+/* --------------------------------------- */
+
 timeDateLayout {
   color: var(--secondary-color);
 }
