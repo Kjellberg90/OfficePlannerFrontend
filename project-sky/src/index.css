@@ -3,20 +3,13 @@
   --secondary-color: #FFC72C;
 }
 
-#root {
-  width: 1620px;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
 }
 
 body {
-  display: flex;
-  justify-content: center;
   background-color: var(--primary-color);
-  height: 100vh;
 }
 
 h1 {
@@ -28,42 +21,27 @@ h1 {
   justify-content: center;
  }
 
- .layoutHeader {
-  height: 100px;
-  width: 1620px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
- }
-
-.startpageContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  justify-content: space-around;
-}
-
  .selectionBox {
   background-color: var(--secondary-color);
-  width: 50vw;
-  max-width: 500px;
-  height: 50vw;
-  max-height: 500px;
-  margin: 10px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50px;
  }
 
- .boxTextStartPage {
-    font-size: 8rem;
-    color: var(--primary-color);
- }
+.boxTextStartPage {
+  color: var(--primary-color);
+}
 
  a {
+  color: var(--primary-color);
   text-decoration: none;
+ }
+
+ a :hover {
+  color: var(--primary-color);
+  text-decoration: underline;
  }
 
  
