@@ -11,7 +11,7 @@ const AppRouter = () => {
         <Routes>
             <Route element={<Layout />}>
                 <Route index element={<Startpage />}/>
-                <Route path="/test" element={<Test/>}/>
+                <Route path="/test" element={<Test props={{name: "Daniel"}}/>}/>
                 <Route path="/groups" element={<Groups/>}/>
                 <Route path="/rooms" element={<RoomsPage/>}/>
             </Route>
