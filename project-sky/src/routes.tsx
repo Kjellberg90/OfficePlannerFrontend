@@ -1,8 +1,9 @@
 import { Routes, Route } from "react-router-dom"
-import Layout from "./Compontents/Layout";
-import Startpage from "./Compontents/Startpage";
-import Groups from "./Compontents/Groups";
-import RoomsPage from "./Compontents/Rooms/RoomsPage";
+import Layout from "./Components/Layout";
+import Startpage from "./Components/Startpage";
+import Groups from "./Components/Groups";
+import RoomsPage from "./Components/Rooms/RoomsPage";
+import GroupInfoPage from "./Components/Group-Info-Page";
 
 const AppRouter = () => {
     return (
@@ -10,6 +11,7 @@ const AppRouter = () => {
             <Route element={<Layout />}>
                 <Route index element={<Startpage />}/>
                 <Route path="/groups" element={<Groups/>}/>
+                    <Route path="info" element={<GroupInfoPage />} />  
                 <Route path="/rooms" element={<RoomsPage/>}/>
             </Route>
         </Routes>
