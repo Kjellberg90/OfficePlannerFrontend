@@ -21,11 +21,10 @@ const RoomsPage = () => {
 
     return (   
         <Container>
-        <Stack gap={5}>            
-            <Fragment>            
+            <Stack gap={5}>            
                 {rooms.map((room: Room) => {return (
-                    <Row className="room-info-row">
-                        <Col lg={{span:6, offset:3}} className="room-info-col text-center">
+                    <Row className="room-info-row" key={room.name}>
+                        <Col md={{span:6, offset:3}} className="room-info-col text-center">
                             <Row>
                                 <h2>{room.name}</h2>
                             </Row>
@@ -39,9 +38,8 @@ const RoomsPage = () => {
                             </Row>                    
                         </Col>
                     </Row>
-                )} )}        
-            </Fragment>        
-        </Stack>
+                )} )}          
+            </Stack>
         </Container>
     )
 }

@@ -50,9 +50,9 @@ h1 {
   align-items: center;
  }
 
- .room-info-row {
+ /* .room-info-row {
   margin: 0;
- }
+ } */
 
  .room-info-row:first-child {
   margin-top: 40px;
@@ -62,5 +62,17 @@ h1 {
   background-color: var(--secondary-color);
   color: var(--primary-color);
   border-radius: 50px;
+ }
+
+ .return-arrow {
+  position: fixed;
+  color: var(--secondary-color);
+  font-size: 80px;
+  bottom: 20px;
+  left: 40px;
+ }
+
+ .return-arrow:hover {
+  cursor: pointer;
  }
  
