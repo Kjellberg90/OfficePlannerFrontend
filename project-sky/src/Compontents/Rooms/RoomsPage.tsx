@@ -26,7 +26,7 @@ const RoomsPage = () => {
                     <Row className="room-info-row" key={room.name}>
                         <Col md={{span:6, offset:3}} className="room-info-col text-center">
                             <Row>
-                                <h2>{room.name}</h2>
+                                <h2><u>{room.name}</u></h2>
                             </Row>
                             <Row>
                                 <Col>
