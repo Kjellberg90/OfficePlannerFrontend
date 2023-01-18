@@ -1,7 +1,5 @@
 import { loadRoomData} from "../shared/fetch/testdata";
-import { useState } from "react"
-import { info } from "console";
-import Group from "./Groups";
+import { useState, useEffect} from "react"
 
 const {
     jsonRoomData
@@ -9,21 +7,28 @@ const {
 
 let fakeProp = "DQT 6"
 
-function CheckIfBookingExist() {
-    const [check, setCheck] = useState<boolean>(false)
+// Props: any för tillfället eftersom den inte gillade att jag körde med props: string, kanske för att jag har min fakeprop utanför?
+function CheckIfBookingExist(props: any) {
    
-    var listBookings = jsonRoomData.map(info => info.bookedBy)
-   
-        JSON.stringify(listBookings, (key, value )=>{
-         if(value.contains = fakeProp)
-         {
-            
-            return <GroupDetails />
-            setCheck(true);
-         }
+const [check, setCheck] = useState<boolean>()
+let response = false;
 
-         return <h1>No bookings could be found</h1>
-    }); 
+ useEffect(() => {
+     setCheck(response);
+    },[response])
+
+        jsonRoomData.map(info => {
+        if(info.bookedBy === fakeProp)
+        {
+           response = true;
+        }
+    })
+
+    
+if (check == true) {
+    return <GroupDetails />
+}
+     return <h1>No bookings could be found</h1>
 }
 
 function GroupDetails() {
@@ -43,13 +48,10 @@ function GroupDetails() {
     )
 }
 
-
 const GroupInfoPage = () => {
 
     return (
-        <>
-         <GroupDetails />
-        </>     
+         <CheckIfBookingExist /> 
       )
 }
 
