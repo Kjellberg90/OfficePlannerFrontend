@@ -19,7 +19,8 @@ const RoomsPage = () => {
         .catch(err => setError(err))
     },[])
 
-    return (
+    return (   
+        <Container>
         <Stack gap={5}>            
             <Fragment>            
                 {rooms.map((room: Room) => {return (
@@ -41,6 +42,7 @@ const RoomsPage = () => {
                 )} )}        
             </Fragment>        
         </Stack>
+        </Container>
     )
 }
 
