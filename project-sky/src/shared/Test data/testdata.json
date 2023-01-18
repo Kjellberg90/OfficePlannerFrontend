@@ -54,16 +54,16 @@
     }
   ],
   "groups": [
-    { "groupName": "DQT 6" },
-    { "groupName": "Phoenix 4" },
-    { "groupName": "Bazinga 4" },
-    { "groupName": "ConSys 4" },
-    { "groupName": "PAST 6" },
-    { "groupName": "Heimdall 6" },
-    { "groupName": "Battery 5" },
-    { "groupName": "ConCore 7" },
-    { "groupName": "Everest 6" },
-    { "groupName": "Portal 2" }
+    { "groupName": "DQT" },
+    { "groupName": "Phoenix" },
+    { "groupName": "Bazinga" },
+    { "groupName": "ConSys" },
+    { "groupName": "PAST" },
+    { "groupName": "Heimdall" },
+    { "groupName": "Battery" },
+    { "groupName": "ConCore" },
+    { "groupName": "Everest" },
+    { "groupName": "Portal" }
   ]
 }
 

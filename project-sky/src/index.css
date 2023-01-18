@@ -64,3 +64,11 @@ h1 {
   border-radius: 50px;
  }
  
+ .groupNameDiv {
+  background-color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  color: var(--primary-color);
+ }
