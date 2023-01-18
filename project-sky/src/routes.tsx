@@ -6,7 +6,6 @@ import Groups from "./Components/Groups";
 import Rooms from "./Components/Rooms";
 import GroupInfoPage from "./Components/Group-Info-Page";
 
-
 const AppRouter = () => {
     return (
         <Routes>
@@ -14,12 +13,10 @@ const AppRouter = () => {
                 <Route index element={<Startpage />}/>
                 <Route path="/test" element={<Test/>}/>
                 <Route path="/groups" element={<Groups/>}/>
-                {/* Hårdkodat värde */}
-                    <Route path="info/DQT" element={<GroupInfoPage />} />  
+                    <Route path="info" element={<GroupInfoPage />} />  
                 <Route path="/rooms" element={<Rooms/>}/>
             </Route>
         </Routes>
-
     )
 }
 

@@ -1,58 +1,75 @@
-import { loadRoomData} from "../shared/fetch/testdata";
-import { useState, useEffect} from "react"
+import Stack from 'react-bootstrap/Stack'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { loadRoomData } from "../shared/fetch/testdata";
+import { useState, useEffect } from "react"
 
 const {
     jsonRoomData
-} = loadRoomData(); 
+} = loadRoomData();
 
 let fakeProp = "DQT 6"
 
 // Props: any för tillfället eftersom den inte gillade att jag körde med props: string, kanske för att jag har min fakeprop utanför?
 function CheckIfBookingExist(props: any) {
-   
-const [check, setCheck] = useState<boolean>()
-let response = false;
 
- useEffect(() => {
-     setCheck(response);
-    },[response])
+    const [check, setCheck] = useState<boolean>()
+    let response = false;
 
-        jsonRoomData.map(info => {
-        if(info.bookedBy === fakeProp)
-        {
-           response = true;
+    useEffect(() => {
+        setCheck(response);
+    }, [response])
+
+    jsonRoomData.map(info => {
+        if (info.bookedBy === fakeProp) {
+            response = true;
         }
     })
 
-    
-if (check == true) {
-    return <GroupDetails />
-}
-     return <h1>No bookings could be found</h1>
+
+    if (check == true) {
+        return <GroupDetails />
+    }
+
+    return (
+        <div className="d-flex align-items-center justify-content-center">
+            <h1>No bookings could be found</h1>
+        </div>
+    )
 }
 
 function GroupDetails() {
     return (
-        <div>
-        {
-            jsonRoomData.map(info => info.bookedBy == fakeProp && (
-            <h1>
-            Team: {info.bookedBy} <br />
-            Room: {info.roomName} <br/>
-            Seatings: {info.seating} <br/>
-            {info.startTime} - {info.endTime}
-            </h1>
-        ))
-        }      
-        </div>
+        <Col lg={{ span: 6, offset: 3 }}>
+            <div className="selectionBox">
+                {
+                    jsonRoomData.map(info => info.bookedBy == fakeProp && (
+                        <h2 className="boxTextStartPage d-flex align-items-center justify-content-center">
+                            Team: {info.bookedBy} <br />
+                            Room: {info.roomName} <br />
+                            Seatings: {info.seating} <br />
+                            {info.startTime} - {info.endTime}
+                        </h2>
+                    )
+                    )};
+            </div>
+        </Col>
     )
 }
 
 const GroupInfoPage = () => {
 
     return (
-         <CheckIfBookingExist /> 
-      )
+        <Container>
+            <Stack gap={5}>
+                <Row>
+                    <CheckIfBookingExist />
+                </Row>
+            </Stack>
+        </Container>
+    )
 }
 
 export default GroupInfoPage;
+
