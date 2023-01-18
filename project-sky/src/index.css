@@ -16,15 +16,6 @@ h1 {
   color: var(--secondary-color);
 }
 
-.headerContainer {
-  display: flex;
-  justify-content: center;
- }
-
-
-
-
-
  .selectionBox {
   background-color: var(--secondary-color);
   aspect-ratio: 1 / 1;
@@ -48,5 +39,14 @@ h1 {
   text-decoration: underline;
  }
 
- 
+ .layoutHeader {
+  padding-top: 10px;
+  height: 100px;
+ }
+
+ .layoutColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
  
