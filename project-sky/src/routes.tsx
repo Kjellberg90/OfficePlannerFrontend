@@ -3,7 +3,7 @@ import Layout from "./Compontents/Layout";
 import Startpage from "./Compontents/Startpage";
 import Test from "./Compontents/Test";
 import Groups from "./Compontents/Groups";
-import Rooms from "./Compontents/Rooms"
+import RoomsPage from "./Compontents/Rooms/RoomsPage";
 
 
 const AppRouter = () => {
@@ -13,7 +13,7 @@ const AppRouter = () => {
                 <Route index element={<Startpage />}/>
                 <Route path="/test" element={<Test/>}/>
                 <Route path="/groups" element={<Groups/>}/>
-                <Route path="/rooms" element={<Rooms/>}/>
+                <Route path="/rooms" element={<RoomsPage/>}/>
             </Route>
         </Routes>
 
