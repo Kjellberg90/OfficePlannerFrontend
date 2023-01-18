@@ -3,9 +3,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
-import {useState, useEffect } from 'react'
-import Test from "./Test";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
@@ -13,25 +11,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
     jsonGroupData
   } = loadGroupData();
 
-   const Group = () => {
-
-    //const navigate = useNavigate()
-     
-    //  var x = function onClickGroupName(name: string) {
-    //  var [groupName, setgroupName] = useState("")
-    //  useEffect(() => {
-    //    setgroupName("Daniel")
-    //  }, [])
-    //  console.log(groupName)   
-    // function sendGroupNameAsProp(groupName: string){
-    //   <Test groupName={"groupName"}/>
-    // }
-
-    // var [groupName, setgroupName] = useState("")
-
-   
-     // console.log("Gruppnamn: " + groupName)
-    
+  const Group = () => {  
 
     return (
         <Container>
@@ -41,12 +21,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                       {
                           jsonGroupData.map(groups => {
                             return(
-                                // <div className="groupNameDiv" key={groups.groupName} onClick={() => setgroupName(groups.groupName)}>
                                 <Link to='/test' state={{group: groups.groupName}}>
                                   <div className="groupNameDiv" key={groups.groupName}>
                                     <h3>{groups.groupName}</h3>
                                   </div>
-                                
                                 </Link>
                             );
                           })
@@ -54,7 +32,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                   </Stack>
                 </Col>
            </Row>
-           </Container>
+        </Container>
       )
 }
 
