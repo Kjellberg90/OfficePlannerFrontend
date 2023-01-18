@@ -1,20 +1,17 @@
 import { Routes, Route } from "react-router-dom"
-import Layout from "./Components/Layout";
-import Startpage from "./Components/Startpage";
-import Test from "./Components/Test";
-import Groups from "./Components/Groups";
-import Rooms from "./Components/Rooms";
-import GroupInfoPage from "./Components/Group-Info-Page";
+import Layout from "./Compontents/Layout";
+import Startpage from "./Compontents/Startpage";
+import Groups from "./Compontents/Groups";
+import RoomsPage from "./Compontents/Rooms/RoomsPage";
 
 const AppRouter = () => {
     return (
         <Routes>
             <Route element={<Layout />}>
                 <Route index element={<Startpage />}/>
-                <Route path="/test" element={<Test/>}/>
                 <Route path="/groups" element={<Groups/>}/>
                     <Route path="info" element={<GroupInfoPage />} />  
-                <Route path="/rooms" element={<Rooms/>}/>
+                <Route path="/rooms" element={<RoomsPage/>}/>
             </Route>
         </Routes>
     )
