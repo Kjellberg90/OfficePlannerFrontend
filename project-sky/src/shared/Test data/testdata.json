@@ -48,7 +48,7 @@
       "roomName": "Innovation",
       "seating": 8,
       "available": false,
-      "bookedBy": "ConCor",
+      "bookedBy": "ConCore",
       "startTime": "08:00:00 AM",
       "endTime": "04:00:00 PM"
     }

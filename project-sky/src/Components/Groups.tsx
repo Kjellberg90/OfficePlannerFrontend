@@ -22,8 +22,8 @@ import { Link} from "react-router-dom";
                       {
                           jsonGroupData.map(groups => {
                             return(
-                                <Link to='/info' state={{group: groups.groupName}}>
-                                  <div className=" d-flex align-items-center justify-content-center groupNameDiv" key={groups.groupName}>
+                                <Link to='/info' state={{group: groups.groupName}} key={groups.groupName}>
+                                  <div className=" d-flex align-items-center justify-content-center groupNameDiv" >
                                     <h3>{groups.groupName}</h3>
                                   </div>
                                 </Link>
