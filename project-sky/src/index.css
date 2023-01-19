@@ -20,9 +20,6 @@ h1 {
   background-color: var(--secondary-color);
   aspect-ratio: 1 / 1;
   border-radius: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
  }
 
 .boxTextStartPage {
@@ -75,9 +72,6 @@ h1 {
  
  .groupNameDiv {
   background-color: var(--secondary-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border-radius: 25px;
   color: var(--primary-color);
  }
