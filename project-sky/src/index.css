@@ -72,9 +72,6 @@ h1 {
  
  .groupNameDiv {
   background-color: var(--secondary-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border-radius: 25px;
   color: var(--primary-color);
  }
