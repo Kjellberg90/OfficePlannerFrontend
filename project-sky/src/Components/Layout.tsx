@@ -49,7 +49,7 @@ const Layout = () => {
                   </Link>
                 </Col> 
                 <Col className="layoutColumn">
-                  <h1 className="timeDateLayout">{currentDateTime} {time.toLocaleTimeString()}</h1>
+                  <h1 className="timeDateLayout">{currentDateTime} {time.toLocaleTimeString('sv-SE')}</h1>
                 </Col>
               </Row>
           </Container>
