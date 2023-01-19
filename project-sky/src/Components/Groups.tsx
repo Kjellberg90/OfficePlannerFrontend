@@ -3,15 +3,16 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
-
-
+ 
   const {
     jsonGroupData
   } = loadGroupData();
 
   const Group = () => {  
+
+
 
     return (
         <Container>
@@ -21,7 +22,7 @@ import { Link } from "react-router-dom";
                       {
                           jsonGroupData.map(groups => {
                             return(
-                                <Link to='/test' state={{group: groups.groupName}}>
+                                <Link to='/info' state={{group: groups.groupName}}>
                                   <div className="groupNameDiv" key={groups.groupName}>
                                     <h3>{groups.groupName}</h3>
                                   </div>

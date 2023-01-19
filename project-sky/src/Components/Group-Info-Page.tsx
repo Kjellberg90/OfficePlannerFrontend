@@ -4,6 +4,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { loadRoomData } from "../shared/fetch/testdata";
 import { useState, useEffect } from "react"
+import { useLocation } from 'react-router-dom';
+
 
 const {
     jsonRoomData
@@ -40,8 +42,18 @@ function CheckIfBookingExist(props: any) {
 }
 
 function GroupDetails() {
+
+const location = useLocation();
+
+var [groupName, setgroupName] = useState("")
+
+useEffect(() => {
+  setgroupName(location.state.group)
+})
+
     return (
         <Col lg={{ span: 6, offset: 3 }}>
+          <h1>{groupName}</h1>
             <div className="selectionBox">
                 {
                     jsonRoomData.map(info => info.bookedBy == fakeProp && (
