@@ -7,14 +7,19 @@ import { useState, useEffect } from "react"
 import { useLocation } from 'react-router-dom';
 
 
+
+
 const {
     jsonRoomData
 } = loadRoomData();
 
-let fakeProp = "DQT 6"
 
 // Props: any för tillfället eftersom den inte gillade att jag körde med props: string, kanske för att jag har min fakeprop utanför?
-function CheckIfBookingExist(props: any) {
+function CheckIfBookingExist() {
+
+  const location = useLocation();
+
+  var groupName: string = location.state.group
 
     const [check, setCheck] = useState<boolean>()
     let response = false;
@@ -24,7 +29,8 @@ function CheckIfBookingExist(props: any) {
     }, [response])
 
     jsonRoomData.map(info => {
-        if (info.bookedBy === fakeProp) {
+      
+        if (info.bookedBy === groupName) {
             response = true;
         }
     })
@@ -43,20 +49,15 @@ function CheckIfBookingExist(props: any) {
 
 function GroupDetails() {
 
-const location = useLocation();
+  const location = useLocation();
 
-var [groupName, setgroupName] = useState("")
-
-useEffect(() => {
-  setgroupName(location.state.group)
-})
+  var groupName: string = location.state.group
 
     return (
         <Col lg={{ span: 6, offset: 3 }}>
-          <h1>{groupName}</h1>
             <div className="selectionBox">
                 {
-                    jsonRoomData.map(info => info.bookedBy == fakeProp && (
+                    jsonRoomData.map(info => info.bookedBy == groupName && (
                         <h2 className="boxTextStartPage d-flex align-items-center justify-content-center">
                             Team: {info.bookedBy} <br />
                             Room: {info.roomName} <br />
