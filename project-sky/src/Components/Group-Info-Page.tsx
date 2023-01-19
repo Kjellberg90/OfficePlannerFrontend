@@ -1,47 +1,35 @@
-import Stack from 'react-bootstrap/Stack'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { loadRoomData } from "../shared/fetch/testdata";
 import { useState, useEffect } from "react"
 import { useLocation } from 'react-router-dom';
-
-
-
 
 const {
     jsonRoomData
 } = loadRoomData();
 
-
-// Props: any för tillfället eftersom den inte gillade att jag körde med props: string, kanske för att jag har min fakeprop utanför?
 function CheckIfBookingExist() {
 
   const location = useLocation();
-
   var groupName: string = location.state.group
 
-    const [check, setCheck] = useState<boolean>()
-    let response = false;
+  const [check, setCheck] = useState<boolean>()
+  let response = false;
 
     useEffect(() => {
         setCheck(response);
     }, [response])
 
     jsonRoomData.map(info => {
-      
         if (info.bookedBy === groupName) {
             response = true;
         }
     })
-
 
     if (check == true) {
         return <GroupDetails />
     }
 
     return (
-        <div className="d-flex align-items-center justify-content-center">
+        <div className="d-flex align-items-center justify-content-center customHeight">
             <h1>No bookings could be found</h1>
         </div>
     )
@@ -54,33 +42,30 @@ function GroupDetails() {
   var groupName: string = location.state.group
 
     return (
-        <Col lg={{ span: 6, offset: 3 }}>
-            <div className="selectionBox">
+        <div className="d-flex align-items-center justify-content-center customHeight">
+
                 {
                     jsonRoomData.map(info => info.bookedBy == groupName && (
-                        <h2 className="boxTextStartPage d-flex align-items-center justify-content-center">
-                            Team: {info.bookedBy} <br />
-                            Room: {info.roomName} <br />
-                            Seatings: {info.seating} <br />
-                            {info.startTime} - {info.endTime}
-                        </h2>
+                        <>
+                        <div className="groupInfoCard">
+                            <h2>Room: {info.roomName}</h2> 
+                            <h2>Number of seatings: {info.seating}</h2>
+                            <h2>Booked By Team: {info.bookedBy}</h2>
+                            <h2>Time: {info.startTime} - {info.endTime}</h2>
+                        </div>
+                        </>
                     )
-                    )};
-            </div>
-        </Col>
+                    )}
+         </div>
     )
 }
 
 const GroupInfoPage = () => {
 
     return (
-        <Container>
-            <Stack gap={5}>
-                <Row>
-                    <CheckIfBookingExist />
-                </Row>
-            </Stack>
-        </Container>
+        <div>   
+            <CheckIfBookingExist />
+        </div>
     )
 }
 
