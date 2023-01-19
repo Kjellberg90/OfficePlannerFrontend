@@ -5,7 +5,7 @@
       "roomName": "United",
       "seating": 6,
       "available": false,
-      "bookedBy": "DQT 6",
+      "bookedBy": "DQT",
       "startTime": "08:00:00 AM",
       "endTime": "03:00:00 PM"
     },
@@ -23,7 +23,7 @@
       "roomName": "Inspired B",
       "seating": 4,
       "available": false,
-      "bookedBy": "Phoenix 4",
+      "bookedBy": "Phoenix",
       "startTime": "09:30:00 AM",
       "endTime": "04:00:00 PM"
     },
@@ -32,7 +32,7 @@
       "roomName": "Committment",
       "seating": 6,
       "available": false,
-      "bookedBy": "Everest 6",
+      "bookedBy": "Everest",
       "startTime": "07:30:00 AM",
       "endTime": "02:30:00 PM"
     },
@@ -48,7 +48,7 @@
       "roomName": "Innovation",
       "seating": 8,
       "available": false,
-      "bookedBy": "ConCor 7",
+      "bookedBy": "ConCor",
       "startTime": "08:00:00 AM",
       "endTime": "04:00:00 PM"
     }
