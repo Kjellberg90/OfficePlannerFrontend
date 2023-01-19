@@ -24,7 +24,7 @@ function CheckIfBookingExist() {
         }
     })
 
-    if (check == true) {
+    if (check === true) {
         return <GroupDetails />
     }
 
@@ -45,15 +45,13 @@ function GroupDetails() {
         <div className="d-flex align-items-center justify-content-center customHeight">
 
                 {
-                    jsonRoomData.map(info => info.bookedBy == groupName && (
-                        <>
-                        <div className="groupInfoCard">
+                    jsonRoomData.map(info => info.bookedBy === groupName && (
+                        <div className="groupInfoCard" key={groupName}>
                             <h2>Room: {info.roomName}</h2> 
                             <h2>Number of seatings: {info.seating}</h2>
                             <h2>Booked By Team: {info.bookedBy}</h2>
                             <h2>Time: {info.startTime} - {info.endTime}</h2>
                         </div>
-                        </>
                     )
                     )}
          </div>
