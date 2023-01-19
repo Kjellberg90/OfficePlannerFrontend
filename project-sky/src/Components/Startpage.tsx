@@ -7,20 +7,20 @@ const Startpage = () => {
     return (
       <Container>
             <Stack gap={5}>
-                <Row >
-                  <Col lg={{span: 6, offset: 3}}>
+                <Row>
+                  <Col  lg={{span: 6, offset: 3}}>
                     <a href="/groups">
-                      <div className="selectionBox">
+                      <div className="d-flex align-items-center justify-content-center selectionBox">
                             <h2 className="boxTextStartPage">Groups</h2>
                       </div>
                     </a>
                   </Col>
                 </Row>
                 <Row>
-                  <Col lg={{span: 6, offset: 3}}>
+                  <Col className='text-center' lg={{span: 6, offset: 3}}>
                     <a href="/rooms">
-                      <div className="selectionBox">
-                        <h3 className="boxTextStartPage">Rooms</h3>
+                      <div className="d-flex align-items-center justify-content-center selectionBox ">
+                        <h2 className="boxTextStartPage ">Rooms</h2>
                       </div>
                     </a>
                   </Col>
