@@ -1,18 +1,18 @@
 # Project Sky - Frontend
 
-## Om Projektet
+## About the Project
 
-Detta är Frontend delen för Projekt Sky
+This is the Frontend for Project Sky
 
-## Krav
+## Requirements
 
-För att köra appen behöver du se till att du står på branchen `dev` och kör en `npm install` i terminalen och sen 
-`npm start` för att kunna se webbsidan på localhost:3000/
+To run the app, you need to make sure that you've selected the `dev` branch and run an `npm install' in the terminal and then run
+`npm start` to view the web page at localhost:3000/
 
-Project Sky - Backend behövs köras igång för att kunna se alla features till fullo (se readme för Backend-delen)
+Project Sky - Backend needs to be running to be able to see all features (see readme for the Backend part)
 
 ### Installation
 
-- Klona projektet
-- Stå på rätt folder (`/project-sky`)
-- npm install
+- Clone the project
+- Select the right folder path (`/project-sky`)
+- Run `npm install` in the terminal
