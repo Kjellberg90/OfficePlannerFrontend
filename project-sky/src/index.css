@@ -18,7 +18,7 @@ h1 {
 
  .selectionBox {
   background-color: var(--secondary-color);
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1.5 / 1;
   border-radius: 50px;
  }
 
@@ -39,16 +39,13 @@ h1 {
  .layoutHeader {
   padding-top: 10px;
   height: 100px;
+  width: 100%;
  }
 
  .layoutColumn {
   display: flex;
   justify-content: center;
   align-items: center;
- }
-
- .room-info-row:first-child {
-  margin-top: 40px;
  }
 
  .room-info-col {
@@ -83,3 +80,25 @@ h1 {
   border-radius: 25px;
   color: var(--primary-color);
  }
+
+ .headerContainer {
+  padding-bottom: 40px;
+ }
+
+@media (max-width:768px) {
+  .layoutColumn a{
+    height: 40px;
+  }
+
+  .layoutColumn h1 {
+    font-size:x-large;
+  }
+
+  .layoutHeader {
+    height: 75px;
+  }
+
+  .headerContainer {
+    padding-bottom: 10px;
+  }
+}

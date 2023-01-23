@@ -49,11 +49,11 @@ const Layout = () => {
 
   return (
       <Fragment>
-          <Container className="layoutHeader">
-              <Row>
+          <Container className="headerContainer">
+              <Row className="layoutHeader d-flex justify-content-center ">
                 <Col className="layoutColumn">
                   <Link to={"/"}>
-                    <img src={epirocLogo} alt="test" height="80px"/>
+                    <img src={epirocLogo} alt="test" style={{width:"100%", height: "100%"}} className="epiricLogo"/>
                   </Link>
                 </Col> 
                 <Col className="layoutColumn">
