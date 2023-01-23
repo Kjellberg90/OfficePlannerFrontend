@@ -30,7 +30,7 @@ function CheckIfBookingExist() {
     }
 
     return (
-        <Row className="d-flex align-items-center justify-content-center customHeight text-center">
+        <Row className="d-flex align-items-center justify-content-center text-center" style={{height:"80vh", overflow:"hidden"}}>
             <Col>
                 <h1>No bookings could be found</h1>
             </Col>
@@ -45,7 +45,7 @@ function GroupDetails() {
     var groupName: string = location.state.group
 
     return (
-        <Row className="d-flex align-items-center justify-content-center customHeight">
+        <Row className="d-flex align-items-center justify-content-center" style={{height:"80vh", overflow:"hidden"}}>
 
             {
                 jsonRoomData.map(info => info.bookedBy === groupName && (
@@ -64,7 +64,7 @@ function GroupDetails() {
 const GroupInfoPage = () => {
 
     return (
-        <Container>
+        <Container fluid style={{height:"90vh", overflow: "hidden"}}>
             <CheckIfBookingExist />
         </Container>
     )
