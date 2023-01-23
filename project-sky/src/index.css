@@ -76,9 +76,9 @@ h1 {
   color: var(--primary-color);
  }
 
- .customHeight {
+ /* .customHeight {
   min-height: 75vh;
- }
+ } */
 
  .groupInfoCard {
    background-color: var(--secondary-color);
