@@ -13,7 +13,7 @@ const RoomsPage = () => {
     
 
     useEffect(() => {
-        fetch("https://localhost:7054/api/Rooms/get-rooms-info")
+        fetch("https://localhost:7054/api/Room/get-rooms-info")
         .then(response => response.json())
         .then(res => setRooms(res))
         .catch(err => setError(err))
