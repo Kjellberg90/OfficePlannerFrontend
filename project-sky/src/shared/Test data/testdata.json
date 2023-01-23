@@ -6,8 +6,8 @@
       "seating": 6,
       "available": false,
       "bookedBy": "DQT",
-      "startTime": "08:00:00 AM",
-      "endTime": "03:00:00 PM"
+      "startTime": "08:00",
+      "endTime": "15:00"
     },
     {
       "id": 2,
@@ -24,8 +24,8 @@
       "seating": 4,
       "available": false,
       "bookedBy": "Phoenix",
-      "startTime": "09:30:00 AM",
-      "endTime": "04:00:00 PM"
+      "startTime": "09:30",
+      "endTime": "16:00"
     },
     {
       "id": 4,
@@ -33,8 +33,8 @@
       "seating": 6,
       "available": false,
       "bookedBy": "Everest",
-      "startTime": "07:30:00 AM",
-      "endTime": "02:30:00 PM"
+      "startTime": "07:30",
+      "endTime": "14:30"
     },
     {
       "id": 5,
@@ -49,8 +49,8 @@
       "seating": 8,
       "available": false,
       "bookedBy": "ConCore",
-      "startTime": "08:00:00 AM",
-      "endTime": "04:00:00 PM"
+      "startTime": "08:00",
+      "endTime": "16:00"
     }
   ],
   "groups": [
