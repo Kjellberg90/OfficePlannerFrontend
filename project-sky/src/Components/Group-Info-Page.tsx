@@ -64,7 +64,7 @@ function GroupDetails() {
 const GroupInfoPage = () => {
 
     return (
-        <Container fluid style={{height:"90vh", overflow: "hidden"}}>
+        <Container fluid style={{height:"80vh", overflow: "hidden"}}>
             <CheckIfBookingExist />
         </Container>
     )
