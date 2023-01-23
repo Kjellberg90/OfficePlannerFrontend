@@ -16,7 +16,7 @@ import { Link} from "react-router-dom";
 
     return (
         <Container>
-           <Row className="groups">
+           <Row>
                 <Col  lg={{span: 6, offset: 3}}>
                   <Stack gap={5}>
                       {
