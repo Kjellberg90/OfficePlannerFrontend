@@ -59,11 +59,8 @@ h1 {
  }
 
  .return-arrow {
-  position: fixed;
   color: var(--secondary-color);
   font-size: 80px;
-  bottom: 20px;
-  left: 40px;
  }
 
  .return-arrow:hover {

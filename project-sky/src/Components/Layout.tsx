@@ -34,8 +34,16 @@ const Layout = () => {
   }
 
   const BackButton = () => {
-    if(window.location.href != "http://localhost:3000/") {
-      return(<FontAwesomeIcon icon={faLongArrowLeft} className="return-arrow" onClick={goBack}/>)
+    if(window.location.href !== "http://localhost:3000/") {
+      return(
+        <Container className="layoutFooter">
+          <Row>
+            <Col lg={{span: 6, offset: 3}}>
+              <FontAwesomeIcon icon={faLongArrowLeft} className="return-arrow" onClick={goBack}/>
+            </Col>
+          </Row>
+        </Container>
+      )
     }
   }
 
