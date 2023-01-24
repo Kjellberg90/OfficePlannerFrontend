@@ -61,7 +61,7 @@ const Layout = () => {
                 </Col>
               </Row>
           </Container>
-          <Outlet />
+          <Outlet context={currentDateTime}/>
           {BackButton()}         
       </Fragment>
   );

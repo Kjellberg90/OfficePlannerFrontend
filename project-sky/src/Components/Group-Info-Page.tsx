@@ -2,12 +2,16 @@ import { loadRoomData } from "../shared/fetch/testdata";
 import { useState, useEffect } from "react"
 import { useLocation } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap'
+import { useOutletContext } from 'react-router-dom';
 
 const {
     jsonRoomData
 } = loadRoomData();
 
 function CheckIfBookingExist() {
+
+  const currentDate = useOutletContext(); //Tanken att den här ska ta emot datom från layoutfil
+console.log(currentDate)
 
     const location = useLocation();
     var groupName: string = location.state.group
