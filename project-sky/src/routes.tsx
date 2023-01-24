@@ -4,6 +4,8 @@ import Startpage from "./Components/Startpage";
 import Groups from "./Components/Groups";
 import RoomsPage from "./Components/Rooms/RoomsPage";
 import GroupInfoPage from "./Components/Group-Info-Page";
+import { time } from "console";
+
 
 const AppRouter = () => {
     return (
@@ -12,7 +14,7 @@ const AppRouter = () => {
                 <Route index element={<Startpage />}/>
                 <Route path="/groups" element={<Groups/>}/>
                 <Route path="/info" element={<GroupInfoPage />} />  
-                <Route path="/rooms" element={<RoomsPage/>}/>
+                <Route path="/rooms" element={<RoomsPage />}/>
             </Route>
         </Routes>
     )
