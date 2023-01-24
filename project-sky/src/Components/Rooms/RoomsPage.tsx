@@ -27,14 +27,15 @@ const RoomsPage = () => {
                     <Row className="room-info-row" key={room.name}>
                         <Col md={{span:6, offset:3}} className="room-info-col text-center">
                             <Row>
-                                <h2><u>{room.name}</u></h2>
+                                <h2><i><b>{room.name}</b></i></h2>
+                                <h4>{room.bookedBy != null ? "Booked by: " + room.bookedBy : "Not booked"}</h4>
                             </Row>
                             <Row>
                                 <Col>
-                                    <h3>Seats: {room.seats}</h3>
+                                    <h4>Seats: {room.seats}</h4>
                                 </Col>
                                 <Col>
-                                    <h3>Available: {room.availableSeats}</h3>
+                                    <h4>Available: {room.availableSeats}</h4>
                                 </Col>
                             </Row>                    
                         </Col>
