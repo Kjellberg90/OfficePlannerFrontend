@@ -12,6 +12,93 @@ body {
   background-color: var(--primary-color);
 }
 
-h1{
+h1 {
   color: var(--secondary-color);
+}
+
+ .selectionBox {
+  background-color: var(--secondary-color);
+  aspect-ratio: 1.5 / 1;
+  border-radius: 50px;
+ }
+
+.boxTextStartPage {
+  color: var(--primary-color);
+}
+
+ a {
+  color: var(--primary-color);
+  text-decoration: none;
+ }
+
+ a :hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+ }
+
+ .layoutHeader {
+  padding-top: 10px;
+  height: 100px;
+  width: 100%;
+ }
+
+ .layoutColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+
+ .room-info-col {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border-radius: 50px;
+  padding: 2px;
+ }
+
+ .return-arrow {
+  color: var(--secondary-color);
+  font-size: 80px;
+ }
+
+ .return-arrow:hover {
+  cursor: pointer;
+ }
+ 
+ .groupNameDiv {
+  background-color: var(--secondary-color);
+  border-radius: 25px;
+  color: var(--primary-color);
+ }
+
+ /* .customHeight {
+  min-height: 75vh;
+ } */
+
+ .groupInfoCard {
+   background-color: var(--secondary-color);
+  padding: 80px;
+  border-radius: 25px;
+  color: var(--primary-color);
+ }
+
+ .headerContainer {
+  padding-bottom: 40px;
+ }
+
+@media (max-width:768px) {
+  .layoutColumn a{
+    height: 40px;
+  }
+
+  .layoutColumn h1 {
+    font-size:x-large;
+  }
+
+  .layoutHeader {
+    height: 75px;
+  }
+
+  .headerContainer {
+    padding-bottom: 10px;
+  }
 }
