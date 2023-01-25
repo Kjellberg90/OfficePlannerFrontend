@@ -54,7 +54,7 @@ const Layout = () => {
                   </Link>
                 </Col> 
                 <Col className="layoutColumn datepicker">
-                <input type="date" defaultValue={formattedDate} onChange={handleChange} style={{width:"220px", fontSize:"1rem", textAlign:"center", fontWeight:"bold", borderRadius:"10px"}}/>
+                <input type="date" className="makeClickable" defaultValue={formattedDate} onChange={handleChange} style={{width:"220px", fontSize:"1rem", textAlign:"center", fontWeight:"bold", borderRadius:"10px"}}/>
                 </Col>
               </Row>
           </Container>
