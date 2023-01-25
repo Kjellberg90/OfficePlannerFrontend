@@ -50,7 +50,7 @@ const Layout = () => {
               <Row className="layoutHeader d-flex justify-content-center ">
                 <Col className="layoutColumn">
                   <Link to={"/"}>
-                    <img src={epirocLogo} alt="test" style={{width:"100%", height: "100%"}} className="epirocLogo"/>
+                    <img onClick={() => window.location.assign("/")} src={epirocLogo} alt="test" style={{width:"100%", height: "100%"}} className="epirocLogo"/>
                   </Link>
                 </Col> 
                 <Col className="layoutColumn datepicker">
