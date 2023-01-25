@@ -25,7 +25,7 @@ const Layout = () => {
       return(
         <Container className="layoutFooter">
           <Row className="d-flex align-items-center justify-content-center">
-            <Col>
+            <Col md={6}>
               <FontAwesomeIcon icon={faLongArrowLeft} className="return-arrow" onClick={goBack}/>
             </Col>
           </Row>
