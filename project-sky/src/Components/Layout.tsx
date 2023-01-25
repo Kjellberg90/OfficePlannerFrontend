@@ -30,12 +30,6 @@ const Layout = () => {
       setDate(value);
   };
 
-  const resetDate = () => {
-    const currentDate = new Date();
-    const currentDatetoString =  currentDate.toLocaleDateString();
-    setDate(currentDatetoString)
-  }
-
   const BackButton = () => {
     if(window.location.href !== "http://localhost:3000/") {
       return(
