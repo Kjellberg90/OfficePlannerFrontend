@@ -7,18 +7,28 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons"
-import DropdownDatepicker from "../shared/Dropdown-Datepicker"
+import { format } from "date-fns";
 
 
 const Layout = () => {
-
-
-  
 
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
   }
+
+  const [date, setDate] = useState("");
+
+  var today = new Date();
+  var formattedDate = format(today, "yyyy-MM-dd");
+  useEffect(() => {
+      setDate(formattedDate);
+  }, [formattedDate])
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      setDate(value);
+  };
 
   const BackButton = () => {
     if(window.location.href !== "http://localhost:3000/") {
@@ -44,11 +54,11 @@ const Layout = () => {
                   </Link>
                 </Col> 
                 <Col className="layoutColumn datepicker">
-                  <DropdownDatepicker />
+                <input type="date" defaultValue={formattedDate} onChange={handleChange} style={{width:"220px", fontSize:"1rem", textAlign:"center", fontWeight:"bold", borderRadius:"10px"}}/>
                 </Col>
               </Row>
           </Container>
-          <Outlet />
+          <Outlet context={date}/>
           {BackButton()}         
       </Fragment>
   );

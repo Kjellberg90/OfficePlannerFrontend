@@ -10,6 +10,9 @@ const RoomsPage = () => {
     const [rooms, setRooms] = useState([]);
     const [error, setError] = useState([]);
 
+    const currentDate = useOutletContext(); //Använda detta datum till fetch när bakend fungerar
+    // console.log("Från roomspage: ", currentDate)
+
     useEffect(() => {
         fetch("https://localhost:7054/api/Room/get-rooms-info")
         .then(response => response.json())
@@ -17,8 +20,6 @@ const RoomsPage = () => {
         .catch(err => setError(err))
     },[])
 
-    const currentDate = useOutletContext(); //Tanken att den här ska ta emot datom från layoutfil
-    console.log(currentDate)
 
     return (   
         <Container>
