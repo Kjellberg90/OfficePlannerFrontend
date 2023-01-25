@@ -11,7 +11,7 @@ const RoomsPage = () => {
     const [error, setError] = useState([]);
 
     const currentDate = useOutletContext(); //Använda detta datum till fetch när bakend fungerar
-    console.log("Från roomspage: ", currentDate)
+    // console.log("Från roomspage: ", currentDate)
 
     useEffect(() => {
         fetch("https://localhost:7054/api/Room/get-rooms-info")
