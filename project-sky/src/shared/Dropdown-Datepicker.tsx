@@ -19,7 +19,7 @@ const DropdownDatepicker = () => {
 
     return (
         <>
-            <input type="date" defaultValue={formattedDate} onChange={handleChange} />
+            <input type="date" defaultValue={formattedDate} onChange={handleChange} style={{width:"220px", fontSize:"1rem", textAlign:"center", fontWeight:"bold", borderRadius:"10px"}}/>
         </>
     )
 }

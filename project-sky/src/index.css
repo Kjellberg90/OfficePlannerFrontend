@@ -85,6 +85,42 @@ h1 {
   padding-bottom: 40px;
  }
 
+/* DATEPICKER STYLE */
+
+input[type="date"] { 
+  background: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+input[type="date"] {
+  -webkit-align-items: center;
+  display: -webkit-inline-flex;
+  font-family: monospace;
+  overflow: hidden;
+  padding-left: 0;
+  -webkit-padding-start: 1px;
+  appearance: unset;
+}
+
+input::-webkit-datetime-edit {
+ -webkit-flex: 1;
+ -webkit-user-modify: read-only !important;
+}
+
+input::-webkit-datetime-edit-fields-wrapper {
+ -webkit-user-modify: read-only !important;
+ display: inline-block;
+ padding: 10px;
+ margin-left: 20px;
+}
+
+::-webkit-calendar-picker-indicator {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23425563" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+  padding-right:15px;
+}
+
+/* END OF DATEPICKER STYLE */
+
 @media (max-width:768px) {
   .layoutColumn a{
     height: 40px;
