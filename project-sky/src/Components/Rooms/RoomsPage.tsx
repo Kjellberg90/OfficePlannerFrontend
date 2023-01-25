@@ -14,7 +14,7 @@ const RoomsPage = () => {
     // console.log("Från roomspage: ", currentDate)
 
     useEffect(() => {
-        fetch("https://localhost:7054/api/Room/get-rooms-info")
+        fetch(`https://localhost:7054/api/Room/get-rooms-info?date=${currentDate}`)
         .then(response => response.json())
         .then(res => setRooms(res))
         .catch(err => setError(err))
