@@ -1,3 +1,5 @@
+
+/* -------------- General Styling --------------------*/
 :root {
   --primary-color: #425563;
   --secondary-color: #FFC72C;
@@ -16,6 +18,18 @@ h1 {
   color: var(--secondary-color);
 }
 
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+ }
+
+ a :hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+ }
+
+/* -------------- Startpage Styling --------------------*/
+
  .selectionBox {
   background-color: var(--secondary-color);
   aspect-ratio: 1.5 / 1;
@@ -26,15 +40,7 @@ h1 {
   color: var(--primary-color);
 }
 
- a {
-  color: var(--primary-color);
-  text-decoration: none;
- }
-
- a :hover {
-  color: var(--primary-color);
-  text-decoration: underline;
- }
+ /* -------------- Layout Styling --------------------*/
 
  .layoutHeader {
   padding-top: 10px;
@@ -63,16 +69,34 @@ h1 {
  .return-arrow:hover {
   cursor: pointer;
  }
- 
+
+ @media (max-width:768px) {
+  .layoutColumn a{
+    height: 40px;
+  }
+
+  .layoutColumn h1 {
+    font-size:x-large;
+  }
+
+  .layoutHeader {
+    height: 75px;
+  }
+
+  .headerContainer {
+    padding-bottom: 10px;
+  }
+}
+
+ /* -------------- Groupselectionpage Styling --------------------*/
+
  .groupNameDiv {
   background-color: var(--secondary-color);
   border-radius: 25px;
   color: var(--primary-color);
  }
 
- /* .customHeight {
-  min-height: 75vh;
- } */
+/* -------------- Groupinfopage Styling --------------------*/
 
  .groupInfoCard {
    background-color: var(--secondary-color);
@@ -85,7 +109,7 @@ h1 {
   padding-bottom: 40px;
  }
 
-/* DATEPICKER STYLE */
+/* -------------- DATEPICKER STYLE --------------------*/
 
 input[type="date"] { 
   background: var(--secondary-color);
@@ -128,22 +152,4 @@ input::-webkit-datetime-edit-fields-wrapper {
   padding-right:15px;
 }
 
-/* END OF DATEPICKER STYLE */
 
-@media (max-width:768px) {
-  .layoutColumn a{
-    height: 40px;
-  }
-
-  .layoutColumn h1 {
-    font-size:x-large;
-  }
-
-  .layoutHeader {
-    height: 75px;
-  }
-
-  .headerContainer {
-    padding-bottom: 10px;
-  }
-}
