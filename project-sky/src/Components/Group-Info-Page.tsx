@@ -10,8 +10,8 @@ const {
 
 function CheckIfBookingExist() {
 
-  const currentDate = useOutletContext(); //Tanken att den här ska ta emot datom från layoutfil
-console.log(currentDate)
+  const currentDate = useOutletContext(); //Använda detta datum till fetch när bakend fungerar
+  console.log("Från infopage: ", currentDate)
 
     const location = useLocation();
     var groupName: string = location.state.group
