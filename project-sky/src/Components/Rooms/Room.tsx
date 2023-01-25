@@ -2,7 +2,7 @@ interface Room {
     name: string;
     seats: number;
     availableSeats: number;
-    bookedBy: string;
+    groupName: string;
 }
 
 export default Room;

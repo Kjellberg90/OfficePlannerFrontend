@@ -10,11 +10,13 @@ const RoomsPage = () => {
     const [rooms, setRooms] = useState([]);
     const [error, setError] = useState([]);
 
-    const currentDate = useOutletContext(); //Använda detta datum till fetch när bakend fungerar
-    // console.log("Från roomspage: ", currentDate)
-
+    debugger
+    
+    const currentDate: string = useOutletContext(); //Använda detta datum till fetch när bakend fungerar
+    console.log("Från roomspage: ", currentDate)
+    
     useEffect(() => {
-        fetch(`https://localhost:7054/api/Room/get-rooms-info?date=${currentDate}`)
+        fetch(`https://localhost:7054/api/Room/get-rooms-info?date=` + currentDate)
         .then(response => response.json())
         .then(res => setRooms(res))
         .catch(err => setError(err))
@@ -29,7 +31,7 @@ const RoomsPage = () => {
                         <Col className="room-info-col text-center" md={6}>
                             <Row>
                                 <h2><i><b>{room.name}</b></i></h2>
-                                <h4>{room.bookedBy != null ? "Booked by: " + room.bookedBy : "Not booked"}</h4>
+                                <h4>Booked by: {room.groupName}</h4>
                             </Row>
                             <Row>
                                 <Col>
