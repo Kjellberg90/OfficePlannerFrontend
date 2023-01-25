@@ -1,31 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
-
-
-
 
 const DropdownDatepicker = () => {
 
-    // const [date, setDate] = useState(new Date());
     const [date, setDate] = useState("");
 
+    var today = new Date();
+    var formattedDate = format(today, "yyyy-MM-dd");
+    useEffect(() => {
+        setDate(formattedDate);
+    }, [formattedDate])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setDate(value);
+        console.log(value);
     };
-
-
-        var disDate = new Date();
-        var formattedDate = format(disDate, "yyyy-MM-dd");
-        console.log(formattedDate);
-  
-
-
 
     return (
         <>
-            <input type="date" defaultValue={formattedDate} />
+            <input type="date" defaultValue={formattedDate} onChange={handleChange} />
         </>
     )
 }
