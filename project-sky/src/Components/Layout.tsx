@@ -24,8 +24,8 @@ const Layout = () => {
     if(window.location.href !== "http://localhost:3000/") {
       return(
         <Container className="layoutFooter">
-          <Row>
-            <Col lg={{span: 6, offset: 3}}>
+          <Row className="d-flex align-items-center justify-content-center">
+            <Col>
               <FontAwesomeIcon icon={faLongArrowLeft} className="return-arrow" onClick={goBack}/>
             </Col>
           </Row>
@@ -40,7 +40,7 @@ const Layout = () => {
               <Row className="layoutHeader d-flex justify-content-center ">
                 <Col className="layoutColumn">
                   <Link to={"/"}>
-                    <img src={epirocLogo} alt="test" style={{width:"100%", height: "100%"}} className="epiricLogo"/>
+                    <img src={epirocLogo} alt="test" style={{width:"100%", height: "100%"}} className="epirocLogo"/>
                   </Link>
                 </Col> 
                 <Col className="layoutColumn datepicker">
@@ -48,7 +48,7 @@ const Layout = () => {
                 </Col>
               </Row>
           </Container>
-          <Outlet context={currentDateTime}/>
+          <Outlet />
           {BackButton()}         
       </Fragment>
   );

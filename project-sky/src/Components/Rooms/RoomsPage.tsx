@@ -24,8 +24,8 @@ const RoomsPage = () => {
         <Container>
             <Stack gap={5}>            
                 {rooms.map((room: Room) => {return (
-                    <Row className="room-info-row" key={room.name}>
-                        <Col md={{span:6, offset:3}} className="room-info-col text-center">
+                    <Row className="room-info-row d-flex align-items-center justify-content-center" key={room.name}>
+                        <Col className="room-info-col text-center" md={6}>
                             <Row>
                                 <h2><i><b>{room.name}</b></i></h2>
                                 <h4>{room.bookedBy != null ? "Booked by: " + room.bookedBy : "Not booked"}</h4>

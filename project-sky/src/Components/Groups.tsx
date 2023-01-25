@@ -16,8 +16,8 @@ import { Link} from "react-router-dom";
 
     return (
         <Container>
-           <Row>
-                <Col  lg={{span: 6, offset: 3}}>
+           <Row className="d-flex align-items-center justify-content-center">
+                <Col  md={6}>
                   <Stack gap={5}>
                       {
                           jsonGroupData.map(groups => {
