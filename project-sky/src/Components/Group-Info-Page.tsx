@@ -11,7 +11,6 @@ const {
 function CheckIfBookingExist() {
 
   const currentDate = useOutletContext(); //Använda detta datum till fetch när bakend fungerar
-  console.log("Från infopage: ", currentDate)
 
     const location = useLocation();
     var groupName: string = location.state.group
