@@ -4,23 +4,25 @@ import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
 import Stack from "react-bootstrap/esm/Stack";
 import { useOutletContext } from 'react-router-dom';
+import { format } from "date-fns";
 
 const RoomsPage = () => {
 
     const [rooms, setRooms] = useState([]);
     const [error, setError] = useState([]);
 
-    debugger
+    var currentDate = useOutletContext(); //Använda detta datum till fetch när bakend fungerar
+    console.log("Från roomspage: ", currentDate);
     
-    const currentDate: string = useOutletContext(); //Använda detta datum till fetch när bakend fungerar
-    console.log("Från roomspage: ", currentDate)
-    
+
     useEffect(() => {
+
         fetch(`https://localhost:7054/api/Room/get-rooms-info?date=` + currentDate)
         .then(response => response.json())
         .then(res => setRooms(res))
+        .then(() => console.log("hello"))
         .catch(err => setError(err))
-    },[])
+    },[currentDate])
 
 
     return (   

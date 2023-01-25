@@ -17,7 +17,7 @@ const Layout = () => {
     navigate(-1);
   }
 
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
 
   var today = new Date();
   var formattedDate = format(today, "yyyy-MM-dd");
