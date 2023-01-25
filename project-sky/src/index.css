@@ -144,7 +144,7 @@ input::-webkit-datetime-edit-fields-wrapper {
   padding-top: 10px;
   padding-bottom: 10px;
   cursor: pointer;
-  border: 1px dashed red;
+  /* border: 1px dashed red; */
   padding-right: 36px;
 }
 
