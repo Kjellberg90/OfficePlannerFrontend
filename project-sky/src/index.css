@@ -140,11 +140,12 @@ input::-webkit-datetime-edit-fields-wrapper {
 
 /* A "fix" to get a larger clickable area for calendar icon  */
 .makeClickable::-webkit-calendar-picker-indicator {
-  padding-left: 60px;
+  padding-left: 36px;
   padding-top: 10px;
   padding-bottom: 10px;
   cursor: pointer;
-  /* border: 1px dashed red; */
+  border: 1px dashed red;
+  padding-right: 36px;
 }
 
 ::-webkit-calendar-picker-indicator {
