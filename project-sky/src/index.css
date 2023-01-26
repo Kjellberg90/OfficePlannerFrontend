@@ -118,6 +118,7 @@ input[type="date"] {
 
 input[type="date"] {
   -webkit-align-items: center;
+  align-items: center;
   display: -webkit-inline-flex;
   font-family: monospace;
   overflow: hidden;
