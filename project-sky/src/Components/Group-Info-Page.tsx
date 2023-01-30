@@ -26,6 +26,7 @@ function CheckIfBookingExist() {
         if (info.bookedBy === groupName) {
             response = true;
         }
+        return response;
     })
 
     if (check === true) {
