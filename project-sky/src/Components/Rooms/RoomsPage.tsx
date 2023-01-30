@@ -24,7 +24,6 @@ const RoomsPage = () => {
         .catch(err => setError(err))
     },[currentDate])
 
-
     return (   
         <Container>
             <Stack gap={5}>            
