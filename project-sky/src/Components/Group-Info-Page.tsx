@@ -13,7 +13,7 @@ function CheckIfBookingExist() {
   const currentDate = useOutletContext(); //Använda detta datum till fetch när bakend fungerar
 
     const location = useLocation();
-    var groupName: string = location.state.group
+    var groupName: string = location.state.group.name
 
     const [check, setCheck] = useState<boolean>()
     let response = false;
@@ -22,7 +22,7 @@ function CheckIfBookingExist() {
         setCheck(response);
     }, [response])
 
-    jsonRoomData.map(info => {
+    jsonRoomData.map(info  => {
         if (info.bookedBy === groupName) {
             response = true;
         }
@@ -46,13 +46,13 @@ function GroupDetails() {
 
     const location = useLocation();
 
-    var groupName: string = location.state.group
+    var groupName: string = location.state.group.name
 
     return (
         <Row className="d-flex align-items-center justify-content-center" style={{height:"80vh", overflow:"hidden"}}>
 
             {
-                jsonRoomData.map(info => info.bookedBy === groupName && (
+                jsonRoomData.map((info: any) => info.bookedBy === groupName && (
                     <Col className="groupInfoCard" key={groupName} md={6} lg="auto" xl="auto">
                         <h2>Room: {info.roomName}</h2>
                         <h2>Number of seatings: {info.seating}</h2>
