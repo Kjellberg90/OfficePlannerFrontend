@@ -4,8 +4,6 @@ import Startpage from "./Components/Startpage/Startpage";
 import Groups from "./Components/Groups/Groups";
 import RoomsPage from "./Components/Rooms/RoomsPage";
 import GroupInfoPage from "./Components/Groups/Group-Info-Page";
-import { time } from "console";
-
 
 const AppRouter = () => {
     return (

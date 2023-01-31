@@ -23,7 +23,7 @@ const GroupInfoPage = () => {
                 setLoading(false)
             })
             .catch(err => setError(err))
-    }, [currentDate])
+    }, [currentDate, groupId])
 
 
     if (group?.bookedRoom === null) {
