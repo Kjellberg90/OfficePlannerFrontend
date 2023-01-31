@@ -33,10 +33,6 @@ const RoomsPage = () => {
                             <Row>
                                 <h2><b>{room.name}</b></h2>
                                 {room.groupName == "" ? <h4><i>Unbooked</i></h4> : <h4><b>{room.groupName}</b></h4>}
-                                
-
-                                {/* <h2><i><b>{room.name}</b></i></h2>
-                                <h4>Booked by: {room.groupName}</h4> */}
                             </Row>
                             <Row>
                                 <Col>
