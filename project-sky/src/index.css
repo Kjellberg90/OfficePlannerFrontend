@@ -3,6 +3,7 @@
 :root {
   --primary-color: #425563;
   --secondary-color: #FFC72C;
+  --accent-color: #001e32; /* Möjlig accentfärg */
 }
 
 * {
