@@ -31,15 +31,15 @@ const RoomsPage = () => {
                     <Row className="room-info-row d-flex align-items-center justify-content-center" key={room.name}>
                         <Col className="room-info-col text-center" md={6}>
                             <Row>
-                                <h2><i><b>{room.name}</b></i></h2>
-                                <h4>Booked by: {room.groupName}</h4>
+                                <h2><b>{room.name}</b></h2>
+                                {room.groupName == "" ? <h4><i>Unbooked</i></h4> : <h4><b>{room.groupName}</b></h4>}
                             </Row>
                             <Row>
                                 <Col>
-                                    <h4>Seats: {room.seats}</h4>
+                                    <h5>Seats: {room.seats}</h5>
                                 </Col>
                                 <Col>
-                                    <h4>Available: {room.availableSeats}</h4>
+                                    <h5>Available: {room.availableSeats}</h5>
                                 </Col>
                             </Row>                    
                         </Col>
