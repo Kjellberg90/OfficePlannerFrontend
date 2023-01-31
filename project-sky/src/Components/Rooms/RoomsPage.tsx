@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState} from "react";
 import Room from "./Room";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
@@ -8,7 +8,7 @@ import { useOutletContext } from 'react-router-dom';
 const RoomsPage = () => {
 
     const [rooms, setRooms] = useState([]);
-    const [error, setError] = useState([]);
+    const [, setError] = useState([]);
 
     var currentDate = useOutletContext();
     

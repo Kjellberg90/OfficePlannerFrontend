@@ -12,7 +12,7 @@ const GroupInfoPage = () => {
     var groupId: string = location.state.group.id
 
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState([]);
+    const [, setError] = useState([]);
 
     useLayoutEffect(() => {
 
