@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Room from "./Room";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
@@ -11,7 +11,6 @@ const RoomsPage = () => {
     const [error, setError] = useState([]);
 
     var currentDate = useOutletContext();
-    console.log("Från roomspage: ", rooms);
     
 
     useEffect(() => {
@@ -27,11 +26,20 @@ const RoomsPage = () => {
       setisOpen(roomName)
     }
 
-    const bookRoom = (id: number, name: string) => {
-      const data ={roomId: id, roomName: name}
+    const [id, setid] = useState<number>();
+    const [name, setname] = useState("");
 
-      
-    }
+    const handleSubmit = () => {
+        const data ={ "roomId": id, "date": currentDate, "name": name}
+        fetch("https://localhost:7054/api/Booking/SingleBooking", {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+      }
 
     return (   
         <Container>
@@ -62,10 +70,9 @@ const RoomsPage = () => {
                                   }
                                   else if (isOpen == room.name) {
                                     return (
-                                      <form className="form-inline">
+                                      <form className="form-inline"  onSubmit={handleSubmit}>
                                         <div className="form-group mx-sm-3 mb-2">
-                                          
-                                          <input type="text" className="form-control" id="inputPassword2" placeholder="Name" />
+                                        <input type="text" id="name"  className="form-control" placeholder="Name" onChange={(event) => {setname(event.target.value); setid(room.roomId)}} />
                                         </div>
                                         <button type="submit" className="btn btn-primary mb-2">Confirm identity</button>
                                       </form>
