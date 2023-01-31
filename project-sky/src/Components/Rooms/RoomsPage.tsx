@@ -11,7 +11,7 @@ const RoomsPage = () => {
     const [error, setError] = useState([]);
 
     var currentDate = useOutletContext();
-    console.log("Från roomspage: ", currentDate);
+    console.log("Från roomspage: ", rooms);
     
 
     useEffect(() => {
@@ -25,6 +25,12 @@ const RoomsPage = () => {
 
     const handleOpen = (roomName: string) => {
       setisOpen(roomName)
+    }
+
+    const bookRoom = (id: number, name: string) => {
+      const data ={roomId: id, roomName: name}
+
+      
     }
 
     return (   
@@ -56,7 +62,13 @@ const RoomsPage = () => {
                                   }
                                   else if (isOpen == room.name) {
                                     return (
-                                      <button type="button" className="btn btn-primary">Book Seat</button>
+                                      <form className="form-inline">
+                                        <div className="form-group mx-sm-3 mb-2">
+                                          
+                                          <input type="text" className="form-control" id="inputPassword2" placeholder="Name" />
+                                        </div>
+                                        <button type="submit" className="btn btn-primary mb-2">Confirm identity</button>
+                                      </form>
                                     )
                                   }
                                   else {
