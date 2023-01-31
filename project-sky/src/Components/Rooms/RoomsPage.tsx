@@ -74,7 +74,7 @@ const RoomsPage = () => {
                                         <div className="form-group mx-sm-3 mb-2">
                                         <input type="text" id="name"  className="form-control" placeholder="Name" onChange={(event) => {setname(event.target.value); setid(room.roomId)}} />
                                         </div>
-                                        <button type="submit" className="btn btn-primary mb-2">Confirm identity</button>
+                                        <button type="submit" className="btn btn-primary mb-2">Book Seat</button>
                                       </form>
                                     )
                                   }
