@@ -3,7 +3,7 @@ import Layout from "./Components/Layout";
 import Startpage from "./Components/Startpage";
 import Groups from "./Components/Groups/Groups";
 import RoomsPage from "./Components/Rooms/RoomsPage";
-import GroupInfoPage from "./Components/Group-Info-Page";
+import GroupInfoPage from "./Components/Groups/Group-Info-Page";
 import { time } from "console";
 
 
