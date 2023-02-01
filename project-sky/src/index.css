@@ -56,14 +56,6 @@ a {
   align-items: center;
  }
 
- .room-info-col {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-  border-radius: 50px;
-  padding: 2px;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
- }
-
  .return-arrow {
   color: var(--secondary-color);
   font-size: 80px;
@@ -113,6 +105,19 @@ a {
  .headerContainer {
   padding-bottom: 40px;
  }
+/* -------------- RoomsPage Styling --------------------*/
+
+.room-info-col {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border-radius: 50px;
+  padding: 2px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.roomPage-seats:hover {
+  cursor: pointer;
+}
 
 /* -------------- DATEPICKER STYLE --------------------*/
 
