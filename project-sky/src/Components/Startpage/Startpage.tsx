@@ -12,7 +12,7 @@ const Startpage = () => {
                   <Col  md={6}>
                     <Link to="/groups">
                       <div className="d-flex align-items-center justify-content-center selectionBox">
-                            <h2 className="boxTextStartPage">Groups</h2>
+                            <h2 className="boxTextStartPage">Teams</h2>
                       </div>
                     </Link>
                   </Col>
