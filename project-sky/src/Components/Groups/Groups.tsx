@@ -9,7 +9,7 @@ import Groups from './groupsInterface'
 const Group = () => {  
     
   const [groupNames, setGroups] = useState([]);
-  const [, setError] = useState([]);
+  const [error , setError] = useState([]);
       
   useEffect(() => {
     fetch(`https://localhost:7054/api/Group/GetGroups`)
