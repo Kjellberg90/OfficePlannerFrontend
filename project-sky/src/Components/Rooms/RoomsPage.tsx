@@ -43,7 +43,7 @@ const RoomsPage = () => {
 
     return (   
         <Container>
-            <Stack gap={5}>            
+            <Stack gap={4}>            
                 {rooms.map((room: Room) => {return (
                     <Row className="room-info-row d-flex align-items-center justify-content-center" key={room.name}>
                         <Col className="room-info-col text-center" md={6}>
@@ -75,12 +75,13 @@ const RoomsPage = () => {
                                         <input type="text" id="name"  className="form-control" placeholder="Name" onChange={(event) => {setname(event.target.value); setid(room.roomId)}} />
                                         </div>
                                         <button type="submit" className="btn btn-primary mb-2">Book Seat</button>
+                                        <button type="button" onClick={() => setisOpen("")} className="btn btn-danger mb-2">Cancel</button>
                                       </form>
                                     )
                                   }
                                   else {
                                     return (
-                                      <h5 onClick={() => handleOpen(room.name)}>Book Available seat</h5>
+                                      <h5 onClick={() => handleOpen(room.name)} className="roomPage-seats">Book Available seat</h5>
                                     )
                                   }
                                 })()}
