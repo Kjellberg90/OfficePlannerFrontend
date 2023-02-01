@@ -1,6 +1,6 @@
 import { Fragment } from "react"
 import { Link, Outlet, useNavigate } from "react-router-dom"
-import epirocLogo from '../shared/epiroclogo.svg'
+import epirocLogo from '../../shared/epiroclogo.svg'
 import { useState, useEffect } from "react"
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'

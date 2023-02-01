@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState} from "react";
 import Room from "./Room";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
@@ -8,7 +8,7 @@ import { useOutletContext } from 'react-router-dom';
 const RoomsPage = () => {
 
     const [rooms, setRooms] = useState([]);
-    const [error, setError] = useState([]);
+    const [, setError] = useState([]);
 
     var currentDate = useOutletContext();
     
@@ -49,7 +49,7 @@ const RoomsPage = () => {
                         <Col className="room-info-col text-center" md={6}>
                             <Row>
                                 <h2><b>{room.name}</b></h2>
-                                {room.groupName == "" ? <h4><i>Unbooked</i></h4> : <h4><b>{room.groupName}</b></h4>}
+                                {room.groupName === "" ? <h4><i>Unbooked</i></h4> : <h4><b>{room.groupName}</b></h4>}
                             </Row>
                             <Row>
                                 <Col>
@@ -68,7 +68,7 @@ const RoomsPage = () => {
                                       <h5>No Available Seats</h5>
                                     )
                                   }
-                                  else if (isOpen == room.name) {
+                                  else if (isOpen === room.name) {
                                     return (
                                       <form className="form-inline"  onSubmit={handleSubmit}>
                                         <div className="form-group mx-sm-3 mb-2">
