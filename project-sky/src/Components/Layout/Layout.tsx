@@ -32,7 +32,10 @@ const Layout = () => {
   }
 
   useEffect (() => {
-    if( window.location.href == "http://localhost:3000/" || window.location.href == "http://localhost:3000/admin") {
+    if( window.location.href == "http://localhost:3000/" || 
+      window.location.href == "http://localhost:3000/admin#home" || 
+      window.location.href == "http://localhost:3000/admin#groups" || 
+      window.location.href == "http://localhost:3000/admin#rooms") {
       setShowBackButton(false);
     }
     else {
