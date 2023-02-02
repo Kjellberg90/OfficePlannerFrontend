@@ -56,9 +56,14 @@ a {
   align-items: center;
  }
 
+ .epirocLogo {
+  filter:drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.3))
+ }
+
  .return-arrow {
   color: var(--secondary-color);
   font-size: 80px;
+  filter:drop-shadow(2px 3px 1px rgba(0, 0, 0, 0.3))
  }
 
  .return-arrow:hover {
@@ -115,8 +120,17 @@ a {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
+.roomsPageSubmitButton {
+  margin-right: 15px;
+}
+
 .roomPage-seats:hover {
   cursor: pointer;
+}
+
+input[type="search"]::-webkit-search-decoration:hover,
+input[type="search"]::-webkit-search-cancel-button:hover { 
+    cursor:pointer; 
 }
 
 /* -------------- DATEPICKER STYLE --------------------*/
@@ -165,3 +179,50 @@ input::-webkit-datetime-edit-fields-wrapper {
 }
 
 
+/* -------------- Custom Elements --------------------*/
+
+.primaryButton {
+  padding: 8px 20px;
+  border: 0;
+  border-radius: 15px;
+  background-color: #48a9c5;
+  color: #ffffff;
+  font-weight: Bold;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+
+.primaryButton:hover {
+  background-color: #418fa5;
+  box-shadow: 0 0 20px #6fc5ff50;
+}
+
+.primaryButton:active {
+  background-color: #6dc2d9;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  box-shadow: none;
+}
+
+.dangerButton {
+  padding: 8px 20px;
+  border: 0;
+  border-radius: 15px;
+  background-color: #b7312c;
+  color: #ffffff;
+  font-weight: Bold;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+
+.dangerButton:hover {
+  background-color: #931e1a;
+  box-shadow: 0 0 20px #ff716f50;
+}
+
+.dangerButton:active {
+  background-color: #bd4b47;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  box-shadow: none;
+}
