@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import Room from "./Room";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
@@ -8,28 +8,37 @@ import { useOutletContext } from 'react-router-dom';
 const RoomsPage = () => {
 
     const [rooms, setRooms] = useState([]);
-    const [, setError] = useState([]);
+    const [err, setError] = useState([]);
+    const [isOpen, setisOpen] = useState("");
+    const [id, setid] = useState<number>();
+    const [name, setname] = useState("");
 
-    var currentDate = useOutletContext();
+    var currentDate: string = useOutletContext();
+    
     
 
-    useEffect(() => {
-        fetch(`https://localhost:7054/api/Room/get-rooms-info?date=` + currentDate)
+    const test = async () => {
+        await fetch(`https://localhost:7054/api/Room/get-rooms-info?date=` + currentDate)
         .then(response => response.json())
-        .then(res => setRooms(res))
+        .then(res => { setRooms(res)})
         .catch(err => setError(err))
+    }
+
+    useEffect(() => {
+        test()
     },[currentDate])
 
-    const [isOpen, setisOpen] = useState("");
+
+
 
     const handleOpen = (roomName: string) => {
       setisOpen(roomName)
     }
 
-    const [id, setid] = useState<number>();
-    const [name, setname] = useState("");
 
-    const handleSubmit = () => {
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
+        setisOpen("cleared in handleSubmit")       
         const data ={ "roomId": id, "date": currentDate, "name": name}
         fetch("https://localhost:7054/api/Booking/SingleBooking", {
           method: 'POST',
@@ -39,6 +48,14 @@ const RoomsPage = () => {
           },
           body: JSON.stringify(data)
         })
+        .then((response) => {
+          if(!response.ok) throw new Error(response.status.toString());
+        })
+        .then(() => test())
+        .catch((error) => {
+          console.log("error", error);
+        })
+
       }
 
     return (   
@@ -72,10 +89,10 @@ const RoomsPage = () => {
                                     return (
                                       <form className="form-inline"  onSubmit={handleSubmit}>
                                         <div className="form-group mx-sm-3 mb-2">
-                                        <input type="text" id="name"  className="form-control" placeholder="Name" onChange={(event) => {setname(event.target.value); setid(room.roomId)}} />
+                                          <input type="search" id="name" required className="form-control" placeholder="Name" onChange={(event) => {setname(event.target.value); setid(room.roomId)}} />
                                         </div>
-                                        <button type="submit" className="btn btn-primary mb-2">Book Seat</button>
-                                        <button type="button" onClick={() => setisOpen("")} className="btn btn-danger mb-2">Cancel</button>
+                                        <button type="submit" className="primaryButton roomsPageSubmitButton">Book Seat</button>
+                                        <button type="button" onClick={() => setisOpen("")} className="dangerButton mb-2">Cancel</button>
                                       </form>
                                     )
                                   }
