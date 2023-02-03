@@ -8,6 +8,10 @@ import AdminLayout from "./Components/Admin/AdminLayout";
 import AdminHomePage from "./Components/Admin/AdminHomePage";
 import AdminGroups from "./Components/Admin/AdminGroups";
 import AdminRooms from "./Components/Admin/AdminRooms";
+import ProtectedRoutes from "./Components/ProtectedRoute/ProtectedRoutes";
+import LoginPage from "./Components/Login/Login";
+
+
 
 const AppRouter = () => {
     return (
@@ -17,11 +21,15 @@ const AppRouter = () => {
                 <Route path="/groups" element={<Groups/>}/>
                 <Route path="/info" element={<GroupInfoPage />} />  
                 <Route path="/rooms" element={<RoomsPage />}/>
-                <Route path="/admin" element={<AdminLayout /> }>
-                    <Route path="home" element={<AdminHomePage />} />
-                    <Route path="groups" element={<AdminGroups />} />
-                    <Route path="rooms" element={<AdminRooms />} />
+                <Route path="/login" element={<LoginPage />} />                
+                <Route path="/admin" element={<ProtectedRoutes />}>
+                    <Route path="/admin" element={<AdminLayout /> }>
+                        <Route path="home" element={<AdminHomePage />} />
+                        <Route path="groups" element={<AdminGroups />} />
+                        <Route path="rooms" element={<AdminRooms />} />
+                    </Route>
                 </Route>
+
 
             </Route>
         </Routes>
