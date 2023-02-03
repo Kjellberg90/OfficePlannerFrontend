@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom"
 
 const LoginPage = () => {
   
-  const [password, setpassword] = useState("");
-  const [name, setname] = useState("");
-  
   const [formData, setformData] = useState({
     name: '',
     password: ''
@@ -29,19 +26,18 @@ const LoginPage = () => {
   } 
 
   return (
-    <Row className='d-flex justify-content-center'>
-      <Col  md={6}>
-        <Row className='d-flex justify-content-center'>
-          <form onSubmit={(e) => login(e)}>
-            <label>User: </label>
-            <input type="text" name="name" id="name" onChange={handleChange} value={formData.name} required/>
+    <Row className='room-info-row d-flex align-items-center justify-content-center'>
+      <Col className="room-info-col text-center" md={6}>
+        <div className="d-flex align-items-center justify-content-center flex-column room-info-col pt-2 pb-2">
+        <h2>Log In</h2>
+          <form className="form-inline" onSubmit={(e) => login(e)}>
+            <input className="form-control" type="text" name="name" id="name" placeholder="Username" onChange={handleChange} value={formData.name} required/>
             <br/>
-            <label>Password: </label>
-            <input type="password" onChange={handleChange} name="password" id="password" value={formData.password} required/>
+            <input className="form-control" type="password" onChange={handleChange} placeholder="Password"  name="password" id="password" value={formData.password} required/>
             <br/>
-            <input type="submit" id="submit" ></input>
+            <input className="primaryButton roomsPageSubmitButton" type="submit" id="submit" ></input>
           </form>
-        </Row>
+        </div>
       </Col>
     </Row>
   )
