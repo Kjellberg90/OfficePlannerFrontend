@@ -11,37 +11,49 @@ import { format } from "date-fns";
 
 
 const Layout = () => {
+  
+  const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
+  const [showBackButton, setShowBackButton] = useState(false);
+
+  var today = new Date();
+  var formattedDate = format(today, "yyyy-MM-dd");
+  useEffect(() => {
+    setDate(formattedDate);
+  }, [formattedDate])
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setDate(value);
+  };
 
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
   }
 
-  const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
+  useEffect (() => {
+    if( window.location.href == "http://localhost:3000/" || 
+      window.location.href == "http://localhost:3000/admin#home" || 
+      window.location.href == "http://localhost:3000/admin#groups" || 
+      window.location.href == "http://localhost:3000/admin#rooms") {
+      setShowBackButton(false);
+    }
+    else {
+      setShowBackButton(true)
+    }
+  })
 
-  var today = new Date();
-  var formattedDate = format(today, "yyyy-MM-dd");
-  useEffect(() => {
-      setDate(formattedDate);
-  }, [formattedDate])
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
-      setDate(value);
-  };
 
   const BackButton = () => {
-    if(window.location.href !== "http://localhost:3000/") {
-      return(
-        <Container className="layoutFooter">
-          <Row className="d-flex align-items-center justify-content-center">
-            <Col md={6}>
-              <FontAwesomeIcon icon={faLongArrowLeft} className="return-arrow" onClick={goBack}/>
-            </Col>
-          </Row>
-        </Container>
-      )
-    }
+    return(
+      <Container className="layoutFooter">
+        <Row className="d-flex align-items-center justify-content-center">
+          <Col md={6}>
+            <FontAwesomeIcon icon={faLongArrowLeft} className="return-arrow" onClick={goBack}/>
+          </Col>
+        </Row>
+      </Container>
+    )
   }
 
   return (
@@ -59,7 +71,9 @@ const Layout = () => {
               </Row>
           </Container>
           <Outlet context={date}/>
-          {BackButton()}         
+          <div>
+            {showBackButton ? BackButton() : ""}         
+          </div>
       </Fragment>
   );
 }

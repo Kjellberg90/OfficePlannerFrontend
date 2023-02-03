@@ -133,6 +133,14 @@ input[type="search"]::-webkit-search-cancel-button:hover {
     cursor:pointer; 
 }
 
+/* -------------- Admin Page --------------------*/
+
+nav.adminNavbar {
+  background-color: var(--secondary-color);
+  border-top: 3px solid var(--accent-color);
+  border-bottom: 3px solid var(--accent-color);
+}
+
 /* -------------- DATEPICKER STYLE --------------------*/
 
 input[type="date"] { 
