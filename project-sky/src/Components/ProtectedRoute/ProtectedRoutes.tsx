@@ -4,7 +4,8 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 const useAuth = () => {
   const user = localStorage.getItem('user');
-  if (user) {
+  const password = localStorage.getItem('password');
+  if (user === "admin" && password ==="admin") {
     return true
   } else {
     return false
