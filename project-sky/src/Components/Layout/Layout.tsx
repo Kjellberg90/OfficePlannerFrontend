@@ -16,7 +16,7 @@ const Layout = () => {
   const [showBackButton, setShowBackButton] = useState(false);
 
   const[calDate, setCalDate] = useState<Date>(new Date())
-  var [decrement, setDecrement] = useState<number>(1)
+  var [decrement, setDecrement] = useState<number>(-1)
   
   const [formatDate, setFormatDate] = useState(format(calDate, "yyyy-MM-dd"))
   // var formattedDate = format(today, "yyyy-MM-dd");
