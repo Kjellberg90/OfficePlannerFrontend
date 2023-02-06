@@ -15,8 +15,9 @@ const Layout = () => {
   const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
   const [showBackButton, setShowBackButton] = useState(false);
 
-  const[calDate, setCalDate] = useState<Date>(new Date())
-  var [decrement, setDecrement] = useState<number>(-1)
+  const [calDate, setCalDate] = useState<Date>(new Date());
+  var [decrement, setDecrement] = useState<number>(-1);
+  var [increment, setIncrement] = useState<number>(1);
   
   const [formatDate, setFormatDate] = useState(format(calDate, "yyyy-MM-dd"))
   // var formattedDate = format(today, "yyyy-MM-dd");
@@ -25,12 +26,18 @@ const Layout = () => {
   }, [formatDate])
   
   //Type dis
-  const handleClick = (e: any) => {
-    var check = new Date();
-    check.setDate(check.getDate() + decrement--)
-    console.log(check)
+  const decrementDate = (e: any) => {
+    calDate.setDate(calDate.getDate() + decrement--)
+    const formatDate = format(calDate, "yyyy-MM-dd")
+    setDate(formatDate)
+    console.log(date)
   }
 
+  const incrementDate = (e: any) => {
+    calDate.setDate(calDate.getDate() + increment++)
+    setDate(calDate.toDateString)
+    console.log(date)
+  }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setDate(value);
@@ -76,9 +83,9 @@ const Layout = () => {
                   </Link>
                 </Col> 
                 <Col className="layoutColumn datepicker">
-                <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={handleClick} />
+                <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
                 <input type="date" className="makeClickable" defaultValue={formatDate} onChange={handleChange} style={{width:"220px", fontSize:"1rem", textAlign:"center", fontWeight:"bold", borderRadius:"10px"}}/>
-                <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" />
+                <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" onClick={incrementDate} />
                 </Col>
               </Row>
           </Container>
