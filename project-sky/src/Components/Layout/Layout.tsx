@@ -14,31 +14,30 @@ const Layout = () => {
   
   const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
   const [showBackButton, setShowBackButton] = useState(false);
+  const [calDate ] = useState<Date>(new Date());
+  var [decrement ] = useState<number>(-1);
+  var [increment] = useState<number>(1);
+  const [formatDate] = useState(format(calDate, "yyyy-MM-dd"))
 
-  const [calDate, setCalDate] = useState<Date>(new Date());
-  var [decrement, setDecrement] = useState<number>(-1);
-  var [increment, setIncrement] = useState<number>(1);
-  
-  const [formatDate, setFormatDate] = useState(format(calDate, "yyyy-MM-dd"))
-  // var formattedDate = format(today, "yyyy-MM-dd");
+  const [dateValue, setDateValue] = useState<string>(date)
+
   useEffect(() => {
     setDate(formatDate);
   }, [formatDate])
   
   //Type dis
   const decrementDate = (e: any) => {
-    calDate.setDate(calDate.getDate() + decrement--)
+    calDate.setDate(calDate.getDate() + decrement++)
     const formatDate = format(calDate, "yyyy-MM-dd")
     setDate(formatDate)
-    console.log(date)
   }
 
   const incrementDate = (e: any) => {
     calDate.setDate(calDate.getDate() + increment++)
-    setDate(calDate.toDateString)
-    console.log(date)
+    const formatDate = format(calDate, "yyyy-MM-dd")
+    setDate(formatDate)
   }
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { value } = e.target;
     setDate(value);
   };
@@ -84,7 +83,7 @@ const Layout = () => {
                 </Col> 
                 <Col className="layoutColumn datepicker">
                 <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
-                <input type="date" className="makeClickable" defaultValue={formatDate} onChange={handleChange} style={{width:"220px", fontSize:"1rem", textAlign:"center", fontWeight:"bold", borderRadius:"10px"}}/>
+                <input type="date" className="makeClickable" defaultValue={dateValue} onChange={handleChange} style={{width:"220px", fontSize:"1rem", textAlign:"center", fontWeight:"bold", borderRadius:"10px"}}/>
                 <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" onClick={incrementDate} />
                 </Col>
               </Row>
