@@ -7,8 +7,8 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons"
+import { faSquareCaretLeft, faSquareCaretRight } from "@fortawesome/free-solid-svg-icons"
 import { format } from "date-fns";
-
 
 const Layout = () => {
   
@@ -66,7 +66,9 @@ const Layout = () => {
                   </Link>
                 </Col> 
                 <Col className="layoutColumn datepicker">
+                <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" />
                 <input type="date" className="makeClickable" defaultValue={formattedDate} onChange={handleChange} style={{width:"220px", fontSize:"1rem", textAlign:"center", fontWeight:"bold", borderRadius:"10px"}}/>
+                <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" />
                 </Col>
               </Row>
           </Container>
