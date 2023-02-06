@@ -1,4 +1,4 @@
-import { Fragment } from "react"
+import React, { Fragment } from "react"
 import { Link, Outlet, useNavigate } from "react-router-dom"
 import epirocLogo from '../../shared/epiroclogo.svg'
 import { useState, useEffect } from "react"
@@ -7,21 +7,34 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons"
+import { faSquareCaretLeft, faSquareCaretRight } from "@fortawesome/free-solid-svg-icons"
 import { format } from "date-fns";
-
 
 const Layout = () => {
   
   const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
   const [showBackButton, setShowBackButton] = useState(false);
+  const [calDate ] = useState<Date>(new Date());
+  var [decrement ] = useState<number>(-1);
+  var [increment] = useState<number>(1);
+  const [formatDate] = useState(format(calDate, "yyyy-MM-dd"))
 
-  var today = new Date();
-  var formattedDate = format(today, "yyyy-MM-dd");
   useEffect(() => {
-    setDate(formattedDate);
-  }, [formattedDate])
+    setDate(formatDate);
+  }, [formatDate])
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const decrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
+    calDate.setDate(calDate.getDate() + decrement++)
+    const formatDate = format(calDate, "yyyy-MM-dd")
+    setDate(formatDate)
+  }
+
+  const incrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
+    calDate.setDate(calDate.getDate() + increment++)
+    const formatDate = format(calDate, "yyyy-MM-dd")
+    setDate(formatDate)
+  }
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { value } = e.target;
     setDate(value);
   };
@@ -66,7 +79,9 @@ const Layout = () => {
                   </Link>
                 </Col> 
                 <Col className="layoutColumn datepicker">
-                <input type="date" className="makeClickable" defaultValue={formattedDate} onChange={handleChange} style={{width:"220px", fontSize:"1rem", textAlign:"center", fontWeight:"bold", borderRadius:"10px"}}/>
+                <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
+                <input type="date" className="makeClickable" defaultValue={date} value={date} onChange={handleChange} style={{width:"220px", fontSize:"1rem", textAlign:"center", fontWeight:"bold", borderRadius:"10px"}}/>
+                <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" onClick={incrementDate} />
                 </Col>
               </Row>
           </Container>
