@@ -1,4 +1,4 @@
-import { Fragment } from "react"
+import React, { Fragment } from "react"
 import { Link, Outlet, useNavigate } from "react-router-dom"
 import epirocLogo from '../../shared/epiroclogo.svg'
 import { useState, useEffect } from "react"
@@ -15,12 +15,22 @@ const Layout = () => {
   const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
   const [showBackButton, setShowBackButton] = useState(false);
 
-  var today = new Date();
-  var formattedDate = format(today, "yyyy-MM-dd");
-  useEffect(() => {
-    setDate(formattedDate);
-  }, [formattedDate])
+  const[calDate, setCalDate] = useState<Date>(new Date())
+  var [decrement, setDecrement] = useState<number>(0)
   
+  const [formatDate, setFormatDate] = useState(format(calDate, "yyyy-MM-dd"))
+  // var formattedDate = format(today, "yyyy-MM-dd");
+  useEffect(() => {
+    setDate(formatDate);
+  }, [formatDate])
+  
+  //Type dis
+  const handleClick = (e: any) => {
+    var check = new Date();
+    check.setDate(check.getDate() - decrement--)
+    console.log(check)
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setDate(value);
@@ -66,8 +76,8 @@ const Layout = () => {
                   </Link>
                 </Col> 
                 <Col className="layoutColumn datepicker">
-                <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" />
-                <input type="date" className="makeClickable" defaultValue={formattedDate} onChange={handleChange} style={{width:"220px", fontSize:"1rem", textAlign:"center", fontWeight:"bold", borderRadius:"10px"}}/>
+                <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={handleClick} />
+                <input type="date" className="makeClickable" defaultValue={formatDate} onChange={handleChange} style={{width:"220px", fontSize:"1rem", textAlign:"center", fontWeight:"bold", borderRadius:"10px"}}/>
                 <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" />
                 </Col>
               </Row>
