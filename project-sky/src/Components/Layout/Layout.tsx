@@ -19,20 +19,17 @@ const Layout = () => {
   var [increment] = useState<number>(1);
   const [formatDate] = useState(format(calDate, "yyyy-MM-dd"))
 
-  const [dateValue, setDateValue] = useState<string>(date)
-
   useEffect(() => {
     setDate(formatDate);
   }, [formatDate])
   
-  //Type dis
-  const decrementDate = (e: any) => {
+  const decrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
     calDate.setDate(calDate.getDate() + decrement++)
     const formatDate = format(calDate, "yyyy-MM-dd")
     setDate(formatDate)
   }
 
-  const incrementDate = (e: any) => {
+  const incrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
     calDate.setDate(calDate.getDate() + increment++)
     const formatDate = format(calDate, "yyyy-MM-dd")
     setDate(formatDate)
