@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom"
@@ -20,9 +21,28 @@ const LoginPage = () => {
   const navigate= useNavigate();
   const login = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    localStorage.setItem('user', formData.name)
-    localStorage.setItem('password', formData.password)
-    navigate('/admin')
+
+    const data ={ "userName": formData.name, "password": formData.password}
+    
+    
+
+    fetch("https://localhost:7054/api/User/Login", {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            sessionStorage.setItem("user", "true")
+          } else {
+            alert("Acess Denied")
+          }
+        })
+        .then(() => navigate('/admin')
+        )
   } 
 
   return (
