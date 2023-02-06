@@ -3,9 +3,8 @@ import React from "react"
 import { Navigate, Outlet } from 'react-router-dom'
 
 const useAuth = () => {
-  const user = localStorage.getItem('user');
-  const password = localStorage.getItem('password');
-  if (user === "admin" && password ==="admin") {
+  const user = sessionStorage.getItem('user');
+  if (user === "true") {
     return true
   } else {
     return false
