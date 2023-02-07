@@ -19,6 +19,7 @@ const Layout = () => {
 
   const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
   const [showBackButton, setShowBackButton] = useState(false);
+  const [showToggleBtn, setShowToggleBtn] = useState(false);
   const [calDate] = useState<Date>(new Date());
   var [decrementDay] = useState<number>(-1);
   var [incrementDay] = useState<number>(1);
@@ -71,7 +72,16 @@ const Layout = () => {
       setShowBackButton(false);
     }
     else {
-      setShowBackButton(true)
+      setShowBackButton(true);
+    }
+  })
+
+  useEffect(() => {
+    if (window.location.href === "http://localhost:3000/info") {
+      setShowToggleBtn(true);
+    }
+    else {
+      setShowToggleBtn(false);
     }
   })
 
@@ -88,6 +98,25 @@ const Layout = () => {
     )
   }
 
+  const ToggleButton = () => {
+    return (
+      <button className="togglebtn " onClick={() => setToggle(!toggle)} type="button">
+      <>
+        {toggle ?
+          <Col>
+            <FontAwesomeIcon icon={faToggleOff} />
+            <label className="givemespace toggle-off">Day</label>
+          </Col> :
+          <Col>
+            <FontAwesomeIcon icon={faToggleOn} />
+            <label className="givemespace2 toggle-on">Week</label>
+          </Col>
+        }
+      </>
+    </button>
+    )
+  }
+
   return (
     <Fragment>
       <Container className="headerContainer">
@@ -98,20 +127,7 @@ const Layout = () => {
             </Link>
           </Col>
           <Col className="layoutColumn datepicker">
-            <button className="togglebtn " onClick={() => setToggle(!toggle)} type="button">
-              <>
-                {toggle ?
-                  <Col>
-                    <FontAwesomeIcon icon={faToggleOff} />
-                    <label className="givemespace toggle-off">Day</label>
-                  </Col> :
-                  <Col>
-                    <FontAwesomeIcon icon={faToggleOn} />
-                    <label className="givemespace2 toggle-on">Week</label>
-                  </Col>
-                }
-              </>
-            </button>
+            {showToggleBtn ? ToggleButton() : ""}
             <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
             <input type="date" className="makeClickable" defaultValue={date} value={date} onChange={handleChange} style={{ width: "220px", fontSize: "1rem", textAlign: "center", fontWeight: "bold", borderRadius: "10px" }} />
             <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" onClick={incrementDate} />
