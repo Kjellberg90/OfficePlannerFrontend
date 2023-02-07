@@ -10,15 +10,14 @@ import { BackButton } from "./LayoutButtons"
 import {
   faSquareCaretLeft,
   faSquareCaretRight,
-  faToggleOff,
-  faToggleOn
 } from "@fortawesome/free-solid-svg-icons"
+import { faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons"
 import { format } from "date-fns";
+
 
 const Layout = () => {
 
   const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
-
   const [showBackButton, setShowBackButton] = useState(false);
   const [showToggleBtn, setShowToggleBtn] = useState(false);
   const [calDate] = useState<Date>(new Date());
@@ -79,22 +78,19 @@ const Layout = () => {
     }
   })
 
-
-  const ToggleButton = () => {
+  const toggleButton = () => {
     return (
-      <button className="togglebtn " onClick={() => setToggle(!toggle)} type="button">
-        <>
-          {toggle ?
-            <Col>
-              <FontAwesomeIcon icon={faToggleOff} />
-              <label className="givemespace toggle-off">Day</label>
-            </Col> :
-            <Col>
-              <FontAwesomeIcon icon={faToggleOn} />
-              <label className="givemespace2 toggle-on">Week</label>
-            </Col>
-          }
-        </>
+      <button className="togglebtn" onClick={() => setToggle(!toggle)}>
+        {toggle ?
+          <Col>
+            <FontAwesomeIcon icon={faToggleOff} />
+            <label className="givemespace toggle-off">Day</label>
+          </Col> :
+          <Col>
+            <FontAwesomeIcon icon={faToggleOn} />
+            <label className="givemespace2 toggle-on">Week</label>
+          </Col>
+        }
       </button>
     )
   }
@@ -109,18 +105,18 @@ const Layout = () => {
             </Link>
           </Col>
           <Col className="layoutColumn datepicker">
-            {showToggleBtn ? ToggleButton() : ""}
+            {showToggleBtn ? toggleButton() : ""}
             <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
             <input type="date" className="makeClickable" value={date} onChange={handleChange} style={{ width: "220px", fontSize: "1rem", textAlign: "center", fontWeight: "bold", borderRadius: "10px" }} />
             <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" onClick={incrementDate} />
           </Col>
         </Row>
-      </Container>
+      </Container >
       <Outlet context={date} />
       <div>
         {showBackButton ? <BackButton /> : ""}
       </div>
-    </Fragment>
+    </Fragment >
   );
 }
 
