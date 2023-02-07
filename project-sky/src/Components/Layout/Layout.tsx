@@ -20,8 +20,10 @@ const Layout = () => {
   const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
   const [showBackButton, setShowBackButton] = useState(false);
   const [calDate] = useState<Date>(new Date());
-  var [decrement] = useState<number>(-1);
-  var [increment] = useState<number>(1);
+  var [decrementDay] = useState<number>(-1);
+  var [incrementDay] = useState<number>(1);
+  var[decrementWeek] = useState<number>(-6);
+  var[incrementWeek] = useState<number>(6)
   const [formatDate] = useState(format(calDate, "yyyy-MM-dd"))
   const [toggle, setToggle] = useState<boolean>(true);
 
@@ -30,16 +32,27 @@ const Layout = () => {
   }, [formatDate])
 
   const decrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
-    calDate.setDate(calDate.getDate() + decrement++)
+    if(!toggle){
+      calDate.setDate(calDate.getDate() + decrementWeek++)
+      const formatDate = format(calDate, "yyyy-MM-dd")
+      setDate(formatDate)
+    }
+      calDate.setDate(calDate.getDate() + decrementDay++)
+      const formatDate = format(calDate, "yyyy-MM-dd")
+      setDate(formatDate)
+  }
+
+  const incrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
+    if(!toggle){
+      const formatDate = format(calDate, "yyyy-MM-dd")
+      calDate.setDate(calDate.getDate() + incrementWeek++)
+    setDate(formatDate)
+    }
+    calDate.setDate(calDate.getDate() + incrementDay++)
     const formatDate = format(calDate, "yyyy-MM-dd")
     setDate(formatDate)
   }
 
-  const incrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
-    calDate.setDate(calDate.getDate() + increment++)
-    const formatDate = format(calDate, "yyyy-MM-dd")
-    setDate(formatDate)
-  }
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { value } = e.target;
     setDate(value);
