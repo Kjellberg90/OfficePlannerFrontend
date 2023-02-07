@@ -1,12 +1,12 @@
 import React, { Fragment } from "react"
-import { Link, Outlet, useNavigate } from "react-router-dom"
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"
 import epirocLogo from '../../shared/epiroclogo.svg'
 import { useState, useEffect } from "react"
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons"
+import { BackButton } from "./LayoutButtons"
 import {
   faSquareCaretLeft,
   faSquareCaretRight,
@@ -18,6 +18,7 @@ import { format } from "date-fns";
 const Layout = () => {
 
   const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
+  
   const [showBackButton, setShowBackButton] = useState(false);
   const [showToggleBtn, setShowToggleBtn] = useState(false);
   const [calDate] = useState<Date>(new Date());
@@ -27,11 +28,11 @@ const Layout = () => {
   var[incrementWeek] = useState<number>(6)
   const [formatDate] = useState(format(calDate, "yyyy-MM-dd"))
   const [toggle, setToggle] = useState<boolean>(true);
-
+  
   useEffect(() => {
     setDate(formatDate);
   }, [formatDate])
-
+  
   const decrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
     if(!toggle){
       calDate.setDate(calDate.getDate() + decrementWeek++)
@@ -41,34 +42,36 @@ const Layout = () => {
       calDate.setDate(calDate.getDate() + decrementDay++)
       const formatDate = format(calDate, "yyyy-MM-dd")
       setDate(formatDate)
-  }
-
-  const incrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
-    if(!toggle){
-      const formatDate = format(calDate, "yyyy-MM-dd")
-      calDate.setDate(calDate.getDate() + incrementWeek++)
-    setDate(formatDate)
     }
-    calDate.setDate(calDate.getDate() + incrementDay++)
-    const formatDate = format(calDate, "yyyy-MM-dd")
-    setDate(formatDate)
-  }
-
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { value } = e.target;
-    setDate(value);
-  };
-
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  }
-
+    
+    const incrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
+      if(!toggle){
+        const formatDate = format(calDate, "yyyy-MM-dd")
+        calDate.setDate(calDate.getDate() + incrementWeek++)
+        setDate(formatDate)
+      }
+      calDate.setDate(calDate.getDate() + incrementDay++)
+      const formatDate = format(calDate, "yyyy-MM-dd")
+      setDate(formatDate)
+    }
+    
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+      const { value } = e.target;
+      setDate(value);
+    };
+    
+    useEffect(() => {
+      if (window.location.href === "http://localhost:3000/info") {
+        setShowToggleBtn(true);
+      }
+    else {
+      setShowToggleBtn(false);
+    }
+  })
+  
+  const location = useLocation();
   useEffect(() => {
-    if (window.location.href == "http://localhost:3000/" ||
-      window.location.href == "http://localhost:3000/admin#home" ||
-      window.location.href == "http://localhost:3000/admin#groups" ||
-      window.location.href == "http://localhost:3000/admin#rooms") {
+    if (location.pathname.endsWith("/")){
       setShowBackButton(false);
     }
     else {
@@ -76,27 +79,6 @@ const Layout = () => {
     }
   })
 
-  useEffect(() => {
-    if (window.location.href === "http://localhost:3000/info") {
-      setShowToggleBtn(true);
-    }
-    else {
-      setShowToggleBtn(false);
-    }
-  })
-
-
-  const BackButton = () => {
-    return (
-      <Container className="layoutFooter">
-        <Row className="d-flex align-items-center justify-content-center">
-          <Col md={6}>
-            <FontAwesomeIcon icon={faLongArrowLeft} className="return-arrow" onClick={goBack} />
-          </Col>
-        </Row>
-      </Container>
-    )
-  }
 
   const ToggleButton = () => {
     return (
@@ -136,7 +118,7 @@ const Layout = () => {
       </Container>
       <Outlet context={date} />
       <div>
-        {showBackButton ? BackButton() : ""}
+        {showBackButton ? <BackButton /> : ""}
       </div>
     </Fragment>
   );
