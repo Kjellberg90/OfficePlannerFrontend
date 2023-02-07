@@ -145,15 +145,15 @@ nav.adminNavbar {
 
 .togglebtn {
   width: 6rem;
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   border: none;
-  /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px 3px, rgba(0, 0, 0, 0.2) 0px 0px inset;
-  margin-right: 5px; */
-  color: var(--secondary-color);
-  font-size: larger;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px 3px, rgba(0, 0, 0, 0.2) 0px 0px inset;
+  margin-right: 5px;
+  color: var(--accent-color);
+  font-size: large;
   font-weight: bold;
-  margin-bottom: 25px;
-  border-radius: 10px;
+  margin-right: 15px;
+  border-radius: 8px;
 }
 
 .givemespace {

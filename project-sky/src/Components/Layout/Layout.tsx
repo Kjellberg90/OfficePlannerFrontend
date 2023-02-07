@@ -7,22 +7,28 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons"
-import { faSquareCaretLeft, faSquareCaretRight } from "@fortawesome/free-solid-svg-icons"
+import {
+  faSquareCaretLeft,
+  faSquareCaretRight,
+  faToggleOff,
+  faToggleOn
+} from "@fortawesome/free-solid-svg-icons"
 import { format } from "date-fns";
 
 const Layout = () => {
-  
+
   const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
   const [showBackButton, setShowBackButton] = useState(false);
-  const [calDate ] = useState<Date>(new Date());
-  var [decrement ] = useState<number>(-1);
+  const [calDate] = useState<Date>(new Date());
+  var [decrement] = useState<number>(-1);
   var [increment] = useState<number>(1);
   const [formatDate] = useState(format(calDate, "yyyy-MM-dd"))
+  const [toggle, setToggle] = useState<boolean>(true);
 
   useEffect(() => {
     setDate(formatDate);
   }, [formatDate])
-  
+
   const decrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
     calDate.setDate(calDate.getDate() + decrement++)
     const formatDate = format(calDate, "yyyy-MM-dd")
@@ -44,10 +50,10 @@ const Layout = () => {
     navigate(-1);
   }
 
-  useEffect (() => {
-    if( window.location.href == "http://localhost:3000/" || 
-      window.location.href == "http://localhost:3000/admin#home" || 
-      window.location.href == "http://localhost:3000/admin#groups" || 
+  useEffect(() => {
+    if (window.location.href == "http://localhost:3000/" ||
+      window.location.href == "http://localhost:3000/admin#home" ||
+      window.location.href == "http://localhost:3000/admin#groups" ||
       window.location.href == "http://localhost:3000/admin#rooms") {
       setShowBackButton(false);
     }
@@ -58,11 +64,11 @@ const Layout = () => {
 
 
   const BackButton = () => {
-    return(
+    return (
       <Container className="layoutFooter">
         <Row className="d-flex align-items-center justify-content-center">
           <Col md={6}>
-            <FontAwesomeIcon icon={faLongArrowLeft} className="return-arrow" onClick={goBack}/>
+            <FontAwesomeIcon icon={faLongArrowLeft} className="return-arrow" onClick={goBack} />
           </Col>
         </Row>
       </Container>
@@ -70,26 +76,40 @@ const Layout = () => {
   }
 
   return (
-      <Fragment>
-          <Container className="headerContainer">
-              <Row className="layoutHeader d-flex justify-content-center ">
-                <Col className="layoutColumn">
-                  <Link to={"/"}>
-                    <img onClick={() => window.location.assign("/")} src={epirocLogo} alt="test" style={{width:"100%", height: "100%"}} className="epirocLogo"/>
-                  </Link>
-                </Col> 
-                <Col className="layoutColumn datepicker">
-                <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
-                <input type="date" className="makeClickable" defaultValue={date} value={date} onChange={handleChange} style={{width:"220px", fontSize:"1rem", textAlign:"center", fontWeight:"bold", borderRadius:"10px"}}/>
-                <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" onClick={incrementDate} />
-                </Col>
-              </Row>
-          </Container>
-          <Outlet context={date}/>
-          <div>
-            {showBackButton ? BackButton() : ""}         
-          </div>
-      </Fragment>
+    <Fragment>
+      <Container className="headerContainer">
+        <Row className="layoutHeader d-flex justify-content-center ">
+          <Col className="layoutColumn">
+            <Link to={"/"}>
+              <img onClick={() => window.location.assign("/")} src={epirocLogo} alt="test" style={{ width: "100%", height: "100%" }} className="epirocLogo" />
+            </Link>
+          </Col>
+          <Col className="layoutColumn datepicker">
+            <button className="togglebtn " onClick={() => setToggle(!toggle)} type="button">
+              <>
+                {toggle ?
+                  <Col>
+                    <FontAwesomeIcon icon={faToggleOff} />
+                    <label className="givemespace toggle-off">Day</label>
+                  </Col> :
+                  <Col>
+                    <FontAwesomeIcon icon={faToggleOn} />
+                    <label className="givemespace2 toggle-on">Week</label>
+                  </Col>
+                }
+              </>
+            </button>
+            <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
+            <input type="date" className="makeClickable" defaultValue={date} value={date} onChange={handleChange} style={{ width: "220px", fontSize: "1rem", textAlign: "center", fontWeight: "bold", borderRadius: "10px" }} />
+            <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" onClick={incrementDate} />
+          </Col>
+        </Row>
+      </Container>
+      <Outlet context={date} />
+      <div>
+        {showBackButton ? BackButton() : ""}
+      </div>
+    </Fragment>
   );
 }
 

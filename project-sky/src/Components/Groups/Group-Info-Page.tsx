@@ -2,11 +2,6 @@ import { useState, useLayoutEffect} from "react"
 import { useLocation } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap'
 import { useOutletContext } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faToggleOff,
-    faToggleOn
-  } from "@fortawesome/free-solid-svg-icons"
 import Groups from './groupsInterface'
 
 const GroupInfoPage = () => {
@@ -18,7 +13,7 @@ const GroupInfoPage = () => {
 
     const [loading, setLoading] = useState<boolean>(true);
     const [error ,setError] = useState([]);
-    const [toggle, setToggle] = useState<boolean>(true);
+    
 
     useLayoutEffect(() => {
 
@@ -59,20 +54,6 @@ const GroupInfoPage = () => {
                             {loading ?
                                 <h1>Loading</h1> :
                                 <Col className="groupInfoCard" key={groupId} md={6} lg="auto" xl="auto">
-                                    <button className="togglebtn " onClick={() => setToggle(!toggle)} type="button">
-              <>
-                {toggle ?
-                  <Col>
-                    <FontAwesomeIcon icon={faToggleOff} />
-                    <label className="givemespace toggle-off">Day</label>
-                  </Col> :
-                  <Col>
-                    <FontAwesomeIcon icon={faToggleOn} />
-                    <label className="givemespace2 toggle-on">Week</label>
-                  </Col>
-                }
-              </>
-            </button>
                                     <h2>Room: {group?.bookedRoom?.name}</h2>
                                     <h2>Booked By Team: {group?.name}</h2>
                                     <h2>{currentDate.toString()}</h2>
