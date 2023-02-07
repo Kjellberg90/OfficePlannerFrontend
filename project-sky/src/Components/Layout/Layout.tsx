@@ -18,60 +18,60 @@ import { format } from "date-fns";
 const Layout = () => {
 
   const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
-  
+
   const [showBackButton, setShowBackButton] = useState(false);
   const [showToggleBtn, setShowToggleBtn] = useState(false);
   const [calDate] = useState<Date>(new Date());
   var [decrementDay] = useState<number>(-1);
   var [incrementDay] = useState<number>(1);
-  var[decrementWeek] = useState<number>(-6);
-  var[incrementWeek] = useState<number>(6)
+  var [decrementWeek] = useState<number>(-6);
+  var [incrementWeek] = useState<number>(6)
   const [formatDate] = useState(format(calDate, "yyyy-MM-dd"))
   const [toggle, setToggle] = useState<boolean>(true);
-  
+
   useEffect(() => {
     setDate(formatDate);
   }, [formatDate])
-  
+
   const decrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
-    if(!toggle){
+    if (!toggle) {
       calDate.setDate(calDate.getDate() + decrementWeek++)
       const formatDate = format(calDate, "yyyy-MM-dd")
       setDate(formatDate)
     }
-      calDate.setDate(calDate.getDate() + decrementDay++)
+    calDate.setDate(calDate.getDate() + decrementDay++)
+    const formatDate = format(calDate, "yyyy-MM-dd")
+    setDate(formatDate)
+  }
+
+  const incrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
+    if (!toggle) {
       const formatDate = format(calDate, "yyyy-MM-dd")
+      calDate.setDate(calDate.getDate() + incrementWeek++)
       setDate(formatDate)
     }
-    
-    const incrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
-      if(!toggle){
-        const formatDate = format(calDate, "yyyy-MM-dd")
-        calDate.setDate(calDate.getDate() + incrementWeek++)
-        setDate(formatDate)
-      }
-      calDate.setDate(calDate.getDate() + incrementDay++)
-      const formatDate = format(calDate, "yyyy-MM-dd")
-      setDate(formatDate)
+    calDate.setDate(calDate.getDate() + incrementDay++)
+    const formatDate = format(calDate, "yyyy-MM-dd")
+    setDate(formatDate)
+  }
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { value } = e.target;
+    setDate(value);
+  };
+
+  useEffect(() => {
+    if (window.location.href === "http://localhost:3000/info") {
+      setShowToggleBtn(true);
     }
-    
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-      const { value } = e.target;
-      setDate(value);
-    };
-    
-    useEffect(() => {
-      if (window.location.href === "http://localhost:3000/info") {
-        setShowToggleBtn(true);
-      }
     else {
       setShowToggleBtn(false);
     }
   })
-  
+
   const location = useLocation();
   useEffect(() => {
-    if (location.pathname.endsWith("/")){
+    if (location.pathname.endsWith("/")) {
       setShowBackButton(false);
     }
     else {
@@ -83,19 +83,19 @@ const Layout = () => {
   const ToggleButton = () => {
     return (
       <button className="togglebtn " onClick={() => setToggle(!toggle)} type="button">
-      <>
-        {toggle ?
-          <Col>
-            <FontAwesomeIcon icon={faToggleOff} />
-            <label className="givemespace toggle-off">Day</label>
-          </Col> :
-          <Col>
-            <FontAwesomeIcon icon={faToggleOn} />
-            <label className="givemespace2 toggle-on">Week</label>
-          </Col>
-        }
-      </>
-    </button>
+        <>
+          {toggle ?
+            <Col>
+              <FontAwesomeIcon icon={faToggleOff} />
+              <label className="givemespace toggle-off">Day</label>
+            </Col> :
+            <Col>
+              <FontAwesomeIcon icon={faToggleOn} />
+              <label className="givemespace2 toggle-on">Week</label>
+            </Col>
+          }
+        </>
+      </button>
     )
   }
 
