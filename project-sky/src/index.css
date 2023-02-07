@@ -143,6 +143,27 @@ nav.adminNavbar {
 
 /* -------------- Datepicker Styling --------------------*/
 
+.togglebtn {
+  width: 6rem;
+  background-color: var(--secondary-color);
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px 3px, rgba(0, 0, 0, 0.2) 0px 0px inset;
+  margin-right: 5px;
+  color: var(--accent-color);
+  font-size: large;
+  font-weight: bold;
+  margin-right: 15px;
+  border-radius: 8px;
+}
+
+.givemespace {
+  padding-left: 14px;
+}
+
+.givemespace2 {
+  padding-left: 1px;
+}
+
 .calBtn {
   color: var(--secondary-color);
   margin: 5px;
