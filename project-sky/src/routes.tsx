@@ -10,10 +10,10 @@ import AdminGroups from "./Components/Admin/AdminGroups";
 import AdminRooms from "./Components/Admin/AdminRooms";
 import ProtectedRoutes from "./Components/ProtectedRoute/ProtectedRoutes";
 import LoginPage from "./Components/Login/Login";
-
-
+import { useDateContext } from "./shared/DateContext";
 
 const AppRouter = () => {
+
     return (
         <Routes>
             <Route element={<Layout />}>
@@ -29,8 +29,6 @@ const AppRouter = () => {
                         <Route path="rooms" element={<AdminRooms />} />
                     </Route>
                 </Route>
-
-
             </Route>
         </Routes>
     )

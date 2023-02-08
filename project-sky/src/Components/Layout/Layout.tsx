@@ -13,9 +13,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons"
 import { format } from "date-fns";
-
+import { useDateContext } from "../../shared/DateContext"
 
 const Layout = () => {
+
+  const dateInfo = useDateContext();
 
   const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
   const [showBackButton, setShowBackButton] = useState(false);
@@ -26,7 +28,9 @@ const Layout = () => {
   var [decrementWeek] = useState<number>(-6);
   var [incrementWeek] = useState<number>(6)
   const [formatDate] = useState(format(calDate, "yyyy-MM-dd"))
-  const [toggle, setToggle] = useState<boolean>(true);
+  const [toggle, setToggle] = useState<boolean>(true)
+
+
 
   useEffect(() => {
     setDate(formatDate);
