@@ -152,15 +152,29 @@ nav.adminNavbar {
   color: #001e32a2;
 }
 
+.adminHeader {
+  color: var(--secondary-color)
+}
+
+input[type="text"].adminDateInput {
+  background-color: var(--secondary-color);
+  margin-right: 1rem;
+}
+
 .adminHomeTable {
   border-radius: 1rem;
-  width: 1050px;
   background-color: rgb(183, 183, 183);
+  width: 100%;
+  color: var(--accent-color);
 }
 
 .adminHomeTable th, td {
   border-right: var(--accent-color) solid 1px;
   width: 12.5%;
+}
+
+.adminHomeTable th:last-child, td:last-child {
+  border-right: none;
 }
 
 .adminHomeTableHeader th {
