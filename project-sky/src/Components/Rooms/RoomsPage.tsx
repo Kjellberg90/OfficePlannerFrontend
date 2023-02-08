@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from "react";
-import Room from "./Room";
+import Room from "./RoomInfo";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
 import Stack from "react-bootstrap/esm/Stack";

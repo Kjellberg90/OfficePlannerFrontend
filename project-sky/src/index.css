@@ -139,6 +139,50 @@ nav.adminNavbar {
   background-color: var(--secondary-color);
   border-top: 3px solid var(--accent-color);
   border-bottom: 3px solid var(--accent-color);
+  margin-bottom: 2rem;
+}
+
+.adminNavbar .linkItem {
+  color: var(--accent-color);
+  margin-right: 0.7rem;
+  padding: 0.5rem 0.3rem;
+}
+
+.adminNavbar .linkItem:hover {
+  color: #001e32a2;
+}
+
+.adminHomeTable {
+  border-radius: 1rem;
+  width: 1050px;
+  background-color: rgb(183, 183, 183);
+}
+
+.adminHomeTable th, td {
+  border-right: var(--accent-color) solid 1px;
+  width: 12.5%;
+}
+
+.adminHomeTableHeader th {
+  background-color: var(--secondary-color);
+  border-bottom: var(--accent-color);
+}
+
+.adminHomeTableHeader th:first-child {
+  border-top-left-radius: 1rem;
+}
+
+.adminHomeTableHeader th:last-child {
+  border-top-right-radius: 1rem;
+}
+
+.adminHomeTableBody tr:nth-child(even) {
+  background-color: rgb(255, 255, 255);
+}
+
+.adminHomeTable td, 
+.adminHomeTable th {
+  padding: 1rem;  
 }
 
 /* -------------- DATEPICKER STYLE --------------------*/
