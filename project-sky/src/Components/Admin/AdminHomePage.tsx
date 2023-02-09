@@ -34,7 +34,7 @@ const AdminHomePage = () => {
         <Container className="adminHomePageContainer">
             <Row className="d-flex mb-3">
                 <Col className="justify-contend-end">
-                    <h3 className="adminHeader">Weekly schedule</h3>
+                    <h3 className="headerSecondaryColor">Weekly schedule</h3>
                 </Col>
                 <Col>
                     <form onSubmit={onSubmit} className="d-flex w-100 justify-content-end">
@@ -45,10 +45,10 @@ const AdminHomePage = () => {
             </Row>
             <Row>
                 <Col className='d-flex justify-content-center'>
-                    <table className="adminHomeTable">
+                    <table className="adminTable adminHomePageTable">
                         <thead>
-                            <tr className="adminHomeTableHeader">
-                                <th scope="col">Rooms</th>
+                            <tr className="adminTableHeader">
+                                <th scope="col">Room</th>
                                 <th scope="col">Monday</th>
                                 <th scope="col">Tuesday</th>
                                 <th scope="col">Wednesday</th>
@@ -58,7 +58,7 @@ const AdminHomePage = () => {
                                 <th scope="col">Sunday</th>
                             </tr>
                         </thead>
-                        <tbody className="adminHomeTableBody">
+                        <tbody className="adminTableBody">
                             {rooms.map((room: RoomOverview) => { return (
                                 <tr key={room.roomName}>
                                     <th className="adminHomeTableRooms" scope="row">{room.roomName}</th>
