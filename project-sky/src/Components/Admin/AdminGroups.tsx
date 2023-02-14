@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { Fragment, useEffect, useState } from "react";
+import { faPenToSquare, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Group from "../Groups/Group";
 import Popup from "./Popup";
+import { AdminModal } from "./AdminModal";
 
 
 const AdminGroups = () => {
@@ -15,6 +16,11 @@ const AdminGroups = () => {
     const [newValues, setNewValues] = useState<{name: string | undefined; teamMembers: number | undefined}>
         ({name: "", 
         teamMembers: 0});
+    const [newGroup, setNewGroup] = useState<{name: string | undefined; groupSize: number; division: string | undefined}>
+        ({name: "", 
+        groupSize: 0,
+        division: ""});
+    const [show, setShow] = useState(false);
         
     const FetchGroups = () => {
         fetch("https://localhost:7054/api/Group/GetGroups")
@@ -37,6 +43,27 @@ const AdminGroups = () => {
         });
     }
 
+    const HandleInput = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        let intValue = 0;
+        if (e.target.type === "number") {
+            debugger
+            intValue = parseInt(value, 10)
+            setNewGroup({
+                ...newGroup,
+                [e.target.name]: intValue
+            });
+            return;
+        }
+
+         
+        setNewGroup({
+            ...newGroup,
+            [e.target.name]: value
+        });
+        console.log(newGroup);
+    }
+
     useEffect(() => {
         setNewValues({
             ...newValues,
@@ -44,6 +71,25 @@ const AdminGroups = () => {
             ["teamMembers"]: currentGroup?.teamMembers 
         })
     }, [currentGroup])
+
+    const AddGroup = () => {
+        debugger
+        console.log(newGroup)
+        
+        fetch("https://localhost:7054/api/Group/AddGroup", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newGroup)
+        })
+        .then((response) => {
+            if(!response.ok) throw new Error(response.status.toString());
+        })
+        .catch((error) => {console.log("Error", error)}
+        )
+    }
 
     const UpdateGroup = () => {
         fetch(`https://localhost:7054/api/Group/UpdateGroup/${currentGroup?.id}`,{
@@ -149,8 +195,11 @@ const AdminGroups = () => {
     return (
         <Container>
             <Row className="mb-3">
-                <Col>
+                <Col className="d-flex justify-content-between">
                     <h3 className="headerSecondaryColor">Groups</h3>
+                </Col>
+                <Col>
+                <h3 className="headerSecondaryColor">R&D teams</h3>
                 </Col>
             </Row>
             <Row>
@@ -213,6 +262,18 @@ const AdminGroups = () => {
                     </table>
                 </Col>
             </Row>
+            <Row>
+                <Col>
+                    <button type="button" className="btn btn-primary" onClick={() => setShow(true)}>Add group</button>
+                </Col>
+            </Row>
+            <AdminModal
+                show={show}
+                onHide={() => {setShow(false)}}
+                onUpdatedValue={HandleInput}
+                onSubmit={AddGroup}
+                // onSubmit={() => handleSubmit()}
+            />
         </Container>
     )
 }
