@@ -170,6 +170,13 @@ const deleteSingleBooking = () => {
                                       </div>
                                     )
                                   }
+                                  else if (room.seats - room.availableSeats === 0) {
+                                    return (
+                                      <div className="mx-sm-3 mb-2 mt-2">
+                                        <button className="primaryButton bookButton" onClick={() => handleOpenBook(room.roomId)} >Book Seat</button>
+                                      </div>
+                                    )
+                                  } 
                                   else {
                                     return (
                                       <div className="mx-sm-3 mb-2 mt-2">
