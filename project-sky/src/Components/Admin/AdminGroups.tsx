@@ -112,8 +112,10 @@ const AdminGroups = () => {
         fetch(`https://localhost:7054/api/Group/DeleteGroup/${currentGroup?.id}`,{
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json"
-            }
+                "Content-Type": "application/json",
+                "Accept" : "application/json"
+            },
+            body: JSON.stringify(data)
         })
         .then((response) => response.json())
         .then((res) => { 
