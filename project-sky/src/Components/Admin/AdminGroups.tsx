@@ -3,16 +3,13 @@ import { faPenToSquare, faTrash, faPlus } from "@fortawesome/free-solid-svg-icon
 import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Group from "../Groups/Group";
-import Popup from "./Popup";
-import { AdminModal } from "./AdminModal";
+import { AddGroupModal, UpdateGroupModal, DeleteGroupModal } from "./AdminModals";
 
 
 const AdminGroups = () => {
     const [groups, setGroups] = useState<Group[]>([]);
     const [error, setError] = useState();
     const [currentGroup, setCurrentGroup] = useState<Group>();
-    const [openEditPopup, setOpenEditPopup] = useState(false);
-    const [openDeletePopup, setOpenDeletePopup] = useState(false);
     const [newValues, setNewValues] = useState<{name: string | undefined; teamMembers: number | undefined}>
         ({name: "", 
         teamMembers: 0});
@@ -20,7 +17,9 @@ const AdminGroups = () => {
         ({name: "", 
         groupSize: 0,
         division: ""});
-    const [show, setShow] = useState(false);
+    const [showAddGroup, setShowAddGroup] = useState(false);
+    const [showUppdateGroup, setShowUpdateGroup] = useState(false);
+    const [showDeleteGroup, setShowDeleteGroup] = useState(false);
         
     const FetchGroups = () => {
         fetch("https://localhost:7054/api/Group/GetGroups")
@@ -109,8 +108,8 @@ const AdminGroups = () => {
         })
     }
 
-    const DeleteGroup = async () => {
-        await fetch(`https://localhost:7054/api/Group/DeleteGroup/${currentGroup?.id}`,{
+    const DeleteGroup = () => {
+        fetch(`https://localhost:7054/api/Group/DeleteGroup/${currentGroup?.id}`,{
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -127,8 +126,8 @@ const AdminGroups = () => {
                 "teamMembers": 0,
                 "division" : ""
             });
+            setShowDeleteGroup(false)
         })
-        .then(() => setOpenDeletePopup(false))
         .catch((error) => {
             console.log("error", error)
         })
@@ -223,31 +222,17 @@ const AdminGroups = () => {
                                     <td>
                                         <button type="button" className="btn btn-primary" onClick={() => {
                                             setCurrentGroup(group); 
-                                            setOpenEditPopup(true);
+                                            setShowUpdateGroup(true);
                                         }}><FontAwesomeIcon icon={faPenToSquare} /></button>
                                         <button className="btn btn-danger" onClick={() => {
                                             setCurrentGroup(group);
-                                            setOpenDeletePopup(true);
+                                            setShowDeleteGroup(true);
                                         }}><FontAwesomeIcon icon={faTrash} /></button>
                                     </td>
                                 </tr>
                             )})}
                         </tbody>
                     </table>
-                    <Popup trigger={openEditPopup}>
-                        <h4>Group Id: {currentGroup?.id}</h4>
-                        <form onSubmit={() => (UpdateGroup())}>
-                            <input type="text" placeholder={currentGroup?.name} onChange={HandleChange} name="name"/>
-                            <input type="text" placeholder={currentGroup?.teamMembers.toString()} onChange={HandleChange} name="teamMembers"/>
-                            <input type="submit" value="Update" />
-                            <button type="button" onClick={() => {setOpenEditPopup(false)}}>Cancel</button>
-                        </form>
-                    </Popup>
-                    <Popup trigger={openDeletePopup}>
-                        <h4>Are you sure you want to Delete group {currentGroup?.name}?</h4>
-                        <button onClick={() => {DeleteGroup(); setOpenDeletePopup(false);}}>Confirm</button>
-                        <button onClick={() => setOpenDeletePopup(false)}>Cancel</button>
-                    </Popup>
                 </Col>
                 <Col className="col-lg-6 col-md-12 col-md-p-1 divisionDiv">
                     <table className="adminTable">
@@ -264,15 +249,28 @@ const AdminGroups = () => {
             </Row>
             <Row>
                 <Col>
-                    <button type="button" className="btn btn-primary" onClick={() => setShow(true)}>Add group</button>
+                    <button type="button" className="btn btn-primary" onClick={() => setShowAddGroup(true)}>Add group</button>
                 </Col>
             </Row>
-            <AdminModal
-                show={show}
-                onHide={() => {setShow(false)}}
+            <AddGroupModal
+                show={showAddGroup}
+                onHide={() => {setShowAddGroup(false)}}
                 onUpdatedValue={HandleInput}
                 onSubmit={AddGroup}
-                // onSubmit={() => handleSubmit()}
+            />
+            <UpdateGroupModal 
+                show={showUppdateGroup}
+                onHide={() => setShowUpdateGroup(false)}
+                onUpdatedValue={HandleChange}
+                onSubmit={UpdateGroup}
+                testName={currentGroup?.name}
+                testMembers={currentGroup?.teamMembers}
+            />
+            <DeleteGroupModal 
+                show={showDeleteGroup}
+                onHide={() => setShowDeleteGroup(false)}
+                groupName={currentGroup?.name}
+                delete={() => DeleteGroup()}
             />
         </Container>
     )
