@@ -7,12 +7,7 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons"
-import {
-  faSquareCaretLeft,
-  faSquareCaretRight,
-  faToggleOff,
-  faToggleOn
-} from "@fortawesome/free-solid-svg-icons"
+import { faSquareCaretLeft, faSquareCaretRight, faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons"
 import { format } from "date-fns";
 
 const Layout = () => {

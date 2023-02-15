@@ -119,13 +119,13 @@ a {
 .room-info-col {
   background-color: var(--secondary-color);
   color: var(--primary-color);
-  border-radius: 50px;
-  padding: 2px;
+  border-radius: 50px 50px 45px 45px;
+  /* padding: 2px; */
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .roomsPageSubmitButton {
-  margin-right: 15px;
+  margin-left: 15px;
 }
 
 .roomPage-seats:hover {
@@ -135,6 +135,53 @@ a {
 input[type="search"]::-webkit-search-decoration:hover,
 input[type="search"]::-webkit-search-cancel-button:hover { 
     cursor:pointer; 
+}
+
+.checkRoom {
+  color:green
+}
+
+.crossRoom {
+  color:red
+}
+
+.crossRoom:hover {
+  cursor: pointer;
+}
+
+.dropSeatModalHeader {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  border: none;
+}
+
+.dropSeatModalBody {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  border: none;
+}
+
+.dropSeatModalFooter {
+  background-color: var(--secondary-color);
+  border: none;
+}
+
+.singleBookingUserDiv{
+  padding: 0px 20px 0px 20px;
+  margin: 0px;
+  border-bottom: 1px solid #42556340;
+}
+
+/* .singleBookingUserDiv:first-of-type {
+  border-top: 1px solid black;
+} */
+
+.singleBookingUserList {
+  margin: 0px;
+}
+
+.hrDivider {
+  border-top: 1px solid  #42556340;
 }
 
 /* -------------- Admin Page --------------------*/
@@ -313,7 +360,6 @@ input::-webkit-datetime-edit-fields-wrapper {
   color: #ffffff;
   font-weight: Bold;
   transition: all 0.5s;
-  -webkit-transition: all 0.5s;
 }
 
 .dangerButton:hover {
@@ -324,7 +370,45 @@ input::-webkit-datetime-edit-fields-wrapper {
 .dangerButton:active {
   background-color: #bd4b47;
   transition: all 0.25s;
-  -webkit-transition: all 0.25s;
+  box-shadow: none;
+}
+
+.dropButton {
+  padding: 8px 20px;
+  border: 0px;
+  border-radius: 15px;
+  background-color: #b7312c;
+  color: #ffffff;
+  font-weight: Bold;
+}
+
+.dropButton:hover {
+  background-color: #931e1a;
+  box-shadow: 0 0 20px #ff716f50;
+}
+
+.dropButton:active {
+  background-color: #bd4b47;
+  box-shadow: none;
+}
+
+.bookButton {
+  padding: 8px 20px;
+  border: 0;
+  border-radius: 15px;
+  background-color: #45880a;
+  color: #ffffff;
+  font-weight: Bold;
+  margin-left: 15px;
+}
+
+.bookButton:hover {
+  background-color: #37690b;
+  box-shadow: 0 0 20px #6fc5ff50;
+}
+
+.bookButton:active {
+  background-color: #6dc2d9;
   box-shadow: none;
 }
 
