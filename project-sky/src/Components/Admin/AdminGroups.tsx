@@ -46,7 +46,6 @@ const AdminGroups = () => {
         const value = e.target.value;
         let intValue = 0;
         if (e.target.type === "number") {
-            debugger
             intValue = parseInt(value, 10)
             setNewGroup({
                 ...newGroup,
@@ -72,7 +71,6 @@ const AdminGroups = () => {
     }, [currentGroup])
 
     const AddGroup = () => {
-        debugger
         console.log(newGroup)
         
         fetch("https://localhost:7054/api/Group/AddGroup", {
@@ -108,28 +106,25 @@ const AdminGroups = () => {
         })
     }
 
-    const DeleteGroup = () => {
-        fetch(`https://localhost:7054/api/Group/DeleteGroup/${currentGroup?.id}`,{
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept" : "application/json"
-            },
-            body: JSON.stringify(data)
+    const DeleteGroup = async () => {
+        await fetch(`https://localhost:7054/api/Group/DeleteGroup/${currentGroup?.id}`,{
+            method: "DELETE"
         })
-        .then((response) => response.json())
-        .then((res) => { 
-            if(!res.ok) {
-               throw new Error(res.status)
-            }
-            setCurrentGroup({
-                "id": 0,
-                "name": "",
-                "teamMembers": 0,
-                "division" : ""
-            });
-            setShowDeleteGroup(false)
-        })
+        // .then((response) => response.json())  -----------------------  FRÅGA NÄR DU ÄR TILLBAKA PÅ PLATS!!!  ----------------------------
+        // .then((res) => {
+        //     setShowDeleteGroup(false);
+        //     setCurrentGroup({
+        //         "id": 0,
+        //         "name": "",
+        //         "teamMembers": 0,
+        //         "division" : ""
+        //     });
+        //     console.log(res.status) 
+        //     if(!res.ok) {
+        //        throw new Error(res.status)
+        //     }
+        // })
+        .then(() => FetchGroups())
         .catch((error) => {
             console.log("error", error)
         })
@@ -272,7 +267,7 @@ const AdminGroups = () => {
                 show={showDeleteGroup}
                 onHide={() => setShowDeleteGroup(false)}
                 groupName={currentGroup?.name}
-                delete={() => DeleteGroup()}
+                delete={() => {DeleteGroup(); setShowDeleteGroup(false)}}
             />
         </Container>
     )
