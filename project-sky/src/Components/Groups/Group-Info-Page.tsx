@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap'
 import { useOutletContext } from 'react-router-dom';
 import Groups from './groupsInterface'
+import IdleUser from "../../shared/IdleUser/IdleUser";
 
 const GroupInfoPage = () => {
 
@@ -14,6 +15,7 @@ const GroupInfoPage = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error ,setError] = useState([]);
     
+    IdleUser(); //Sätter Idle Timer
 
     useLayoutEffect(() => {
 

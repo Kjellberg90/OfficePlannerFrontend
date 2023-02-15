@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faXmark, faTrash } from "@fortawesome/free-solid-svg-icons"
 import SingleUser from "./SingleUser";
 import { DeleteSingleBookingModal } from "./Modals/DeleteSingleBookingModal";
+import IdleUser from "../../shared/IdleUser/IdleUser";
 
 const RoomsPage = () => {
 
@@ -22,7 +23,7 @@ const RoomsPage = () => {
 
     var currentDate: string = useOutletContext();
     
-    
+IdleUser(); //Sätter Idle Timer
 
 const test = async () => {
         await fetch(`https://localhost:7054/api/Room/get-rooms-info?date=` + currentDate)

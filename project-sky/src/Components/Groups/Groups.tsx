@@ -5,11 +5,15 @@ import Stack from 'react-bootstrap/Stack'
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Groups from './groupsInterface'
+import IdleUser from '../../shared/IdleUser/IdleUser';
+
 
 const Group = () => {  
     
   const [groupNames, setGroups] = useState([]);
   const [error , setError] = useState([]);
+
+  IdleUser(); //Sätter Idle timer
       
   useEffect(() => {
     fetch(`https://localhost:7054/api/Group/GetGroups`)
@@ -17,7 +21,6 @@ const Group = () => {
           .then(res => setGroups(res))
           .catch(err => setError(err))
   },[])
-
 
   return (
     <Container>
