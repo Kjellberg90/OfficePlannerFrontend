@@ -23,7 +23,7 @@ const RoomsPage = () => {
 
     var currentDate: string = useOutletContext();
     
-IdleUser(); //Sätter Idle Timer
+IdleUser(); //Sets Idle Timer
 
 const test = async () => {
         await fetch(`https://localhost:7054/api/Room/get-rooms-info?date=` + currentDate)
@@ -82,7 +82,6 @@ const test = async () => {
     const [show, setShow] = useState(false);
 
 const deleteSingleBooking = () => {  
-  // const data ={ "date": date, "userName": userName, "roomId": roomId}
   const data = deleteUser
   fetch("https://localhost:7054/api/Booking/DeleteSingleBooking", {
     method: 'DELETE',

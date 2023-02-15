@@ -13,7 +13,7 @@ const Group = () => {
   const [groupNames, setGroups] = useState([]);
   const [error , setError] = useState([]);
 
-  IdleUser(); //Sätter Idle timer
+  IdleUser(); //Sets Idle Timer
       
   useEffect(() => {
     fetch(`https://localhost:7054/api/Group/GetGroups`)

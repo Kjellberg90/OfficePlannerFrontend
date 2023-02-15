@@ -15,7 +15,7 @@ const GroupInfoPage = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error ,setError] = useState([]);
     
-    IdleUser(); //Sätter Idle Timer
+    IdleUser(); //Sets Idle Timer
 
     useLayoutEffect(() => {
 
