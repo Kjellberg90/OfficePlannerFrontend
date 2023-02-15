@@ -10,10 +10,7 @@ const AdminGroups = () => {
     const [groups, setGroups] = useState<Group[]>([]);
     const [error, setError] = useState();
     const [currentGroup, setCurrentGroup] = useState<Group>();
-    const [newValues, setNewValues] = useState<{name: string | undefined; teamMembers: number | undefined}>
-        ({name: "", 
-        teamMembers: 0});
-    const [newGroup, setNewGroup] = useState<{name: string | undefined; groupSize: number; division: string | undefined}>
+    const [newValues, setNewValues] = useState<{name: string | undefined; groupSize: number | undefined; division: string | undefined}>
         ({name: "", 
         groupSize: 0,
         division: ""});
@@ -34,44 +31,35 @@ const AdminGroups = () => {
         FetchGroups()
     }, [])
 
-    const HandleChange = (e: any) => {
-        const value = e.target.value;
-        setNewValues({
-            ...newValues,
-            [e.target.name]: value
-        });
-    }
-
-    const HandleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         let intValue = 0;
         if (e.target.type === "number") {
             intValue = parseInt(value, 10)
-            setNewGroup({
-                ...newGroup,
+            setNewValues({
+                ...newValues,
                 [e.target.name]: intValue
             });
             return;
         }
 
          
-        setNewGroup({
-            ...newGroup,
+        setNewValues({
+            ...newValues,
             [e.target.name]: value
         });
-        console.log(newGroup);
     }
 
     useEffect(() => {
         setNewValues({
             ...newValues,
             ["name"]: currentGroup?.name,
-            ["teamMembers"]: currentGroup?.teamMembers 
+            ["groupSize"]: currentGroup?.groupSize,
+            ["division"]: currentGroup?.division
         })
     }, [currentGroup])
 
     const AddGroup = () => {
-        console.log(newGroup)
         
         fetch("https://localhost:7054/api/Group/AddGroup", {
             method: "POST",
@@ -79,7 +67,7 @@ const AdminGroups = () => {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(newGroup)
+            body: JSON.stringify(newValues)
         })
         .then((response) => {
             if(!response.ok) throw new Error(response.status.toString());
@@ -89,6 +77,15 @@ const AdminGroups = () => {
     }
 
     const UpdateGroup = () => {
+        debugger
+
+        if(newValues.division === undefined || newValues.division === null || newValues.division === ""){
+            setNewValues({
+                ...newValues,
+                division: currentGroup?.division
+            })
+        }
+
         fetch(`https://localhost:7054/api/Group/UpdateGroup/${currentGroup?.id}`,{
             method: "PUT",
             headers: {
@@ -116,7 +113,7 @@ const AdminGroups = () => {
         //     setCurrentGroup({
         //         "id": 0,
         //         "name": "",
-        //         "teamMembers": 0,
+        //         "groupSize": 0,
         //         "division" : ""
         //     });
         //     console.log(res.status) 
@@ -130,9 +127,7 @@ const AdminGroups = () => {
         })
     }
 
-    const TestFunc = () => {
-        console.log(groups)
-
+    const GetOrderedGroups = () => {
         var divisionA: string[] = []
         var divisionB: string[] = []
         var divisionC: string[] = []
@@ -168,16 +163,14 @@ const AdminGroups = () => {
             newArr.push([divisionA[i], divisionB[i], divisionC[i]])
         }
 
-        console.log(newArr)
-
         return (
             <tbody className="adminTableBody">
-                {newArr.map((groups) => {
+                {newArr.map((groups, i) => {
                     return(
-                        <tr>
-                            {groups.map((names) => {
+                        <tr key={i}>
+                            {groups.map((names, i) => {
                                 return(
-                                    <td>{names}</td>
+                                    <td key={i}>{names}</td>
                                 )
                             })}
                         </tr>
@@ -215,7 +208,7 @@ const AdminGroups = () => {
                                 <tr key={group.name}>
                                     <td>{group.id}</td>
                                     <td>{group.name}</td>
-                                    <td>{group.teamMembers}</td>
+                                    <td>{group.groupSize}</td>
                                     <td>
                                         <button type="button" className="btn btn-primary" onClick={() => {
                                             setCurrentGroup(group); 
@@ -240,33 +233,34 @@ const AdminGroups = () => {
                                 <th scope="col" className="col-2">R&D C - Andreas</th>
                             </tr>   
                         </thead>
-                        {TestFunc()}
+                        {GetOrderedGroups()}
                     </table>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <button type="button" className="btn btn-primary" onClick={() => setShowAddGroup(true)}>Add group</button>
+                    <button type="button" className="btn btn-primary mt-3 mb-3" onClick={() => setShowAddGroup(true)}>Add group</button>
                 </Col>
             </Row>
             <AddGroupModal
                 show={showAddGroup}
                 onHide={() => {setShowAddGroup(false)}}
-                onUpdatedValue={HandleInput}
+                updatedvalue={HandleChange}
                 onSubmit={AddGroup}
             />
             <UpdateGroupModal 
                 show={showUppdateGroup}
                 onHide={() => setShowUpdateGroup(false)}
-                onUpdatedValue={HandleChange}
+                updatedvalue={HandleChange}
                 onSubmit={UpdateGroup}
-                testName={currentGroup?.name}
-                testMembers={currentGroup?.teamMembers}
+                groupname={currentGroup?.name}
+                groupsize={currentGroup?.groupSize}
+                groupdivision={currentGroup?.division}
             />
             <DeleteGroupModal 
                 show={showDeleteGroup}
                 onHide={() => setShowDeleteGroup(false)}
-                groupName={currentGroup?.name}
+                groupname={currentGroup?.name}
                 delete={() => {DeleteGroup(); setShowDeleteGroup(false)}}
             />
         </Container>

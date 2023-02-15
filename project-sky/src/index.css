@@ -170,7 +170,7 @@ input[type="text"].adminDateInput {
 }
 
 .groupTableId {
-  min-width: 3.5rem;
+  /* min-width: 3.5rem; */
   text-align: center;
 }
 
@@ -180,11 +180,7 @@ input[type="text"].adminDateInput {
 }
 
 .groupTableName {
-  min-width: 10rem;
-}
-
-.groupTableMembers {
-  min-width: 8.5rem;
+  width: 30%;
 }
 
 .groupTableActions {

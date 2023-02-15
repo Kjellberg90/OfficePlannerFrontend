@@ -15,14 +15,18 @@ export const AddGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detaile
                 </Modal.Header>
                 <Modal.Body>
                     <form id="addForm">
-                        <input type="text" placeholder="Name" name="name" onChange={props.onUpdatedValue}></input>
-                        <input type="number" placeholder="Team size" name="groupSize" onChange={props.onUpdatedValue}></input>
-                        <input type="text" placeholder="R&D" name="division" onChange={props.onUpdatedValue}></input> 
+                        <input type="text" required placeholder="Name" name="name" onChange={props.updatedvalue}></input>
+                        <input type="number" required placeholder="Team size" name="groupSize" onChange={props.updatedvalue}></input>
+                        <select name="division" required onChange={props.updatedvalue}>
+                            <option value="A">R&D A</option>
+                            <option value="B">R&D B</option>
+                            <option value="C">R&D C</option>
+                        </select> 
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button form="addForm" type="submit" className="btn btn-primary" onSubmit={props.AddGroup}>Add group</button>
-                    <button type="button" className="btn btn-primary" onClick={props.onHide}>Cancel</button>
+                    <button form="addForm" type="submit" className="btn btn-primary" onClick={props.onsubmit}>Add group</button>
+                    <button type="button" className="btn btn-danger" onClick={props.onHide}>Cancel</button>
                 </Modal.Footer>
 
             </Modal>
@@ -43,12 +47,17 @@ export const UpdateGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Deta
                 </ModalHeader>
                 <ModalBody>
                     <form id="updateGroupForm">
-                        <input type="text" placeholder={props.testName} onChange={props.onUpdatedValue} name="name"/>
-                        <input type="text" placeholder={props.testMembers} onChange={props.onUpdatedValue} name="teamMembers"/>
+                        <input type="text" placeholder={props.groupname} onChange={props.updatedvalue} name="name"/>
+                        <input type="number" placeholder={props.groupsize} onChange={props.updatedvalue} name="groupSize"/>
+                        <select name="division" placeholder={props.groupdivision} onChange={props.updatedvalue}>
+                            <option value="A">R&D A</option>
+                            <option value="B">R&D B</option>
+                            <option value="C">R&D C</option>
+                        </select> 
                     </form>
                 </ModalBody>
                 <ModalFooter>
-                    <button form="updateGroupForm" type="submit" className="btn btn-primary" onClick={props.onSubmit}>Update group</button>
+                    <button form="updateGroupForm" type="submit" className="btn btn-primary" onClick={props.onsubmit}>Update group</button>
                     <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
 
                 </ModalFooter>
@@ -74,7 +83,6 @@ export const DeleteGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Deta
                 <ModalFooter>
                     <button type="button" className="btn btn-primary" onClick={props.delete}>Delete group</button>
                     <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
-
                 </ModalFooter>
             </Modal>
         </Fragment>

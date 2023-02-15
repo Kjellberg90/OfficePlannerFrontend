@@ -1,7 +1,7 @@
 interface Group {
     id: number;
     name: string;
-    teamMembers: number;
+    groupSize: number;
     division: string;
 }
 
