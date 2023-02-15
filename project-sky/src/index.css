@@ -29,6 +29,10 @@ a {
   text-decoration: underline;
  }
 
+ .headerSecondaryColor {
+  color: var(--secondary-color);
+ }
+
 /* -------------- Startpage Styling --------------------*/
 
  .selectionBox {
@@ -199,51 +203,51 @@ nav.adminNavbar {
   color: #001e32a2;
 }
 
-.adminHeader {
-  color: var(--secondary-color)
-}
-
 input[type="text"].adminDateInput {
   background-color: var(--secondary-color);
   margin-right: 1rem;
 }
 
-.adminHomeTable {
-  border-radius: 1rem;
-  background-color: rgb(183, 183, 183);
+.adminHomePageTable {
   width: 100%;
-  color: var(--accent-color);
 }
 
-.adminHomeTable th, td {
-  border-right: var(--accent-color) solid 1px;
+.adminHomePageTable th, .adminHomePageTable td {
   width: 12.5%;
 }
 
-.adminHomeTable th:last-child, td:last-child {
-  border-right: none;
+.groupTableId {
+  /* min-width: 3.5rem; */
+  text-align: center;
 }
 
-.adminHomeTableHeader th {
-  background-color: var(--secondary-color);
-  border-bottom: var(--accent-color);
+.adminGroupsTable {
+  width: 100%;
+  padding: 0;
 }
 
-.adminHomeTableHeader th:first-child {
-  border-top-left-radius: 1rem;
+.groupTableName {
+  width: 30%;
 }
 
-.adminHomeTableHeader th:last-child {
-  border-top-right-radius: 1rem;
+.groupTableActions {
+  text-align: center;
 }
 
-.adminHomeTableBody tr:nth-child(even) {
-  background-color: rgb(255, 255, 255);
+.adminGroupsTable td:first-child {
+  text-align: center;
 }
 
-.adminHomeTable td, 
-.adminHomeTable th {
-  padding: 1rem;  
+.adminGroupsTable th:first-child{
+  text-align: center;
+}
+
+.adminGroupsTable td:last-child{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  /* width: 7rem; */
 }
 
 /* -------------- Datepicker Styling --------------------*/
@@ -407,3 +411,49 @@ input::-webkit-datetime-edit-fields-wrapper {
   background-color: #6dc2d9;
   box-shadow: none;
 }
+
+/* #region AdminTable*/
+.adminTable {
+  border-radius: 1rem;
+  background-color: rgb(183, 183, 183);
+  color: var(--accent-color);
+}
+
+.adminTable th, .adminTable td {
+  border-right: var(--accent-color) solid 1px;
+}
+
+.adminTable th:last-child, td:last-child {
+  border-right: none;
+}
+.adminTableHeader th {
+  background-color: var(--secondary-color);
+  border-bottom: var(--accent-color);
+}
+
+.adminTableHeader th:first-child {
+  border-top-left-radius: 1rem;
+}
+
+.adminTableHeader th:last-child {
+  border-top-right-radius: 1rem;
+}
+
+.adminTableBody tr:nth-child(even) td,
+.adminTableBody tr:nth-child(even) th{
+  background-color: rgb(255, 255, 255);
+}
+
+.adminTableBody tr:last-child td:first-child {
+  border-bottom-left-radius: 1rem;
+}
+
+.adminTableBody tr:last-child td:last-child{
+  border-bottom-right-radius: 1rem;
+}
+
+.adminTable td, 
+.adminTable th {
+  padding: 0.5rem;  
+}
+/* #endregion */
