@@ -149,14 +149,21 @@ const deleteSingleBooking = () => {
                                         return (
                                           <div>
                                           {
-                                              users.map((user: SingleUser) => {
-                                                    return(
-                                                        <div className="d-flex justify-content-between align-items-center singleBookingUserDiv" key={user.id}>
-                                                          <h4 className="singleBookingUserList">{user.userName} </h4><FontAwesomeIcon icon={ faTrash } onClick={() => {setShow(true); ; setdeleteUser({date: currentDate, userName: user.userName, roomId: room.roomId})}} className="crossRoom" />
-                                                        </div>
-                                                    );
-                                                  })
+                                            (() => {
+                                              if (users.length > 0 ){
+                                                return (
+                                                  users.map((user: SingleUser) => {
+                                                        return(
+                                                            <div className="d-flex justify-content-between align-items-center singleBookingUserDiv" key={user.id}>
+                                                              <h4 className="singleBookingUserList">{user.userName} </h4><FontAwesomeIcon icon={ faTrash } onClick={() => {setShow(true); ; setdeleteUser({date: currentDate, userName: user.userName, roomId: room.roomId})}} className="crossRoom" />
+                                                            </div>
+                                                        );
+                                                      })
+                                                )
+                                              } else {
+                                                return <h3 className="mt-2">No seats to drop</h3>
                                               }
+                                              })()}
                                             <div className="mx-sm-3 mb-2 mt-2">
                                               <button className="dropButton" onClick={() => setisOpenDrop(NaN)}>Cancel</button>
                                             </div>
