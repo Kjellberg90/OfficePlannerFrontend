@@ -326,6 +326,19 @@ input::-webkit-datetime-edit-fields-wrapper {
   padding-right:15px;
 }
 
+/* -------------------- Map --------------------------*/
+.roomHover {
+  background-color: var(--secondary-color);
+  padding: 5px;
+  width: 250px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 15px;
+}
+
+.rooms {
+  fill: var(--secondary-color);
+}
 
 /* -------------- Custom Elements --------------------*/
 
