@@ -327,7 +327,7 @@ input::-webkit-datetime-edit-fields-wrapper {
 }
 
 /* -------------------- Map --------------------------*/
-.roomHover {
+.mapRoomNames {
   background-color: var(--secondary-color);
   padding: 5px;
   width: 250px;
@@ -336,8 +336,12 @@ input::-webkit-datetime-edit-fields-wrapper {
   margin: 15px;
 }
 
-.rooms {
+.mapRooms {
   fill: var(--secondary-color);
+}
+
+.mapRoomNames {
+  color: var(--primary-color)
 }
 
 /* -------------- Custom Elements --------------------*/

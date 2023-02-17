@@ -2,14 +2,17 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 
 const Map = () => {
+
     const mouseOverRoom = (event: React.MouseEvent<Element>) => {
         var targetClassName = (event.target as Element).getAttribute("class");
-        (event.target as SVGPathElement).style.fill = "red"
+        (event.target as SVGPathElement).style.fill = "white"
         console.log("Classname: ", targetClassName)
 
-        let rooms = document.getElementsByClassName(`${targetClassName!}`) as HTMLCollectionOf<HTMLElement>
-        for (let i = 0; rooms[i]; i++) {
-            var c = (rooms[i] as HTMLElement).style.backgroundColor = "blue";
+        let listOfRoomNames = document.getElementsByClassName(`${targetClassName!}`) as HTMLCollectionOf<HTMLElement>
+        for (let i = 0; listOfRoomNames[i]; i++) {
+            var bgcolor = (listOfRoomNames[i] as HTMLElement).style.backgroundColor = "#001e32";
+            var txtcolor = (listOfRoomNames[i] as HTMLElement).style.color = "white";
+            var anim = (listOfRoomNames[i] as HTMLElement).style.transition = "0.5s";
         }
     }
 
@@ -17,12 +20,37 @@ const Map = () => {
         var targetClassName = (event.target as Element).getAttribute("class");
         (event.target as SVGPathElement).style.fill = "#FFC72C"
 
-        let rooms = document.getElementsByClassName(`${targetClassName!}`) as HTMLCollectionOf<HTMLElement>
-        for (let i = 0; rooms[i]; i++) {
-            var c = (rooms[i] as HTMLElement).style.backgroundColor = "#FFC72C";
+        let listOfRoomNames = document.getElementsByClassName(`${targetClassName!}`) as HTMLCollectionOf<HTMLElement>
+        for (let i = 0; listOfRoomNames[i]; i++) {
+            var c = (listOfRoomNames[i] as HTMLElement).style.backgroundColor = "#FFC72C";
+            var txtcolor = (listOfRoomNames[i] as HTMLElement).style.color = "#425563";
         }
     }
 
+    const mouseOverName = (event: React.MouseEvent<Element>) => {
+        var targetName = (event.target as Element).innerHTML.toLowerCase();
+        (event.target as HTMLElement).style.backgroundColor = "#001e32";
+        (event.target as HTMLElement).style.color = "white";
+        console.log("RoomName: ", targetName)
+
+        let rooms = document.getElementsByClassName(`${targetName!}`);
+        for (let i = 0; rooms[i]; i++) {
+            var color = (rooms[i] as SVGPathElement).style.fill = "white";
+            var anim = (rooms[i] as HTMLElement).style.transition = "0.5s";
+        }
+    }
+
+    const mouseLeaveName = (event: React.MouseEvent<Element>) => {
+        var targetName = (event.target as Element).innerHTML.toLowerCase();
+        (event.target as HTMLElement).style.backgroundColor = "#FFC72C"
+        console.log("RoomName: ", targetName)
+
+        let rooms = document.getElementsByClassName(`${targetName!}`);
+        for (let i = 0; rooms[i]; i++) {
+            var color = (rooms[i] as SVGPathElement).style.fill = "#FFC72C";
+            var txtcolor = (rooms[i] as HTMLElement).style.color ="#425563"
+        }
+    }
 
     return (
         <Row>
@@ -79,7 +107,7 @@ const Map = () => {
                                 strokeWidth="6.065"
                                 d="M263.846 27.085s11.515-1.952 21.939-.494c10.425 1.458 19.759 6.325 19.759 6.325l49.314 47.692s4.604 12.29 6.669 22.511c2.066 10.221 1.592 18.372 1.592 18.372"
                             ></path>
-                            <path
+                            <path 
                                 stroke="#ffc72c"
                                 strokeWidth="2.361"
                                 d="M269.799 73.213l25.556-26.69 48.636 46.338-24.565 25.883-49.627-45.531z"
@@ -102,29 +130,29 @@ const Map = () => {
                             </g>
                         </g>
                         <g className="circleRoomRight" fill="none" strokeLinecap="butt" strokeLinejoin="miter">
-                            <path
+                            <path 
                                 stroke="#111110"
                                 strokeWidth="3"
                                 d="M1077.49 310.243l38.95 8.207"
                             ></path>
-                            <path
+                            <path 
                                 stroke="#111110"
                                 strokeDasharray="2"
                                 strokeWidth="3"
                                 d="M1080.67 345.808s15.27-2.693 23.51-12.371c8.24-9.679 7.05-24.579 7.05-24.579"
                             ></path>
-                            <path
+                            <path 
                                 stroke="#111110"
                                 strokeWidth="3"
                                 d="M1146.18 298.663l12.92-38.981"
                             ></path>
-                            <path
+                            <path 
                                 stroke="#141413"
                                 strokeDasharray="2"
                                 strokeWidth="3"
                                 d="M1158.77 260.418s13.5 4.516 19.06 15.088c5.56 10.572 3.18 27.2 3.18 27.2"
                             ></path>
-                            <path
+                            <path 
                                 stroke="#ffc72c"
                                 strokeWidth="6.065"
                                 d="M1179.69 303.272s47.51 22.158 33.07 78.443c-10.39 40.458-64.92 48.539-64.92 48.539"
@@ -145,7 +173,7 @@ const Map = () => {
                                 d="M231.326 837.627l6.25 19.732 28.524-9.402-6.441-19.428-28.333 9.098z"
                             ></path>
                         </g>
-                        <g className="rooms" fill="#85d4ff">
+                        <g className="mapRooms" fill="#85d4ff">
                             <path className="collaboration" onMouseOver={mouseOverRoom} onMouseLeave={mouseLeaveRoom} d="M913.59 412.554l156.92-.083c1.66-.001 3.03 1.295 3.04 2.893l.09 9.234c.02 1.599 1.38 2.898 3.04 2.902l53.94.129c1.66.004 3.01 1.304 3.01 2.902V577.15c0 1.599-1.35 2.892-3.01 2.888l-217.11-.516c-1.664-.004-3.013-1.303-3.012-2.902l.076-161.169c.001-1.599 1.351-2.896 3.016-2.897z"></path>
                             <path className="united" onMouseOver={mouseOverRoom} onMouseLeave={mouseLeaveRoom}
                                 d="M627.745 138.462c1.137-2.122 172.639-1.649 172.581.469-.183 6.644-.528 157.434-.732 162.177-.046 1.071-20.428.396-22.188.743-1.25.247.728 13.7-1.558 13.955-6.403.716-138.297 2.838-138.297 2.838-4.682.06-8.489-3.674-8.503-8.339 0 0-2.058-170.435-1.303-171.843z"
@@ -157,13 +185,13 @@ const Map = () => {
                             <path className="innovation" onMouseOver={mouseOverRoom} onMouseLeave={mouseLeaveRoom} d="M462.932 410.821H679.04c5.641 0 10.215 4.472 10.215 9.989v150.974c0 5.517-4.574 9.989-10.215 9.989H462.932c-5.642 0-10.215-4.472-10.215-9.989V420.81c0-5.517 4.573-9.989 10.215-9.989z">
                             </path>
                         </g>
-                        <g
+                        <g 
                             fill="none"
                             stroke="#111110"
                             strokeLinecap="butt"
                             strokeLinejoin="miter"
                         >
-                            <path
+                            <path 
                                 strokeWidth="3"
                                 d="M252.19 300.948l-11.594-32.994M153.278 122.95l.243 33.477"
                             ></path>
@@ -207,7 +235,7 @@ const Map = () => {
                             ></path>
                             <path strokeWidth="3" d="M295.767 513.827l-1.12-32.011"></path>
                         </g>
-                        <g
+                        <g 
                             fill="none"
                             stroke="#425563"
                             strokeLinecap="butt"
@@ -220,7 +248,7 @@ const Map = () => {
                             <path d="M270.324 517.084l1.168 71.56 215.258 2.199"></path>
                             <path d="M450.929 408.708l-.324 164.866-.035 17.334M690.68 411.689l-.139 180.557M450.56 410.542l625.52.801M627.701 137.258l.608 179.714M800.951 139.257l.126 162.827-24.636-.023M363.02 135.755l771.37 2.406"></path>
                         </g>
-                        <path
+                        <path 
                             fill="none"
                             stroke="#425563"
                             strokeLinecap="butt"
@@ -231,7 +259,7 @@ const Map = () => {
                         ></path>
                         <g fill="#425563">
                             <path d="M1030.09 161.657l11.85 8.567-4.48 13.92-14.63.035-4.55-13.897 11.81-8.625zM784.108 446.771l11.853 8.566-4.485 13.92-14.625.036-4.553-13.898 11.81-8.624zM1095.75 447.054l11.85 8.567-4.48 13.919-14.63.036-4.55-13.897 11.81-8.625zM1028.54 447.905l11.86 8.567-4.49 13.919-14.62.036-4.56-13.897 11.81-8.625zM721.129 447.26l11.852 8.567-4.485 13.92-14.624.035-4.553-13.897 11.81-8.625zM835.101 176.513l8.677-11.772 13.877 4.616-.101 14.624-13.94 4.422-8.513-11.89zM645.639 171.66l8.677-11.772 13.877 4.616-.101 14.623-13.94 4.423-8.513-11.89zM644.887 227.823l8.678-11.772 13.877 4.616-.102 14.624-13.939 4.422-8.514-11.89zM644.136 284.174l8.678-11.772 13.876 4.616-.101 14.624-13.939 4.422-8.514-11.89zM835.349 241.955l8.677-11.771 13.877 4.615-.101 14.624-13.94 4.422-8.513-11.89zM889.505 373.606l8.678-11.772 13.877 4.616-.102 14.624-13.939 4.422-8.514-11.89zM847.705 481.597l8.678-11.772 13.876 4.616-.101 14.624-13.939 4.422-8.514-11.89zM629.09 439.222l8.678-11.772 13.876 4.616-.101 14.624-13.939 4.422-8.514-11.89zM531.271 471.71l8.678-11.772 13.877 4.616-.101 14.624-13.94 4.422-8.514-11.89zM629.002 495.345l8.678-11.771 13.877 4.615-.102 14.624-13.939 4.423-8.514-11.891zM628.127 552.444l8.678-11.772 13.877 4.616-.101 14.623-13.94 4.423-8.514-11.89zM848.073 548.718l8.677-11.772 13.877 4.616-.101 14.624-13.94 4.422-8.513-11.89zM950.613 174.778l-8.678-11.772-13.877 4.616.102 14.624 13.939 4.422 8.514-11.89zM758.19 170.659l-8.678-11.772-13.877 4.616.102 14.624 13.939 4.422 8.514-11.89zM757.814 225.163l-8.678-11.771-13.877 4.615.102 14.624 13.939 4.423 8.514-11.891zM758.19 281.923l-8.678-11.771-13.877 4.615.102 14.624 13.939 4.423 8.514-11.891zM950.613 238.237l-8.678-11.772-13.877 4.616.102 14.624 13.939 4.422 8.514-11.89zM1005.19 371.707l-8.678-11.772-13.877 4.616.101 14.624 13.94 4.422 8.514-11.89zM970.218 480.686l-8.677-11.772-13.877 4.616.101 14.624 13.94 4.422 8.513-11.89zM508.927 439.711l-8.678-11.771-13.877 4.615.102 14.624 13.939 4.423 8.514-11.891zM508.633 495.162l-8.677-11.771-13.877 4.615.101 14.624 13.94 4.423 8.513-11.891zM509.367 557.068l-8.678-11.772-13.877 4.616.102 14.624 13.939 4.422 8.514-11.89zM613.156 528.671l-8.678-11.771-13.876 4.615.101 14.624 13.939 4.422 8.514-11.89zM970.935 544.831l-8.678-11.771-13.876 4.615.101 14.624 13.939 4.422 8.514-11.89zM1095.01 161.449l11.86 8.567-4.49 13.92-14.62.035-4.56-13.897 11.81-8.625zM1030.06 275.393l-11.79-8.655 4.59-13.886 14.63.073 4.45 13.931-11.88 8.537zM723.942 560.42l-11.788-8.655 4.589-13.886 14.624.073 4.449 13.931-11.874 8.537zM789.449 559.999l-11.788-8.655 4.588-13.886 14.624.073 4.45 13.931-11.874 8.537zM1098.54 560.566l-11.79-8.655 4.59-13.886 14.62.073 4.45 13.931-11.87 8.537zM1031.9 560.566l-11.79-8.655 4.59-13.886 14.62.073 4.45 13.931-11.87 8.537zM1099.15 275.393l-11.79-8.655 4.59-13.886 14.62.073 4.45 13.931-11.87 8.537z"></path>
-                            <path
+                            <path 
                                 stroke="#425563"
                                 strokeLinecap="butt"
                                 strokeLinejoin="miter"
@@ -243,19 +271,19 @@ const Map = () => {
                 </svg>
             </Col>
             <Col>
-                <h3 className="roomHover innovation">
+                <h3 className="mapRoomNames innovation" onMouseOver={mouseOverName} onMouseLeave={mouseLeaveName}>
                     Innovation
                 </h3>
-                <h3 className="roomHover commitment">
+                <h3 className="mapRoomNames commitment" onMouseOver={mouseOverName} onMouseLeave={mouseLeaveName}>
                     Commitment
                 </h3>
-                <h3 className="roomHover inspired">
+                <h3 className="mapRoomNames inspired" onMouseOver={mouseOverName} onMouseLeave={mouseLeaveName}>
                     Inspired
                 </h3>
-                <h3 className="roomHover united">
+                <h3 className="mapRoomNames united" onMouseOver={mouseOverName} onMouseLeave={mouseLeaveName}>
                     United
                 </h3>
-                <h3 className="roomHover collaboration">
+                <h3 className="mapRoomNames collaboration" onMouseOver={mouseOverName} onMouseLeave={mouseLeaveName}>
                     Collaboration
                 </h3>
             </Col>
