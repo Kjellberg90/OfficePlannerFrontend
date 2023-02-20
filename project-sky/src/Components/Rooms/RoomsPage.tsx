@@ -83,6 +83,7 @@ const test = async () => {
 
 const deleteSingleBooking = () => {  
   const data = deleteUser
+  console.log(data)
   fetch("https://localhost:7054/api/Booking/DeleteSingleBooking", {
     method: 'DELETE',
     headers: {
