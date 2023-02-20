@@ -1,20 +1,18 @@
 import React, { Fragment } from "react"
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"
+import { Link, Outlet, useLocation } from "react-router-dom"
 import epirocLogo from '../../shared/epiroclogo.svg'
 import { useState, useEffect } from "react"
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import { faSquareCaretLeft, faSquareCaretRight, faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons"
 import { format } from "date-fns";
-import { useDateContext } from "../../shared/DateContext"
 import { BackButton } from "./LayoutButtons"
+import { useContext } from "react";
+import { DateContext } from "../../shared/DateContext"
 
 const Layout = () => {
-
-  const dateInfo = useDateContext();
 
   const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
   const [showBackButton, setShowBackButton] = useState(false);
@@ -25,15 +23,20 @@ const Layout = () => {
   var [decrementWeek] = useState<number>(-6);
   var [incrementWeek] = useState<number>(6)
   const [formatDate] = useState(format(calDate, "yyyy-MM-dd"))
-  const [toggle, setToggle] = useState<boolean>(true)
-
-
+  
+  const {toggle, toggleView} = useContext(DateContext)
+  
+  const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    toggleView!();
+    console.log("Toggle is: ", toggle)
+  }
 
   useEffect(() => {
     setDate(formatDate);
   }, [formatDate])
 
-  const decrementDate = (event: React.MouseEvent<SVGSVGElement>) => {
+  const decrementDate = (e: React.MouseEvent<SVGSVGElement>) => {
     if (!toggle) {
       calDate.setDate(calDate.getDate() + decrementWeek++)
       const formatDate = format(calDate, "yyyy-MM-dd")
@@ -64,9 +67,10 @@ const Layout = () => {
     if (window.location.href == "http://localhost:3000/" ||
       window.location.href.includes("http://localhost:3000/admin")) {
       setShowBackButton(false);
-    }
-    else {
       setShowToggleBtn(false);
+    }
+    else if (window.location.href == "http://localhost:3000/info"){
+      setShowToggleBtn(true);
     }
   })
 
@@ -82,7 +86,7 @@ const Layout = () => {
 
   const toggleButton = () => {
     return (
-      <button className="togglebtn" onClick={() => setToggle(!toggle)}>
+      <button className="togglebtn" onClick={handleOnClick}>
         {toggle ?
           <Col>
             <FontAwesomeIcon icon={faToggleOff} />
