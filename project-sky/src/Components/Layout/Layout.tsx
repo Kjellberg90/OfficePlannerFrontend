@@ -10,6 +10,7 @@ import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import { faSquareCaretLeft, faSquareCaretRight, faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons"
 import { format } from "date-fns";
 import { useDateContext } from "../../shared/DateContext"
+import { BackButton } from "./LayoutButtons"
 
 const Layout = () => {
 
