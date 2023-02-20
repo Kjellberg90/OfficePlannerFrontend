@@ -34,20 +34,18 @@ const AdminRooms = () => {
     const DeleteRoom = () => {
       const data = currentRoom
       fetch(`https://localhost:7054/api/Room/adminDeleteRooms`,{
-            method: "DELETE",
+            method: 'DELETE',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
-        // .then((response) => response.json())
-        // .then((res) => {
-        //   console.log(res)
-        //     if(!res.ok) {
-        //        throw new Error(res.status)
-        //     }
-        // })
+        .then((response) => {
+          if(!response.ok) {
+            throw new Error(response.status.toString())
+          }
+        })
         .then(() => FetchRooms())
         .catch((error) => {
             console.log("error", error)
@@ -106,8 +104,6 @@ const AdminRooms = () => {
 }
 
   const AddRoom = () => {
-      console.log(newValues)
-      debugger
       fetch("https://localhost:7054/api/Room/adminAddRooms", {
           method: "POST",
           headers: {
