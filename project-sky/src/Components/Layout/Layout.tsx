@@ -6,12 +6,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { BackButton } from "./LayoutButtons"
-import {
-  faSquareCaretLeft,
-  faSquareCaretRight,
-} from "@fortawesome/free-solid-svg-icons"
-import { faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons"
+import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons"
+import { faSquareCaretLeft, faSquareCaretRight, faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons"
 import { format } from "date-fns";
 import { useDateContext } from "../../shared/DateContext"
 
@@ -64,8 +60,9 @@ const Layout = () => {
   };
 
   useEffect(() => {
-    if (window.location.href === "http://localhost:3000/info") {
-      setShowToggleBtn(true);
+    if (window.location.href == "http://localhost:3000/" ||
+      window.location.href.includes("http://localhost:3000/admin")) {
+      setShowBackButton(false);
     }
     else {
       setShowToggleBtn(false);

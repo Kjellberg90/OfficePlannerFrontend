@@ -40,7 +40,7 @@ const LoginPage = () => {
             alert("Acess Denied")
           }
         })
-        .then(() => navigate('/admin')
+        .then(() => navigate('/admin/home')
         )
   } 
 
