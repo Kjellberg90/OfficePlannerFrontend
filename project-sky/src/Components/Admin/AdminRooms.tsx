@@ -1,19 +1,19 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { ChangeEvent, Fragment, useEffect, useState } from "react";
+import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { AddRoomModal, UpdateRoomModal, DeleteRoomModal } from "./AdminModals";
 
-interface Rummet {
+interface AdminRoom {
   id: number;
   name: string;
   seats: number;
-}
+} // Interface tillagt då Room interface rooms inte fungerar i denna fil
 
 const AdminRooms = () => {
-    const [rooms, setRooms] = useState<Rummet[]>([]);
+    const [rooms, setRooms] = useState<AdminRoom[]>([]);
     const [error, setError] = useState();
-    const [currentRoom, setCurrentRoom] = useState<Rummet>();
+    const [currentRoom, setCurrentRoom] = useState<AdminRoom>();
     const [showAddRoom, setShowAddRoom] = useState(false);
     const [showUppdateRoom, setShowUpdateRoom] = useState(false);
     const [showDeleteRoom, setShowDeleteRoom] = useState(false);
@@ -119,8 +119,6 @@ const AdminRooms = () => {
       )
   }
 
-  
-    
     return (
         <Container>
             <Row className="mb-3">
@@ -140,7 +138,7 @@ const AdminRooms = () => {
                             </tr>
                         </thead>
                         <tbody className="adminTableBody">
-                            {rooms.map((room: Rummet) => { 
+                            {rooms.map((room: AdminRoom) => { 
                                 return(
                                 <tr key={room.name}>
                                     <td>{room.id}</td>

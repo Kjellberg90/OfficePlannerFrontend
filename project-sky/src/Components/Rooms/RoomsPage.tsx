@@ -1,9 +1,9 @@
 import React, { useEffect, useState} from "react";
 import Room from "./RoomInfo";
 import Container from "react-bootstrap/Container";
-import { Button, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Stack from "react-bootstrap/esm/Stack";
-import { useOutletContext, useRoutes } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faXmark, faTrash } from "@fortawesome/free-solid-svg-icons"
 import SingleUser from "./SingleUser";
@@ -83,7 +83,6 @@ const test = async () => {
 
 const deleteSingleBooking = () => {  
   const data = deleteUser
-  console.log(data)
   fetch("https://localhost:7054/api/Booking/DeleteSingleBooking", {
     method: 'DELETE',
     headers: {
