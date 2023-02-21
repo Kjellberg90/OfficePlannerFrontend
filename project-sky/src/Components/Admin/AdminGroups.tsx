@@ -93,7 +93,7 @@ const AdminGroups = () => {
             },
             body: JSON.stringify(newValues)
         })
-        .then((response) => response.json())
+        // .then((response) => response.json())
         .then((data) => {
             console.log("Success:", data);
         })
@@ -224,7 +224,7 @@ const AdminGroups = () => {
                         </tbody>
                     </table>
                 </Col>
-                <Col className="col-lg-6 col-md-12 col-md-p-1 divisionDiv">
+                <Col className="col-lg-6 col-md-12 divisionDiv">
                     <table className="adminTable">
                         <thead>
                             <tr className="adminTableHeader text-center">

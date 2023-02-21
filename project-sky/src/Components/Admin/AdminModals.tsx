@@ -50,6 +50,7 @@ export const UpdateGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Deta
                         <input type="text" placeholder={props.groupname} onChange={props.updatedvalue} name="name"/>
                         <input type="number" placeholder={props.groupsize} onChange={props.updatedvalue} name="groupSize"/>
                         <select name="division" placeholder={props.groupdivision} onChange={props.updatedvalue}>
+                            <option>Choose R&D</option>
                             <option value="A">R&D A</option>
                             <option value="B">R&D B</option>
                             <option value="C">R&D C</option>
