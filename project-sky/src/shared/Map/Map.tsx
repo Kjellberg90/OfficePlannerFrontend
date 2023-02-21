@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
 function Map() {
 
@@ -54,10 +54,8 @@ function Map() {
 
 
     return (
-
-
         <Row className="d-flex align-items-center">
-            <Col style={{ height: 500, width: 500 }}> 
+            <Col style={{ height: 300, width: 800, paddingLeft: 100 }}> 
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     strokeLinecap="round"
@@ -279,7 +277,7 @@ function Map() {
                     </g>
                 </svg>
             </Col>
-            <Col className="mapRoomNameList">
+            <Col className="mapRoomNameList" >
                 <div>
                 <h3 className="mapRoomNames innovation" onMouseOver={mouseOverName} onMouseLeave={mouseLeaveName}>
                     Innovation
@@ -298,8 +296,7 @@ function Map() {
                 </h3>
                 </div>
             </Col>
-        </Row>
-                             
+        </Row>                        
     );
 }
 
