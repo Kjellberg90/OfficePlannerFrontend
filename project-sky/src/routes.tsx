@@ -11,9 +11,8 @@ import AdminRooms from "./Components/Admin/AdminRooms";
 import ProtectedRoutes from "./Components/ProtectedRoute/ProtectedRoutes";
 import LoginPage from "./Components/Login/Login";
 
-
-
 const AppRouter = () => {
+
     return (
         <Routes>
             <Route element={<Layout />}>
@@ -29,8 +28,6 @@ const AppRouter = () => {
                         <Route path="rooms" element={<AdminRooms />} />
                     </Route>
                 </Route>
-
-
             </Route>
         </Routes>
     )
