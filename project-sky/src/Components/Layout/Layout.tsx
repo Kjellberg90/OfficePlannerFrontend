@@ -13,7 +13,6 @@ import DatePicker from "../../shared/DatePicker"
 const Layout = () => {
 
   const {formatDate} = useContext(DateContext)
-  console.log("formatted date from layout: ", formatDate)
 
   const [showBackButton, setShowBackButton] = useState(false);
 

@@ -11,7 +11,6 @@ import Container from 'react-bootstrap/Container'
 const DatePicker = () => {
 
     const { formatDate, setFormatDate } = useContext(DateContext)
-    console.log("formatted date from datepicker", formatDate)
     const [calDate] = useState<Date>(new Date());
     var [decrementDay] = useState<number>(-1);
     var [incrementDay] = useState<number>(1);
