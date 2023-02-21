@@ -10,7 +10,7 @@ import AdminGroups from "./Components/Admin/AdminGroups";
 import AdminRooms from "./Components/Admin/AdminRooms";
 import ProtectedRoutes from "./Components/ProtectedRoute/ProtectedRoutes";
 import LoginPage from "./Components/Login/Login";
-import Map from "./shared/Map";
+import Map from "./shared/Map/Map";
 
 import AdminBooking from "./Components/Admin/AdminBooking";
 import Week from "./Components/Admin/Week";

@@ -343,6 +343,14 @@ input::-webkit-datetime-edit-fields-wrapper {
   margin: 15px;
 }
 
+.mapRoomNameList {
+  display: flex;
+}
+
+.mapRoomNamesList, div {
+  justify-content: center;
+}
+
 .mapRooms {
   fill: var(--secondary-color);
 }
@@ -350,6 +358,7 @@ input::-webkit-datetime-edit-fields-wrapper {
 .mapRoomNames {
   color: var(--primary-color)
 }
+
 
 /* -------------- Custom Elements --------------------*/
 
