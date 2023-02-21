@@ -7,19 +7,9 @@ interface NameProp {
 
 const SmallerMap: FunctionComponent<NameProp> = ({name}) => {
 
-    
-    // const highLightRoom = (name: NameProp) => {
-    //     console.log(name)
-    //     let rooms = document.getElementsByClassName(`${name}`);
-    //     for (let i = 0; rooms[i]; i++) {
-    //         var color = (rooms[i] as SVGPathElement).style.fill = "white";
-    //     }
-    // }
-
-
 let room = document.getElementsByClassName(`${name}`)
 for (let i = 0; room[i]; i++) {
-    var color = (room[i] as SVGPathElement).style.fill="red";
+    var color = (room[i] as SVGPathElement).style.fill="white";
 }
 
     return (
