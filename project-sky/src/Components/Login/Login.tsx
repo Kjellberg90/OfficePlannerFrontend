@@ -45,8 +45,8 @@ const LoginPage = () => {
   } 
 
   return (
-    <Row className='room-info-row d-flex align-items-center justify-content-center'>
-      <Col className="room-info-col text-center" md={6}>
+    <Row className='d-flex align-items-center justify-content-center'>
+      <Col className="text-center" md={6}>
         <div className="d-flex align-items-center justify-content-center flex-column room-info-col pt-2 pb-2">
         <h2>Log In</h2>
           <form className="form-inline" onSubmit={(e) => login(e)}>
