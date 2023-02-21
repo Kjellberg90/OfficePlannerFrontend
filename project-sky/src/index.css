@@ -230,15 +230,10 @@ input[type="text"].adminDateInput {
   width: 30%;
 }
 
-.groupTableActions {
-  text-align: center;
-}
-
-.adminGroupsTable td:first-child {
-  text-align: center;
-}
-
-.adminGroupsTable th:first-child{
+.groupTableActions,
+.adminGroupsTable td:first-child,
+.adminGroupsTable th:first-child
+{
   text-align: center;
 }
 
@@ -248,6 +243,18 @@ input[type="text"].adminDateInput {
   justify-content: center;
   gap: 0.75rem;
   /* width: 7rem; */
+}
+
+.adminBookingNav {
+  background-color: var(--secondary-color);
+}
+
+.adminBookingActions {
+  color: var(--secondary-color)
+}
+
+.adminTableBody input{
+  width: 100%;
 }
 
 /* -------------- Datepicker Styling --------------------*/
@@ -427,6 +434,11 @@ input::-webkit-datetime-edit-fields-wrapper {
 .bookButton:active {
   background-color: #6dc2d9;
   box-shadow: none;
+}
+
+.adminButton {
+  background-color: #d7d2cb;
+  border-radius: 3px;
 }
 
 /* #region AdminTable*/
