@@ -7,6 +7,7 @@ interface IDateContext {
     toggle: boolean,
     toggleView?: () => void,
     formatDate: string,
+    setFormatDate?: (activeDate: string) => void,
 }
 
 const defaultState = {
@@ -28,6 +29,7 @@ export const DateProvider = ({children}: {children: ReactNode})  => {
         <DateContext.Provider
         value={{
             formatDate,
+            setFormatDate,
             toggle,
             toggleView,
         }}>

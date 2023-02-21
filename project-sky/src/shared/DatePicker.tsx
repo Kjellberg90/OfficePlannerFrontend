@@ -10,10 +10,8 @@ import Container from 'react-bootstrap/Container'
 
 const DatePicker = () => {
 
-    const { formatDate } = useContext(DateContext)
+    const { formatDate, setFormatDate } = useContext(DateContext)
     console.log("formatted date from datepicker", formatDate)
-
-    const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
     const [calDate] = useState<Date>(new Date());
     var [decrementDay] = useState<number>(-1);
     var [incrementDay] = useState<number>(1);
@@ -24,7 +22,7 @@ const DatePicker = () => {
     const { toggle, toggleView } = useContext(DateContext)
 
     useEffect(() => {
-        setDate(formatDate);
+        setFormatDate!(formatDate);
     }, [formatDate])
 
     useEffect(() => {
@@ -41,27 +39,27 @@ const DatePicker = () => {
         if (!toggle) {
             calDate.setDate(calDate.getDate() + decrementWeek++)
             const formatDate = format(calDate, "yyyy-MM-dd")
-            setDate(formatDate)
+            setFormatDate!(formatDate)
         }
         calDate.setDate(calDate.getDate() + decrementDay++)
         const formatDate = format(calDate, "yyyy-MM-dd")
-        setDate(formatDate)
+        setFormatDate!(formatDate)
     }
 
     const incrementDate = (e: React.MouseEvent<SVGSVGElement>) => {
         if (!toggle) {
             const formatDate = format(calDate, "yyyy-MM-dd")
             calDate.setDate(calDate.getDate() + incrementWeek++)
-            setDate(formatDate)
+            setFormatDate!(formatDate)
         }
         calDate.setDate(calDate.getDate() + incrementDay++)
         const formatDate = format(calDate, "yyyy-MM-dd")
-        setDate(formatDate)
+        setFormatDate!(formatDate)
     }
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { value } = e.target;
-        setDate(value);
+        setFormatDate!(value);
     };
 
     const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -90,7 +88,7 @@ const DatePicker = () => {
         <Col className="layoutColumn datepicker">
             {showToggleBtn ? toggleButton() : ""}
             <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
-            <input type="date" className="makeClickable" value={date} onChange={handleChange} style={{ width: "220px", fontSize: "1rem", textAlign: "center", fontWeight: "bold", borderRadius: "10px" }} />
+            <input type="date" className="makeClickable" value={formatDate} onChange={handleChange} style={{ width: "220px", fontSize: "1rem", textAlign: "center", fontWeight: "bold", borderRadius: "10px" }} />
             <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" onClick={incrementDate} />
         </Col>
     )
