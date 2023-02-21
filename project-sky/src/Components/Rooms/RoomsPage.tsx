@@ -105,7 +105,7 @@ const deleteSingleBooking = () => {
         <Container>
             <Stack gap={4}>            
                 {rooms.map((room: Room) => {return (
-                    <Row className="room-info-row d-flex align-items-center justify-content-center" key={room.name}>
+                    <Row className="d-flex align-items-center justify-content-center" key={room.name}>
                         <Col className="room-info-col text-center" md={6}>
                             <Row>
                                 <h2><b>{room.name}</b></h2>
