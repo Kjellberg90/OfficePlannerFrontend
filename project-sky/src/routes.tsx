@@ -10,6 +10,9 @@ import AdminGroups from "./Components/Admin/AdminGroups";
 import AdminRooms from "./Components/Admin/AdminRooms";
 import ProtectedRoutes from "./Components/ProtectedRoute/ProtectedRoutes";
 import LoginPage from "./Components/Login/Login";
+import AdminBooking from "./Components/Admin/AdminBooking";
+import Week from "./Components/Admin/Week";
+import Weeks from "./Components/Admin/Weeks";
 
 const AppRouter = () => {
 
@@ -26,6 +29,10 @@ const AppRouter = () => {
                         <Route path="home" element={<AdminHomePage />} />
                         <Route path="groups" element={<AdminGroups />} />
                         <Route path="rooms" element={<AdminRooms />} />
+                        <Route path="booking" element={<AdminBooking />} >
+                            <Route index path="weeks" element={<Weeks />} />
+                            <Route path="week" element={<Week />} />
+                        </Route>
                     </Route>
                 </Route>
             </Route>
