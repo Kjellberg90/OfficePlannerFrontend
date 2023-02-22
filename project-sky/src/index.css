@@ -229,15 +229,10 @@ input[type="text"].adminDateInput {
   width: 30%;
 }
 
-.groupTableActions {
-  text-align: center;
-}
-
-.adminGroupsTable td:first-child {
-  text-align: center;
-}
-
-.adminGroupsTable th:first-child{
+.groupTableActions,
+.adminGroupsTable td:first-child,
+.adminGroupsTable th:first-child
+{
   text-align: center;
 }
 
@@ -246,8 +241,37 @@ input[type="text"].adminDateInput {
   display: flex;
   justify-content: center;
   gap: 0.75rem;
-  /* width: 7rem; */
 }
+
+.adminBookingNav {
+  background-color: var(--secondary-color);
+  border-radius: 1rem;
+  padding: .75rem 1rem;
+  max-height: 20rem;
+}
+
+.adminBookingNav ul {
+  list-style: none;
+  padding-left: .5rem;
+}
+
+.adminBookingActions {
+  color: var(--secondary-color)
+}
+
+.adminTableBody input{
+  width: 100%;
+}
+
+.adminBookingWeeks h3 {
+  color: var(--secondary-color);
+  padding-top: 1rem;
+}
+
+.adminBookingWeeks, h3:first-child {
+  padding: 0;
+}
+
 
 /* -------------- Datepicker Styling --------------------*/
 
@@ -325,6 +349,72 @@ input::-webkit-datetime-edit-fields-wrapper {
   padding-right:15px;
 }
 
+/* -------------------- Map --------------------------*/
+.mapRoomNames {
+  background-color: var(--secondary-color);
+  padding: 5px;
+  width: 250px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 15px;
+}
+
+.mapRoomNameList {
+  display: flex;
+}
+
+.mapRoomNamesList, div {
+  justify-content: center;
+}
+
+.mapRooms {
+  fill: var(--secondary-color);
+}
+
+.mapRoomNames {
+  color: var(--primary-color)
+}
+
+.modalMap {
+  height: 400px;
+}
+
+.mapModalBody {
+  background-color: var(--primary-color);
+}
+
+.mapBtnCol {
+  margin-top: 20px;
+}
+
+.mapBtn {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: larger;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px 3px, rgba(0, 0, 0, 0.2) 0px 0px inset;
+}
+
+/* TEMP BREAKPOINTS  */
+
+@media only screen and (min-width: 1200px) {
+  .smallMap {
+    height: 400px; 
+    width: 700px; 
+    padding-left: 140px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .smallMap {
+    height: 300px; 
+    width: 500px; 
+    padding-left: 100px;
+  }
+}
 
 /* -------------- Custom Elements --------------------*/
 
@@ -409,6 +499,16 @@ input::-webkit-datetime-edit-fields-wrapper {
 .bookButton:active {
   background-color: #6dc2d9;
   box-shadow: none;
+}
+
+.adminButton {
+  background-color: #d7d2cb;
+  border-radius: 3px;
+  height: 80%;
+}
+
+.adminButton:hover {
+  background-color: #f1eee9;
 }
 
 /* #region AdminTable*/

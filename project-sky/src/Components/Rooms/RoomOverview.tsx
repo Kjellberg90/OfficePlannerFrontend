@@ -1,5 +1,5 @@
 interface RoomOverview {
-    roomName: number;
+    roomName: string;
     groupNames: string[];
 }
 

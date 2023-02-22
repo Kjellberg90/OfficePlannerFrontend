@@ -9,6 +9,7 @@ import { faCheck, faXmark, faTrash } from "@fortawesome/free-solid-svg-icons"
 import SingleUser from "./SingleUser";
 import { DeleteSingleBookingModal } from "./Modals/DeleteSingleBookingModal";
 import IdleUser from "../../shared/IdleUser/IdleUser";
+import { RoomMapModal } from "./Modals/RoomsMapModal";
 
 const RoomsPage = () => {
 
@@ -57,6 +58,10 @@ const test = async () => {
       Fetchusers(roomId)
     }
 
+    const handleOpenMap = () => {
+      setShowMap(true);
+    }
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         setisOpenBook(NaN)       
@@ -80,6 +85,7 @@ const test = async () => {
       }
 
     const [show, setShow] = useState(false);
+    const [showMap, setShowMap] = useState(false);
 
 const deleteSingleBooking = () => {  
   const data = deleteUser
@@ -205,6 +211,13 @@ const deleteSingleBooking = () => {
                 user={deleteUser}
                 delete={() => {deleteSingleBooking(); setShow(false); setisOpenDrop(NaN)}}
             />
+            <RoomMapModal
+                show={showMap}
+                onHide={() => {setShowMap(false); }}
+            />
+            <Col className="mapBtnCol d-flex">
+              <button className="mapBtn" onClick={handleOpenMap}>Show Map</button>
+            </Col>
         </Container>
     )
 }
