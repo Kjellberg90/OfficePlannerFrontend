@@ -105,7 +105,7 @@ a {
 
  .groupInfoCard {
   background-color: var(--secondary-color);
-  border-radius: 25px;
+  border-radius: 50px 50px 45px 45px;
   color: var(--primary-color);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
  }
@@ -113,6 +113,15 @@ a {
  .headerContainer {
   padding-bottom: 40px;
  }
+
+ .UnbookedText {
+  color: #b7312c;
+ }
+
+ .BookedText {
+  color: #45880a;
+ }
+
 /* -------------- RoomsPage Styling --------------------*/
 
 .room-info-col {
