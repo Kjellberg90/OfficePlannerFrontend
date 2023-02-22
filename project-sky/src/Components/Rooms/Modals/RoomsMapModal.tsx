@@ -2,7 +2,7 @@ import { DetailedHTMLProps, Fragment, HTMLAttributes, ReactNode, RefObject }from
 import { Modal, ModalProps } from "react-bootstrap";
 import { Omit, BsPrefixProps } from "react-bootstrap/esm/helpers";
 import Map from "../../../shared/Map/Map";
-import { Col, Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 
 export const RoomMapModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode; }) => {

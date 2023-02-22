@@ -1,9 +1,10 @@
-import { useState, useLayoutEffect} from "react"
+import { useState, useLayoutEffect, useEffect } from "react"
 import { useLocation } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap'
 import { useOutletContext } from 'react-router-dom';
 import Groups from './groupsInterface'
 import IdleUser from "../../shared/IdleUser/IdleUser";
+import SmallerMap from "../../shared/Map/SmallerMap";
 
 const GroupInfoPage = () => {
 
@@ -14,6 +15,7 @@ const GroupInfoPage = () => {
 
     const [loading, setLoading] = useState<boolean>(true);
     const [error ,setError] = useState([]);
+    const [roomName, setRoomName] = useState<string>();
     
     IdleUser(); //Sets Idle Timer
 
@@ -24,10 +26,18 @@ const GroupInfoPage = () => {
             .then(res => {
                 setGroup(res)
                 setLoading(false)
+                
             })
             .catch(err => setError(err))
     }, [currentDate, groupId])
 
+    useEffect(() => {
+        var roomName = group?.bookedRoom?.name.toLowerCase();
+                setRoomName(roomName)
+        }
+      )
+
+    const name = roomName!;
 
     if (group?.bookedRoom === null) {
 
@@ -59,6 +69,7 @@ const GroupInfoPage = () => {
                                     <h2>Room: {group?.bookedRoom?.name}</h2>
                                     <h2>Booked By Team: {group?.name}</h2>
                                     <h2>{currentDate.toString()}</h2>
+                                <SmallerMap name={name}/>
                                 </Col>
                             }
                         </>
