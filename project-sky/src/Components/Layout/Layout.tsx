@@ -11,24 +11,16 @@ import { DateContext } from "../../shared/DateContext"
 import DatePicker from "../../shared/DatePicker"
 
 const Layout = () => {
-
   const {formatDate} = useContext(DateContext)
-
   const [showBackButton, setShowBackButton] = useState(false);
 
-  useEffect(() => {
-    if (window.location.href == "http://localhost:3000/" ||
-      window.location.href.includes("http://localhost:3000/admin")) {
-      setShowBackButton(false);
-    }
-  })
-
   const location = useLocation();
+
   useEffect(() => {
-    if (location.pathname.endsWith("/")) {
+    if (location.pathname == "/" ||
+      location.pathname.toString().startsWith("/admin/")) {
       setShowBackButton(false);
-    }
-    else {
+    } else {
       setShowBackButton(true);
     }
   })

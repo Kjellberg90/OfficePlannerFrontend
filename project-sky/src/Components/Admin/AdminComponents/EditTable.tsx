@@ -1,32 +1,23 @@
-import { group } from "console";
 import { useState, useEffect, Fragment, ChangeEvent, ChangeEventHandler } from "react";
 import Group from "../../Groups/Group";
 import RoomOverview from "../../Rooms/RoomOverview";
 
 const EditTable = (props: {currentDate: string}) => {
     const [rooms, setRooms] = useState<RoomOverview[]>([]);
-    const [date, setDate] = useState("2023-01-09")
     const [groups, setGroups] = useState<string[]>([]);
     const [error, setError] = useState("");
-    
+
     useEffect(() => {
-        setDate(props.currentDate)
         RoomOverviewFetch();
-    },[props.currentDate])
+        GroupFetch();
+    },[])
 
     const RoomOverviewFetch = () => {
-        fetch(`https://localhost:7054/api/Room/adminOverview/` + date)
+        fetch(`https://localhost:7054/api/Room/adminOverview/` + props.currentDate)
         .then(response => response.json())
         .then(res => { setRooms(res)})
     }
     
-    useEffect(() => {
-        RoomOverviewFetch();
-    },[date])
-    
-    useEffect(() => {
-        GroupFetch();
-    },[])
     const GroupFetch = () => {
         fetch("https://localhost:7054/api/Group/GetGroups")
         .then((res) => res.json())
@@ -52,8 +43,25 @@ const EditTable = (props: {currentDate: string}) => {
         setRooms(newRooms);
     }
 
+    const HandleReset = (e: ChangeEvent<HTMLFormElement>) => {
+        var roomList = new Array<RoomOverview>();
+
+        for (let i = 0; i < rooms.length; i++) {
+            
+            var room: RoomOverview = {
+                roomName: rooms[i].roomName,
+                groupNames: ["","","","",""]
+            }
+
+
+            roomList.push(room);            
+        }
+        setRooms(roomList);
+    }
+
     
     return (
+        <form id="testForm" onReset={HandleReset}>
         <table className="adminTable adminHomePageTable">
             <thead>
                 <tr className="adminTableHeader">
@@ -88,6 +96,7 @@ const EditTable = (props: {currentDate: string}) => {
                 )})}
             </tbody>
         </table>
+        </form>
     )
 }
 

@@ -1,33 +1,24 @@
-import { format } from "date-fns";
 import { Fragment, useEffect, useState } from "react";
 import Group from "../../Groups/Group";
 import RoomOverview from "../../Rooms/RoomOverview";
 
 const WeekOverview = (props: {inputDate: string}) => {
     const [rooms, setRooms] = useState([]);
-    const [date, setDate] = useState("2023-01-09")
-    
-    
+    const [groups, setGroups] = useState<string[]>([]);
+    const [error, setError] = useState("");
+
     useEffect(() => {
-        setDate(props.inputDate)
         RoomOverviewFetch();
+        GroupFetch();
     },[props.inputDate])
     
-    const RoomOverviewFetch = () => {
-        fetch(`https://localhost:7054/api/Room/adminOverview/` + date)
+    const RoomOverviewFetch = async () => {
+        await fetch(`https://localhost:7054/api/Room/adminOverview/` + props.inputDate)
         .then(response => response.json())
         .then(res => { setRooms(res)})
     }
     
-    useEffect(() => {
-        RoomOverviewFetch();
-    },[date])
-    
-    const [groups, setGroups] = useState<string[]>([]);
-    const [error, setError] = useState("");
-    useEffect(() => {
-        GroupFetch();
-    },[])
+
     const GroupFetch = () => {
         fetch("https://localhost:7054/api/Group/GetGroups")
         .then((res) => res.json())
@@ -35,7 +26,6 @@ const WeekOverview = (props: {inputDate: string}) => {
             var nameList: string[] = data.map((group: Group) => {
                 return group.name
             })
-            console.log(nameList);
             setGroups(nameList);
         })
         .catch((err) => {
