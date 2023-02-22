@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useContext, useEffect, useState} from "react";
 import Room from "./RoomInfo";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
@@ -10,6 +10,7 @@ import SingleUser from "./SingleUser";
 import { DeleteSingleBookingModal } from "./Modals/DeleteSingleBookingModal";
 import IdleUser from "../../shared/IdleUser/IdleUser";
 import { RoomMapModal } from "./Modals/RoomsMapModal";
+import { DateContext } from "../../shared/DateContext";
 
 const RoomsPage = () => {
 
@@ -22,8 +23,10 @@ const RoomsPage = () => {
     const [name, setname] = useState("");
     const [deleteUser, setdeleteUser] = useState({});
 
-    var currentDate: string = useOutletContext();
+    // var currentDate: string = useOutletContext();
     
+    const {currentDate} = useContext(DateContext)
+
 IdleUser(); //Sets Idle Timer
 
 const test = async () => {
@@ -111,7 +114,7 @@ const deleteSingleBooking = () => {
         <Container>
             <Stack gap={4}>            
                 {rooms.map((room: Room) => {return (
-                    <Row className="room-info-row d-flex align-items-center justify-content-center" key={room.name}>
+                    <Row className="d-flex align-items-center justify-content-center" key={room.name}>
                         <Col className="room-info-col text-center" md={6}>
                             <Row>
                                 <h2><b>{room.name}</b></h2>

@@ -1,32 +1,47 @@
-import { useState, useLayoutEffect, useEffect } from "react"
+import { useState, useLayoutEffect, useEffect, useContext } from "react"
 import { useLocation } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Stack } from 'react-bootstrap'
 import { useOutletContext } from 'react-router-dom';
 import Groups from './groupsInterface'
+import WeeklySchedule from "./weeklyscheduleInterface";
 import IdleUser from "../../shared/IdleUser/IdleUser";
 import SmallerMap from "../../shared/Map/SmallerMap";
+import { DateContext } from "../../shared/DateContext";
 
 const GroupInfoPage = () => {
 
     const [group, setGroup] = useState<Groups>();
-    const currentDate: Date = useOutletContext();
+    const [weeklySchedule, setweeklySchedule] = useState([]);
+    const [currentWeek, setcurrentWeek] = useState<Week>();
     const location = useLocation();
     var groupId: string = location.state.group.id
 
-    const [loading, setLoading] = useState<boolean>(true);
     const [error ,setError] = useState([]);
     const [roomName, setRoomName] = useState<string>();
     
+    interface Week {
+      week: number
+    }
+
+    const {currentDate} = useContext(DateContext)
+
     IdleUser(); //Sets Idle Timer
 
     useLayoutEffect(() => {
-
         fetch(`https://localhost:7054/api/Group/GroupInfo/${currentDate}&${groupId}`)
             .then(response => response.json())
             .then(res => {
                 setGroup(res)
-                setLoading(false)
-                
+            })
+            .catch(err => setError(err))
+    }, [currentDate, groupId])
+
+
+    useLayoutEffect(() => {
+      fetch(`https://localhost:7054/api/Group/GetWeeklyGroupSchedule?date=${currentDate}&groupId=${groupId}`)
+            .then(response => response.json())
+            .then(res => {
+                setweeklySchedule(res)
             })
             .catch(err => setError(err))
     }, [currentDate, groupId])
@@ -39,45 +54,68 @@ const GroupInfoPage = () => {
 
     const name = roomName!;
 
-    if (group?.bookedRoom === null) {
+
+
+    useLayoutEffect(() => {
+      fetch(`https://localhost:7054/api/Group/GetCurrentWeek?date=${currentDate}`)
+            .then(response => response.json())
+            .then(res => {
+                setcurrentWeek(res)
+            })
+            .catch(err => setError(err))
+    }, [currentDate])
 
         return (
-            <Container fluid style={{ height: "80vh", overflow: "hidden" }}>
-                <Row className="d-flex align-items-center justify-content-center text-center" style={{ height: "80vh", overflow: "hidden" }}>
-                    <>
-                        {loading ?
-                            <h1>Loading</h1> :
-                            <Col>
-                                <h1>No bookings could be found</h1>
-                            </Col>
-                        }
-                    </>
+          <Container>
+              <Stack gap={5}>
+                <Row className="d-flex align-items-center justify-content-center">
+                  <Col className="groupInfoCard text-center p-3" key={groupId} md={6}>
+                        <h2>{group?.name}</h2>
+                        {
+                            (() => {
+                              if (group?.bookedRoom === null){
+                                return (
+                                  <h5 className="UnbookedText"><i>Unbooked</i></h5>
+                                )
+                              } else {
+                                return(
+                                  <h5 className="BookedText">{group?.bookedRoom?.name}</h5>
+                                )
+                              }
+                            })()}
+                        <h6>{currentDate.toString()}</h6>
+                    <SmallerMap name={name}/>
+                  </Col>
                 </Row>
-            </Container>
-        )
-    }
-    else {
-
-        return (
-            <Container fluid style={{ height: "80vh", overflow: "hidden" }}>
-                <Row className="d-flex align-items-center justify-content-center text-center" style={{ height: "80vh", overflow: "hidden" }}>
-                    {
-                        <>
-                            {loading ?
-                                <h1>Loading</h1> :
-                                <Col className="groupInfoCard" key={groupId} md={6} lg="auto" xl="auto">
-                                    <h2>Room: {group?.bookedRoom?.name}</h2>
-                                    <h2>Booked By Team: {group?.name}</h2>
-                                    <h2>{currentDate.toString()}</h2>
-                                <SmallerMap name={name}/>
-                                </Col>
+                <Row className="d-flex align-items-center justify-content-center">
+                        <Col className="room-info-col text-center pt-3 pb-3" md={6}>
+                          <h2>Week {currentWeek?.week}</h2>
+                            {
+                              weeklySchedule.map((day: WeeklySchedule) => {
+                                return(
+                                  <div className="singleBookingUserDiv" key={day.date} >
+                                    {
+                            (() => {
+                              if (day.room === "Unbooked"){
+                                return (
+                                  <span className="d-flex justify-content-between align-items-center"><h4 className="singleBookingUserList">{day.date} </h4><h4 className="UnbookedText" >{day.room}</h4></span>
+                                )
+                              } else {
+                                return(
+                                  <span className="d-flex justify-content-between align-items-center"><h4 className="singleBookingUserList">{day.date} </h4><h4 className="BookedText" >{day.room}</h4></span>
+                                )
+                              }
+                            })()}
+                                  </div>
+                                );
+                              })
                             }
-                        </>
-                    }
-                </Row>
-            </Container>
+                        </Col>
+                        </Row>
+              </Stack>
+          </Container>
         )
     }
-}
+
 
 export default GroupInfoPage;
