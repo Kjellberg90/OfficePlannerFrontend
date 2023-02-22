@@ -12,8 +12,10 @@ for (let i = 0; room[i]; i++) {
     var color = (room[i] as SVGPathElement).style.fill="white";
 }
 
+
+
     return (
-        <Col style={{ height: 400, width: 700, paddingLeft: 100}}>
+        <Col className="smallMap" >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 strokeLinecap="round"
