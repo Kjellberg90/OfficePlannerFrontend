@@ -6,10 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareCaretLeft, faSquareCaretRight, faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons"
 import Col from 'react-bootstrap/Col'
 
-
 const DatePicker = () => {
 
-    const { formatDate, setFormatDate } = useContext(DateContext)
+    const { currentDate, setFormatDate } = useContext(DateContext)
     const [calDate] = useState<Date>(new Date());
     var [decrementDay] = useState<number>(-1);
     var [incrementDay] = useState<number>(1);
@@ -20,8 +19,8 @@ const DatePicker = () => {
     const { toggle, toggleView } = useContext(DateContext)
 
     useEffect(() => {
-        setFormatDate!(formatDate);
-    }, [formatDate])
+        setFormatDate!(currentDate);
+    }, [currentDate])
 
     useEffect(() => {
         if (window.location.href == "http://localhost:3000/" ||
@@ -86,7 +85,7 @@ const DatePicker = () => {
         <Col className="layoutColumn datepicker">
             {showToggleBtn ? toggleButton() : ""}
             <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
-            <input type="date" className="makeClickable" value={formatDate} onChange={handleChange} style={{ width: "220px", fontSize: "1rem", textAlign: "center", fontWeight: "bold", borderRadius: "10px" }} />
+            <input type="date" className="makeClickable" value={currentDate} onChange={handleChange} style={{ width: "220px", fontSize: "1rem", textAlign: "center", fontWeight: "bold", borderRadius: "10px" }} />
             <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" onClick={incrementDate} />
         </Col>
     )

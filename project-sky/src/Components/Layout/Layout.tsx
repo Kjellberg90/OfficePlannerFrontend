@@ -11,7 +11,6 @@ import { DateContext } from "../../shared/DateContext"
 import DatePicker from "../../shared/DatePicker"
 
 const Layout = () => {
-  const {formatDate} = useContext(DateContext)
   const [showBackButton, setShowBackButton] = useState(false);
 
   const location = useLocation();
@@ -37,7 +36,7 @@ const Layout = () => {
         <DatePicker />
         </Row>
       </Container >
-      <Outlet context={formatDate} />
+      <Outlet  />
       <div>
         {showBackButton ? <BackButton /> : ""}
       </div>
