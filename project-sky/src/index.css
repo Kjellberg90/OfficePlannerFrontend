@@ -399,10 +399,6 @@ input::-webkit-datetime-edit-fields-wrapper {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px 3px, rgba(0, 0, 0, 0.2) 0px 0px inset;
 }
 
-.debug {
-  fill:blue;
-}
-
 /* TEMP BREAKPOINTS  */
 
 @media only screen and (min-width: 1200px) {
