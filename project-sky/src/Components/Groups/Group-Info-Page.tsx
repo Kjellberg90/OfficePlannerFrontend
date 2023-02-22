@@ -15,7 +15,6 @@ const GroupInfoPage = () => {
     const location = useLocation();
     var groupId: string = location.state.group.id
 
-    const [loading, setLoading] = useState<boolean>(true);
     const [error ,setError] = useState([]);
     
     interface Week {
@@ -29,7 +28,6 @@ const GroupInfoPage = () => {
             .then(response => response.json())
             .then(res => {
                 setGroup(res)
-                setLoading(false)
             })
             .catch(err => setError(err))
     }, [currentDate, groupId])
@@ -39,7 +37,6 @@ const GroupInfoPage = () => {
             .then(response => response.json())
             .then(res => {
                 setweeklySchedule(res)
-                setLoading(false)
             })
             .catch(err => setError(err))
     }, [currentDate, groupId])
@@ -59,47 +56,40 @@ const GroupInfoPage = () => {
                 <Row className="d-flex align-items-center justify-content-center" >
                     {
                       <>
-                            {loading ?
-                                <h1>Loading</h1> :
-                                <Col className="room-info-col text-center pt-2 pb-2" md={6} key={groupId} >
-                                    <h2><i>{group?.name}</i></h2>
-                                    {
-                                            (() => {
-                                              if (group?.bookedRoom === null){
-                                                return (
-                                                  <h4>Unbooked</h4>
-                                                )
-                                              } else {
-                                                return(
-                                                  <h4>{group?.bookedRoom?.name}</h4>
-                                                )
-                                              }
-                                              })()}
-                                </Col>
-                            }
-                        </>
+                        <Col className="room-info-col text-center pt-2 pb-2" md={6} key={groupId} >
+                            <h2>{group?.name}</h2>
+                            {
+                            (() => {
+                              if (group?.bookedRoom === null){
+                                return (
+                                  <h4><i>Unbooked</i></h4>
+                                )
+                              } else {
+                                return(
+                                  <h4>{group?.bookedRoom?.name}</h4>
+                                )
+                              }
+                            })()}
+                        </Col>
+                      </>
                     }
                 </Row>
                 <Row className="d-flex align-items-center justify-content-center">
                     {
-                        <>
-                            {loading ?
-                                <h1>Loading</h1> :
-                                <Col className="room-info-col text-center pt-3 pb-3" md={6}>
-                                  <h2>Week {currentWeek?.week}</h2>
-                                    {
-                                      weeklySchedule.map((day: WeeklySchedule) => {
-                                        return(
-                                          <div className="d-flex justify-content-between align-items-center singleBookingUserDiv" key={day.date} >
-                                            <h4 className="singleBookingUserList">{day.date} </h4> <h4>{day.room}</h4>
-                                          </div>
-                                          
-                                        );
-                                      })
-                                    }
-                                </Col>
+                      <>
+                        <Col className="room-info-col text-center pt-3 pb-3" md={6}>
+                          <h2>Week {currentWeek?.week}</h2>
+                            {
+                              weeklySchedule.map((day: WeeklySchedule) => {
+                                return(
+                                  <div className="d-flex justify-content-between align-items-center singleBookingUserDiv" key={day.date} >
+                                    <h4 className="singleBookingUserList">{day.date} </h4> <h4>{day.room}</h4>
+                                  </div>
+                                );
+                              })
                             }
-                        </>
+                        </Col>
+                      </>
                     }
                 </Row>
               </Stack>
