@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Col, Container, Nav, Row } from "react-bootstrap";
 import { NavLink, Outlet } from "react-router-dom";
 
@@ -8,9 +9,6 @@ const AdminBooking = () => {
             <Row>
                 <Col className="col-2 adminBookingNav">
                     <Nav className="d-flex flex-column">
-                        <div>
-                            <h5>Overview</h5>
-                        </div>
                         <div>
                             <h5>Weeks</h5>
                             <ul>

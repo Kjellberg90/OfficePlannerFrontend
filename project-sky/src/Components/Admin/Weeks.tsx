@@ -3,15 +3,19 @@ import WeekTable from "./AdminComponents/WeekTable";
 import Week from "./Week";
 
 const Weeks = () => {
+    var dateArray = ["2023-01-09", "2023-01-16", "2023-01-23"]
+
     return (
-        <Fragment>
-            <h5>Week 1</h5>
-            <WeekTable inputDate="2023-01-09" />
-            <h5 className="pt-3">Week 2</h5>
-            <WeekTable inputDate="2023-01-16" />
-            <h5 className="pt-3">Week 3</h5>
-            <WeekTable inputDate="2023-01-23" />
-        </Fragment>
+        <div className="adminBookingWeeks">
+            {dateArray.map((date: string, i) => {
+                return(
+                    <Fragment>
+                        <h3>Week {i+1}</h3>
+                        <WeekTable inputDate={date} />
+                    </Fragment>
+                )
+            })}
+        </div>
     )
 }
 

@@ -242,11 +242,18 @@ input[type="text"].adminDateInput {
   display: flex;
   justify-content: center;
   gap: 0.75rem;
-  /* width: 7rem; */
 }
 
 .adminBookingNav {
   background-color: var(--secondary-color);
+  border-radius: 1rem;
+  padding: .75rem 1rem;
+  max-height: 20rem;
+}
+
+.adminBookingNav ul {
+  list-style: none;
+  padding-left: .5rem;
 }
 
 .adminBookingActions {
@@ -256,6 +263,16 @@ input[type="text"].adminDateInput {
 .adminTableBody input{
   width: 100%;
 }
+
+.adminBookingWeeks h3 {
+  color: var(--secondary-color);
+  padding-top: 1rem;
+}
+
+.adminBookingWeeks, h3:first-child {
+  padding: 0;
+}
+
 
 /* -------------- Datepicker Styling --------------------*/
 
@@ -470,6 +487,11 @@ input::-webkit-datetime-edit-fields-wrapper {
 .adminButton {
   background-color: #d7d2cb;
   border-radius: 3px;
+  height: 80%;
+}
+
+.adminButton:hover {
+  background-color: #f1eee9;
 }
 
 /* #region AdminTable*/

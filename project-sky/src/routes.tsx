@@ -33,7 +33,7 @@ const AppRouter = () => {
                         <Route path="groups" element={<AdminGroups />} />
                         <Route path="rooms" element={<AdminRooms />} />
                         <Route path="booking" element={<AdminBooking />} >
-                            <Route index path="weeks" element={<Weeks />} />
+                            <Route path="weeks" element={<Weeks />} />
                             <Route path="week" element={<Week />} />
                         </Route>
                     </Route>
