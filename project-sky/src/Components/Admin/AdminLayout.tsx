@@ -16,8 +16,7 @@ const AdminLayout = () => {
                             <NavLink to="home" className="linkItem">Home</NavLink>
                             <NavLink to="groups" className="linkItem">Groups</NavLink>
                             <NavLink to="rooms" className="linkItem">Rooms</NavLink>
-                            <NavLink to="booking" className="linkItem">Booking</NavLink>
-                            
+                            <NavLink to="booking/weeks" className="linkItem">Booking</NavLink>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
