@@ -38,6 +38,8 @@ const test = async () => {
 
     useEffect(() => {
         test()
+        setisOpenBook(NaN)
+        setisOpenDrop(NaN)
     },[currentDate])
 
 
