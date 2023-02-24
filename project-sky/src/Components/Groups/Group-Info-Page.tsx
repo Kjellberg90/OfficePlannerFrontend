@@ -21,6 +21,7 @@ const GroupInfoPage = () => {
     
     interface Week {
       week: number
+      day:string
     }
 
     var {currentDate} = useContext(DateContext)
@@ -66,7 +67,7 @@ const GroupInfoPage = () => {
       if(currentDate === "") {
         currentDate =new Date().toDateString();
       }
-      fetch(`https://localhost:7054/api/Group/GetCurrentWeek?date=${currentDate}`)
+      fetch(`https://localhost:7054/api/Group/GetCurrentWeekAndDay?date=${currentDate}`)
             .then(response => response.json())
             .then(res => {
                 setcurrentWeek(res)
@@ -92,7 +93,7 @@ const GroupInfoPage = () => {
                                 )
                               }
                             })()}
-                        <h6>{currentDate.toString()}</h6>
+                        <h5>{currentWeek?.day}</h5>
                     <SmallerMap name={name}/>
                   </Col>
                 </Row>
