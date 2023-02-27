@@ -121,13 +121,9 @@ const AdminRooms = () => {
 
     return (
         <Container>
-            <Row className="mb-3">
-                <Col className="d-flex justify-content-between">
-                    <h3 className="headerSecondaryColor">Rooms</h3>
-                </Col>
-            </Row>
             <Row>
                 <Col className="col-md-12 col-lg-6">
+                    <h3 className="headerSecondaryColor">Rooms</h3>
                     <table className="adminTable adminGroupsTable">
                         <thead>
                             <tr className="adminTableHeader">
@@ -158,10 +154,6 @@ const AdminRooms = () => {
                             )})}
                         </tbody>
                     </table>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
                     <button type="button" className="btn btn-primary mt-3 mb-3" onClick={() => setShowAddRoom(true)}>Add Room</button>
                 </Col>
             </Row>

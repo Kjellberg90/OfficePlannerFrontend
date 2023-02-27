@@ -25,12 +25,16 @@ const RoomsPage = () => {
 
     // var currentDate: string = useOutletContext();
     
-    const {currentDate} = useContext(DateContext)
+    var {currentDate} = useContext(DateContext)
 
 IdleUser(); //Sets Idle Timer
 
 const test = async () => {
-        await fetch(`https://localhost:7054/api/Room/get-rooms-info?date=` + currentDate)
+  if(currentDate === "") {
+    currentDate =new Date().toDateString();
+  }
+  await fetch(`https://localhost:7054/api/Room/get-rooms-info?date=` + currentDate)
+  
         .then(response => response.json())
         .then(res => { setRooms(res)})
         .catch(err => setError(err))
@@ -38,6 +42,8 @@ const test = async () => {
 
     useEffect(() => {
         test()
+        setisOpenBook(NaN)
+        setisOpenDrop(NaN)
     },[currentDate])
 
 

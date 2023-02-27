@@ -21,13 +21,17 @@ const GroupInfoPage = () => {
     
     interface Week {
       week: number
+      day:string
     }
 
-    const {currentDate} = useContext(DateContext)
+    var {currentDate} = useContext(DateContext)
 
     IdleUser(); //Sets Idle Timer
 
     useLayoutEffect(() => {
+      if(currentDate === "") {
+        currentDate = new Date().toDateString();
+      }
         fetch(`https://localhost:7054/api/Group/GroupInfo/${currentDate}&${groupId}`)
             .then(response => response.json())
             .then(res => {
@@ -38,6 +42,9 @@ const GroupInfoPage = () => {
 
 
     useLayoutEffect(() => {
+      if(currentDate === "") {
+        currentDate =new Date().toDateString();
+      }
       fetch(`https://localhost:7054/api/Group/GetWeeklyGroupSchedule?date=${currentDate}&groupId=${groupId}`)
             .then(response => response.json())
             .then(res => {
@@ -57,7 +64,10 @@ const GroupInfoPage = () => {
 
 
     useLayoutEffect(() => {
-      fetch(`https://localhost:7054/api/Group/GetCurrentWeek?date=${currentDate}`)
+      if(currentDate === "") {
+        currentDate =new Date().toDateString();
+      }
+      fetch(`https://localhost:7054/api/Group/GetCurrentWeekAndDay?date=${currentDate}`)
             .then(response => response.json())
             .then(res => {
                 setcurrentWeek(res)
@@ -83,7 +93,7 @@ const GroupInfoPage = () => {
                                 )
                               }
                             })()}
-                        <h6>{currentDate.toString()}</h6>
+                        <h5>{currentWeek?.day}</h5>
                     <SmallerMap name={name}/>
                   </Col>
                 </Row>
