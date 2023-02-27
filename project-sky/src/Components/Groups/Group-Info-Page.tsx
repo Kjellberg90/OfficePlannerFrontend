@@ -1,12 +1,12 @@
 import { useState, useLayoutEffect, useEffect, useContext } from "react"
 import { useLocation } from 'react-router-dom';
 import { Container, Row, Col, Stack } from 'react-bootstrap'
-import { useOutletContext } from 'react-router-dom';
 import Groups from './groupsInterface'
 import WeeklySchedule from "./weeklyscheduleInterface";
 import IdleUser from "../../shared/IdleUser/IdleUser";
 import SmallerMap from "../../shared/Map/SmallerMap";
 import { DateContext } from "../../shared/DateContext";
+import { fetchGroupInfo, fetchWeekAndDay, fetchWeeklyGroupSchedule } from "../../shared/Fetch/GroupFetches";
 
 const GroupInfoPage = () => {
 
@@ -16,7 +16,6 @@ const GroupInfoPage = () => {
     const location = useLocation();
     var groupId: string = location.state.group.id
 
-    const [error ,setError] = useState([]);
     const [roomName, setRoomName] = useState<string>();
     
     interface Week {
@@ -28,54 +27,43 @@ const GroupInfoPage = () => {
 
     IdleUser(); //Sets Idle Timer
 
-    useLayoutEffect(() => {
-      if(currentDate === "") {
-        currentDate = new Date().toDateString();
-      }
-        fetch(`https://localhost:7054/api/Group/GroupInfo/${currentDate}&${groupId}`)
-            .then(response => response.json())
-            .then(res => {
-                setGroup(res)
-            })
-            .catch(err => setError(err))
-    }, [currentDate, groupId])
+    async function getGroupInfo(currentDate: string, groupId: string) {
+      const response: any = await fetchGroupInfo(currentDate, groupId)
+      setGroup(response)
+    }
 
+    useEffect(() => {
+      getGroupInfo(currentDate, groupId)
+    }, [currentDate])
 
-    useLayoutEffect(() => {
-      if(currentDate === "") {
-        currentDate =new Date().toDateString();
-      }
-      fetch(`https://localhost:7054/api/Group/GetWeeklyGroupSchedule?date=${currentDate}&groupId=${groupId}`)
-            .then(response => response.json())
-            .then(res => {
-                setweeklySchedule(res)
-            })
-            .catch(err => setError(err))
-    }, [currentDate, groupId])
+    async function getWeeklyRoomSchedule(currentDate: string, groupId: string) {
+      const response: any = await fetchWeeklyGroupSchedule(currentDate, groupId)
+      setweeklySchedule(response)
+    }
 
+    useEffect(() => {
+      getWeeklyRoomSchedule(currentDate, groupId)
+    }, [currentDate])
+
+    
+    async function getWeekAndDay(currentDate: string) {
+      const response: any = await fetchWeekAndDay(currentDate)
+      setcurrentWeek(response)
+    }
+    
+    useEffect(() => {
+      getWeekAndDay(currentDate)
+    }, [currentDate])
+    
     useEffect(() => {
         var roomName = group?.bookedRoom?.name.toLowerCase();
                 setRoomName(roomName)
         }
       )
-
+  
     const name = roomName!;
-
-
-
-    useLayoutEffect(() => {
-      if(currentDate === "") {
-        currentDate =new Date().toDateString();
-      }
-      fetch(`https://localhost:7054/api/Group/GetCurrentWeekAndDay?date=${currentDate}`)
-            .then(response => response.json())
-            .then(res => {
-                setcurrentWeek(res)
-            })
-            .catch(err => setError(err))
-    }, [currentDate])
-
         return (
+
           <Container>
               <Stack gap={5}>
                 <Row className="d-flex align-items-center justify-content-center">
