@@ -3,7 +3,6 @@ import Room from "./RoomInfo";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
 import Stack from "react-bootstrap/esm/Stack";
-import { useOutletContext } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faXmark, faTrash } from "@fortawesome/free-solid-svg-icons"
 import SingleUser from "./SingleUser";
@@ -22,8 +21,6 @@ const RoomsPage = () => {
     const [id, setid] = useState<number>();
     const [name, setname] = useState("");
     const [deleteUser, setdeleteUser] = useState({});
-
-    // var currentDate: string = useOutletContext();
     
     var {currentDate} = useContext(DateContext)
 

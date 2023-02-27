@@ -6,21 +6,22 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Groups from './groupsInterface'
 import IdleUser from '../../shared/IdleUser/IdleUser';
-
+import { fetchGroups } from '../../shared/Fetch/GroupFetches';
 
 const Group = () => {  
     
   const [groupNames, setGroups] = useState([]);
-  const [error , setError] = useState([]);
 
   IdleUser(); //Sets Idle Timer
       
-  useEffect(() => {
-    fetch(`https://localhost:7054/api/Group/GetGroups`)
-          .then(response => response.json())
-          .then(res => setGroups(res))
-          .catch(err => setError(err))
-  },[])
+async function GetGroups() {
+  const response: any = await fetchGroups()
+  setGroups(response)
+}
+
+useEffect(() => {
+  GetGroups()
+}, [])
 
   return (
     <Container>
