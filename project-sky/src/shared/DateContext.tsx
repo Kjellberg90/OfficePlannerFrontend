@@ -7,7 +7,7 @@ interface IDateContext {
     toggle: boolean,
     toggleView?: () => void,
     currentDate: string,
-    setFormatDate?: (activeDate: string) => void,
+    setcurrentDate?: (activeDate: string) => void,
 }
 
 const defaultState = {
@@ -19,7 +19,7 @@ export const DateContext = createContext<IDateContext>(defaultState);
 
 export const DateProvider = ({children}: {children: ReactNode})  => {
     const [toggle, setToggle] = useState(defaultState.toggle);
-    const [currentDate, setFormatDate] = useState(format(new Date, "yyyy-MM-dd"))
+    const [currentDate, setcurrentDate] = useState(format(new Date, "yyyy-MM-dd"))
 
     const toggleView = () => {
         setToggle(!toggle)
@@ -29,7 +29,7 @@ export const DateProvider = ({children}: {children: ReactNode})  => {
         <DateContext.Provider
         value={{
             currentDate,
-            setFormatDate,
+            setcurrentDate,
             toggle,
             toggleView,
         }}>
