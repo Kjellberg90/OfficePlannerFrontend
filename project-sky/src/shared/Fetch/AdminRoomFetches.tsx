@@ -18,7 +18,6 @@ export const fetchAdminRooms = () => {
   return result
 }
 
-
 export const fetchDeleteRoom = (data : any) => {
   var result = axios.delete(`https://localhost:7054/api/Room/adminDeleteRooms`, {
     headers: {
