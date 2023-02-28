@@ -3,6 +3,9 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { AddRoomModal, UpdateRoomModal, DeleteRoomModal } from "./AdminModals";
+import { fetchAdminRooms, fetchDeleteRoom, fetchPostNewRooom, fetchPutRoom } from "../../shared/Fetch/AdminRoomFetches";
+
+
 
 interface AdminRoom {
   id: number;
@@ -17,40 +20,21 @@ const AdminRooms = () => {
     const [showAddRoom, setShowAddRoom] = useState(false);
     const [showUppdateRoom, setShowUpdateRoom] = useState(false);
     const [showDeleteRoom, setShowDeleteRoom] = useState(false);
-        
-    const FetchRooms = () => {
-        fetch("https://localhost:7054/api/Room/adminGetRooms")
-        .then(res => res.json())
-        .then(res => {
-            setRooms(res);
-        })
-        .catch(error => setError(error))
+    
+    async function GetRooms() {
+      const response: any = await fetchAdminRooms()
+      setRooms(response)
     }
     
     useEffect(() => {
-        FetchRooms()
+        GetRooms()
     }, [])
 
-    const DeleteRoom = () => {
+    async function DeleteRoom() {
       const data = currentRoom
-      fetch(`https://localhost:7054/api/Room/adminDeleteRooms`,{
-            method: 'DELETE',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then((response) => {
-          if(!response.ok) {
-            throw new Error(response.status.toString())
-          }
-        })
-        .then(() => FetchRooms())
-        .catch((error) => {
-            console.log("error", error)
-        })
-    }
+      await fetchDeleteRoom(data)
+        .then(() => GetRooms())
+    } 
     
     const [newValues, setNewValues] = useState<{name: string | undefined; seats: number | undefined; }>
         ({name: "", 
@@ -85,39 +69,15 @@ const AdminRooms = () => {
   }, [currentRoom])
 
 
-  const UpdateRoom = () => {
-    fetch(`https://localhost:7054/api/Room/adminroomEditRoom?roomId=${currentRoom?.id}`,{
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newValues)
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log("Success:", data);
-    })
-    .catch((err) => {
-        setError(err);
-        console.log("Error:", error);
-    })
+async function UpdateRoom() {
+  const roomId: any = currentRoom?.id
+  await fetchPutRoom(newValues, roomId)
 }
 
-  const AddRoom = () => {
-      fetch("https://localhost:7054/api/Room/adminAddRooms", {
-          method: "POST",
-          headers: {
-              "Accept": "application/json",
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify(newValues)
-      })
-      .then((response) => {
-          if(!response.ok) throw new Error(response.status.toString());
-      })
-      .catch((error) => {console.log("Error", error)}
-      )
-  }
+async function AddRoom() {
+  await fetchPostNewRooom(newValues)
+    .then(() => GetRooms())
+}
 
     return (
         <Container>

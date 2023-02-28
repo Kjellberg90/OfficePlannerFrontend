@@ -62,7 +62,6 @@ const AdminGroups = () => {
     }    
 
     async function UpdateGroup() {
-      debugger
       const groupId: any = currentGroup?.id
       if(newValues.division === undefined || newValues.division === null || newValues.division === ""){
         setNewValues({

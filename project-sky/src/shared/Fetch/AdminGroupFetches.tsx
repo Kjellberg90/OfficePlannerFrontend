@@ -37,7 +37,6 @@ export const fetchDeleteGroup = (currentGroupId: number) => {
 }
 
 export const fetchPutGroup = (data: any, groupId: number) => {
-  debugger
   var result = axios.put(`https://localhost:7054/api/Group/UpdateGroup/${groupId}`, data, {
     headers: {
       "Content-Type": "application/json"
