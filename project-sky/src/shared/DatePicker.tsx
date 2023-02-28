@@ -8,55 +8,55 @@ import Col from 'react-bootstrap/Col'
 
 const DatePicker = () => {
 
-    const { currentDate, setFormatDate } = useContext(DateContext)
-    const [calDate] = useState<Date>(new Date());
-    var [decrementDay] = useState<number>(-1);
-    var [incrementDay] = useState<number>(1);
-    var [decrementWeek] = useState<number>(-6);
-    var [incrementWeek] = useState<number>(6)
-    
+    const { currentDate, setcurrentDate } = useContext(DateContext)    
     const [showToggleBtn, setShowToggleBtn] = useState(false);
     const { toggle, toggleView } = useContext(DateContext)
 
     useEffect(() => {
-        setFormatDate!(currentDate);
+      setcurrentDate!(currentDate);
     }, [currentDate])
 
     useEffect(() => {
-        if (window.location.href == "http://localhost:3000/" ||
+        if (window.location.href === "http://localhost:3000/" ||
             window.location.href.includes("http://localhost:3000/admin")) {
             setShowToggleBtn(false);
         }
-        else if (window.location.href == "http://localhost:3000/info") {
+        else if (window.location.href === "http://localhost:3000/info") {
             setShowToggleBtn(true);
         }
     })
 
     const decrementDate = (e: React.MouseEvent<SVGSVGElement>) => {
+      var calDate: Date = new Date()
         if (!toggle) {
-            calDate.setDate(calDate.getDate() + decrementWeek++)
-            const formatDate = format(calDate, "yyyy-MM-dd")
-            setFormatDate!(formatDate)
+          calDate = new Date(Date.parse(currentDate) - 86400000 * 7 )
+          const formatDate = format(calDate, "yyyy-MM-dd")
+          setcurrentDate!(formatDate)
         }
-        calDate.setDate(calDate.getDate() + decrementDay++)
-        const formatDate = format(calDate, "yyyy-MM-dd")
-        setFormatDate!(formatDate)
+        else {
+          calDate = new Date(Date.parse(currentDate) - 86400000 )
+          const formatDate = format(calDate, "yyyy-MM-dd")
+          setcurrentDate!(formatDate)
+        }
     }
 
     const incrementDate = (e: React.MouseEvent<SVGSVGElement>) => {
+        var calDate: Date = new Date()
         if (!toggle) {
-            const formatDate = format(calDate, "yyyy-MM-dd")
-            calDate.setDate(calDate.getDate() + incrementWeek++)
-            setFormatDate!(formatDate)
+          calDate = new Date(Date.parse(currentDate) + 86400000 * 7 )
+          const formatDate = format(calDate, "yyyy-MM-dd")
+          setcurrentDate!(formatDate)
         }
-        calDate.setDate(calDate.getDate() + incrementDay++)
-        const formatDate = format(calDate, "yyyy-MM-dd")
-        setFormatDate!(formatDate)
+        else {
+          calDate = new Date(Date.parse(currentDate) + 86400000 )
+          const formatDate = format(calDate, "yyyy-MM-dd")
+          setcurrentDate!(formatDate)
+        }
     }
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { value } = e.target;
-        setFormatDate!(value);
+        setcurrentDate!(value);
     };
 
     const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
