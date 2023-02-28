@@ -96,7 +96,7 @@ async function AddRoom() {
                         <tbody className="adminTableBody">
                             {rooms.map((room: AdminRoom) => { 
                                 return(
-                                <tr key={room.name}>
+                                <tr key={room.id}>
                                     <td>{room.id}</td>
                                     <td>{room.name}</td>
                                     <td>{room.seats}</td>
