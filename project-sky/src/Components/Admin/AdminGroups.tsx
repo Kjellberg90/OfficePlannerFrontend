@@ -52,7 +52,7 @@ const AdminGroups = () => {
             ...newValues,
             ["name"]: currentGroup?.name,
             ["groupSize"]: currentGroup?.groupSize,
-            ["division"]: currentGroup?.division
+            ["division"]: currentGroup?.department
         })
     }, [currentGroup])
 
@@ -66,7 +66,7 @@ const AdminGroups = () => {
       if(newValues.division === undefined || newValues.division === null || newValues.division === ""){
         setNewValues({
             ...newValues,
-            division: currentGroup?.division
+            division: currentGroup?.department
         })
     }
       await fetchPutGroup(newValues, groupId)
@@ -87,7 +87,7 @@ const AdminGroups = () => {
         var newArr: Array<string[]> = [];
 
         groups.map((group: Group) => {
-            switch(group.division){
+            switch(group.department){
                 case "A":
                     divisionA.push(group.name)
                     break;
@@ -206,7 +206,7 @@ const AdminGroups = () => {
                 onSubmit={UpdateGroup}
                 groupname={currentGroup?.name}
                 groupsize={currentGroup?.groupSize}
-                groupdivision={currentGroup?.division}
+                groupdivision={currentGroup?.department}
             />
             <DeleteGroupModal 
                 show={showDeleteGroup}
