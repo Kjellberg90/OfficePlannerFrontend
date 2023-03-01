@@ -15,7 +15,6 @@ interface AdminRoom {
 
 const AdminRooms = () => {
     const [rooms, setRooms] = useState<AdminRoom[]>([]);
-    const [error, setError] = useState();
     const [currentRoom, setCurrentRoom] = useState<AdminRoom>();
     const [showAddRoom, setShowAddRoom] = useState(false);
     const [showUppdateRoom, setShowUpdateRoom] = useState(false);

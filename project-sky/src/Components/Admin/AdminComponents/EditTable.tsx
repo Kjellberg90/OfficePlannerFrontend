@@ -1,35 +1,35 @@
-import { useState, useEffect, Fragment, ChangeEvent, ChangeEventHandler } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import Group from "../../Groups/Group";
 import RoomOverview from "../../Rooms/RoomOverview";
+import { fetchGroupsOverview } from "../../../shared/Fetch/AdminHomeFetches";
+import { fetchGroups } from "../../../shared/Fetch/AdminGroupFetches";
 
 const EditTable = (props: {currentDate: string}) => {
     const [rooms, setRooms] = useState<RoomOverview[]>([]);
     const [groups, setGroups] = useState<string[]>([]);
-    const [error, setError] = useState("");
 
     useEffect(() => {
         RoomOverviewFetch();
         GroupFetch();
     },[])
 
-    const RoomOverviewFetch = () => {
-        fetch(`https://localhost:7054/api/Room/adminOverview/` + props.currentDate)
-        .then(response => response.json())
-        .then(res => { setRooms(res)})
-    }
     
-    const GroupFetch = () => {
-        fetch("https://localhost:7054/api/Group/GetGroups")
-        .then((res) => res.json())
+
+    const RoomOverviewFetch = async () => {
+        await fetchGroupsOverview(props.currentDate)
         .then((data) => {
-            var nameList: string[] = data.map((group: Group) => {
-                return group.name
+            setRooms(data)
+        })
+    }
+
+    const GroupFetch = async () => {
+        await fetchGroups()
+            .then((data) => {
+                var nameList: string[] = data.map((group: Group) => {
+                    return group.name
+                })
+                setGroups(nameList)
             })
-            setGroups(nameList);
-        })
-        .catch((err) => {
-            setError(err);
-        })
     }
 
     const HandleChange = (e: ChangeEvent<HTMLSelectElement>, roomIndex: number, dayIndex: number) => {

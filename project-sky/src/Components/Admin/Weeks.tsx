@@ -9,7 +9,7 @@ const Weeks = () => {
         <div className="adminBookingWeeks">
             {dateArray.map((date: string, i) => {
                 return(
-                    <Fragment>
+                    <Fragment key={i}>
                         <h3>Week {i+1}</h3>
                         <WeekTable inputDate={date} />
                     </Fragment>
