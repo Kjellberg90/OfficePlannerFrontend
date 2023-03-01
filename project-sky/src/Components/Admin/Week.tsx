@@ -9,7 +9,6 @@ const Week = () => {
     const [useEdit, setUseEdit] = useState(false);
 
     const date = useLocation().state.week;
-    console.log("Week/week", date)
 
     return (
         <Container>
