@@ -1,4 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
+import { fetchGroupsOverview } from "../../../shared/Fetch/AdminHomeFetches";
+import { fetchGroups } from "../../../shared/Fetch/GroupFetches";
 import Group from "../../Groups/Group";
 import RoomOverview from "../../Rooms/RoomOverview";
 
@@ -12,24 +14,23 @@ const WeekOverview = (props: {inputDate: string}) => {
         GroupFetch();
     },[props.inputDate])
     
-    const RoomOverviewFetch = async () => {
-        await fetch(`https://localhost:7054/api/Room/adminOverview/` + props.inputDate)
-        .then(response => response.json())
-        .then(res => { setRooms(res)})
-    }
-    
 
-    const GroupFetch = () => {
-        fetch("https://localhost:7054/api/Group/GetGroups")
-        .then((res) => res.json())
+    async function RoomOverviewFetch() {
+      const response: any = await fetchGroupsOverview(props.inputDate)
+      setRooms(response)
+    }
+
+  useEffect(() => {
+      RoomOverviewFetch();
+  },[])
+
+    const GroupFetch = async () => {
+        await fetchGroups()
         .then((data) => {
             var nameList: string[] = data.map((group: Group) => {
                 return group.name
             })
             setGroups(nameList);
-        })
-        .catch((err) => {
-            setError(err);
         })
     }
 

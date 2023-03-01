@@ -10,6 +10,7 @@ import { DeleteSingleBookingModal } from "./Modals/DeleteSingleBookingModal";
 import IdleUser from "../../shared/IdleUser/IdleUser";
 import { RoomMapModal } from "./Modals/RoomsMapModal";
 import { DateContext } from "../../shared/DateContext";
+import { fetchRooms, fetchSingleBookings, fetchDeleteSingleBookings, fetchPostSingleBookings } from "../../shared/Fetch/RoomFetches";
 
 const RoomsPage = () => {
 
@@ -26,32 +27,21 @@ const RoomsPage = () => {
 
 IdleUser(); //Sets Idle Timer
 
-const test = async () => {
-  if(currentDate === "") {
-    currentDate =new Date().toDateString();
-  }
-  await fetch(`https://localhost:7054/api/Room/get-rooms-info?date=` + currentDate)
-  
-        .then(response => response.json())
-        .then(res => { setRooms(res)})
-        .catch(err => setError(err))
+    async function getRoomInfo() {
+      const response: any = await fetchRooms(currentDate)
+      setRooms(response)
     }
 
     useEffect(() => {
-        test()
+        getRoomInfo()
         setisOpenBook(NaN)
         setisOpenDrop(NaN)
     },[currentDate])
 
-
-    const Fetchusers = async (roomId: number) =>{
-      await fetch(`https://localhost:7054/api/Booking/GetSingleBookings?date=${currentDate}&roomId=${roomId}`)
-      .then((response) => response.json())
-      .then (res => {setUsers(res)}) 
-      .catch((error) => {
-        console.log("error", error);
-      })
-    }
+async function getSingleBookings(roomId: number){
+  const response: any = await fetchSingleBookings(currentDate, roomId)
+  setUsers(response)
+}
 
     const handleOpenBook = (roomId: number) => {
       setisOpenBook(roomId)
@@ -61,7 +51,7 @@ const test = async () => {
     const handleOpenDrop = (roomId: number) => {
       setisOpenDrop(roomId)
       setisOpenBook(NaN)
-      Fetchusers(roomId)
+      getSingleBookings(roomId)
     }
 
     const handleOpenMap = () => {
@@ -71,46 +61,22 @@ const test = async () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         setisOpenBook(NaN)       
-        const data ={ "roomId": id, "date": currentDate, "name": name}
-        fetch("https://localhost:7054/api/Booking/SingleBooking", {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        })
-        .then((response) => {
-          if(!response.ok) throw new Error(response.status.toString());
-        })
-        .then(() => test())
-        .catch((error) => {
-          console.log("error", error);
-        })
-
+        
+        postSingleBooking()
       }
 
     const [show, setShow] = useState(false);
     const [showMap, setShowMap] = useState(false);
 
-const deleteSingleBooking = () => {  
-  const data = deleteUser
-  fetch("https://localhost:7054/api/Booking/DeleteSingleBooking", {
-    method: 'DELETE',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  .then((response) => {
-    if(!response.ok) throw new Error(response.status.toString());
-  })
-  .then(() => test())
-  .catch((error) => {
-    console.log("error", error);
-  })
+const postSingleBooking = () => {
+  const postData ={ "roomId": id, "date": currentDate, "name": name}
+  fetchPostSingleBookings(postData)
+    .then(() => getRoomInfo())
+}
 
+const deleteSingleBooking = () => {
+  fetchDeleteSingleBookings(deleteUser)
+    .then(() => getRoomInfo())
 }
 
     return (   
@@ -213,7 +179,7 @@ const deleteSingleBooking = () => {
             </Stack>
             <DeleteSingleBookingModal
                 show={show}
-                onHide={() => {test(); setShow(false); setisOpenDrop(NaN);}}
+                onHide={() => {getRoomInfo(); setShow(false); setisOpenDrop(NaN);}}
                 user={deleteUser}
                 delete={() => {deleteSingleBooking(); setShow(false); setisOpenDrop(NaN)}}
             />

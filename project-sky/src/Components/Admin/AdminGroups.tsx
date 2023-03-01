@@ -4,11 +4,12 @@ import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Group from "../Groups/Group";
 import { AddGroupModal, UpdateGroupModal, DeleteGroupModal } from "./AdminModals";
+import { fetchGroups } from "../../shared/Fetch/GroupFetches";
+import { fetchDeleteGroup, fetchPostNewGroup, fetchPutGroup } from "../../shared/Fetch/AdminGroupFetches";
 
 
 const AdminGroups = () => {
     const [groups, setGroups] = useState<Group[]>([]);
-    const [error, setError] = useState();
     const [currentGroup, setCurrentGroup] = useState<Group>();
     const [newValues, setNewValues] = useState<{name: string | undefined; groupSize: number | undefined; division: string | undefined}>
         ({name: "", 
@@ -18,17 +19,13 @@ const AdminGroups = () => {
     const [showUppdateGroup, setShowUpdateGroup] = useState(false);
     const [showDeleteGroup, setShowDeleteGroup] = useState(false);
         
-    const FetchGroups = () => {
-        fetch("https://localhost:7054/api/Group/GetGroups")
-        .then(res => res.json())
-        .then(res => {
-            setGroups(res);
-        })
-        .catch(error => setError(error))
+    async function GetGroups() {
+      const response: any = await fetchGroups()
+      setGroups(response)
     }
     
     useEffect(() => {
-        FetchGroups()
+        GetGroups()
     }, [])
 
     const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -59,73 +56,27 @@ const AdminGroups = () => {
         })
     }, [currentGroup])
 
-    const AddGroup = () => {
-        
-        fetch("https://localhost:7054/api/Group/AddGroup", {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newValues)
-        })
-        .then((response) => {
-            if(!response.ok) throw new Error(response.status.toString());
-        })
-        .catch((error) => {console.log("Error", error)}
-        )
-    }
+    async function PostGroup() {
+      const data = newValues
+      await fetchPostNewGroup(data)
+    }    
 
-    const UpdateGroup = () => {
-        debugger
-
-        if(newValues.division === undefined || newValues.division === null || newValues.division === ""){
-            setNewValues({
-                ...newValues,
-                division: currentGroup?.division
-            })
-        }
-
-        fetch(`https://localhost:7054/api/Group/UpdateGroup/${currentGroup?.id}`,{
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newValues)
-        })
-        // .then((response) => response.json())
-        .then((data) => {
-            console.log("Success:", data);
-        })
-        .catch((err) => {
-            setError(err);
-            console.log("Error:", error);
+    async function UpdateGroup() {
+      const groupId: any = currentGroup?.id
+      if(newValues.division === undefined || newValues.division === null || newValues.division === ""){
+        setNewValues({
+            ...newValues,
+            division: currentGroup?.division
         })
     }
+      await fetchPutGroup(newValues, groupId)
+    }   
 
-    const DeleteGroup = async () => {
-        await fetch(`https://localhost:7054/api/Group/DeleteGroup/${currentGroup?.id}`,{
-            method: "DELETE"
-        })
-        // .then((response) => response.json())  -----------------------  FRÅGA NÄR DU ÄR TILLBAKA PÅ PLATS!!!  ----------------------------
-        // .then((res) => {
-        //     setShowDeleteGroup(false);
-        //     setCurrentGroup({
-        //         "id": 0,
-        //         "name": "",
-        //         "groupSize": 0,
-        //         "division" : ""
-        //     });
-        //     console.log(res.status) 
-        //     if(!res.ok) {
-        //        throw new Error(res.status)
-        //     }
-        // })
-        .then(() => FetchGroups())
-        .catch((error) => {
-            console.log("error", error)
-        })
-    }
+    async function DeleteGroup() {
+      const Id: any = currentGroup?.id
+      await fetchDeleteGroup(Id)
+        .then(() => GetGroups())
+    } 
 
     const GetOrderedGroups = () => {
         var divisionA: string[] = []
@@ -246,7 +197,7 @@ const AdminGroups = () => {
                 show={showAddGroup}
                 onHide={() => {setShowAddGroup(false)}}
                 updatedvalue={HandleChange}
-                onSubmit={AddGroup}
+                onSubmit={PostGroup}
             />
             <UpdateGroupModal 
                 show={showUppdateGroup}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom"
+import { fetchLogin } from "../../shared/Fetch/LoginFetch";
 
 const LoginPage = () => {
   
@@ -18,32 +19,16 @@ const LoginPage = () => {
   }
   
   const navigate= useNavigate();
-  const login = (e: React.FormEvent<HTMLFormElement>) => {
+
+  async function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     const data ={ "userName": formData.name, "password": formData.password}
-    
-    
 
-    fetch("https://localhost:7054/api/User/Login", {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        })
-        .then((response) => {
-          if (response.status === 200) {
-            sessionStorage.setItem("user", "true")
-          } else {
-            alert("Acess Denied")
-          }
-        })
-        .then(() => navigate('/admin/home')
-        )
-  } 
+      await fetchLogin(data)
+      .then(() => navigate('/admin/home'))
+  }
 
+ 
   return (
     <Container>
       <Row className='d-flex align-items-center justify-content-center'>

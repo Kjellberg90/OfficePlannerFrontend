@@ -3,21 +3,18 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useOutletContext } from 'react-router-dom';
 import RoomOverview from "../Rooms/RoomOverview";
 import { format } from "date-fns";
+import { fetchGroupsOverview } from "../../shared/Fetch/AdminHomeFetches";
 
 const AdminHomePage = () => {
 
     const [rooms, setRooms] = useState([]);
-    var currentDate: string = useOutletContext();
 
     const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"))
 
-    
-    const RoomOverviewFetch = () => {
-        fetch(`https://localhost:7054/api/Room/adminOverview/` + date)
-        .then(response => response.json())
-        .then(res => { setRooms(res);
-            console.log(res);})
-        }
+      async function RoomOverviewFetch() {
+        const response: any = await fetchGroupsOverview(date)
+        setRooms(response)
+      }
 
     useEffect(() => {
         RoomOverviewFetch();
@@ -25,7 +22,6 @@ const AdminHomePage = () => {
         
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(date);
         RoomOverviewFetch();
     }
 
