@@ -7,11 +7,15 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { BackButton } from "./LayoutButtons"
 import { useContext } from "react";
-import { DateContext } from "../../shared/DateContext"
 import DatePicker from "../../shared/DatePicker"
+import { UserContext } from "../../shared/Context/UserContext";
 
 const Layout = () => {
   const [showBackButton, setShowBackButton] = useState(false);
+
+  var { loginStatus } = useContext(UserContext)
+
+console.log("Från layout: ",loginStatus)
 
   const location = useLocation();
 

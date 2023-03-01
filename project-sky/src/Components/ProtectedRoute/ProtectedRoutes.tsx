@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useContext } from "react"
+import { UserContext } from "../../shared/Context/UserContext";
+
 
 import { Navigate, Outlet } from 'react-router-dom'
+import { log } from "util";
 
 const useAuth = () => {
-  const user = sessionStorage.getItem('user');
-  if (user === "true") {
+  if (sessionStorage.getItem("userLoggedIn") === "true") {
     return true
   } else {
     return false

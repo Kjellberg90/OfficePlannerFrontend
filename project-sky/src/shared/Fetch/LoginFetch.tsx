@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const fetchLogin = (data: any) => {
-  
+
   var result = axios.post(`https://localhost:7054/api/User/Login`, data, {
     headers: {
       'Accept': 'application/json',
@@ -11,15 +11,13 @@ export const fetchLogin = (data: any) => {
   )
   .then((response) => {
     if (response.status === 200) {
-      sessionStorage.setItem("user", "true")
       CreateLoginToken(response.data)
-      return response.data
+      return true
     } else {
-      alert("Acess Denied")
+      return false
     }
   })
   .catch(err => console.log(err))
-  
     return result
 }
 
