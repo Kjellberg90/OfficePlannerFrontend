@@ -190,6 +190,7 @@ input[type="search"]::-webkit-search-cancel-button:hover {
 
 .hrDivider {
   border-top: 1px solid  #42556340;
+  min-height: 3.5rem;
 }
 
 /* -------------- Admin Page --------------------*/
@@ -490,6 +491,20 @@ input::-webkit-datetime-edit-fields-wrapper {
   box-shadow: none;
 }
 
+.dropButton:active {
+  background-color: #6dc2d9;
+  box-shadow: none;
+}
+
+.dropButton:disabled {
+  background-color: #808080;
+  color: rgb(203, 203, 203);
+}
+
+.dropButton:disabled:hover {
+  box-shadow: none;
+}
+
 .bookButton {
   padding: 8px 20px;
   border: 0;
@@ -507,6 +522,15 @@ input::-webkit-datetime-edit-fields-wrapper {
 
 .bookButton:active {
   background-color: #6dc2d9;
+  box-shadow: none;
+}
+
+.bookButton:disabled {
+  background-color: #808080;
+  color: rgb(203, 203, 203);
+}
+
+.bookButton:disabled:hover {
   box-shadow: none;
 }
 
