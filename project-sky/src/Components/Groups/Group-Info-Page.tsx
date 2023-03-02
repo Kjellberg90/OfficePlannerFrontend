@@ -26,11 +26,9 @@ const GroupInfoPage = () => {
     var {currentDate} = useContext(DateContext)
 
     const resetDateIfEmptyString = () => {
-      console.log("ResetDateIfEmptyString 1: ", currentDate)
       if (currentDate === ""){
         currentDate = new Date().toLocaleDateString("sv-SE")
       }
-      console.log("ResetDateIfEmptyString 2: ", currentDate)
     }
 
     IdleUser(); //Sets Idle Timer

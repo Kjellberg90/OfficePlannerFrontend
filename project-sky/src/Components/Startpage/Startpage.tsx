@@ -24,6 +24,7 @@ const Startpage = () => {
                         <h2 className="boxTextStartPage ">Rooms</h2>
                       </div>
                     </Link>
+                    
                   </Col>
                 </Row>
             </Stack>
