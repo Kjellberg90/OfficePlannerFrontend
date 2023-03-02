@@ -16,10 +16,10 @@ const Week = () => {
                 <h3>Week: {weekNumber}</h3>
                 <div className="d-flex gap-1">
                     <button className="adminButton" disabled={useEdit} type="button"onClick={() => setUseEdit(true)}>Edit</button>
-                    <button className="adminButton" type="button" onClick={() => setUseEdit(false)}>Cancel</button>
                     <button className="adminButton" disabled={true} type="button">Undo</button>
-                    <button className="adminButton" disabled={true} type="button" >Save changes</button>
+                    <button className="adminButton" disabled={!useEdit} form="testForm" type="submit" >Save changes</button>
                     <button className="adminButton" disabled={!useEdit} form="testForm" type="reset">Clear Table</button>
+                    <button className="adminButton" disabled={!useEdit} type="button" onClick={() => setUseEdit(false)}>Cancel</button>
                 </div>
             </div>
             <div>
