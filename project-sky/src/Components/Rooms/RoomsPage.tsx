@@ -27,7 +27,16 @@ const RoomsPage = () => {
 
 IdleUser(); //Sets Idle Timer
 
+const resetDateIfEmptyString = () => {
+  console.log("ResetDateIfEmptyString: ", currentDate)
+  if (currentDate === ""){
+    currentDate = new Date().toLocaleDateString("sv-SE")
+    console.log("Inne i If Sats: ", currentDate)
+  }
+}
+
     async function getRoomInfo() {
+      resetDateIfEmptyString()
       const response: any = await fetchRooms(currentDate)
       setRooms(response)
     }
@@ -39,6 +48,7 @@ IdleUser(); //Sets Idle Timer
     },[currentDate])
 
 async function getSingleBookings(roomId: number){
+  resetDateIfEmptyString()
   const response: any = await fetchSingleBookings(currentDate, roomId)
   setUsers(response)
 }
@@ -69,12 +79,14 @@ async function getSingleBookings(roomId: number){
     const [showMap, setShowMap] = useState(false);
 
 const postSingleBooking = () => {
+  resetDateIfEmptyString()
   const postData ={ "roomId": id, "date": currentDate, "name": name}
   fetchPostSingleBookings(postData)
     .then(() => getRoomInfo())
 }
 
 const deleteSingleBooking = () => {
+  resetDateIfEmptyString()
   fetchDeleteSingleBookings(deleteUser)
     .then(() => getRoomInfo())
 }
