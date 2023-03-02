@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState} from "react";
-import Room from "./RoomInfo";
+import RoomInfo from "./RoomInfo";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
 import Stack from "react-bootstrap/esm/Stack";
@@ -19,6 +19,7 @@ const RoomsPage = () => {
     const [err, setError] = useState([]);
     const [isOpenBook, setisOpenBook] = useState<number>();
     const [isOpenDrop, setisOpenDrop] = useState<number>();
+    const [showDrop, setShowDrop] = useState(false);
     const [id, setid] = useState<number>();
     const [name, setname] = useState("");
     const [deleteUser, setdeleteUser] = useState({});
@@ -98,7 +99,10 @@ const deleteSingleBooking = () => {
     return (   
         <Container>
             <Stack gap={4}>            
-                {rooms.map((room: Room) => {return (
+                {rooms.map((room: RoomInfo) => {
+                  var singleSeatBooked = room.singleBookings > 0 ? true : false;
+                  var availableSeats = room.availableSeats > 0 ? true : false;
+                  return (
                     <Row className="d-flex align-items-center justify-content-center" key={room.name}>
                         <Col className="room-info-col text-center" md={6}>
                             <Row>
@@ -111,15 +115,11 @@ const deleteSingleBooking = () => {
                                 </Col>
                                 <Col>
                                 {(() => {
-                                  if(room.availableSeats > 0){
-                                      return(
-                                          <h5>Available: <FontAwesomeIcon icon={ faCheck } className="checkRoom" /></h5>
-                                        ) 
-                                      }else {
-                                          return(
-                                          <h5>Available: <FontAwesomeIcon icon={ faXmark } className="crossRoom" /></h5>
-                                        )
-                                      }
+                                  var icon = room.availableSeats > 0 ? faCheck : faXmark;
+                                  var iconColor = room.availableSeats > 0 ? "checkRoom" : "crossRoom"
+                                  return(
+                                     <h5>Available: <FontAwesomeIcon icon={ icon } className={iconColor} /></h5>
+                                  )
                                 })()}
                                 </Col>
                             </Row>                    
@@ -165,25 +165,11 @@ const deleteSingleBooking = () => {
                                           </div>
                                         )                                    
                                   }
-                                  else if(room.availableSeats <= 0) {
+                                  else {
                                     return(
                                       <div className="mx-sm-3 mb-2 mt-2">
-                                        <button className="dropButton" onClick={() => handleOpenDrop(room.roomId)}>Drop Seat</button>
-                                      </div>
-                                    )
-                                  }
-                                  else if (room.seats - room.availableSeats === 0) {
-                                    return (
-                                      <div className="mx-sm-3 mb-2 mt-2">
-                                        <button className="primaryButton bookButton" onClick={() => handleOpenBook(room.roomId)} >Book Seat</button>
-                                      </div>
-                                    )
-                                  } 
-                                  else {
-                                    return (
-                                      <div className="mx-sm-3 mb-2 mt-2">
-                                        <button className="dropButton" onClick={() => {handleOpenDrop(room.roomId)}}>Drop Seat</button>
-                                        <button className="primaryButton bookButton" onClick={() => handleOpenBook(room.roomId)} >Book Seat</button>
+                                        <button disabled={!singleSeatBooked} className="dropButton mx-2" onClick={() => handleOpenDrop(room.roomId)}>Drop Seat</button>
+                                        <button disabled={!availableSeats} className="bookButton mx-2" onClick={() => handleOpenBook(room.roomId)} >Book Seat</button>
                                       </div>
                                     )
                                   }
