@@ -14,6 +14,7 @@ const Datepicker = () => {
 
     const [showToggleBtn, setShowToggleBtn] = useState(false);
     const { toggle, toggleView } = useContext(DateContext)
+    const [startDate, setStartDate] = useState(new Date());
 
     useEffect(() => {
       setcurrentDate!(currentDate);
@@ -58,9 +59,7 @@ const Datepicker = () => {
     }
 
     function handleChange(e: any) {
-      console.log("Inne i handlechange: ", e)
       var time = new Date(e).toLocaleDateString("sv-SE")
-        // const { value } = e.target;
         setcurrentDate!(time);
     };
 
@@ -86,15 +85,10 @@ const Datepicker = () => {
         )
     }
 
-    const [startDate, setStartDate] = useState(new Date());
-
- 
-
     return (
         <Col className="layoutColumn">
             {showToggleBtn ? toggleButton() : ""}
             <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
-            {/* <input type="date" className="makeClickable" value={currentDate} onChange={handleChange} style={{ width: "220px", fontSize: "1rem", textAlign: "center", fontWeight: "bold", borderRadius: "10px" }} /> */}
             <DatePicker 
               value={currentDate}
               selected={startDate} 
