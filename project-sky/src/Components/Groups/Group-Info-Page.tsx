@@ -25,12 +25,6 @@ const GroupInfoPage = () => {
 
     var {currentDate} = useContext(DateContext)
 
-    const resetDateIfEmptyString = () => {
-      if (currentDate === ""){
-        currentDate = new Date().toLocaleDateString("sv-SE")
-      }
-    }
-
     IdleUser(); //Sets Idle Timer
 
     async function getGroupInfo(currentDate: string, groupId: string) {
@@ -43,7 +37,6 @@ const GroupInfoPage = () => {
     }, [currentDate])
 
     async function getWeeklyRoomSchedule(currentDate: string, groupId: string) {
-      resetDateIfEmptyString()
       const response: any = await fetchWeeklyGroupSchedule(currentDate, groupId)
       setweeklySchedule(response)
     }
@@ -54,7 +47,6 @@ const GroupInfoPage = () => {
 
     
     async function getWeekAndDay(currentDate: string) {
-      resetDateIfEmptyString()
       const response: any = await fetchWeekAndDay(currentDate)
       setcurrentWeek(response)
     }
