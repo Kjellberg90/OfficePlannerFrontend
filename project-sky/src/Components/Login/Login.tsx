@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom"
+import { UserContext } from "../../shared/Context/UserContext";
 import { fetchLogin } from "../../shared/Fetch/LoginFetch";
 
 const LoginPage = () => {
   
+  var {loginStatus, setloginStatus } = useContext(UserContext)
+
   const [formData, setformData] = useState({
     name: '',
     password: ''
@@ -19,14 +22,21 @@ const LoginPage = () => {
   }
   
   const navigate= useNavigate();
+  
 
-  async function login(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const data ={ "userName": formData.name, "password": formData.password}
-
-      await fetchLogin(data)
-      .then(() => navigate('/admin/home'))
-  }
+async function login(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+  const data ={ "userName": formData.name, "password": formData.password}
+  await fetchLogin(data)
+    .then((response) => {
+      if (response === true){
+        setloginStatus!(true)
+        sessionStorage.setItem("userLoggedIn", loginStatus.toString())
+        navigate('/admin/home')
+      }
+      else(alert("Wrong Credentials"))
+    })
+  } 
 
  
   return (

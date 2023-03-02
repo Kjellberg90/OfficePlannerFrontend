@@ -8,7 +8,8 @@ import Col from 'react-bootstrap/Col'
 
 const DatePicker = () => {
 
-    const { currentDate, setcurrentDate } = useContext(DateContext)    
+    const { currentDate, setcurrentDate } = useContext(DateContext)  
+
     const [showToggleBtn, setShowToggleBtn] = useState(false);
     const { toggle, toggleView } = useContext(DateContext)
 

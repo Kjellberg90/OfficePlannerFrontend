@@ -3,7 +3,6 @@ import {useState} from "react";
 import { format } from "date-fns";
 
 interface IDateContext {
-
     toggle: boolean,
     toggleView?: () => void,
     currentDate: string,
