@@ -26,7 +26,6 @@ const LoginPage = () => {
 
 async function login(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
-  debugger
   const data ={ "userName": formData.name, "password": formData.password}
   await fetchLogin(data)
     .then((response) => {
