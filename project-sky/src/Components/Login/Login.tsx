@@ -13,7 +13,6 @@ const LoginPage = () => {
     password: ''
   })
 
-  console.log("Loginstatus 1:", loginStatus)
   const handleChange = (e: any) => {
     const { name, value } = e.target
     setformData({
@@ -23,20 +22,21 @@ const LoginPage = () => {
   }
   
   const navigate= useNavigate();
+  
 
 async function login(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
+  debugger
   const data ={ "userName": formData.name, "password": formData.password}
   await fetchLogin(data)
-  .then((response) => {
-    console.log("Response: ", response)
-    if (response === true){
-      setloginStatus!(true)
-      sessionStorage.setItem("userLoggedIn", loginStatus.toString())
-      navigate('/admin/home')
-    }
-    else(alert("Wrong Credentials"))
-  })
+    .then((response) => {
+      if (response === true){
+        setloginStatus!(true)
+        sessionStorage.setItem("userLoggedIn", loginStatus.toString())
+        navigate('/admin/home')
+      }
+      else(alert("Wrong Credentials"))
+    })
   } 
 
  

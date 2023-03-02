@@ -6,9 +6,7 @@ export const fetchLogin = (data: any) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    }
-  }
-  )
+    }})
   .then((response) => {
     if (response.status === 200) {
       CreateLoginToken(response.data)
@@ -24,7 +22,6 @@ export const fetchLogin = (data: any) => {
 var CreateLoginToken = (data: any) => {
   const token = data.token
   const expires = new Date(Date.now() + 86400 * 1000).toUTCString();
-  console.log(token)
   // document.cookie =  `token=${token};expires=${expires + 86400}`
   document.cookie =  `token=${token}`
 }

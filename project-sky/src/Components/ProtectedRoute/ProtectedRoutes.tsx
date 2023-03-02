@@ -3,10 +3,10 @@ import { UserContext } from "../../shared/Context/UserContext";
 
 
 import { Navigate, Outlet } from 'react-router-dom'
-import { log } from "util";
 
 const useAuth = () => {
-  if (sessionStorage.getItem("userLoggedIn") === "true") {
+  //OBS Denna del behöver ses över och funkar inte 100% Korrekt
+  if (sessionStorage.getItem("userLoggedIn") === "false") { 
     return true
   } else {
     return false
