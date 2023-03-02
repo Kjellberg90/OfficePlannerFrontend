@@ -26,19 +26,16 @@ const GroupInfoPage = () => {
     var {currentDate} = useContext(DateContext)
 
     const resetDateIfEmptyString = () => {
-      console.log("ResetDateIfEmptyString: ", currentDate)
+      console.log("ResetDateIfEmptyString 1: ", currentDate)
       if (currentDate === ""){
         currentDate = new Date().toLocaleDateString("sv-SE")
       }
+      console.log("ResetDateIfEmptyString 2: ", currentDate)
     }
 
     IdleUser(); //Sets Idle Timer
 
     async function getGroupInfo(currentDate: string, groupId: string) {
-      console.log("Currentdate 1. ",currentDate)
-      debugger
-      resetDateIfEmptyString()
-      console.log("Currentdate 2. ",currentDate)
       const response: any = await fetchGroupInfo(currentDate, groupId)
       setGroup(response)
     }
