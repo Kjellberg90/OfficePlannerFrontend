@@ -120,7 +120,16 @@ const deleteSingleBooking = () => {
                                       <form id="bookSingleBooking" className="form-inline"  onSubmit={handleSubmit}>
                                         <div className="form-group mx-sm-3 mb-2 mt-2">
                                           <input type="search" id="name" required className="form-control" placeholder="Name" onChange={(event) => {setname(event.target.value); setid(room.roomId)}} />
+                                          <div className="pinCode">
+                                            <label>PIN:</label>
+                                            <input className="pinInput form-control" type="number" maxLength={1}></input>
+                                            <input className="pinInput form-control" type="number" maxLength={1}></input>
+                                            <input className="pinInput form-control" type="number" maxLength={1}></input>
+                                            <input className="pinInput form-control" type="number" maxLength={1}></input>
+                                          </div>
                                         </div>
+                                          
+
                                       </form>
                                         <button onClick={() => setisOpenBook(NaN)} className="dangerButton mb-2">Cancel</button>
                                         <button form="bookSingleBooking" type="submit" className="bookButton roomsPageSubmitButton">Book Seat</button>
