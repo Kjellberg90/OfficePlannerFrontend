@@ -314,6 +314,7 @@ input[type="text"].adminDateInput {
 
 .calBtn:hover {
   color: var(--accent-color);
+  cursor: pointer;
 }
 
 .dateInput{
@@ -325,10 +326,43 @@ input[type="text"].adminDateInput {
   border-radius: 8px;
   margin: 0px 5px;
   filter:drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.5));
+  min-height: 1.8rem;
 }
 
-.calendarInput{
-  background-color: #37690b;
+.dateInput:hover {
+  cursor: pointer;
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.calendarInput .react-datepicker__header,
+.calendarInput .react-datepicker__triangle
+{
+  background-color: var(--secondary-color);
+}
+
+.calendarInput .react-datepicker__triangle::before,
+.calendarInput .react-datepicker__triangle::after  
+{
+  border-bottom-color: var(--secondary-color) !important;
+}
+
+.calendarInput .react-datepicker__day--selected {
+  background-color: var(--secondary-color);
+  color: var(--accent-color)
+}
+
+.calendarInput .react-datepicker__day--selected:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.calendarInput .react-datepicker__navigation-icon::before {
+  border-color: black;
+}
+
+.calendarInput .react-datepicker__today-button {
+  background-color: #d7d2cb
 }
 
 .react-datepicker-wrapper{
