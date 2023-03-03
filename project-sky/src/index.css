@@ -289,13 +289,13 @@ input[type="text"].adminDateInput {
   width: 6rem;
   background-color: var(--secondary-color);
   border: none;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px 3px, rgba(0, 0, 0, 0.2) 0px 0px inset;
   margin-right: 5px;
   color: var(--accent-color);
   font-size: large;
   font-weight: bold;
   margin-right: 15px;
   border-radius: 8px;
+  filter:drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.5));
 }
 
 .givemespace {
@@ -309,54 +309,30 @@ input[type="text"].adminDateInput {
 .calBtn {
   color: var(--secondary-color);
   margin: 5px;
-   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  filter:drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.5));
 }
 
 .calBtn:hover {
   color: var(--accent-color);
 }
 
-input[type="date"] { 
-  background: var(--secondary-color);
-  color: var(--primary-color);
+.dateInput{
+  background-color: var(--secondary-color);
+  color: var(--accent-color);
+  font-weight: bold;
+  text-align: center;
+  border:none;
+  border-radius: 8px;
+  margin: 0px 5px;
+  filter:drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.5));
 }
 
-input[type="date"] {
-  -webkit-align-items: center;
-  align-items: center;
-  display: -webkit-inline-flex;
-  font-family: monospace;
-  overflow: hidden;
-  padding-left: 0;
-  -webkit-padding-start: 1px;
-  appearance: unset;
+.calendarInput{
+  background-color: #37690b;
 }
 
-input::-webkit-datetime-edit {
- -webkit-flex: 1;
- -webkit-user-modify: read-only !important;
-}
-
-input::-webkit-datetime-edit-fields-wrapper {
- -webkit-user-modify: read-only !important;
- display: inline-block;
- padding: 10px;
- margin-left: 20px;
-}
-
-/* A "fix" to get a larger clickable area for calendar icon  */
-.makeClickable::-webkit-calendar-picker-indicator {
-  padding-left: 36px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  cursor: pointer;
-  /* border: 1px dashed red; */
-  padding-right: 36px;
-}
-
-::-webkit-calendar-picker-indicator {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23425563" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
-  padding-right:15px;
+.react-datepicker-wrapper{
+  width: min-content !important;
 }
 
 /* -------------------- Map --------------------------*/

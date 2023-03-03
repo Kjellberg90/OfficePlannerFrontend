@@ -75,6 +75,10 @@ const postSingleBooking = () => {
     .then(() => getRoomInfo())
 }
 
+const userToDelete = ( userName: string, roomId: number) => {
+  setdeleteUser({date: currentDate, userName: userName, roomId: roomId})
+}
+
 const deleteSingleBooking = () => {
   fetchDeleteSingleBookings(deleteUser)
     .then(() => getRoomInfo())
@@ -133,7 +137,7 @@ const deleteSingleBooking = () => {
                                                   users.map((user: SingleUser) => {
                                                         return(
                                                             <div className="d-flex justify-content-between align-items-center singleBookingUserDiv" key={user.id}>
-                                                              <h4 className="singleBookingUserList">{user.userName} </h4><FontAwesomeIcon icon={ faTrash } onClick={() => {setShow(true); ; setdeleteUser({date: currentDate, userName: user.userName, roomId: room.roomId})}} className="crossRoom" />
+                                                              <h4 className="singleBookingUserList">{user.userName} </h4><FontAwesomeIcon icon={ faTrash } onClick={() => {setShow(true); ; userToDelete( user.userName, room.roomId )}} className="crossRoom" />
                                                             </div>
                                                         );
                                                       })

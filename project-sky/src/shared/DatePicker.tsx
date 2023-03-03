@@ -1,17 +1,20 @@
-import { useContext } from "react";
+import { forwardRef, useContext } from "react";
 import { DateContext } from "./DateContext";
 import { useState, useEffect } from "react";
 import format from "date-fns/format";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareCaretLeft, faSquareCaretRight, faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons"
 import Col from 'react-bootstrap/Col'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-const DatePicker = () => {
+const Datepicker = () => {
 
     const { currentDate, setcurrentDate } = useContext(DateContext)  
 
     const [showToggleBtn, setShowToggleBtn] = useState(false);
     const { toggle, toggleView } = useContext(DateContext)
+    const [startDate, setStartDate] = useState(new Date());
 
     useEffect(() => {
       setcurrentDate!(currentDate);
@@ -55,9 +58,9 @@ const DatePicker = () => {
         }
     }
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        const { value } = e.target;
-        setcurrentDate!(value);
+    function handleChange(e: any) {
+      var time = new Date(e).toLocaleDateString("sv-SE")
+        setcurrentDate!(time);
     };
 
     const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -83,13 +86,21 @@ const DatePicker = () => {
     }
 
     return (
-        <Col className="layoutColumn datepicker">
+        <Col className="layoutColumn">
             {showToggleBtn ? toggleButton() : ""}
             <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
-            <input type="date" className="makeClickable" value={currentDate} onChange={handleChange} style={{ width: "220px", fontSize: "1rem", textAlign: "center", fontWeight: "bold", borderRadius: "10px" }} />
+            <DatePicker 
+              value={currentDate}
+              selected={startDate} 
+              onChange={(date) => handleChange(date)}
+              showWeekNumbers
+              todayButton="Go To Today"
+              className="dateInput"
+              calendarClassName="calendarInput"
+            />
             <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" onClick={incrementDate} />
         </Col>
     )
 }
 
-export default DatePicker;
+export default Datepicker;
