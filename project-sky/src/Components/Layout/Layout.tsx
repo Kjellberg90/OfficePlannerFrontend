@@ -7,10 +7,11 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { BackButton } from "./LayoutButtons"
 import DatePicker from "../../shared/DatePicker"
+import { DateContext } from "../../shared/DateContext"
 
 const Layout = () => {
   const [showBackButton, setShowBackButton] = useState(false);
-  
+  const { toggle, toggleView } = useContext(DateContext)
   const location = useLocation();
 
   useEffect(() => {
