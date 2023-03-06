@@ -29,11 +29,18 @@ const GroupInfoPage = () => {
 
     IdleUser(); //Sets Idle Timer
 
+    useEffect(() => {
+      var roomName = group?.bookedRoom?.name.toLowerCase();
+              setRoomName(roomName)      
+    })
+    
     async function getGroupInfo(currentDate: string, groupId: string) {
       setIsLoading(true);
       const response: any = await fetchGroupInfo(currentDate, groupId)
-      setGroup(response)
-      // setIsLoading(false);
+      setGroup(response);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500)
     }
 
     useEffect(() => {
@@ -59,12 +66,7 @@ const GroupInfoPage = () => {
       getWeekAndDay(currentDate)
     }, [currentDate])
     
-    useEffect(() => {
-        var roomName = group?.bookedRoom?.name.toLowerCase();
-                setRoomName(roomName)
-        }
-      )
-  
+   
     const name = roomName!;
         return (
 
