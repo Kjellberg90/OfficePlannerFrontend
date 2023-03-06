@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from "react";
+import { useContext } from "react";
 import { DateContext } from "./DateContext";
 import { useState, useEffect } from "react";
 import format from "date-fns/format";
@@ -85,7 +85,7 @@ const Datepicker = () => {
     }
 
     return (
-        <Col className="layoutColumn">
+        <Col className="layoutColumn" >
             {showToggleBtn ? toggleButton() : ""}
             <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
             <DatePicker 

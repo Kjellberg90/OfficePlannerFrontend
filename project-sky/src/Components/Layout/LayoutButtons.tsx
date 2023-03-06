@@ -14,10 +14,13 @@ export const BackButton = () => {
 
     const navigate = useNavigate();
     const goBack = () => {
-        if (!toggle) {
-          toggleView!()
-        }
         navigate(-1);
+    }
+
+    if (window.location.href !== "http://localhost:3000/info") {
+      if (!toggle) {
+        toggleView!()
+      }
     }
 
     return (
