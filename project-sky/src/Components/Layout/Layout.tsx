@@ -10,7 +10,6 @@ import DatePicker from "../../shared/DatePicker"
 
 const Layout = () => {
   const [showBackButton, setShowBackButton] = useState(false);
-  
   const location = useLocation();
 
   useEffect(() => {

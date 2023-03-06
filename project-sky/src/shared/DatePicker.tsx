@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from "react";
+import { useContext } from "react";
 import { DateContext } from "./DateContext";
 import { useState, useEffect } from "react";
 import format from "date-fns/format";
@@ -21,14 +21,13 @@ const Datepicker = () => {
     }, [currentDate])
 
     useEffect(() => {
-        if (window.location.href === "http://localhost:3000/" ||
-            window.location.href.includes("http://localhost:3000/admin")) {
-            setShowToggleBtn(false);
-        }
-        else if (window.location.href === "http://localhost:3000/info") {
+        if (window.location.href === "http://localhost:3000/info") {
             setShowToggleBtn(true);
-        }
-    })
+          }
+          else {
+          setShowToggleBtn(false);
+        }       
+      })
 
     const decrementDate = (e: React.MouseEvent<SVGSVGElement>) => {
       var calDate: Date = new Date()
