@@ -22,7 +22,7 @@ const Layout = () => {
   })
 
   return (
-    
+
     <Fragment>
       <Container className="headerContainer d-flex flex-column align-items-center">
         <Row className="layoutHeader d-flex justify-content-center align-items-center">
@@ -32,11 +32,11 @@ const Layout = () => {
             </Link>
           </Col>
           <Col>
-        <DatePicker />
+            <DatePicker />
           </Col>
         </Row>
       </Container >
-      <Outlet  />
+      <Outlet />
       <div>
         {showBackButton ? <BackButton /> : ""}
       </div>
