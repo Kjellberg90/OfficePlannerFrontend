@@ -22,8 +22,9 @@ const Layout = () => {
   })
 
   return (
+    
     <Fragment>
-      <Container className="headerContainer">
+      <Container className="headerContainer d-flex flex-column align-items-center">
         <Row className="layoutHeader d-flex justify-content-center align-items-center">
           <Col xs={12} md={4} className="layoutColumn">
             <Link to={"/"}>

@@ -421,40 +421,55 @@ input[type="text"].adminDateInput {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px 3px, rgba(0, 0, 0, 0.2) 0px 0px inset;
 }
 
+
 /* MAP BREAKPOINTS  */
 @media (max-width: 480px) {
   .groupInfoCard {
     /* background-color: red; */
+    margin-top: -2rem;
     border-radius: 0%;
   }
   .room-info-col {
     border-radius: 0%;
+    margin-bottom: -7rem;
   }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 540px) {
   /* Styles for small devices (>=576px) */
-
+  
   .groupInfoCard {
     background-color: blue;
     border-radius: 0%;
+    margin-top: -2rem;
   }
   
   .room-info-col {
     border-radius: 0%;
+    margin-bottom: -3rem;
   }
 }
 
 @media (min-width: 768px) {
   /* Styles for medium devices (>=768px) */
   
+  .groupInfoWrapper {
+    margin-top: -3rem;
+    margin-bottom: -3rem;
+  }
   .groupInfoCard {
     background-color: yellow;
-    border-radius: 0%;
+    border-radius: 40px 40px 35px 35px;
   }
-  
+
+  .togglebtn {
+    margin-left: -20px;
+    margin-bottom: 5px;
+  }
+
   .room-info-col {
-    border-radius: 0%;
+    border-radius: 40px 40px 35px 35px;
+    margin-bottom: 25px;
   }
 }
 
@@ -463,11 +478,11 @@ input[type="text"].adminDateInput {
   
   .groupInfoCard {
     background-color: violet;
-    border-radius: 0%;
+    border-radius: 40px 40px 35px 35px;
   }
   
   .room-info-col {
-    border-radius: 0%;
+    border-radius: 40px 40px 35px 35px;
   }
 }
 
@@ -475,11 +490,11 @@ input[type="text"].adminDateInput {
   /* Styles for extra large devices (>=1200px) */
   .groupInfoCard {
     background-color: turquoise;
-    border-radius: 0%;
+    border-radius: 40px 40px 35px 35px;
   }
   
   .room-info-col {
-    border-radius: 0%;
+    border-radius: 40px 40px 35px 35px;
   }
 }
 
