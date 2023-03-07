@@ -65,7 +65,7 @@ const GroupInfoPage = () => {
   return (
     <div className="groupInfoWrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Container>
-        <Stack gap={{ xs: 5, sm: 5, md: 5 }} style={{marginTop: '5rem', marginBottom: "8rem"}}>
+        <Stack gap={5} style={{marginTop: '5rem', marginBottom: "8rem"}}>
           <Row>
             <Col className="groupInfoCard text-center p-4" key={groupId} xs={12} sm={6} md={6} lg={6} xl={5}>
               <h2>{group?.name}</h2>
@@ -90,7 +90,7 @@ const GroupInfoPage = () => {
             </Col>
           </Row>
           <Row>
-            <Col className="room-info-col text-center pt-3 pb-5" xs={12} sm={6} md={6} lg={6} xl={5}>
+            <Col className="group-room-info-col text-center pt-3 pb-5" xs={12} sm={6} md={6} lg={6} xl={5}>
               <h2>Week {currentWeek?.week}</h2>
               {
                 weeklySchedule.map((day: WeeklySchedule) => {

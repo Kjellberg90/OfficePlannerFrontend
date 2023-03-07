@@ -422,43 +422,49 @@ input[type="text"].adminDateInput {
 }
 
 
-/* MAP BREAKPOINTS  */
+.group-room-info-col {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border-radius: 50px 50px 45px 45px;
+  /* padding: 2px; */
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+/* Group Info Page BREAKPOINTS  */
 @media (max-width: 480px) {
   .groupInfoCard {
     /* background-color: red; */
     margin-top: -2rem;
     border-radius: 0%;
   }
-  .room-info-col {
+  .group-room-info-col {
     border-radius: 0%;
     margin-bottom: -7rem;
   }
 }
 
 @media (min-width: 540px) {
-  /* Styles for small devices (>=576px) */
   
   .groupInfoCard {
-    background-color: blue;
+    /* background-color: blue; */
     border-radius: 0%;
     margin-top: -2rem;
   }
   
-  .room-info-col {
+  .group-room-info-col {
     border-radius: 0%;
     margin-bottom: -3rem;
   }
 }
 
 @media (min-width: 768px) {
-  /* Styles for medium devices (>=768px) */
-  
+
   .groupInfoWrapper {
     margin-top: -3rem;
     margin-bottom: -3rem;
   }
   .groupInfoCard {
-    background-color: yellow;
+    /* background-color: yellow; */
     border-radius: 40px 40px 35px 35px;
   }
 
@@ -467,34 +473,34 @@ input[type="text"].adminDateInput {
     margin-bottom: 5px;
   }
 
-  .room-info-col {
+  .group-room-info-col {
     border-radius: 40px 40px 35px 35px;
-    margin-bottom: 25px;
   }
 }
 
 @media (min-width: 992px) {
-  /* Styles for large devices (>=992px) */
   
   .groupInfoCard {
-    background-color: violet;
+    margin-top: 3rem;
+    /* background-color: violet; */
     border-radius: 40px 40px 35px 35px;
   }
   
-  .room-info-col {
+  .group-room-info-col {
     border-radius: 40px 40px 35px 35px;
   }
 }
 
 @media (min-width: 1200px) {
-  /* Styles for extra large devices (>=1200px) */
   .groupInfoCard {
-    background-color: turquoise;
+    margin-top: -2rem;
+    /* background-color: turquoise; */
     border-radius: 40px 40px 35px 35px;
   }
   
-  .room-info-col {
+  .group-room-info-col {
     border-radius: 40px 40px 35px 35px;
+    margin-bottom: -4rem;
   }
 }
 

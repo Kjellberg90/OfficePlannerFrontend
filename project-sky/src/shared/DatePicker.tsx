@@ -90,7 +90,7 @@ const Datepicker = () => {
     return (
       <Row className="flex-wrap">
            
-        <Col className="justify-content-center align-self-center d-flex order-md-2" xs={12} md={7}>
+        <Col className="justify-content-center align-self-center d-flex order-md-2" xs={12} md={7} lg={5} xl={3}>
             <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
             <DatePicker 
               value={currentDate}
