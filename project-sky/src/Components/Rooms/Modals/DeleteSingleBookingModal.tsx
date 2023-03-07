@@ -21,7 +21,7 @@ export const DeleteSingleBookingModal = (props: JSX.IntrinsicAttributes & Omit<P
           <h4>Drop Booked Seat for {props.user.userName}</h4>
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-around dropSeatModalFooter">
-          <button className="dropButton" onClick={props.delete}>Drop Booking</button>
+          <button className="dropButton" onClick={props.onDelete}>Drop Booking</button>
         </Modal.Footer>
       </Modal>
   </Fragment>

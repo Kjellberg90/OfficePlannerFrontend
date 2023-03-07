@@ -171,7 +171,7 @@ const deleteSingleBooking = () => {
                 show={show}
                 onHide={() => {getRoomInfo(); setShow(false); setisOpenDrop(NaN);}}
                 user={deleteUser}
-                delete={() => {deleteSingleBooking(); setShow(false); setisOpenDrop(NaN)}}
+                onDelete={() => {deleteSingleBooking(); setShow(false); setisOpenDrop(NaN)}}
             />
             <RoomMapModal
                 show={showMap}
