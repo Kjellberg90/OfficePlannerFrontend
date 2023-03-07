@@ -490,7 +490,11 @@ input[type="text"].adminDateInput {
     border-radius: 40px 40px 35px 35px;
   }
   .epirocLogo {
-    margin-left: 25px;
+    margin-left: 60px;
+  }
+
+  .picker {
+    margin-right: 50px;
   }
 }
 
@@ -507,7 +511,11 @@ input[type="text"].adminDateInput {
   }
 
   .epirocLogo {
-    margin-left: 25px;
+    margin-left: 60px;
+  }
+
+  .picker {
+    margin-right: 50px;
   }
 }
 
