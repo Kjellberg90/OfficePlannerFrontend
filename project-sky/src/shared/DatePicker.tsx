@@ -69,8 +69,7 @@ const Datepicker = () => {
 
     const toggleButton = () => {
         return (
-              <Col className="col-12 col-md-6 align-self-center d-flex justify-content-center">
-
+              
             <button className="togglebtn" onClick={handleOnClick}>
                 {toggle ?
                 <>
@@ -84,15 +83,14 @@ const Datepicker = () => {
                     </>
                       }
             </button>
-                      
-                      </Col>
+            
         )
     }
 
     return (
-      <Row className="flex-wrap flex-column-reverse">
-            {showToggleBtn ? toggleButton() : ""}
-        <Col className="col-12 col-md-6 align-self-center d-flex justify-content-center">
+      <Row className="flex-wrap">
+           
+        <Col className="justify-content-center align-self-center d-flex order-md-2" xs={12} md={6}>
             <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
             <DatePicker 
               value={currentDate}
@@ -104,6 +102,9 @@ const Datepicker = () => {
               calendarClassName="calendarInput"
             />
             <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" onClick={incrementDate} />
+        </Col>
+        <Col xs={12} md={6} className="d-flex justify-content-center justify-content-md-start align-items-center order-md-1">
+        {showToggleBtn ? toggleButton() : ""}
         </Col>
       </Row>
     )
