@@ -296,6 +296,7 @@ input[type="text"].adminDateInput {
   margin-right: 15px;
   border-radius: 8px;
   filter:drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.5));
+  margin-top: 6px;
 }
 
 .givemespace {
@@ -419,18 +420,21 @@ input[type="text"].adminDateInput {
 }
 
 /* MAP BREAKPOINTS  */
-
+@media (max-width: 480px) {
+  .groupInfoCard {
+    /* background-color: red; */
+    border-radius: 0%;
+  }
+  .room-info-col {
+    border-radius: 0%;
+  }
+}
 
 @media (min-width: 576px) {
   /* Styles for small devices (>=576px) */
-  .smallMap {
-    height: 300px; 
-    width: 500px; 
-    padding-right: 50px;
-    margin-bottom:40px;
-  }
-  
+
   .groupInfoCard {
+    background-color: blue;
     border-radius: 0%;
   }
   
@@ -441,14 +445,40 @@ input[type="text"].adminDateInput {
 
 @media (min-width: 768px) {
   /* Styles for medium devices (>=768px) */
+  
+  .groupInfoCard {
+    background-color: yellow;
+    border-radius: 0%;
+  }
+  
+  .room-info-col {
+    border-radius: 0%;
+  }
 }
 
 @media (min-width: 992px) {
   /* Styles for large devices (>=992px) */
+  
+  .groupInfoCard {
+    background-color: violet;
+    border-radius: 0%;
+  }
+  
+  .room-info-col {
+    border-radius: 0%;
+  }
 }
 
 @media (min-width: 1200px) {
   /* Styles for extra large devices (>=1200px) */
+  .groupInfoCard {
+    background-color: turquoise;
+    border-radius: 0%;
+  }
+  
+  .room-info-col {
+    border-radius: 0%;
+  }
 }
 
 

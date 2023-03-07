@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import format from "date-fns/format";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareCaretLeft, faSquareCaretRight, faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons"
-import Col from 'react-bootstrap/Col'
+import { Row, Col } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -69,24 +69,30 @@ const Datepicker = () => {
 
     const toggleButton = () => {
         return (
+              <Col className="justify-content-center text-center align-items-center">
+
             <button className="togglebtn" onClick={handleOnClick}>
                 {toggle ?
-                    <Col>
+                <>
                         <FontAwesomeIcon icon={faToggleOff} />
                         <label className="givemespace toggle-off">Day</label>
-                    </Col> :
-                    <Col>
+                </>
+                     :
+                     <>
                         <FontAwesomeIcon icon={faToggleOn} />
                         <label className="givemespace2 toggle-on">Week</label>
-                    </Col>
-                }
+                    </>
+                      }
             </button>
+                      
+                      </Col>
         )
     }
 
     return (
-        <Col className="layoutColumn">
+      <Row className="flex-wrap flex-column-reverse justify-content-center">
             {showToggleBtn ? toggleButton() : ""}
+        <Col xs={12} md={4} order={2} className="layoutColumn">
             <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
             <DatePicker 
               value={currentDate}
@@ -99,6 +105,7 @@ const Datepicker = () => {
             />
             <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" onClick={incrementDate} />
         </Col>
+      </Row>
     )
 }
 

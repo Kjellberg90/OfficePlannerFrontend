@@ -30,8 +30,8 @@ const Layout = () => {
               <img onClick={() => window.location.assign("/")} src={epirocLogo} alt="test" style={{ width: "100%", height: "100%" }} className="epirocLogo" />
             </Link>
           </Col>
-        <DatePicker />
         </Row>
+        <DatePicker />
       </Container >
       <Outlet  />
       <div>

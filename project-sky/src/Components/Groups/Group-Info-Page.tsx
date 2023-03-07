@@ -82,7 +82,11 @@ const GroupInfoPage = () => {
                               }
                             })()}
                         <h5>{currentWeek?.day}</h5>
+                        <Col className="d-flex align-items-center">
+                        
                     <SmallerMap name={name}/>
+                        </Col>
+                        
                   </Col>
                 </Row>
                 <Row>
