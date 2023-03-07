@@ -63,10 +63,10 @@ const GroupInfoPage = () => {
   
     const name = roomName!;
         return (
-
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
           <Container>
               <Stack gap={5}>
-                <Row className="d-flex align-items-center justify-content-center">
+                <Row>
                   <Col className="groupInfoCard text-center p-3" key={groupId} md={6}>
                         <h2>{group?.name}</h2>
                         {
@@ -85,8 +85,8 @@ const GroupInfoPage = () => {
                     <SmallerMap name={name}/>
                   </Col>
                 </Row>
-                <Row className="d-flex align-items-center justify-content-center">
-                        <Col className="room-info-col text-center pt-3 pb-3" md={6}>
+                <Row>
+                        <Col className="room-info-col text-center pt-3 pb-5" md={6}>
                           <h2>Week {currentWeek?.week}</h2>
                             {
                               weeklySchedule.map((day: WeeklySchedule) => {
@@ -112,6 +112,7 @@ const GroupInfoPage = () => {
                         </Row>
               </Stack>
           </Container>
+                            </div>
         )
     }
 

@@ -418,23 +418,39 @@ input[type="text"].adminDateInput {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px 3px, rgba(0, 0, 0, 0.2) 0px 0px inset;
 }
 
-/* TEMP BREAKPOINTS  */
+/* MAP BREAKPOINTS  */
 
-@media only screen and (min-width: 1200px) {
-  .smallMap {
-    height: 400px; 
-    width: 700px; 
-    padding-left: 140px;
-  }
-}
 
-@media only screen and (min-width: 992px) {
+@media (min-width: 576px) {
+  /* Styles for small devices (>=576px) */
   .smallMap {
     height: 300px; 
     width: 500px; 
-    padding-left: 100px;
+    padding-right: 50px;
+    margin-bottom:40px;
+  }
+  
+  .groupInfoCard {
+    border-radius: 0%;
+  }
+  
+  .room-info-col {
+    border-radius: 0%;
   }
 }
+
+@media (min-width: 768px) {
+  /* Styles for medium devices (>=768px) */
+}
+
+@media (min-width: 992px) {
+  /* Styles for large devices (>=992px) */
+}
+
+@media (min-width: 1200px) {
+  /* Styles for extra large devices (>=1200px) */
+}
+
 
 /* -------------- Custom Elements --------------------*/
 
