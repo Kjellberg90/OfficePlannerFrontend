@@ -7,9 +7,11 @@ import IdleUser from "../../shared/IdleUser/IdleUser";
 import SmallerMap from "../../shared/Map/SmallerMap";
 import { DateContext } from "../../shared/DateContext";
 import { fetchGroupInfo, fetchWeekAndDay, fetchWeeklyGroupSchedule } from "../../shared/Fetch/GroupFetches";
+import { LoadingSpinner } from "../../shared/Spinner/LoadingSpinner";
 
 const GroupInfoPage = () => {
 
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [group, setGroup] = useState<Groups>();
     const [weeklySchedule, setweeklySchedule] = useState([]);
     const [currentWeek, setcurrentWeek] = useState<Week>();
@@ -27,9 +29,18 @@ const GroupInfoPage = () => {
 
     IdleUser(); //Sets Idle Timer
 
+    useEffect(() => {
+      var roomName = group?.bookedRoom?.name.toLowerCase();
+              setRoomName(roomName)      
+    })
+    
     async function getGroupInfo(currentDate: string, groupId: string) {
+      setIsLoading(true);
       const response: any = await fetchGroupInfo(currentDate, groupId)
-      setGroup(response)
+      setGroup(response);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500)
     }
 
     useEffect(() => {
@@ -55,17 +66,15 @@ const GroupInfoPage = () => {
       getWeekAndDay(currentDate)
     }, [currentDate])
     
-    useEffect(() => {
-        var roomName = group?.bookedRoom?.name.toLowerCase();
-                setRoomName(roomName)
-        }
-      )
-  
+   
     const name = roomName!;
         return (
 
           <Container>
-              <Stack gap={5}>
+            {isLoading ? (
+            <LoadingSpinner isLoading={isLoading} message="Please wait. . ."/>
+            ) : (
+               <Stack gap={5}>
                 <Row className="d-flex align-items-center justify-content-center">
                   <Col className="groupInfoCard text-center p-3" key={groupId} md={6}>
                         <h2>{group?.name}</h2>
@@ -111,6 +120,7 @@ const GroupInfoPage = () => {
                         </Col>
                         </Row>
               </Stack>
+            )}
           </Container>
         )
     }
