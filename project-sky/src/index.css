@@ -368,6 +368,9 @@ input[type="text"].adminDateInput {
 
 .react-datepicker-wrapper{
   width: min-content !important;
+  margin:auto;
+  margin-right: 0;
+  margin-left: 0;
 }
 
 /* -------------------- Map --------------------------*/

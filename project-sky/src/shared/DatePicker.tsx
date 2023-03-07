@@ -69,7 +69,7 @@ const Datepicker = () => {
 
     const toggleButton = () => {
         return (
-              <Col className="justify-content-center text-center align-items-center">
+              <Col className="col-12 col-md-6 align-self-center d-flex justify-content-center">
 
             <button className="togglebtn" onClick={handleOnClick}>
                 {toggle ?
@@ -90,9 +90,9 @@ const Datepicker = () => {
     }
 
     return (
-      <Row className="flex-wrap flex-column-reverse justify-content-center">
+      <Row className="flex-wrap flex-column-reverse">
             {showToggleBtn ? toggleButton() : ""}
-        <Col xs={12} md={4} order={2} className="layoutColumn">
+        <Col className="col-12 col-md-6 align-self-center d-flex justify-content-center">
             <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
             <DatePicker 
               value={currentDate}
