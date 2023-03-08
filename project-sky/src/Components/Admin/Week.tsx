@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Container} from "react-bootstrap";
-import { useLocation } from "react-router-dom";
 import { useWeek } from "./AdminBooking";
 import EditTable from "./AdminComponents/EditTable";
 import WeekTable from "./AdminComponents/WeekTable";
@@ -22,7 +21,7 @@ const Week = () => {
                 </div>
             </div>
             <div>
-                {useEdit ? <EditTable currentDate={week.date}/> : <WeekTable inputDate={week.date}/>}
+                {useEdit ? <EditTable currentDate={"2023-01-09"}/> : <WeekTable inputDate={"2023-01-09"}/>}
             </div>
         </Container>
     )
