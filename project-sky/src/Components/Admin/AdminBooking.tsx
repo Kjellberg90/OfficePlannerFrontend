@@ -1,8 +1,18 @@
 import { useState } from "react";
 import { Col, Container, Nav, Row } from "react-bootstrap";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useOutletContext } from "react-router-dom";
+import { weekData } from "./AdminInterfaces";
 
 const AdminBooking = () => {
+
+    const [week, setWeek] = useState<weekData>({
+        weekNumber: 1,
+        date: "2023-01-09"
+    })
+
+    // state={{week: "2023-01-09", weekNumber: 1}}
+    // state={{week: "2023-01-16", weekNumber: 2}}
+    // state={{week: "2023-01-23", weekNumber: 3}}
 
     return (
         <Container>
@@ -13,9 +23,9 @@ const AdminBooking = () => {
                             <h5>Weeks</h5>
                             <ul>
                                 <li><NavLink to="weeks">All weeks</NavLink></li>
-                                <li><NavLink to="week" state={{week: "2023-01-09", weekNumber: 1}}>Week 1</NavLink></li>
-                                <li><NavLink to="week" state={{week: "2023-01-16", weekNumber: 2}}>Week 2</NavLink></li>
-                                <li><NavLink to="week" state={{week: "2023-01-23", weekNumber: 3}}>Week 3</NavLink></li>
+                                <li><NavLink to="week" onClick={() => setWeek({weekNumber: 1, date: "2023-01-09"})}>Week 1</NavLink></li>
+                                <li><NavLink to="week" onClick={() => setWeek({weekNumber: 2, date: "2023-01-16"})}>Week 2</NavLink></li>
+                                <li><NavLink to="week" onClick={() => setWeek({weekNumber: 3, date: "2023-01-23"})}>Week 3</NavLink></li>
                                 <li>Edit</li>
                             </ul>
                         </div>
@@ -25,7 +35,7 @@ const AdminBooking = () => {
                     </Nav>
                 </Col>
                 <Col>
-                    <Outlet />
+                    <Outlet context={{week}}/>
                 </Col>                
             </Row>
         </Container>
@@ -33,3 +43,7 @@ const AdminBooking = () => {
 }
 
 export default AdminBooking;
+
+export const useWeek = () => {
+    return useOutletContext<weekData>();
+}

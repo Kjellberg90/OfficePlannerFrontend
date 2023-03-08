@@ -1,19 +1,18 @@
 import { useState } from "react";
 import { Container} from "react-bootstrap";
 import { useLocation } from "react-router-dom";
+import { useWeek } from "./AdminBooking";
 import EditTable from "./AdminComponents/EditTable";
 import WeekTable from "./AdminComponents/WeekTable";
 
 const Week = () => {
-    const weekNumber = useLocation().state.weekNumber;
+    const week = useWeek();
     const [useEdit, setUseEdit] = useState(false);
-
-    const date = useLocation().state.week;
 
     return (
         <Container>
             <div className="d-flex justify-content-between adminBookingActions">
-                <h3>Week: {weekNumber}</h3>
+                <h3>Week: {week.weekNumber}</h3>
                 <div className="d-flex gap-1">
                     <button className="adminButton" disabled={useEdit} type="button"onClick={() => setUseEdit(true)}>Edit</button>
                     <button className="adminButton" disabled={true} type="button">Undo</button>
@@ -23,7 +22,7 @@ const Week = () => {
                 </div>
             </div>
             <div>
-                {useEdit ? <EditTable currentDate={date}/> : <WeekTable inputDate={date}/>}
+                {useEdit ? <EditTable currentDate={week.date}/> : <WeekTable inputDate={week.date}/>}
             </div>
         </Container>
     )
