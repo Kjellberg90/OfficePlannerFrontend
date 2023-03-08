@@ -1,9 +1,9 @@
-
 /* -------------- General Styling --------------------*/
 :root {
   --primary-color: #425563;
   --secondary-color: #FFC72C;
-  --accent-color: #001e32; /* Möjlig accentfärg */
+  --accent-color: #001e32;
+  /* Möjlig accentfärg */
 }
 
 * {
@@ -22,65 +22,65 @@ h1 {
 a {
   color: var(--primary-color);
   text-decoration: none;
- }
+}
 
- a :hover {
+a :hover {
   color: var(--primary-color);
   text-decoration: underline;
- }
+}
 
- .headerSecondaryColor {
+.headerSecondaryColor {
   color: var(--secondary-color);
- }
+}
 
 /* -------------- Startpage Styling --------------------*/
 
- .selectionBox {
+.selectionBox {
   background-color: var(--secondary-color);
   aspect-ratio: 1.5 / 1;
   border-radius: 50px;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
- }
+}
 
 .boxTextStartPage {
   color: var(--primary-color);
 }
 
- /* -------------- Layout Styling --------------------*/
+/* -------------- Layout Styling --------------------*/
 
- .layoutHeader {
+.layoutHeader {
   padding-top: 10px;
   height: 100px;
   width: 100%;
- }
+}
 
- .layoutColumn {
+.layoutColumn {
   display: flex;
   justify-content: center;
   align-items: center;
- }
+}
 
- .epirocLogo {
-  filter:drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.3))
- }
+.epirocLogo {
+  filter: drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.3))
+}
 
- .return-arrow {
+.return-arrow {
   color: var(--secondary-color);
   font-size: 80px;
-  filter:drop-shadow(2px 3px 1px rgba(0, 0, 0, 0.3))
- }
+  filter: drop-shadow(2px 3px 1px rgba(0, 0, 0, 0.3))
+}
 
- .return-arrow:hover {
+.return-arrow:hover {
   cursor: pointer;
- }
+}
 
- @media (max-width:768px) {
-  .layoutColumn a{
+@media (max-width:768px) {
+  .layoutColumn a {
     height: 40px;
   }
 
   .layoutColumn h1 {
-    font-size:x-large;
+    font-size: x-large;
   }
 
   .layoutHeader {
@@ -92,35 +92,35 @@ a {
   }
 }
 
- /* -------------- Groupselectionpage Styling --------------------*/
+/* -------------- Groupselectionpage Styling --------------------*/
 
- .groupNameDiv {
+.groupNameDiv {
   background-color: var(--secondary-color);
   border-radius: 50px 50px 45px 45px;
   color: var(--primary-color);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
- }
+}
 
 /* -------------- Groupinfopage Styling --------------------*/
 
- .groupInfoCard {
+.groupInfoCard {
   background-color: var(--secondary-color);
   border-radius: 50px 50px 45px 45px;
   color: var(--primary-color);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
- }
+}
 
- .headerContainer {
+.headerContainer {
   padding-bottom: 40px;
- }
+}
 
- .UnbookedText {
+.UnbookedText {
   color: #b7312c;
- }
+}
 
- .BookedText {
+.BookedText {
   color: #45880a;
- }
+}
 
 /* -------------- RoomsPage Styling --------------------*/
 
@@ -141,12 +141,12 @@ a {
 }
 
 input[type="search"]::-webkit-search-decoration:hover,
-input[type="search"]::-webkit-search-cancel-button:hover { 
-    cursor:pointer; 
+input[type="search"]::-webkit-search-cancel-button:hover {
+  cursor: pointer;
 }
 
 .checkRoom {
-  color:green
+  color: green
 }
 
 .pinInput::-webkit-outer-spin-button,
@@ -156,7 +156,7 @@ input[type="search"]::-webkit-search-cancel-button:hover {
 }
 
 .crossRoom {
-  color:red
+  color: red
 }
 
 .crossRoom:hover {
@@ -180,7 +180,7 @@ input[type="search"]::-webkit-search-cancel-button:hover {
   border: none;
 }
 
-.singleBookingUserDiv{
+.singleBookingUserDiv {
   padding: 0px 20px 0px 20px;
   margin: 0px;
   border-bottom: 1px solid #42556340;
@@ -231,7 +231,7 @@ input[type="search"]::-webkit-search-cancel-button:hover {
 }
 
 .hrDivider {
-  border-top: 1px solid  #42556340;
+  border-top: 1px solid #42556340;
   min-height: 3.5rem;
 }
 
@@ -263,7 +263,8 @@ input[type="text"].adminDateInput {
   width: 100%;
 }
 
-.adminHomePageTable th, .adminHomePageTable td {
+.adminHomePageTable th,
+.adminHomePageTable td {
   width: 12.5%;
 }
 
@@ -283,12 +284,11 @@ input[type="text"].adminDateInput {
 
 .groupTableActions,
 .adminGroupsTable td:first-child,
-.adminGroupsTable th:first-child
-{
+.adminGroupsTable th:first-child {
   text-align: center;
 }
 
-.adminGroupsTable td:last-child{
+.adminGroupsTable td:last-child {
   text-align: center;
   display: flex;
   justify-content: center;
@@ -311,7 +311,7 @@ input[type="text"].adminDateInput {
   color: var(--secondary-color)
 }
 
-.adminTableBody input{
+.adminTableBody input {
   width: 100%;
 }
 
@@ -320,7 +320,8 @@ input[type="text"].adminDateInput {
   padding-top: 1rem;
 }
 
-.adminBookingWeeks, h3:first-child {
+.adminBookingWeeks,
+h3:first-child {
   padding: 0;
 }
 
@@ -337,7 +338,8 @@ input[type="text"].adminDateInput {
   font-weight: bold;
   margin-right: 15px;
   border-radius: 8px;
-  filter:drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.5));
+  margin-top: 6px;
 }
 
 .givemespace {
@@ -351,7 +353,7 @@ input[type="text"].adminDateInput {
 .calBtn {
   color: var(--secondary-color);
   margin: 5px;
-  filter:drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.5));
 }
 
 .calBtn:hover {
@@ -359,15 +361,15 @@ input[type="text"].adminDateInput {
   cursor: pointer;
 }
 
-.dateInput{
+.dateInput {
   background-color: var(--secondary-color);
   color: var(--accent-color);
   font-weight: bold;
   text-align: center;
-  border:none;
+  border: none;
   border-radius: 8px;
   margin: 0px 5px;
-  filter:drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.5));
   min-height: 1.8rem;
 }
 
@@ -378,14 +380,12 @@ input[type="text"].adminDateInput {
 }
 
 .calendarInput .react-datepicker__header,
-.calendarInput .react-datepicker__triangle
-{
+.calendarInput .react-datepicker__triangle {
   background-color: var(--secondary-color);
 }
 
 .calendarInput .react-datepicker__triangle::before,
-.calendarInput .react-datepicker__triangle::after  
-{
+.calendarInput .react-datepicker__triangle::after {
   border-bottom-color: var(--secondary-color) !important;
 }
 
@@ -407,8 +407,11 @@ input[type="text"].adminDateInput {
   background-color: #d7d2cb
 }
 
-.react-datepicker-wrapper{
+.react-datepicker-wrapper {
   width: min-content !important;
+  margin: auto;
+  margin-right: 0;
+  margin-left: 0;
 }
 
 /* -------------------- Map --------------------------*/
@@ -425,7 +428,8 @@ input[type="text"].adminDateInput {
   display: flex;
 }
 
-.mapRoomNamesList, div {
+.mapRoomNamesList,
+div {
   justify-content: center;
 }
 
@@ -460,23 +464,107 @@ input[type="text"].adminDateInput {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px 3px, rgba(0, 0, 0, 0.2) 0px 0px inset;
 }
 
-/* TEMP BREAKPOINTS  */
 
-@media only screen and (min-width: 1200px) {
-  .smallMap {
-    height: 400px; 
-    width: 700px; 
-    padding-left: 140px;
+.group-room-info-col {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border-radius: 50px 50px 45px 45px;
+  /* padding: 2px; */
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+/* Group Info Page BREAKPOINTS  */
+@media (max-width: 480px) {
+  .groupInfoCard {
+    /* background-color: red; */
+    margin-top: -2rem;
+    border-radius: 0%;
+  }
+
+  .group-room-info-col {
+    border-radius: 0%;
+    margin-bottom: -7rem;
   }
 }
 
-@media only screen and (min-width: 992px) {
-  .smallMap {
-    height: 300px; 
-    width: 500px; 
-    padding-left: 100px;
+@media (min-width: 540px) {
+
+  .groupInfoCard {
+    /* background-color: blue; */
+    border-radius: 0%;
+    margin-top: -2rem;
+  }
+
+  .group-room-info-col {
+    border-radius: 0%;
+    margin-bottom: -3rem;
   }
 }
+
+@media (min-width: 768px) {
+
+  .groupInfoWrapper {
+    margin-top: -3rem;
+    margin-bottom: -3rem;
+  }
+
+  .groupInfoCard {
+    /* background-color: yellow; */
+    border-radius: 40px 40px 35px 35px;
+  }
+
+  .togglebtn {
+    margin-left: -20px;
+    margin-bottom: 5px;
+  }
+
+  .group-room-info-col {
+    border-radius: 40px 40px 35px 35px;
+  }
+}
+
+@media (min-width: 992px) {
+
+  .groupInfoCard {
+    margin-top: 3rem;
+    /* background-color: violet; */
+    border-radius: 40px 40px 35px 35px;
+  }
+
+  .group-room-info-col {
+    border-radius: 40px 40px 35px 35px;
+  }
+
+  .epirocLogo {
+    margin-left: 60px;
+  }
+
+  .picker {
+    margin-right: 50px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .groupInfoCard {
+    margin-top: -2rem;
+    /* background-color: turquoise; */
+    border-radius: 40px 40px 35px 35px;
+  }
+
+  .group-room-info-col {
+    border-radius: 40px 40px 35px 35px;
+    margin-bottom: -4rem;
+  }
+
+  .epirocLogo {
+    margin-left: 60px;
+  }
+
+  .picker {
+    margin-right: 50px;
+  }
+}
+
 
 /* -------------- Loading Component --------------------*/
 
@@ -613,13 +701,16 @@ input[type="text"].adminDateInput {
   color: var(--accent-color);
 }
 
-.adminTable th, .adminTable td {
+.adminTable th,
+.adminTable td {
   border-right: var(--accent-color) solid 1px;
 }
 
-.adminTable th:last-child, td:last-child {
+.adminTable th:last-child,
+td:last-child {
   border-right: none;
 }
+
 .adminTableHeader th {
   background-color: var(--secondary-color);
   border-bottom: var(--accent-color);
@@ -634,7 +725,7 @@ input[type="text"].adminDateInput {
 }
 
 .adminTableBody tr:nth-child(even) td,
-.adminTableBody tr:nth-child(even) th{
+.adminTableBody tr:nth-child(even) th {
   background-color: rgb(255, 255, 255);
 }
 
@@ -642,12 +733,13 @@ input[type="text"].adminDateInput {
   border-bottom-left-radius: 1rem;
 }
 
-.adminTableBody tr:last-child td:last-child{
+.adminTableBody tr:last-child td:last-child {
   border-bottom-right-radius: 1rem;
 }
 
-.adminTable td, 
+.adminTable td,
 .adminTable th {
-  padding: 0.5rem;  
+  padding: 0.5rem;
 }
+
 /* #endregion */
