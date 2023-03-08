@@ -1,6 +1,6 @@
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { ChangeEvent, SetStateAction, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { fetchAdminRooms } from "../../shared/Fetch/AdminRoomFetches";
 import { fetchAdminSingleRoomBooking, fetchDeleteBooking, fetchPostNewBooking } from "../../shared/Fetch/AdminSingleRoomBooking";
@@ -57,13 +57,52 @@ useEffect(() => {
   GetRooms()
 }, [])
 
-const [addBooking, setaddBooking] = useState([]);
+const [newBooking, setNewBooking] = useState();
 
 async function AddBooking() {
-
-  // const data = {"groupId": 9, "roomId": 5, date: "2023-03-11"}
-  // await fetchPostNewBooking(data)
+  console.log(newBooking)
+  // await fetchPostNewBooking()
 }
+
+
+// "groupId": 1,
+//   "roomId": 1,
+//   "date": "2023-03-11"
+//----------------------------------------------------------------------------------------
+const [newValues, setNewValues] = useState<{groupId: number | undefined; roomId: number | undefined; date: string | undefined;}>
+({groupId: 0, 
+  roomId: 0,
+  date: ""
+});
+
+const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
+const value = e.target.value;
+console.log(value)
+// let intValue = 0;
+// if (e.target.type === "number") {
+//   intValue = parseInt(value, 10)
+//   setNewValues({
+//       ...newValues,
+//       [e.target.name]: intValue
+//   });
+//   return;
+}
+
+
+// setNewValues({
+//   ...newValues,
+//   [e.target.name]: value
+// });
+// }
+
+// useEffect(() => {
+// setNewValues({
+//   ...newValues,
+//   ["name"]: currentRoom?.name,
+//   ["seats"]: currentRoom?.seats
+// })
+// }, [currentRoom])
+//----------------------------------------------------------------------------------
 
     return (
         <Container>
@@ -115,7 +154,9 @@ async function AddBooking() {
                 booking={currentBooking}
                 groups={groups}
                 rooms={rooms}
-                onSubmit={AddBooking}
+                onSubmit={() => AddBooking()}
+                updatedvalue={HandleChange}
+                // setBooking={() => setNewBooking()}
             />
         </Container>
     )

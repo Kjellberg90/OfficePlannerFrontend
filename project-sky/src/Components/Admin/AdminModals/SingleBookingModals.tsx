@@ -38,13 +38,10 @@ export const AddBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detai
 
   const [groups, setGroups] = useState([]);
   const [rooms, setRooms] = useState([]);
-  
 
   useEffect(() => {
     setGroups(props.groups)
     setRooms(props.rooms)
-    console.log("Groups: ", groups)
-    console.log("Rooms: ", rooms)
   })
 
   return (
@@ -59,28 +56,56 @@ export const AddBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detai
               </ModalHeader>
               <ModalBody>
                 <form id="addSingleBookingModalForm">
-                  <select placeholder="Select Group" >
+                  <select placeholder="Select Group" onChange={props.updatedvalue}>
+                  {/* <select placeholder="Select Group" onChange={props.updatedvalue}> */}
                     {
                       groups.map((group: Groups) => {
-                        return <option key={group.id}>{group.name}</option>
+                        return <option key={group.id} >{group.name}</option>
                       })
                     }
                   </select>
-                  <select placeholder="Select Room" >
+                  <select placeholder="Select Room" onChange={props.updatedvalue}>
                   {
                       rooms.map((room: AdminRoom) => {
                         return <option key={room.id}>{room.name}</option>
                       })
                     }
                     </select>
-                  <input type="date" />
+                  <input type="date" onChange={props.updatedvalue}/>
                 </form>
               </ModalBody>
               <ModalFooter>
-                <button form="addSingleBookingModalForm" type="submit" className="btn btn-primary" onClick={() => props.onsubmit(booking)}>Book</button>
+                <button form="addSingleBookingModalForm" type="submit" className="btn btn-primary" onClick={() => {props.onsubmit()}}>Book</button>
                 <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
               </ModalFooter>
           </Modal>
       </Fragment>
   )
 }
+
+// export const UpdateBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
+//   return (
+//       <Fragment>
+//           <Modal {...props}
+//               size="lg"
+//               aria-labelledby="contained-modal-title-vcenter"
+//               centered
+//           >
+//               <ModalHeader>
+//                   <h3>Update room</h3>
+//               </ModalHeader>
+//               <ModalBody>
+//                   <form id="updateGroupForm">
+//                       <input type="text" placeholder={props.roomname} onChange={props.updatedvalue} name="name"/>
+//                       <input type="number" placeholder={props.seats} onChange={props.updatedvalue} name="seats"/>
+//                   </form>
+//               </ModalBody>
+//               <ModalFooter>
+//                   <button form="updateGroupForm" type="submit" className="btn btn-primary" onClick={props.onsubmit}>Update room</button>
+//                   <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
+
+//               </ModalFooter>
+//           </Modal>
+//       </Fragment>
+//   )
+// }
