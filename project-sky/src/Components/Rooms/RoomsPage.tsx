@@ -22,7 +22,7 @@ const RoomsPage = () => {
     const [showDrop, setShowDrop] = useState(false);
     const [id, setid] = useState<number>();
     const [name, setname] = useState("");
-    const [deleteUser, setdeleteUser] = useState({});
+    const [deleteUser, setdeleteUser] = useState({ date: '', userName: '', roomId: 0 });
     
     var {currentDate} = useContext(DateContext)
 
@@ -171,7 +171,7 @@ const deleteSingleBooking = () => {
                 show={show}
                 onHide={() => {getRoomInfo(); setShow(false); setisOpenDrop(NaN);}}
                 user={deleteUser}
-                onDelete={() => {deleteSingleBooking(); setShow(false); setisOpenDrop(NaN)}}
+                delete={() => {deleteSingleBooking(); setShow(false); setisOpenDrop(NaN)}}
             />
             <RoomMapModal
                 show={showMap}

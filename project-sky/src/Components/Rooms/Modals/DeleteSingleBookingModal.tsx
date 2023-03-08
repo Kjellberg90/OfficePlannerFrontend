@@ -1,16 +1,26 @@
-import { DetailedHTMLProps, Fragment, HTMLAttributes, ReactNode, RefObject } from "react";
+import { DetailedHTMLProps, Fragment, HTMLAttributes, ReactNode, RefObject, useState } from "react";
 import { Modal, ModalProps } from "react-bootstrap";
 import { Omit, BsPrefixProps } from "react-bootstrap/esm/helpers";
 
 
+type DeleteSingleBookingModalProps = {
+  show: boolean;
+  onHide: () => void;
+  user: { date: string; userName: string; roomId: number };
+  delete: () => void;
+};
 
-export const DeleteSingleBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode; }) => {
-
+export const DeleteSingleBookingModal = ({
+  show,
+  onHide,
+  user,
+  delete: handleDelete,
+}: DeleteSingleBookingModalProps) => {
 
   return (
   <Fragment>
       <Modal
-        {...props}
+        show={show} onHide={onHide} 
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -18,10 +28,10 @@ export const DeleteSingleBookingModal = (props: JSX.IntrinsicAttributes & Omit<P
         <Modal.Header className="d-flex justify-content-center dropSeatModalHeader" closeButton>
         </Modal.Header>
         <Modal.Body  className="d-flex justify-content-center dropSeatModalBody" >
-          <h4>Drop Booked Seat for {props.user.userName}</h4>
+          <h4>Drop Booked Seat for {user.userName}</h4>
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-around dropSeatModalFooter">
-          <button className="dropButton" onClick={props.onDelete}>Drop Booking</button>
+          <button className="dropButton" onClick={handleDelete}>Drop Booking</button>
         </Modal.Footer>
       </Modal>
   </Fragment>
