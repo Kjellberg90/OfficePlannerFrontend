@@ -14,6 +14,7 @@ import LoginPage from "./Components/Login/Login";
 import AdminBooking from "./Components/Admin/AdminBooking";
 import Week from "./Components/Admin/Week";
 import Weeks from "./Components/Admin/Weeks";
+import AdminSingleBooking from "./Components/Admin/AdminSingleBooking";
 
 const AppRouter = () => {
 
@@ -34,6 +35,7 @@ const AppRouter = () => {
                             <Route path="weeks" element={<Weeks />} />
                             <Route path="week" element={<Week />} />
                         </Route>
+                        <Route path="singlebooking" element={<AdminSingleBooking />} />
                     </Route>
                 </Route>
             </Route>
