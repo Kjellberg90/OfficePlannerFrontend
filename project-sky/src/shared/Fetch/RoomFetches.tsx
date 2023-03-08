@@ -42,8 +42,6 @@ export const fetchPostSingleBookings = (data: any) => {
       'Content-Type': 'application/json'
     }
   }
-  )
-    .catch(err => console.log(err))
-  
+  )  
     return result
 }
