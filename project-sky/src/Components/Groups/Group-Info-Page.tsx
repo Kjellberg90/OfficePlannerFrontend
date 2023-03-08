@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useEffect, useContext } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useLocation } from 'react-router-dom';
 import { Container, Row, Col, Stack } from 'react-bootstrap'
 import Groups from './groupsInterface'
@@ -7,11 +7,9 @@ import IdleUser from "../../shared/IdleUser/IdleUser";
 import SmallerMap from "../../shared/Map/SmallerMap";
 import { DateContext } from "../../shared/DateContext";
 import { fetchGroupInfo, fetchWeekAndDay, fetchWeeklyGroupSchedule } from "../../shared/Fetch/GroupFetches";
-import { LoadingSpinner } from "../../shared/Spinner/LoadingSpinner";
 
 const GroupInfoPage = () => {
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  
   const [group, setGroup] = useState<Groups>();
   const [weeklySchedule, setweeklySchedule] = useState([]);
   const [currentWeek, setcurrentWeek] = useState<Week>();
@@ -35,12 +33,8 @@ const GroupInfoPage = () => {
   }, [group?.bookedRoom?.name])
 
   async function getGroupInfo(currentDate: string, groupId: string) {
-    setIsLoading(true);
     const response: any = await fetchGroupInfo(currentDate, groupId)
     setGroup(response);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500)
   }
 
   useEffect(() => {
