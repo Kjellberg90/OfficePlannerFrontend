@@ -2,7 +2,9 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { fetchAdminSingleRoomBooking, fetchDeleteBooking } from "../../shared/Fetch/AdminSingleRoomBooking";
+import { fetchAdminRooms } from "../../shared/Fetch/AdminRoomFetches";
+import { fetchAdminSingleRoomBooking, fetchDeleteBooking, fetchPostNewBooking } from "../../shared/Fetch/AdminSingleRoomBooking";
+import { fetchGroups } from "../../shared/Fetch/GroupFetches";
 import { AddBookingModal, DeleteBookingModal } from "./AdminModals/SingleBookingModals";
 
 
@@ -23,7 +25,6 @@ const AdminSingleBooking = () => {
 
   async function GetBookings() {
     const response: any = await fetchAdminSingleRoomBooking()
-    console.log(response)
     setbookings(response)
   }
 
@@ -38,7 +39,31 @@ async function DeleteBooking() {
     .then(() => GetBookings())
 } 
 
+const [groups, setGroups] = useState([]);
+    
+async function GetGroups() {
+  const response: any = await fetchGroups()
+setGroups(response)
+}
+const [rooms, setRooms] = useState([]);
+    
+async function GetRooms() {
+  const response: any = await fetchAdminRooms()
+  setRooms(response)
+}
 
+useEffect(() => {
+  GetGroups()
+  GetRooms()
+}, [])
+
+const [addBooking, setaddBooking] = useState([]);
+
+async function AddBooking() {
+
+  // const data = {"groupId": 9, "roomId": 5, date: "2023-03-11"}
+  // await fetchPostNewBooking(data)
+}
 
     return (
         <Container>
@@ -88,8 +113,9 @@ async function DeleteBooking() {
                 show={showAddBooking}
                 onHide={() => {setshowAddBooking(false)}}
                 booking={currentBooking}
-                // groups={groups}
-                // rooms={rooms}
+                groups={groups}
+                rooms={rooms}
+                onSubmit={AddBooking}
             />
         </Container>
     )

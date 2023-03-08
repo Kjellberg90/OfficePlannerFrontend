@@ -1,8 +1,14 @@
-import { DetailedHTMLProps, Fragment, HTMLAttributes, ReactNode, RefObject, useState } from "react";
+import { DetailedHTMLProps, Fragment, HTMLAttributes, ReactNode, RefObject, useEffect, useState } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader, ModalProps } from "react-bootstrap";
 import { BsPrefixProps, Omit } from "react-bootstrap/esm/helpers";
-import DatePicker from "react-datepicker";
-import { format } from "date-fns";
+import Groups from "../../Groups/groupsInterface";
+import Room from "../../Rooms/Room";
+
+interface AdminRoom {
+  id: number;
+  name: string;
+  seats: number;
+}
 
 export const DeleteBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
   return (
@@ -29,6 +35,18 @@ export const DeleteBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<De
 
 export const AddBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: RefObject<HTMLDivElement> | ((instance: HTMLDivElement | null) => void) | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode; }) => {
   
+
+  const [groups, setGroups] = useState([]);
+  const [rooms, setRooms] = useState([]);
+  
+
+  useEffect(() => {
+    setGroups(props.groups)
+    setRooms(props.rooms)
+    console.log("Groups: ", groups)
+    console.log("Rooms: ", rooms)
+  })
+
   return (
       <Fragment>
           <Modal {...props}
@@ -40,13 +58,27 @@ export const AddBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detai
                   <h3>Add Booking</h3>
               </ModalHeader>
               <ModalBody>
-                  <select placeholder="Select Room" ></select>
-                  <select placeholder="Select Group" ></select>
+                <form id="addSingleBookingModalForm">
+                  <select placeholder="Select Group" >
+                    {
+                      groups.map((group: Groups) => {
+                        return <option key={group.id}>{group.name}</option>
+                      })
+                    }
+                  </select>
+                  <select placeholder="Select Room" >
+                  {
+                      rooms.map((room: AdminRoom) => {
+                        return <option key={room.id}>{room.name}</option>
+                      })
+                    }
+                    </select>
                   <input type="date" />
+                </form>
               </ModalBody>
               <ModalFooter>
-                  <button type="button" className="btn btn-primary" onClick={props.delete}>Book</button>
-                  <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
+                <button form="addSingleBookingModalForm" type="submit" className="btn btn-primary" onClick={() => props.onsubmit(booking)}>Book</button>
+                <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
               </ModalFooter>
           </Modal>
       </Fragment>

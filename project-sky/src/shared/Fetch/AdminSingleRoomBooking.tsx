@@ -24,3 +24,17 @@ export const fetchDeleteBooking = (ID : any) => {
   
     return result
 }
+
+export const fetchPostNewBooking = (data: any) => {
+  var result = axios.post(`https://localhost:7054/api/Booking/postGroupToRoom`, data, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: "Bearer " + GetCookie("token"),
+    }
+  }
+  )
+    .catch(err => console.log(err))
+  
+    return result
+}
