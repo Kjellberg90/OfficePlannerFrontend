@@ -4,15 +4,10 @@ import { NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { weekData } from "./AdminInterfaces";
 
 const AdminBooking = () => {
-
     const [week, setWeek] = useState<weekData>({
         weekNumber: 1,
         date: "2023-01-09"
-    })
-
-    // state={{week: "2023-01-09", weekNumber: 1}}
-    // state={{week: "2023-01-16", weekNumber: 2}}
-    // state={{week: "2023-01-23", weekNumber: 3}}
+    });
 
     return (
         <Container>
@@ -26,7 +21,6 @@ const AdminBooking = () => {
                                 <li><NavLink to="week" onClick={() => setWeek({weekNumber: 1, date: "2023-01-09"})}>Week 1</NavLink></li>
                                 <li><NavLink to="week" onClick={() => setWeek({weekNumber: 2, date: "2023-01-16"})}>Week 2</NavLink></li>
                                 <li><NavLink to="week" onClick={() => setWeek({weekNumber: 3, date: "2023-01-23"})}>Week 3</NavLink></li>
-                                <li>Edit</li>
                             </ul>
                         </div>
                         <div>
@@ -35,15 +29,15 @@ const AdminBooking = () => {
                     </Nav>
                 </Col>
                 <Col>
-                    <Outlet context={{week}}/>
+                    <Outlet context={week}/>
                 </Col>                
             </Row>
         </Container>
     )
 }
 
-export default AdminBooking;
-
 export const useWeek = () => {
     return useOutletContext<weekData>();
 }
+
+export default AdminBooking;

@@ -66,7 +66,7 @@ const EditTable = (props: {currentDate: string}) => {
 
     
     return (
-        <form id="testForm" onReset={HandleReset} onSubmit={HandleSubmit}>
+        <form id="editForm" onReset={HandleReset} onSubmit={HandleSubmit}>
         <table className="adminTable adminHomePageTable">
             <thead>
                 <tr className="adminTableHeader">
