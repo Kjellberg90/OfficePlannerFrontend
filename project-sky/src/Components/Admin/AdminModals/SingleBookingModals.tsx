@@ -1,3 +1,4 @@
+import { group } from "console";
 import { DetailedHTMLProps, Fragment, HTMLAttributes, ReactNode, RefObject, useEffect, useState } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader, ModalProps } from "react-bootstrap";
 import { BsPrefixProps, Omit } from "react-bootstrap/esm/helpers";
@@ -56,22 +57,22 @@ export const AddBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detai
               </ModalHeader>
               <ModalBody>
                 <form id="addSingleBookingModalForm">
-                  <select placeholder="Select Group" onChange={props.updatedvalue}>
+                  <select placeholder="Select Group" name="groupId" id="groupId" onChange={props.updatedvalue}>
                   {/* <select placeholder="Select Group" onChange={props.updatedvalue}> */}
                     {
                       groups.map((group: Groups) => {
-                        return <option key={group.id} >{group.name}</option>
+                        return <option id="groupName" key={group.id} value={group.id} >{group.name}</option>
                       })
                     }
                   </select>
-                  <select placeholder="Select Room" onChange={props.updatedvalue}>
+                  <select placeholder="Select Room" name="roomId"  id="roomId" onChange={props.updatedvalue}>
                   {
                       rooms.map((room: AdminRoom) => {
-                        return <option key={room.id}>{room.name}</option>
+                        return <option key={room.id} value={room.id}>{room.name}</option>
                       })
                     }
                     </select>
-                  <input type="date" onChange={props.updatedvalue}/>
+                  <input type="date" name="date" onChange={props.updatedvalue}/>
                 </form>
               </ModalBody>
               <ModalFooter>

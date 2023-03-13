@@ -26,6 +26,8 @@ export const fetchDeleteBooking = (ID : any) => {
 }
 
 export const fetchPostNewBooking = (data: any) => {
+  console.log(data)
+  debugger
   var result = axios.post(`https://localhost:7054/api/Booking/postGroupToRoom`, data, {
     headers: {
       'Accept': 'application/json',

@@ -57,51 +57,39 @@ useEffect(() => {
   GetRooms()
 }, [])
 
-const [newBooking, setNewBooking] = useState();
 
 async function AddBooking() {
-  console.log(newBooking)
-  // await fetchPostNewBooking()
+  console.log(formData)
+  await fetchPostNewBooking(formData)
 }
 
 
-// "groupId": 1,
-//   "roomId": 1,
-//   "date": "2023-03-11"
-//----------------------------------------------------------------------------------------
-const [newValues, setNewValues] = useState<{groupId: number | undefined; roomId: number | undefined; date: string | undefined;}>
-({groupId: 0, 
-  roomId: 0,
+const [formData, setFormData] = useState({
+  groupId: "", 
+  roomId: "",
   date: ""
-});
+})
 
 const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
-const value = e.target.value;
-console.log(value)
-// let intValue = 0;
-// if (e.target.type === "number") {
-//   intValue = parseInt(value, 10)
-//   setNewValues({
-//       ...newValues,
-//       [e.target.name]: intValue
-//   });
-//   return;
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value
+})
+console.log(formData)
 }
+  
+  // useEffect(() => {
+  //   setFormData({
+  //       ...formData,
+  //       ["roomId"]: formData.roomId,
+  //       ["groupId"]: formData.groupId,
+  //       ["date"]: formData.date
+  //   })
+  // }, [formData])
 
 
-// setNewValues({
-//   ...newValues,
-//   [e.target.name]: value
-// });
-// }
 
-// useEffect(() => {
-// setNewValues({
-//   ...newValues,
-//   ["name"]: currentRoom?.name,
-//   ["seats"]: currentRoom?.seats
-// })
-// }, [currentRoom])
+
 //----------------------------------------------------------------------------------
 
     return (
