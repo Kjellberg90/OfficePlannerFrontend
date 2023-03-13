@@ -1,8 +1,9 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, SyntheticEvent } from "react";
 import Group from "../../Groups/Group";
 import RoomOverview from "../../Rooms/RoomOverview";
 import { fetchGroupsOverview } from "../../../shared/Fetch/AdminHomeFetches";
 import { fetchGroups } from "../../../shared/Fetch/AdminGroupFetches";
+import { FetchPutBookings } from "../../../shared/Fetch/AdminBookingFetches";
 
 const EditTable = (props: {currentDate: string}) => {
     const [rooms, setRooms] = useState<RoomOverview[]>([]);
@@ -59,9 +60,13 @@ const EditTable = (props: {currentDate: string}) => {
         setRooms(roomList);
     }
 
+    const HandleSubmit = (e: SyntheticEvent) => {
+        FetchPutBookings(rooms, props.currentDate)
+    }
+
     
     return (
-        <form id="testForm" onReset={HandleReset}>
+        <form id="editForm" onReset={HandleReset} onSubmit={HandleSubmit}>
         <table className="adminTable adminHomePageTable">
             <thead>
                 <tr className="adminTableHeader">

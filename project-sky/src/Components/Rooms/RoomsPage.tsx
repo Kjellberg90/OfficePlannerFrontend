@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState, ChangeEvent } from "react";
 import RoomInfo from "./RoomInfo";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
@@ -14,174 +14,199 @@ import { fetchRooms, fetchSingleBookings, fetchDeleteSingleBookings, fetchPostSi
 
 const RoomsPage = () => {
 
-    const [rooms, setRooms] = useState([]);
-    const [users, setUsers] = useState([]);
-    const [err, setError] = useState([]);
-    const [isOpenBook, setisOpenBook] = useState<number>();
-    const [isOpenDrop, setisOpenDrop] = useState<number>();
-    const [showDrop, setShowDrop] = useState(false);
-    const [id, setid] = useState<number>();
-    const [name, setname] = useState("");
-    const [deleteUser, setdeleteUser] = useState({});
-    
-    var {currentDate} = useContext(DateContext)
+  const [rooms, setRooms] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [isOpenBook, setisOpenBook] = useState<number>();
+  const [isOpenDrop, setisOpenDrop] = useState<number>();
+  const [id, setid] = useState<number>();
+  const [name, setname] = useState("");
+  const [pin, setPin] = useState([0, 0, 0, 0]);
+  const [deleteUser, setdeleteUser] = useState({ date: '', userName: '', roomId: 0, pinNumbers: pin });
+  const [show, setShow] = useState(false);
+  const [showMap, setShowMap] = useState(false);
 
-IdleUser(); //Sets Idle Timer
+  var { currentDate } = useContext(DateContext)
 
-    async function getRoomInfo() {
-      const response: any = await fetchRooms(currentDate)
-      setRooms(response)
-    }
+  IdleUser(); //Sets Idle Timer
 
-    useEffect(() => {
-        getRoomInfo()
-        setisOpenBook(NaN)
-        setisOpenDrop(NaN)
-    },[currentDate])
+  async function getRoomInfo() {
+    const response: any = await fetchRooms(currentDate)
+    setRooms(response)
+  }
 
-async function getSingleBookings(roomId: number){
-  const response: any = await fetchSingleBookings(currentDate, roomId)
-  setUsers(response)
-}
+  useEffect(() => {
+    getRoomInfo()
+    setisOpenBook(NaN)
+    setisOpenDrop(NaN)
+  }, [currentDate])
 
-    const handleOpenBook = (roomId: number) => {
-      setisOpenBook(roomId)
-      setisOpenDrop(NaN);
-    }
+  async function getSingleBookings(roomId: number) {
+    const response: any = await fetchSingleBookings(currentDate, roomId)
+    setUsers(response)
+  }
 
-    const handleOpenDrop = (roomId: number) => {
-      setisOpenDrop(roomId)
-      setisOpenBook(NaN)
-      getSingleBookings(roomId)
-    }
+  const handleOpenBook = (roomId: number) => {
+    setisOpenBook(roomId)
+    setisOpenDrop(NaN);
+  }
 
-    const handleOpenMap = () => {
-      setShowMap(true);
-    }
+  const handleOpenDrop = (roomId: number) => {
+    setisOpenDrop(roomId)
+    setisOpenBook(NaN)
+    getSingleBookings(roomId)
+  }
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        setisOpenBook(NaN)       
-        
-        postSingleBooking()
-      }
+  const handleOpenMap = () => {
+    setShowMap(true);
+  }
 
-    const [show, setShow] = useState(false);
-    const [showMap, setShowMap] = useState(false);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    var index = parseInt(e.target.id.slice(-1)) - 1;
+    const val = e.target.valueAsNumber;
+    const newVal = val < 10 ? val : parseInt(val.toString().substring(0, 1));
+    var newPin = pin;
+    newPin[index] = newVal;
+    setPin(newPin);
+  }
 
-const postSingleBooking = () => {
-  const postData ={ "roomId": id, "date": currentDate, "name": name}
-  fetchPostSingleBookings(postData)
-    .then(() => getRoomInfo())
-}
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setisOpenBook(NaN)
 
-const userToDelete = ( userName: string, roomId: number) => {
-  setdeleteUser({date: currentDate, userName: userName, roomId: roomId})
-}
+    postSingleBooking()
+  }
 
-const deleteSingleBooking = () => {
-  fetchDeleteSingleBookings(deleteUser)
-    .then(() => getRoomInfo())
-}
 
-    return (   
-        <Container>
-            <Stack gap={4}>            
-                {rooms.map((room: RoomInfo) => {
-                  var singleSeatBooked = room.singleBookings > 0 ? true : false;
-                  var availableSeats = room.availableSeats > 0 ? true : false;
-                  return (
-                    <Row className="d-flex align-items-center justify-content-center" key={room.name}>
-                        <Col className="room-info-col text-center" md={6}>
-                            <Row>
-                                <h2><b>{room.name}</b></h2>
-                                {room.groupName === "" ? <h4><i>Unbooked</i></h4> : <h4><b>{room.groupName}</b></h4>}
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h5>Booked: {room.seats - room.availableSeats} / {room.seats}</h5>
-                                </Col>
-                                <Col>
-                                {(() => {
-                                  var icon = room.availableSeats > 0 ? faCheck : faXmark;
-                                  var iconColor = room.availableSeats > 0 ? "checkRoom" : "crossRoom"
-                                  return(
-                                     <h5>Available: <FontAwesomeIcon icon={ icon } className={iconColor} /></h5>
-                                  )
-                                })()}
-                                </Col>
-                            </Row>                    
-                            <Row>
-                              <Col className="p-0 hrDivider" >
-                                {(() => {
-                                  if (isOpenBook === room.roomId) {
-                                    return (
-                                      <div>
-                                      <form id="bookSingleBooking" className="form-inline"  onSubmit={handleSubmit}>
-                                        <div className="form-group mx-sm-3 mb-2 mt-2">
-                                          <input type="search" id="name" required className="form-control" placeholder="Name" onChange={(event) => {setname(event.target.value); setid(room.roomId)}} />
+  const postSingleBooking = () => {
+    const postData = { "roomId": id, "date": currentDate, "name": name, "pinNumbers": pin }
+    fetchPostSingleBookings(postData)
+      .then(() => {
+        getRoomInfo();
+        setPin([0, 0, 0, 0])
+      })
+  }
+
+  const userToDelete = (userName: string, roomId: number) => {
+    setdeleteUser({ date: currentDate, userName: userName, roomId: roomId, pinNumbers: pin })
+  }
+
+  const deleteSingleBooking = () => {
+    fetchDeleteSingleBookings(deleteUser)
+      .then(() => {
+        getRoomInfo();
+        setPin([0, 0, 0, 0]);
+      })
+  }
+
+  return (
+    <Container>
+      <Stack gap={4}>
+        {rooms.map((room: RoomInfo) => {
+          var singleSeatBooked = room.singleBookings > 0 ? true : false;
+          var availableSeats = room.availableSeats > 0 ? true : false;
+          return (
+            <Row className="d-flex align-items-center justify-content-center" key={room.name}>
+              <Col className="room-info-col text-center" md={6}>
+                <Row>
+                  <h2><b>{room.name}</b></h2>
+                  {room.groupName === "" ? <h4><i>Unbooked</i></h4> : <h4><b>{room.groupName}</b></h4>}
+                </Row>
+                <Row>
+                  <Col>
+                    <h5>Booked: {room.seats - room.availableSeats} / {room.seats}</h5>
+                  </Col>
+                  <Col>
+                    {(() => {
+                      var icon = room.availableSeats > 0 ? faCheck : faXmark;
+                      var iconColor = room.availableSeats > 0 ? "checkRoom" : "crossRoom"
+                      return (
+                        <h5>Available: <FontAwesomeIcon icon={icon} className={iconColor} /></h5>
+                      )
+                    })()}
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="p-0 hrDivider" >
+                    {(() => {
+                      if (isOpenBook === room.roomId) {
+                        return (
+                          <div>
+                            <form id="bookSingleBooking" className="form-inline" onSubmit={handleSubmit}>
+                              <div className="form-group mx-sm-3 mb-2 mt-2">
+                                <input type="search" id="name" required className="form-control" placeholder="Name" onChange={(event) => { setname(event.target.value); setid(room.roomId) }} />
+                                <div className="pinCode">
+                                  <label>PIN:</label>
+                                  <div className="pinCode">
+                                    <input type="number" className="pinInput" id="pin1" onChange={(e) => handleChange(e)} />
+                                    <input type="number" className="pinInput" id="pin2" onChange={(e) => handleChange(e)} />
+                                    <input type="number" className="pinInput" id="pin3" onChange={(e) => handleChange(e)} />
+                                    <input type="number" className="pinInput" id="pin4" onChange={(e) => handleChange(e)} />
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                            <button onClick={() => setisOpenBook(NaN)} className="dangerButton mb-2">Cancel</button>
+                            <button form="bookSingleBooking" type="submit" className="bookButton roomsPageSubmitButton">Book Seat</button>
+                          </div>
+                        )
+                      }
+                      else if (isOpenDrop === room.roomId) {
+                        return (
+                          <div>
+                            {
+                              (() => {
+                                if (users.length > 0) {
+                                  return (
+                                    users.map((user: SingleUser) => {
+                                      return (
+                                        <div className="d-flex justify-content-between align-items-center singleBookingUserDiv" key={user.id}>
+                                          <h4 className="singleBookingUserList">{user.userName} </h4><FontAwesomeIcon icon={faTrash} onClick={() => { setShow(true);; userToDelete(user.userName, room.roomId) }} className="crossRoom" />
                                         </div>
-                                      </form>
-                                        <button onClick={() => setisOpenBook(NaN)} className="dangerButton mb-2">Cancel</button>
-                                        <button form="bookSingleBooking" type="submit" className="bookButton roomsPageSubmitButton">Book Seat</button>
-                                      </div>
-                                    )
-                                  }
-                                  else if (isOpenDrop === room.roomId) {
-                                        return (
-                                          <div>
-                                          {
-                                            (() => {
-                                              if (users.length > 0 ){
-                                                return (
-                                                  users.map((user: SingleUser) => {
-                                                        return(
-                                                            <div className="d-flex justify-content-between align-items-center singleBookingUserDiv" key={user.id}>
-                                                              <h4 className="singleBookingUserList">{user.userName} </h4><FontAwesomeIcon icon={ faTrash } onClick={() => {setShow(true); ; userToDelete( user.userName, room.roomId )}} className="crossRoom" />
-                                                            </div>
-                                                        );
-                                                      })
-                                                )
-                                              } else {
-                                                return <h3 className="mt-2">No seats to drop</h3>
-                                              }
-                                              })()}
-                                            <div className="mx-sm-3 mb-2 mt-2">
-                                              <button className="dropButton" onClick={() => setisOpenDrop(NaN)}>Cancel</button>
-                                            </div>
-                                          </div>
-                                        )                                    
-                                  }
-                                  else {
-                                    return(
-                                      <div className="mx-sm-3 mb-2 mt-2">
-                                        <button disabled={!singleSeatBooked} className="dropButton mx-2" onClick={() => handleOpenDrop(room.roomId)}>Drop Seat</button>
-                                        <button disabled={!availableSeats} className="bookButton mx-2" onClick={() => handleOpenBook(room.roomId)} >Book Seat</button>
-                                      </div>
-                                    )
-                                  }
-                                })()}
-                              </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                )} )}     
-            </Stack>
-            <DeleteSingleBookingModal
-                show={show}
-                onHide={() => {getRoomInfo(); setShow(false); setisOpenDrop(NaN);}}
-                user={deleteUser}
-                delete={() => {deleteSingleBooking(); setShow(false); setisOpenDrop(NaN)}}
-            />
-            <RoomMapModal
-                show={showMap}
-                onHide={() => {setShowMap(false); }}
-            />
-            <Col className="mapBtnCol d-flex">
-              <button className="mapBtn" onClick={handleOpenMap}>Show Map</button>
-            </Col>
-        </Container>
-    )
+                                      );
+                                    })
+                                  )
+                                } else {
+                                  return <h3 className="mt-2">No seats to drop</h3>
+                                }
+                              })()}
+                            <div className="mx-sm-3 mb-2 mt-2">
+                              <button className="dropButton" onClick={() => setisOpenDrop(NaN)}>Cancel</button>
+                            </div>
+                          </div>
+                        )
+                      }
+                      else {
+                        return (
+                          <div className="mx-sm-3 mb-2 mt-2">
+                            <button disabled={!singleSeatBooked} className="dropButton mx-2" onClick={() => handleOpenDrop(room.roomId)}>Drop Seat</button>
+                            <button disabled={!availableSeats} className="bookButton mx-2" onClick={() => handleOpenBook(room.roomId)} >Book Seat</button>
+                          </div>
+                        )
+                      }
+                    })()}
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          )
+        })}
+      </Stack>
+      <DeleteSingleBookingModal
+        show={show}
+        onHide={() => { getRoomInfo(); setShow(false); setisOpenDrop(NaN); }}
+        user={deleteUser}
+        handleChange={handleChange}
+        delete={() => { deleteSingleBooking(); setShow(false); setisOpenDrop(NaN) }}
+      />
+      <RoomMapModal
+        show={showMap}
+        onHide={() => { setShowMap(false); }}
+      />
+      <Col className="mapBtnCol d-flex">
+        <button className="mapBtn" onClick={handleOpenMap}>Show Map</button>
+      </Col>
+    </Container>
+  )
 }
 
 export default RoomsPage;
