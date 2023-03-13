@@ -2,7 +2,14 @@ import axios from "axios"
 import { GetCookie } from "../CookieHandler/Cookiehandler"
 
 export const fetchAdminSingleRoomBooking = () => {
-  var result = axios.get(`https://localhost:7054/api/Booking/getGroupsBookedToRoom`)
+  var result = axios.get(`https://localhost:7054/api/Booking/getGroupsBookedToRoom`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: "Bearer " + GetCookie("token"),
+    }
+  }
+  )
     .then((response) => {
       return response.data
     })
@@ -37,4 +44,16 @@ export const fetchPostNewBooking = (data: any) => {
     .catch(err => console.log(err))
   
     return result
+}
+
+export const fetchPutBooking = (id: any , data: any) => {
+  var result = axios.put(`https://localhost:7054/api/Booking/EditGroupToRoomBooking?Id=${id}`, data, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + GetCookie("token"),
+    }
+  })
+  .catch(err => console.log(err))
+
+  return result
 }

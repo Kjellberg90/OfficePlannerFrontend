@@ -1,3 +1,4 @@
+import { group } from "console";
 import { DetailedHTMLProps, Fragment, HTMLAttributes, ReactNode, RefObject, useEffect, useState } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader, ModalProps } from "react-bootstrap";
 import { BsPrefixProps, Omit } from "react-bootstrap/esm/helpers";
@@ -34,8 +35,6 @@ export const DeleteBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<De
 }
 
 export const AddBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: RefObject<HTMLDivElement> | ((instance: HTMLDivElement | null) => void) | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode; }) => {
-  
-
   const [groups, setGroups] = useState([]);
   const [rooms, setRooms] = useState([]);
 
@@ -56,22 +55,21 @@ export const AddBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detai
               </ModalHeader>
               <ModalBody>
                 <form id="addSingleBookingModalForm">
-                  <select placeholder="Select Group" onChange={props.updatedvalue}>
-                  {/* <select placeholder="Select Group" onChange={props.updatedvalue}> */}
+                  <select placeholder="Select Group" name="groupId" id="groupId" onChange={props.updatedvalue}>
                     {
                       groups.map((group: Groups) => {
-                        return <option key={group.id} >{group.name}</option>
+                        return <option id="groupName" key={group.id} value={group.id} >{group.name}</option>
                       })
                     }
                   </select>
-                  <select placeholder="Select Room" onChange={props.updatedvalue}>
+                  <select placeholder="Select Room" name="roomId"  id="roomId" onChange={props.updatedvalue}>
                   {
                       rooms.map((room: AdminRoom) => {
-                        return <option key={room.id}>{room.name}</option>
+                        return <option key={room.id} value={room.id}>{room.name}</option>
                       })
                     }
                     </select>
-                  <input type="date" onChange={props.updatedvalue}/>
+                  <input type="date" name="date" onChange={props.updatedvalue}/>
                 </form>
               </ModalBody>
               <ModalFooter>
@@ -83,29 +81,51 @@ export const AddBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detai
   )
 }
 
-// export const UpdateBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
-//   return (
-//       <Fragment>
-//           <Modal {...props}
-//               size="lg"
-//               aria-labelledby="contained-modal-title-vcenter"
-//               centered
-//           >
-//               <ModalHeader>
-//                   <h3>Update room</h3>
-//               </ModalHeader>
-//               <ModalBody>
-//                   <form id="updateGroupForm">
-//                       <input type="text" placeholder={props.roomname} onChange={props.updatedvalue} name="name"/>
-//                       <input type="number" placeholder={props.seats} onChange={props.updatedvalue} name="seats"/>
-//                   </form>
-//               </ModalBody>
-//               <ModalFooter>
-//                   <button form="updateGroupForm" type="submit" className="btn btn-primary" onClick={props.onsubmit}>Update room</button>
-//                   <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
+export const EditBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
+  
+  const [groups, setGroups] = useState([]);
+  const [rooms, setRooms] = useState([]);
 
-//               </ModalFooter>
-//           </Modal>
-//       </Fragment>
-//   )
-// }
+  useEffect(() => {
+    setGroups(props.groups)
+    setRooms(props.rooms)
+  })
+  
+  return (
+      <Fragment>
+          <Modal {...props}
+              size="lg"
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+          >
+              <ModalHeader>
+                  <h3>Update Booking</h3>
+              </ModalHeader>
+              <ModalBody>
+              <form id="EditSingleBookingModalForm">
+                  <select placeholder="Select Group" name="groupId" id="groupId" onChange={props.updatedvalue}>
+                    {
+                      groups.map((group: Groups) => {
+                        return <option id="groupName" key={group.id} value={group.id} >{group.name}</option>
+                      })
+                    }
+                  </select>
+                  <select placeholder="Select Room" name="roomId"  id="roomId" onChange={props.updatedvalue}>
+                  {
+                      rooms.map((room: AdminRoom) => {
+                        return <option key={room.id} value={room.id}>{room.name}</option>
+                      })
+                  }
+                  </select>
+                  <input type="date" name="date" onChange={props.updatedvalue}/>
+                </form>
+              </ModalBody>
+              <ModalFooter>
+                  <button form="EditSingleBookingModalForm" type="submit" className="btn btn-primary" onClick={() => props.onsubmit()}>Update</button>
+                  <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
+
+              </ModalFooter>
+          </Modal>
+      </Fragment>
+  )
+}

@@ -1,11 +1,12 @@
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ChangeEvent, SetStateAction, useEffect, useState } from "react";
+import { id } from "date-fns/locale";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { fetchAdminRooms } from "../../shared/Fetch/AdminRoomFetches";
-import { fetchAdminSingleRoomBooking, fetchDeleteBooking, fetchPostNewBooking } from "../../shared/Fetch/AdminSingleRoomBooking";
+import { fetchAdminSingleRoomBooking, fetchDeleteBooking, fetchPostNewBooking, fetchPutBooking } from "../../shared/Fetch/AdminSingleRoomBooking";
 import { fetchGroups } from "../../shared/Fetch/GroupFetches";
-import { AddBookingModal, DeleteBookingModal } from "./AdminModals/SingleBookingModals";
+import { AddBookingModal, DeleteBookingModal, EditBookingModal } from "./AdminModals/SingleBookingModals";
 
 
 interface SingleRoomBooking {
@@ -22,6 +23,9 @@ const AdminSingleBooking = () => {
   const [currentBooking, setcurrentBooking] = useState<SingleRoomBooking>();
   const [showDeleteBooking, setShowDeleteBooking] = useState(false);
   const [showAddBooking, setshowAddBooking] = useState(false);
+  const [showEditBooking, setshowEditBooking] = useState(false);
+  const [groups, setGroups] = useState([]);
+  const [rooms, setRooms] = useState([]);
 
   async function GetBookings() {
     const response: any = await fetchAdminSingleRoomBooking()
@@ -39,13 +43,10 @@ async function DeleteBooking() {
     .then(() => GetBookings())
 } 
 
-const [groups, setGroups] = useState([]);
-    
 async function GetGroups() {
   const response: any = await fetchGroups()
 setGroups(response)
 }
-const [rooms, setRooms] = useState([]);
     
 async function GetRooms() {
   const response: any = await fetchAdminRooms()
@@ -57,52 +58,30 @@ useEffect(() => {
   GetRooms()
 }, [])
 
-const [newBooking, setNewBooking] = useState();
 
 async function AddBooking() {
-  console.log(newBooking)
-  // await fetchPostNewBooking()
+  await fetchPostNewBooking(formData)
+}
+async function EditBooking() {
+  await fetchPutBooking(currentBooking?.id, formData)
+  .then(() => GetBookings())
 }
 
-
-// "groupId": 1,
-//   "roomId": 1,
-//   "date": "2023-03-11"
-//----------------------------------------------------------------------------------------
-const [newValues, setNewValues] = useState<{groupId: number | undefined; roomId: number | undefined; date: string | undefined;}>
-({groupId: 0, 
-  roomId: 0,
+const [formData, setFormData] = useState({
+  groupId: 1, 
+  roomId: 1,
   date: ""
-});
+})
 
 const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
-const value = e.target.value;
-console.log(value)
-// let intValue = 0;
-// if (e.target.type === "number") {
-//   intValue = parseInt(value, 10)
-//   setNewValues({
-//       ...newValues,
-//       [e.target.name]: intValue
-//   });
-//   return;
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value
+  })
+  console.log(formData)
 }
 
-
-// setNewValues({
-//   ...newValues,
-//   [e.target.name]: value
-// });
-// }
-
-// useEffect(() => {
-// setNewValues({
-//   ...newValues,
-//   ["name"]: currentRoom?.name,
-//   ["seats"]: currentRoom?.seats
-// })
-// }, [currentRoom])
-//----------------------------------------------------------------------------------
+console.log(currentBooking)
 
     return (
         <Container>
@@ -127,8 +106,8 @@ console.log(value)
                                     <td>{booking.roomName}</td>
                                     <td>
                                         <button type="button" className="btn btn-primary" onClick={() => {
-                                            setcurrentBooking(booking); 
-                                            // setShowUpdateRoom(true);
+                                          setcurrentBooking(booking); 
+                                          setshowEditBooking(true);
                                         }}><FontAwesomeIcon icon={faPenToSquare} /></button>
                                         <button className="btn btn-danger" onClick={() => {
                                             setcurrentBooking(booking);
@@ -151,12 +130,18 @@ console.log(value)
             <AddBookingModal
                 show={showAddBooking}
                 onHide={() => {setshowAddBooking(false)}}
-                booking={currentBooking}
                 groups={groups}
                 rooms={rooms}
                 onSubmit={() => AddBooking()}
                 updatedvalue={HandleChange}
-                // setBooking={() => setNewBooking()}
+            />
+            <EditBookingModal
+                show={showEditBooking}
+                onHide={() => {setshowEditBooking(false)}}
+                groups={groups}
+                rooms={rooms}
+                onSubmit={() => EditBooking()}
+                updatedvalue={HandleChange}
             />
         </Container>
     )
