@@ -14,6 +14,7 @@ const Layout = () => {
 
   useEffect(() => {
     if (location.pathname === "/" ||
+      location.pathname.toString().startsWith("/start") ||
       location.pathname.toString().startsWith("/admin/")) {
       setShowBackButton(false);
     } else {
