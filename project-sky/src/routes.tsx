@@ -21,7 +21,8 @@ const AppRouter = () => {
     return (
         <Routes>
             <Route element={<Layout />}>
-                <Route index element={<Startpage />}/>
+                <Route index element={<LoginPage />}/>
+                <Route path="/start" element={<Startpage />}/>
                 <Route path="/groups" element={<Groups/>}/>
                 <Route path="/info" element={<GroupInfoPage />} />  
                 <Route path="/rooms" element={<RoomsPage />}/>

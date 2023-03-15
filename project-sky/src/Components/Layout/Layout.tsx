@@ -28,7 +28,7 @@ const Layout = () => {
         <Row className="layoutHeader d-flex justify-content-center align-items-center">
           <Col xs={12} md={4} className="layoutColumn">
             <Link to={"/"}>
-              <img onClick={() => window.location.assign("/")} src={epirocLogo} alt="test" style={{ width: "100%", height: "100%", objectFit: "contain" }} className="epirocLogo" />
+              <img onClick={() => window.location.assign("/start")} src={epirocLogo} alt="test" style={{ width: "100%", height: "100%", objectFit: "contain" }} className="epirocLogo" />
             </Link>
           </Col>
           <Col>

@@ -32,7 +32,7 @@ async function login(e: React.FormEvent<HTMLFormElement>) {
       if (response === true){
         setloginStatus!(true)
         sessionStorage.setItem("userLoggedIn", loginStatus.toString())
-        navigate('/admin/home')
+        navigate('/start')
       }
       else(alert("Wrong Credentials"))
     })
