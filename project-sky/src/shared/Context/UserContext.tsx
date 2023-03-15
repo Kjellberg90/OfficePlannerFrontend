@@ -16,7 +16,7 @@ const UserProvider = ({children}: {children: ReactNode}) => {
   const [loginStatus, setloginStatus] = useState(defaultState.loginStatus)
 
   return (
-    <UserContext.Provider 
+    <UserContext.Provider  
       value={{
           loginStatus, 
           setloginStatus
