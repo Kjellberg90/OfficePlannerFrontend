@@ -4,7 +4,7 @@ import { id } from "date-fns/locale";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { fetchAdminRooms } from "../../shared/Fetch/AdminRoomFetches";
-import { fetchAdminSingleRoomBooking, fetchDeleteBooking, fetchPostNewBooking, fetchPutBooking } from "../../shared/Fetch/AdminSingleRoomBooking";
+import { fetchAdminSingleRoomBooking, fetchDeleteBooking, fetchDeleteOldBookings, fetchPostNewBooking, fetchPutBooking } from "../../shared/Fetch/AdminSingleRoomBooking";
 import { fetchGroups } from "../../shared/Fetch/GroupFetches";
 import { AddBookingModal, DeleteBookingModal, EditBookingModal } from "./AdminModals/SingleBookingModals";
 
@@ -42,6 +42,11 @@ async function DeleteBooking() {
   await fetchDeleteBooking(Id)
     .then(() => GetBookings())
 } 
+
+async function DeleteOldBookings() {
+  const response: any = await fetchDeleteOldBookings()
+  .then(() => GetBookings())
+}
 
 async function GetGroups() {
   const response: any = await fetchGroups()
@@ -118,7 +123,8 @@ console.log(currentBooking)
                             )})}
                         </tbody>
                     </table>
-                    <button type="button" className="btn btn-primary mt-3 mb-3" onClick={() => setshowAddBooking(true)}>Add Booking</button>
+                    <button type="button" className="btn btn-primary mt-3 mb-3  " onClick={() => setshowAddBooking(true)}>Add Booking</button>
+                    <button type="button" className="btn btn-danger mt-3 mb-3 ms-3" onClick={() => {DeleteOldBookings();}}>Delete Old Bookings</button>
                 </Col>
             </Row>
             <DeleteBookingModal 
