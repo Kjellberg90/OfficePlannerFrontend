@@ -8,17 +8,17 @@ const Startpage = () => {
     return (
       <Container>
             <Stack gap={5}>
-                <Row>
-                  <Col  lg={{span: 6, offset: 3}}>
+                <Row className='d-flex justify-content-center'>
+                  <Col  md={6}>
                     <Link to="/groups">
                       <div className="d-flex align-items-center justify-content-center selectionBox">
-                            <h2 className="boxTextStartPage">Groups</h2>
+                            <h2 className="boxTextStartPage">Teams</h2>
                       </div>
                     </Link>
                   </Col>
                 </Row>
-                <Row>
-                  <Col className='text-center' lg={{span: 6, offset: 3}}>
+                <Row className='d-flex justify-content-center'>
+                  <Col md={6}>
                     <Link to="/rooms">
                       <div className="d-flex align-items-center justify-content-center selectionBox ">
                         <h2 className="boxTextStartPage ">Rooms</h2>

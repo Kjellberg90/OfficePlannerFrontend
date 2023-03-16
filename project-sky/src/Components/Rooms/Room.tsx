@@ -1,7 +1,8 @@
 interface Room {
+    roomId: number;
     name: string;
     seats: number;
-    availableSeats: number;
+    bookedBy: number;
 }
 
 export default Room;
