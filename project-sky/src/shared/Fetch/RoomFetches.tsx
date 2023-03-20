@@ -1,4 +1,5 @@
 import axios from "axios"
+import { response } from "express"
 
 export const fetchRooms = (currentDate: string) => {
   var result = axios.get(`https://localhost:7054/api/Room/get-rooms-info?date=${currentDate}`)
@@ -29,9 +30,8 @@ export const fetchDeleteSingleBookings = (data: any) => {
     },
     data: userData
   })
-    .catch(err => console.log(err))
   
-    return result
+  return result;
 }
 
 export const fetchPostSingleBookings = (data: any) => {
