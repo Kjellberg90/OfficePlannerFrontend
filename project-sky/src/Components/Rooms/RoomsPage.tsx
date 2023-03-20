@@ -11,6 +11,7 @@ import IdleUser from "../../shared/IdleUser/IdleUser";
 import { RoomMapModal } from "./Modals/RoomsMapModal";
 import { DateContext } from "../../shared/DateContext";
 import { fetchRooms, fetchSingleBookings, fetchDeleteSingleBookings, fetchPostSingleBookings } from "../../shared/Fetch/RoomFetches";
+import axios from "axios";
 
 const RoomsPage = () => {
 
@@ -89,11 +90,22 @@ const RoomsPage = () => {
 
   const deleteSingleBooking = () => {
     const delUser = {"roomId": deleteUser.roomId, "date": currentDate, "name": deleteUser.name, "password": pin}
-    fetchDeleteSingleBookings(delUser)
-      .then(() => {
-        getRoomInfo();
-        setPin("");
-      })
+    var result = fetchDeleteSingleBookings(delUser)
+    result.then((res) => {
+      console.log(res.data)
+    })
+    
+    axios.interceptors.response.use(response => {
+      return response;
+    }, error => {
+      if (error.response.status === 401) {
+        console.log("Testing interceptors")
+      }
+      return error;
+    });
+    
+    debugger
+    
   }
 
   return (
