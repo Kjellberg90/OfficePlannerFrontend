@@ -4,7 +4,7 @@ import { Modal} from "react-bootstrap";
 type DeleteSingleBookingModalProps = {
   show: boolean;
   onHide: () => void;
-  user: { date: string; userName: string; roomId: number; pinNumbers: number[]; };
+  user: { date: string; name: string; roomId: number; password: string; };
   delete: () => void;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
@@ -29,16 +29,13 @@ export const DeleteSingleBookingModal = ({
         <Modal.Header className="d-flex justify-content-center dropSeatModalHeader" closeButton>
         </Modal.Header>
         <Modal.Body className="d-flex justify-content-center dropSeatModalBody" >
-          <h4>Drop Booked Seat for {user.userName}</h4>
+          <h4>Drop Booked Seat for {user.name}</h4>
         </Modal.Body>
-        <Modal.Footer className="d-flex justify-content-around dropSeatModalFooter">
-          <form>
-            <input className="pinInput" id="deletePin1" type="number" onChange={(e) => handleChange(e)} />
-            <input className="pinInput" id="deletePin2" type="number" onChange={(e) => handleChange(e)} />
-            <input className="pinInput" id="deletePin3" type="number" onChange={(e) => handleChange(e)} />
-            <input className="pinInput" id="deletePin4" type="number" onChange={(e) => handleChange(e)} />
+        <Modal.Footer className="d-flex justify-content-center dropSeatModalFooter pt-0">
+          <form className="d-flex justify-content-center gap-2" onSubmit={handleDelete}>
+            <input className="pinInput form-control" type="password" placeholder="Password" onChange={(e) => handleChange(e)} />
+            <button className="dropButton" type="submit">Drop Booking</button>
           </form>
-          <button className="dropButton" onClick={handleDelete}>Drop Booking</button>
         </Modal.Footer>
       </Modal>
     </Fragment>
