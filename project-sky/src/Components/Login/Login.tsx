@@ -1,12 +1,12 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom"
-import { UserContext } from "../../shared/Context/UserContext";
+import { UserContext, User } from "../../shared/Context/UserContext";
 import { fetchLogin } from "../../shared/Fetch/LoginFetch";
 
 const LoginPage = () => {
   
-  var {loginStatus, setloginStatus } = useContext(UserContext)
+  var {user, setUser } = useContext(UserContext)
 
   const [formData, setformData] = useState({
     name: '',
@@ -23,21 +23,29 @@ const LoginPage = () => {
   
   const navigate= useNavigate();
   
+  interface Fetchresult {
+    token: string,
+    user: User 
+  }
 
 async function login(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
   const data ={ "userName": formData.name, "password": formData.password}
-  await fetchLogin(data)
-    .then((response) => {
-      if (response === true){
-        setloginStatus!(true)
-        sessionStorage.setItem("userLoggedIn", loginStatus.toString())
-        navigate('/start')
-      }
-      else(alert("Wrong Credentials"))
-    })
-  } 
+  debugger
+  var result: Fetchresult = await fetchLogin(data)
 
+if (result.user.name !== "") {
+  setUser!(result.user)
+  sessionStorage.setItem("loggedIn", "true")
+  sessionStorage.setItem("role", result.user.role)
+  debugger
+  if(result.user.role === "Admin"){
+    navigate('/admin/home')
+  } 
+  else if (result.user.role === "User")
+    navigate('/start')
+  }
+  } 
  
   return (
     <Container>

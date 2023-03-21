@@ -1,31 +1,34 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
 
-
-interface IUserContext {
-  loginStatus: boolean,
-  setloginStatus?: (loginStatus: boolean) => void
+export type User = {
+  id: string,
+  name: string,
+  role: string
 }
 
-const defaultState = {
-  loginStatus: false,
+export interface UserContextInterface {
+  user: User,
+  setUser: Dispatch<SetStateAction<User>>
 }
 
-export const UserContext = createContext<IUserContext>(defaultState)
 
-const UserProvider = ({children}: {children: ReactNode}) => {
-  const [loginStatus, setloginStatus] = useState(defaultState.loginStatus)
+
+export const UserContext = createContext<Partial<UserContextInterface>>({})
+
+type UserProvideProps = {
+  children : ReactNode
+}
+
+export default function UserProvider({children}: UserProvideProps){
+  const [user, setUser] = useState<User>({
+    id: "",
+    name: "",
+    role: ""
+  });
 
   return (
-    <UserContext.Provider  
-      value={{
-          loginStatus, 
-          setloginStatus
-        }}>
-          {children}
+    <UserContext.Provider value={{user, setUser}}>
+      {children}
     </UserContext.Provider>
   )
-}
-
-export default UserProvider
-
-
+} 
