@@ -41,7 +41,7 @@ export const fetchDeleteSingleBookings = (data: any) => {
     data: userData
   })
   
-  return result;
+  return result.then((res) => {return res});
 }
 
 export const fetchPostSingleBookings = (data: any) => {

@@ -11,7 +11,7 @@ import IdleUser from "../../shared/IdleUser/IdleUser";
 import { RoomMapModal } from "./Modals/RoomsMapModal";
 import { DateContext } from "../../shared/DateContext";
 import { fetchRooms, fetchSingleBookings, fetchDeleteSingleBookings, fetchPostSingleBookings } from "../../shared/Fetch/RoomFetches";
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
 const RoomsPage = () => {
 
@@ -25,6 +25,7 @@ const RoomsPage = () => {
   const [deleteUser, setdeleteUser] = useState({ date: '', name: '', roomId: 0, password: pin });
   const [show, setShow] = useState(false);
   const [showMap, setShowMap] = useState(false);
+  const [error, setError] = useState("");
 
   var { currentDate } = useContext(DateContext)
 
@@ -88,28 +89,31 @@ const RoomsPage = () => {
     setdeleteUser({ date: currentDate, name: userName, roomId: roomId, password: pin })
   }
 
-  const deleteSingleBooking = () => {
+  const deleteSingleBooking = async () => {
     const delUser = {"roomId": deleteUser.roomId, "date": currentDate, "name": deleteUser.name, "password": pin}
-    var result = fetchDeleteSingleBookings(delUser)
-    result.then((res) => {
-      console.log(res.data)
+    debugger
+
+    axios.delete(`https://localhost:7054/api/Booking/DeleteSingleBooking`, {
+      data: delUser
     })
-    
-    axios.interceptors.response.use(response => {
-      return response;
-    }, error => {
-      if (error.response.status === 401) {
-        console.log("Testing interceptors")
-      }
-      return error;
+    .then(response => {return (console.log(response))})
+    .catch(err => {
+        console.error('There was an error!', err);
     });
     
-    debugger
-    
+
+    console.log("result");
   }
+  
+
 
   return (
     <Container>
+      <div id="test" className="d-flex justify-content-center">
+        <div id="subTest">
+          <span className="status"></span>
+        </div>
+      </div>
       <Stack gap={4}>
         {rooms.map((room: RoomInfo) => {
           var singleSeatBooked = room.singleBookings > 0 ? true : false;
