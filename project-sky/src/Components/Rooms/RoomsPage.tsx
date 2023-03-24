@@ -91,18 +91,11 @@ const RoomsPage = () => {
 
   const deleteSingleBooking = async () => {
     const delUser = {"roomId": deleteUser.roomId, "date": currentDate, "name": deleteUser.name, "password": pin}
-    debugger
-
-    axios.delete(`https://localhost:7054/api/Booking/DeleteSingleBooking`, {
-      data: delUser
-    })
-    .then(response => {return (console.log(response))})
-    .catch(err => {
-        console.error('There was an error!', err);
-    });
-    
-
-    console.log("result");
+    fetchDeleteSingleBookings(delUser)
+      .then(() => {
+        getRoomInfo();
+        setPin("");
+      })
   }
   
 
