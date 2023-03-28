@@ -12,6 +12,7 @@ import { RoomMapModal } from "./Modals/RoomsMapModal";
 import { DateContext } from "../../shared/DateContext";
 import { fetchRooms, fetchSingleBookings, fetchDeleteSingleBookings, fetchPostSingleBookings } from "../../shared/Fetch/RoomFetches";
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { GetCookie } from "../../shared/CookieHandler/Cookiehandler";
 
 const RoomsPage = () => {
 
@@ -89,13 +90,22 @@ const RoomsPage = () => {
     setdeleteUser({ date: currentDate, name: userName, roomId: roomId, password: pin })
   }
 
-  const deleteSingleBooking = async () => {
+  const deleteSingleBooking = (e: any) => {
+    e.preventDefault();
     const delUser = {"roomId": deleteUser.roomId, "date": currentDate, "name": deleteUser.name, "password": pin}
+
     fetchDeleteSingleBookings(delUser)
-      .then(() => {
-        getRoomInfo();
-        setPin("");
-      })
+    .then((response) => {
+      setShow(false); 
+      setisOpenDrop(NaN);
+      getRoomInfo(); 
+      console.log("response:", response.status)
+    })
+    .catch(err => {
+      console.log("error: ",err.response.status);
+      console.log("error:",err);
+      setError(err.response.data);
+    })
   }
   
 
@@ -159,7 +169,7 @@ const RoomsPage = () => {
                                     users.map((user: SingleUser) => {
                                       return (
                                         <div className="d-flex justify-content-between align-items-center singleBookingUserDiv" key={user.id}>
-                                          <h4 className="singleBookingUserList">{user.userName} </h4><FontAwesomeIcon icon={faTrash} onClick={() => { setShow(true);; userToDelete(user.userName, room.roomId) }} className="crossRoom" />
+                                          <h4 className="singleBookingUserList">{user.userName} </h4><FontAwesomeIcon icon={faTrash} onClick={() => { setShow(true);; userToDelete(user.userName, room.roomId) }} className="crossRoom dropRoom" />
                                         </div>
                                       );
                                     })
@@ -195,7 +205,7 @@ const RoomsPage = () => {
         onHide={() => { getRoomInfo(); setShow(false); setisOpenDrop(NaN); }}
         user={deleteUser}
         handleChange={handleChange}
-        delete={() => { deleteSingleBooking(); setShow(false); setisOpenDrop(NaN) }}
+        delete={(e) => { deleteSingleBooking(e); }}
       />
       <RoomMapModal
         show={showMap}
