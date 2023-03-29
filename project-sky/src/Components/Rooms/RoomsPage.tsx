@@ -95,17 +95,17 @@ const RoomsPage = () => {
     const delUser = {"roomId": deleteUser.roomId, "date": currentDate, "name": deleteUser.name, "password": pin}
 
     fetchDeleteSingleBookings(delUser)
-    .then((response) => {
+    .then(() => {
       setShow(false); 
       setisOpenDrop(NaN);
-      getRoomInfo(); 
-      console.log("response:", response.status)
+      getRoomInfo();
+      setError("");
     })
     .catch(err => {
-      console.log("error: ",err.response.status);
       console.log("error:",err);
       setError(err.response.data);
     })
+    setPin("");
   }
   
 
@@ -202,10 +202,11 @@ const RoomsPage = () => {
       </Stack>
       <DeleteSingleBookingModal
         show={show}
-        onHide={() => { getRoomInfo(); setShow(false); setisOpenDrop(NaN); }}
+        onHide={() => { getRoomInfo(); setShow(false); setisOpenDrop(NaN); setError("");}}
         user={deleteUser}
         handleChange={handleChange}
         delete={(e) => { deleteSingleBooking(e); }}
+        errorMessage = {error}
       />
       <RoomMapModal
         show={showMap}
