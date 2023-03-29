@@ -11,8 +11,6 @@ import IdleUser from "../../shared/IdleUser/IdleUser";
 import { RoomMapModal } from "./Modals/RoomsMapModal";
 import { DateContext } from "../../shared/DateContext";
 import { fetchRooms, fetchSingleBookings, fetchDeleteSingleBookings, fetchPostSingleBookings } from "../../shared/Fetch/RoomFetches";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import { GetCookie } from "../../shared/CookieHandler/Cookiehandler";
 
 const RoomsPage = () => {
 
@@ -65,7 +63,6 @@ const RoomsPage = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
-    console.log(val);
     setPin(val);
   }
 
