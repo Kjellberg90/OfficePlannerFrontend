@@ -5,8 +5,9 @@ type DeleteSingleBookingModalProps = {
   show: boolean;
   onHide: () => void;
   user: { date: string; name: string; roomId: number; password: string; };
-  delete: () => void;
+  delete: (e: any) =>  void;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  errorMessage: string;
 };
 
 export const DeleteSingleBookingModal = ({
@@ -15,6 +16,7 @@ export const DeleteSingleBookingModal = ({
   user,
   delete: handleDelete,
   handleChange,
+  errorMessage,
 }: DeleteSingleBookingModalProps) => {
 
   return (
@@ -31,11 +33,16 @@ export const DeleteSingleBookingModal = ({
         <Modal.Body className="d-flex justify-content-center dropSeatModalBody" >
           <h4>Drop Booked Seat for {user.name}</h4>
         </Modal.Body>
-        <Modal.Footer className="d-flex justify-content-center dropSeatModalFooter pt-0">
-          <form className="d-flex justify-content-center gap-2" onSubmit={handleDelete}>
-            <input className="pinInput form-control" type="password" placeholder="Password" onChange={(e) => handleChange(e)} />
-            <button className="dropButton" type="submit">Drop Booking</button>
-          </form>
+        <Modal.Footer className="dropSeatModalFooter d-flex justify-content-center flex-column">
+          <div className="d-flex justify-content-center pt-0">
+            <form id="deleteSingleSeatForm" className="d-flex justify-content-center gap-2" onSubmit={(e) => handleDelete(e)}>
+              <input className="pinInput form-control" type="password" placeholder="Password" onChange={(e) => handleChange(e)} />
+              <button className="dropButton" type="submit">Drop Booking</button>
+            </form>
+          </div>
+          <div className="text-alignt-center">
+            <span className="errorMessage text-danger">{errorMessage}</span>
+          </div>
         </Modal.Footer>
       </Modal>
     </Fragment>

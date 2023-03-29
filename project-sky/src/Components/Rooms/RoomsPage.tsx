@@ -11,7 +11,6 @@ import IdleUser from "../../shared/IdleUser/IdleUser";
 import { RoomMapModal } from "./Modals/RoomsMapModal";
 import { DateContext } from "../../shared/DateContext";
 import { fetchRooms, fetchSingleBookings, fetchDeleteSingleBookings, fetchPostSingleBookings } from "../../shared/Fetch/RoomFetches";
-import axios, { AxiosError, AxiosResponse } from "axios";
 
 const RoomsPage = () => {
 
@@ -64,7 +63,6 @@ const RoomsPage = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
-    console.log(val);
     setPin(val);
   }
 
@@ -89,13 +87,22 @@ const RoomsPage = () => {
     setdeleteUser({ date: currentDate, name: userName, roomId: roomId, password: pin })
   }
 
-  const deleteSingleBooking = async () => {
+  const deleteSingleBooking = (e: any) => {
+    e.preventDefault();
     const delUser = {"roomId": deleteUser.roomId, "date": currentDate, "name": deleteUser.name, "password": pin}
+
     fetchDeleteSingleBookings(delUser)
-      .then(() => {
-        getRoomInfo();
-        setPin("");
-      })
+    .then(() => {
+      setShow(false); 
+      setisOpenDrop(NaN);
+      getRoomInfo();
+      setError("");
+    })
+    .catch(err => {
+      console.log("error:",err);
+      setError(err.response.data);
+    })
+    setPin("");
   }
   
 
@@ -159,7 +166,7 @@ const RoomsPage = () => {
                                     users.map((user: SingleUser) => {
                                       return (
                                         <div className="d-flex justify-content-between align-items-center singleBookingUserDiv" key={user.id}>
-                                          <h4 className="singleBookingUserList">{user.userName} </h4><FontAwesomeIcon icon={faTrash} onClick={() => { setShow(true);; userToDelete(user.userName, room.roomId) }} className="crossRoom" />
+                                          <h4 className="singleBookingUserList">{user.userName} </h4><FontAwesomeIcon icon={faTrash} onClick={() => { setShow(true);; userToDelete(user.userName, room.roomId) }} className="crossRoom dropRoom" />
                                         </div>
                                       );
                                     })
@@ -192,10 +199,11 @@ const RoomsPage = () => {
       </Stack>
       <DeleteSingleBookingModal
         show={show}
-        onHide={() => { getRoomInfo(); setShow(false); setisOpenDrop(NaN); }}
+        onHide={() => { getRoomInfo(); setShow(false); setisOpenDrop(NaN); setError("");}}
         user={deleteUser}
         handleChange={handleChange}
-        delete={() => { deleteSingleBooking(); setShow(false); setisOpenDrop(NaN) }}
+        delete={(e) => { deleteSingleBooking(e); }}
+        errorMessage = {error}
       />
       <RoomMapModal
         show={showMap}
