@@ -1,17 +1,23 @@
 import { useState } from "react";
 import { Container} from "react-bootstrap";
+import { useOutletContext } from "react-router-dom";
 import { useWeek } from "./AdminBooking";
 import EditTable from "./AdminComponents/EditTable";
 import WeekTable from "./AdminComponents/WeekTable";
 
 const Week = () => {
+    type ContextType = {
+        weekNr: number;
+        weekTotal: number;
+        scheduleId: number;
+    }
     const [useEdit, setUseEdit] = useState(false);
-    const week: number = useWeek();
+    const context: ContextType = useOutletContext();
 
     return (
         <Container>
             <div className="d-flex justify-content-between adminBookingActions">
-                <h3>Week: {week}</h3>
+                <h3>Week: {context.weekNr}</h3>
                 <div className="d-flex gap-1">
                     <button className="adminButton" disabled={useEdit} type="button"onClick={() => setUseEdit(true)}>Edit</button>
                     <button className="adminButton" disabled={!useEdit} type="button" onClick={() => setUseEdit(false)}>Cancel</button>
@@ -21,7 +27,9 @@ const Week = () => {
                 </div>
             </div>
             <div>
-                {useEdit ? <EditTable weekNumber={week}/> : <WeekTable weekNumber={week}/>}
+                {useEdit 
+                ? <EditTable weekNumber={context.weekNr} scheduleId={context.scheduleId}/> 
+                : <WeekTable weekNumber={context.weekNr} scheduleId={context.scheduleId}/>}
             </div>
         </Container>
     )

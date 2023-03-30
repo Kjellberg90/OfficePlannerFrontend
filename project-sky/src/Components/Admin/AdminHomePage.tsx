@@ -11,7 +11,7 @@ const AdminHomePage = () => {
     const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"))
 
       async function RoomOverviewFetch() {
-        const response: any = await fetchGroupsOverviewDate(date)
+        const response: any = await fetchGroupsOverviewDate(date, 1)
         setRooms(response)
       }
 
