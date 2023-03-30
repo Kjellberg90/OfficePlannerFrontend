@@ -3,15 +3,15 @@ import WeekTable from "./AdminComponents/WeekTable";
 import Week from "./Week";
 
 const Weeks = () => {
-    var dateArray = ["2023-01-09", "2023-01-16", "2023-01-23"]
+    var dateArray = [1, 2, 3]
 
     return (
         <div className="adminBookingWeeks">
-            {dateArray.map((date: string, i) => {
+            {dateArray.map((week: number, i) => {
                 return(
                     <Fragment key={i}>
                         <h3>Week {i+1}</h3>
-                        <WeekTable inputDate={date} />
+                        <WeekTable weekNumber={week} />
                     </Fragment>
                 )
             })}
