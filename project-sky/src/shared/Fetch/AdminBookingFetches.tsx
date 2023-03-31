@@ -14,4 +14,35 @@ export const FetchPutBookings = (data: any, weekNumber: number) => {
     return result
 }
 
+export const FetchGetSchedules = () => {
+  var result = axios.get(`${instance}api/Schedule/GetSchedules/`,{
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + GetCookie("token"),
+    }
+  })
+  .then((response) => {
+    return response.data;
+  })
+  .catch(err => console.log(err));
+
+  return result;
+}
+
+export const FetchGetTotalWeeks = (scheduleId: number) => {
+  var result = axios.get(`https://localhost:7054/api/Schedule/schedule-weeks/${scheduleId}`, {
+    headers: {
+      "Content-Type": "application/json"
+    } 
+  })
+  .then((response) => {
+    return response.data;
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+
+  return result;
+}
+
   

@@ -1,8 +1,7 @@
-import axios from "axios";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Nav, Row } from "react-bootstrap";
-import context from "react-bootstrap/esm/AccordionContext";
 import { NavLink, Outlet, useOutletContext } from "react-router-dom";
+import { FetchGetSchedules, FetchGetTotalWeeks } from "../../shared/Fetch/AdminBookingFetches";
 
 const AdminBooking = () => {
     const [scheduleId, setScheduleId] = useState(1);
@@ -32,13 +31,9 @@ const AdminBooking = () => {
     },[])
 
     const GetWeeksTotal = () => {
-        axios.get(`https://localhost:7054/api/Schedule/schedule-weeks/${scheduleId}`, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
+        FetchGetTotalWeeks(scheduleId)
         .then((response) => {
-            setWeeks(response.data)
+            setWeeks(response)
         })
         .catch((err) => {
             console.log(err)
@@ -46,25 +41,14 @@ const AdminBooking = () => {
     }
 
     const GetSchedules = () => {
-        axios.get(`https://localhost:7054/api/Schedule/GetSchedules`,{
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
+        FetchGetSchedules()
         .then((response) => {
-            setSchedules(response.data);
+            setSchedules(response);
         })
         .catch((err) => {
             console.log(err);
         })
     }
-
-    // const HandleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    //     var value = e.target.value;
-    //     var valueAsNumber = parseInt(value); 
-
-    //     setScheduleId(valueAsNumber);
-    // }
 
     const WeekLoop = () => {
         var items = [];
