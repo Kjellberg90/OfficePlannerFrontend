@@ -2,7 +2,7 @@ import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Col, Container, Nav, Row } from "react-bootstrap";
 import context from "react-bootstrap/esm/AccordionContext";
-import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
+import { NavLink, Outlet, useOutletContext } from "react-router-dom";
 
 const AdminBooking = () => {
     const [scheduleId, setScheduleId] = useState(1);
@@ -10,9 +10,13 @@ const AdminBooking = () => {
     const [week, setWeek] = useState(1);
     const [weeks, setWeeks] = useState(0);
 
-    type ContextType = {
-        weekNr: number | null;
-        weekTotal: number | null;
+    interface Schedule {
+        id: number;
+        name: string;
+        weekIntervall: number;
+        startDate: Date | null;
+        endDate: Date | null;
+        bookings: number | null;
     }
 
     useEffect(() => {
@@ -22,6 +26,10 @@ const AdminBooking = () => {
     useEffect(() => {
         console.log(weeks);
     },[weeks])
+
+    useEffect(() => {
+        GetSchedules();
+    },[])
 
     const GetWeeksTotal = () => {
         axios.get(`https://localhost:7054/api/Schedule/schedule-weeks/${scheduleId}`, {
@@ -38,7 +46,7 @@ const AdminBooking = () => {
     }
 
     const GetSchedules = () => {
-        axios.get(`https://localhost:7054/api/Schedule/GetSchedules/${scheduleId}`,{
+        axios.get(`https://localhost:7054/api/Schedule/GetSchedules`,{
             headers: {
                 "Content-Type": "application/json"
             }
@@ -66,6 +74,10 @@ const AdminBooking = () => {
         return items;
     }
 
+    const GetSchedule = () => {
+
+    }
+
     return (
         <Container>
             <Row>
@@ -73,19 +85,22 @@ const AdminBooking = () => {
                     <Row className="adminBookingNav mb-3">
                         <Nav className="d-flex flex-column">
                             <h5>Schedule</h5>
-                            {/* <form>
-                                <select onChange={(e: ChangeEvent<HTMLSelectElement>) => {HandleChange(e)}}>
-                                    <option value={1}>Default</option>
-                                    <option value={2}>Sommarschema</option> 
-                                </select>
-                            </form> */}
-
-                            
+                            <ul className="">
+                                {schedules.map((schedule: Schedule) => {
+                                    return (
+                                        <li key={schedule.id}><a onClick={() => setScheduleId(schedule.id)}>{schedule.name}</a></li>
+                                    )
+                                })}
+                            </ul>
                         </Nav>
                     </Row>
                     <Row className="adminBookingNav">
                         <Nav className="d-flex flex-column">
-                            <h5>Weeks</h5>
+                            <h5>{schedules.map((schedule: Schedule) => {
+                                if(schedule.id == scheduleId) {
+                                    return (schedule.name)
+                                }
+                            })}</h5>
                             <ul>
                                 <li><NavLink to="weeks">All weeks</NavLink></li>
                                 {WeekLoop().map((item) => {
