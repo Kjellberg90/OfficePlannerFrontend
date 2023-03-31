@@ -18,7 +18,7 @@ export const fetchRooms = (currentDate: string) => {
 }
 
 export const fetchSingleBookings = (currentDate: string, roomId: number) => {
-  var result = axios.get(`${instance}SingleBooking/GetSingleBookings?date=${currentDate}&roomId=${roomId}`, {
+  var result = axios.get(`${instance}api/SingleBooking/GetSingleBookings?date=${currentDate}&roomId=${roomId}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + GetCookie("token"),
