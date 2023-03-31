@@ -1,16 +1,16 @@
 import { Fragment, useEffect, useState } from "react";
-import { fetchGroupsOverview } from "../../../shared/Fetch/AdminHomeFetches";
+import { fetchGroupsOverviewWeek } from "../../../shared/Fetch/AdminHomeFetches";
 import RoomOverview from "../../Rooms/RoomOverview";
 
-const WeekOverview = (props: {inputDate: string}) => {
+const WeekOverview = (props: {weekNumber: number, scheduleId: number}) => {
     const [rooms, setRooms] = useState([]);
 
     useEffect(() => {
         RoomOverviewFetch();
-    },[props.inputDate])
+    },[props.weekNumber])
 
     async function RoomOverviewFetch() {
-      const response: any = await fetchGroupsOverview(props.inputDate)
+      const response: any = await fetchGroupsOverviewWeek(props.weekNumber, props.scheduleId)
       setRooms(response)
     }
     

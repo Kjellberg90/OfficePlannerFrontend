@@ -4,9 +4,10 @@ import { Modal} from "react-bootstrap";
 type DeleteSingleBookingModalProps = {
   show: boolean;
   onHide: () => void;
-  user: { date: string; userName: string; roomId: number; pinNumbers: number[]; };
-  delete: () => void;
+  user: { date: string; name: string; roomId: number; password: string; };
+  delete: (e: any) =>  void;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  errorMessage: string;
 };
 
 export const DeleteSingleBookingModal = ({
@@ -15,6 +16,7 @@ export const DeleteSingleBookingModal = ({
   user,
   delete: handleDelete,
   handleChange,
+  errorMessage,
 }: DeleteSingleBookingModalProps) => {
 
   return (
@@ -29,16 +31,18 @@ export const DeleteSingleBookingModal = ({
         <Modal.Header className="d-flex justify-content-center dropSeatModalHeader" closeButton>
         </Modal.Header>
         <Modal.Body className="d-flex justify-content-center dropSeatModalBody" >
-          <h4>Drop Booked Seat for {user.userName}</h4>
+          <h4>Drop Booked Seat for {user.name}</h4>
         </Modal.Body>
-        <Modal.Footer className="d-flex justify-content-around dropSeatModalFooter">
-          <form>
-            <input className="pinInput" id="deletePin1" type="number" onChange={(e) => handleChange(e)} />
-            <input className="pinInput" id="deletePin2" type="number" onChange={(e) => handleChange(e)} />
-            <input className="pinInput" id="deletePin3" type="number" onChange={(e) => handleChange(e)} />
-            <input className="pinInput" id="deletePin4" type="number" onChange={(e) => handleChange(e)} />
-          </form>
-          <button className="dropButton" onClick={handleDelete}>Drop Booking</button>
+        <Modal.Footer className="dropSeatModalFooter d-flex justify-content-center flex-column">
+          <div className="d-flex justify-content-center pt-0">
+            <form id="deleteSingleSeatForm" className="d-flex justify-content-center gap-2" onSubmit={(e) => handleDelete(e)}>
+              <input className="pinInput form-control" type="password" placeholder="Password" onChange={(e) => handleChange(e)} />
+              <button className="dropButton" type="submit">Drop Booking</button>
+            </form>
+          </div>
+          <div className="text-alignt-center">
+            <span className="errorMessage text-danger">{errorMessage}</span>
+          </div>
         </Modal.Footer>
       </Modal>
     </Fragment>

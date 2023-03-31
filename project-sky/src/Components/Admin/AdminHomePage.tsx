@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import RoomOverview from "../Rooms/RoomOverview";
 import { format } from "date-fns";
-import { fetchGroupsOverview } from "../../shared/Fetch/AdminHomeFetches";
+import { fetchGroupsOverviewDate } from "../../shared/Fetch/AdminHomeFetches";
 
 const AdminHomePage = () => {
 
@@ -11,7 +11,7 @@ const AdminHomePage = () => {
     const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"))
 
       async function RoomOverviewFetch() {
-        const response: any = await fetchGroupsOverview(date)
+        const response: any = await fetchGroupsOverviewDate(date, 1)
         setRooms(response)
       }
 

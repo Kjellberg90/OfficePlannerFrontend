@@ -1,8 +1,9 @@
 import axios from "axios"
 import { GetCookie } from "../CookieHandler/Cookiehandler"
+import instance from "./baseURL"
 
 export const fetchGroups = () => {
-  var result = axios.get(`https://localhost:7054/api/Group/GetGroups`, {
+  var result = axios.get(`${instance}api/Group/GetGroups`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + GetCookie("token"),
@@ -17,7 +18,7 @@ export const fetchGroups = () => {
 }
 
 export const fetchPostNewGroup = (data: any) => {
-  var result = axios.post(`https://localhost:7054/api/Group/AddGroup`, data, {
+  var result = axios.post(`${instance}api/Group/AddGroup`, data, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -31,7 +32,7 @@ export const fetchPostNewGroup = (data: any) => {
 }
 
 export const fetchDeleteGroup = (currentGroupId: number) => {
-  var result = axios.delete(`https://localhost:7054/api/Group/DeleteGroup/${currentGroupId}`, {
+  var result = axios.delete(`${instance}api/Group/DeleteGroup/${currentGroupId}`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -45,7 +46,7 @@ export const fetchDeleteGroup = (currentGroupId: number) => {
 }
 
 export const fetchPutGroup = (data: any, groupId: number) => {
-  var result = axios.put(`https://localhost:7054/api/Group/UpdateGroup/${groupId}`, data, {
+  var result = axios.put(`${instance}api/Group/UpdateGroup/${groupId}`, data, {
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + GetCookie("token"),

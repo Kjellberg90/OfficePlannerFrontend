@@ -1,17 +1,34 @@
 import { Fragment } from "react";
+import { useOutletContext } from "react-router-dom";
+import { useWeek } from "./AdminBooking";
 import WeekTable from "./AdminComponents/WeekTable";
-import Week from "./Week";
 
 const Weeks = () => {
-    var dateArray = ["2023-01-09", "2023-01-16", "2023-01-23"]
+    type ContextType = {
+        weekNr: number;
+        weekTotal: number;
+        scheduleId: number;
+    }
+
+    // const week: number = useWeek();
+    const weeks: any = useWeek();
+    const context: ContextType = useOutletContext();
+
+    const WeekLoop = () => {
+        var items = [];
+        for (let i = 1; i <= context.weekTotal; i++) {
+            items.push(<WeekTable weekNumber={i} scheduleId={context.scheduleId}/>);
+        }
+        return items;
+    }
 
     return (
         <div className="adminBookingWeeks">
-            {dateArray.map((date: string, i) => {
+            {WeekLoop().map((week, i) => {
                 return(
                     <Fragment key={i}>
                         <h3>Week {i+1}</h3>
-                        <WeekTable inputDate={date} />
+                        {week}
                     </Fragment>
                 )
             })}

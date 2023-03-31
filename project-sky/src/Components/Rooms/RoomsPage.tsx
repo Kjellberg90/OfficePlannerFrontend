@@ -20,10 +20,11 @@ const RoomsPage = () => {
   const [isOpenDrop, setisOpenDrop] = useState<number>();
   const [id, setid] = useState<number>();
   const [name, setname] = useState("");
-  const [pin, setPin] = useState([0, 0, 0, 0]);
-  const [deleteUser, setdeleteUser] = useState({ date: '', userName: '', roomId: 0, pinNumbers: pin });
+  const [pin, setPin] = useState("");
+  const [deleteUser, setdeleteUser] = useState({ date: '', name: '', roomId: 0, password: pin });
   const [show, setShow] = useState(false);
   const [showMap, setShowMap] = useState(false);
+  const [error, setError] = useState("");
 
   var { currentDate } = useContext(DateContext)
 
@@ -61,12 +62,8 @@ const RoomsPage = () => {
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    var index = parseInt(e.target.id.slice(-1)) - 1;
-    const val = e.target.valueAsNumber;
-    const newVal = val < 10 ? val : parseInt(val.toString().substring(0, 1));
-    var newPin = pin;
-    newPin[index] = newVal;
-    setPin(newPin);
+    const val = e.target.value;
+    setPin(val);
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -78,28 +75,45 @@ const RoomsPage = () => {
 
 
   const postSingleBooking = () => {
-    const postData = { "roomId": id, "date": currentDate, "name": name, "pinNumbers": pin }
+    const postData = { "roomId": id, "date": currentDate, "name": name, "password": pin }
     fetchPostSingleBookings(postData)
       .then(() => {
         getRoomInfo();
-        setPin([0, 0, 0, 0])
+        setPin("");
       })
   }
 
   const userToDelete = (userName: string, roomId: number) => {
-    setdeleteUser({ date: currentDate, userName: userName, roomId: roomId, pinNumbers: pin })
+    setdeleteUser({ date: currentDate, name: userName, roomId: roomId, password: pin })
   }
 
-  const deleteSingleBooking = () => {
-    fetchDeleteSingleBookings(deleteUser)
-      .then(() => {
-        getRoomInfo();
-        setPin([0, 0, 0, 0]);
-      })
+  const deleteSingleBooking = (e: any) => {
+    e.preventDefault();
+    const delUser = {"roomId": deleteUser.roomId, "date": currentDate, "name": deleteUser.name, "password": pin}
+
+    fetchDeleteSingleBookings(delUser)
+    .then(() => {
+      setShow(false); 
+      setisOpenDrop(NaN);
+      getRoomInfo();
+      setError("");
+    })
+    .catch(err => {
+      console.log("error:",err);
+      setError(err.response.data);
+    })
+    setPin("");
   }
+  
+
 
   return (
     <Container>
+      <div id="test" className="d-flex justify-content-center">
+        <div id="subTest">
+          <span className="status"></span>
+        </div>
+      </div>
       <Stack gap={4}>
         {rooms.map((room: RoomInfo) => {
           var singleSeatBooked = room.singleBookings > 0 ? true : false;
@@ -134,15 +148,7 @@ const RoomsPage = () => {
                             <form id="bookSingleBooking" className="form-inline" onSubmit={handleSubmit}>
                               <div className="form-group mx-sm-3 mb-2 mt-2">
                                 <input type="search" id="name" required className="form-control" placeholder="Name" onChange={(event) => { setname(event.target.value); setid(room.roomId) }} />
-                                <div className="pinCode">
-                                  <label>PIN:</label>
-                                  <div className="pinCode">
-                                    <input type="number" className="pinInput" id="pin1" onChange={(e) => handleChange(e)} />
-                                    <input type="number" className="pinInput" id="pin2" onChange={(e) => handleChange(e)} />
-                                    <input type="number" className="pinInput" id="pin3" onChange={(e) => handleChange(e)} />
-                                    <input type="number" className="pinInput" id="pin4" onChange={(e) => handleChange(e)} />
-                                  </div>
-                                </div>
+                                <input type="password" className="form-control" placeholder="Password" onChange={(e) => handleChange(e)} />
                               </div>
                             </form>
                             <button onClick={() => setisOpenBook(NaN)} className="dangerButton mb-2">Cancel</button>
@@ -160,7 +166,7 @@ const RoomsPage = () => {
                                     users.map((user: SingleUser) => {
                                       return (
                                         <div className="d-flex justify-content-between align-items-center singleBookingUserDiv" key={user.id}>
-                                          <h4 className="singleBookingUserList">{user.userName} </h4><FontAwesomeIcon icon={faTrash} onClick={() => { setShow(true);; userToDelete(user.userName, room.roomId) }} className="crossRoom" />
+                                          <h4 className="singleBookingUserList">{user.userName} </h4><FontAwesomeIcon icon={faTrash} onClick={() => { setShow(true);; userToDelete(user.userName, room.roomId) }} className="crossRoom dropRoom" />
                                         </div>
                                       );
                                     })
@@ -193,10 +199,11 @@ const RoomsPage = () => {
       </Stack>
       <DeleteSingleBookingModal
         show={show}
-        onHide={() => { getRoomInfo(); setShow(false); setisOpenDrop(NaN); }}
+        onHide={() => { getRoomInfo(); setShow(false); setisOpenDrop(NaN); setError("");}}
         user={deleteUser}
         handleChange={handleChange}
-        delete={() => { deleteSingleBooking(); setShow(false); setisOpenDrop(NaN) }}
+        delete={(e) => { deleteSingleBooking(e); }}
+        errorMessage = {error}
       />
       <RoomMapModal
         show={showMap}
