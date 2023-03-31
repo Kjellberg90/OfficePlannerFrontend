@@ -18,7 +18,7 @@ export const fetchRooms = (currentDate: string) => {
 }
 
 export const fetchSingleBookings = (currentDate: string, roomId: number) => {
-  var result = axios.get(`https://localhost:7054/api/SingleBooking/GetSingleBookings?date=${currentDate}&roomId=${roomId}`, {
+  var result = axios.get(`${instance}SingleBooking/GetSingleBookings?date=${currentDate}&roomId=${roomId}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + GetCookie("token"),
@@ -33,7 +33,7 @@ export const fetchSingleBookings = (currentDate: string, roomId: number) => {
 
 export const fetchDeleteSingleBookings = (data: any) => {
   const userData = data
-  var result = axios.delete(`https://localhost:7054/api/SingleBooking/DeleteSingleBooking`, {
+  var result = axios.delete(`${instance}api/SingleBooking/DeleteSingleBooking`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ export const fetchDeleteSingleBookings = (data: any) => {
 
 export const fetchPostSingleBookings = (data: any) => {
   const userData = data
-  var result = axios.post(`https://localhost:7054/api/SingleBooking/SingleBooking`, userData, {
+  var result = axios.post(`${instance}api/SingleBooking/SingleBooking`, userData, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
