@@ -5,7 +5,7 @@ import { fetchGroupsOverviewWeek } from "../../../shared/Fetch/AdminHomeFetches"
 import { fetchGroups } from "../../../shared/Fetch/AdminGroupFetches";
 import { FetchPutBookings } from "../../../shared/Fetch/AdminBookingFetches";
 
-const EditTable = (props: {weekNumber: number}) => {
+const EditTable = (props: {weekNumber: number; scheduleId: number}) => {
     const [rooms, setRooms] = useState<RoomOverview[]>([]);
     const [groups, setGroups] = useState<string[]>([]);
 
@@ -17,7 +17,7 @@ const EditTable = (props: {weekNumber: number}) => {
     
 
     const RoomOverviewFetch = async () => {
-        await fetchGroupsOverviewWeek(props.weekNumber)
+        await fetchGroupsOverviewWeek(props.weekNumber, props.scheduleId)
         .then((data) => {
             setRooms(data)
         })

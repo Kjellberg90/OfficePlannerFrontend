@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { fetchGroupsOverviewWeek } from "../../../shared/Fetch/AdminHomeFetches";
 import RoomOverview from "../../Rooms/RoomOverview";
 
-const WeekOverview = (props: {weekNumber: number}) => {
+const WeekOverview = (props: {weekNumber: number, scheduleId: number}) => {
     const [rooms, setRooms] = useState([]);
 
     useEffect(() => {
@@ -10,7 +10,7 @@ const WeekOverview = (props: {weekNumber: number}) => {
     },[props.weekNumber])
 
     async function RoomOverviewFetch() {
-      const response: any = await fetchGroupsOverviewWeek(props.weekNumber)
+      const response: any = await fetchGroupsOverviewWeek(props.weekNumber, props.scheduleId)
       setRooms(response)
     }
     
