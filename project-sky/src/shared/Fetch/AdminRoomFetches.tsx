@@ -1,8 +1,9 @@
 import axios from "axios"
 import { GetCookie } from "../CookieHandler/Cookiehandler"
+import instance from "./baseURL"
 
 export const fetchAdminRooms = () => {
-  var result = axios.get(`https://localhost:7054/api/Room/adminGetRooms`
+  var result = axios.get(`${instance}api/AdminRoom/adminGetRooms`
   , {
     headers: {
       "Content-Type": "application/json",
@@ -19,7 +20,7 @@ export const fetchAdminRooms = () => {
 }
 
 export const fetchDeleteRoom = (data : any) => {
-  var result = axios.delete(`https://localhost:7054/api/Room/adminDeleteRooms`, {
+  var result = axios.delete(`${instance}api/AdminRoom/adminDeleteRooms`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ export const fetchDeleteRoom = (data : any) => {
 }
 
 export const fetchPutRoom = (data: any, roomId: number) => {
-  var result = axios.put(`https://localhost:7054/api/Room/adminroomEditRoom?roomId=${roomId}`, data, {
+  var result = axios.put(`${instance}api/AdminRoom/adminroomEditRoom?roomId=${roomId}`, data, {
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + GetCookie("token"),
@@ -46,7 +47,7 @@ export const fetchPutRoom = (data: any, roomId: number) => {
 }
 
 export const fetchPostNewRooom = (data: any) => {
-  var result = axios.post(`https://localhost:7054/api/Room/adminAddRooms`, data, {
+  var result = axios.post(`${instance}api/AdminRoom/adminAddRooms`, data, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',

@@ -1,8 +1,9 @@
 import axios from "axios"
 import { GetCookie } from "../CookieHandler/Cookiehandler"
+import instance from "./baseURL"
 
 export const fetchGroupsOverviewWeek = (weekInput: number, scheduleIdInput: number) => {
-  var result = axios.get(`https://localhost:7054/api/AdminRoom/adminOverviewFromWeek`, {
+  var result = axios.get(`${instance}api/AdminRoom/adminOverviewFromWeek`, {
     params: {
       weekNr: weekInput,
       scheduleId: scheduleIdInput
@@ -21,7 +22,7 @@ export const fetchGroupsOverviewWeek = (weekInput: number, scheduleIdInput: numb
 }
 
 export const fetchGroupsOverviewDate = (dateInput: string, scheduleIdInput: number) => {
-  var result = axios.get(`https://localhost:7054/api/AdminRoom/adminOverviewFromDate`, {
+  var result = axios.get(`${instance}api/AdminRoom/adminOverviewFromDate`, {
     params: {
       date: dateInput,
       scheduleId: scheduleIdInput

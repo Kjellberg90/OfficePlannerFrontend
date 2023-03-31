@@ -31,14 +31,11 @@ const LoginPage = () => {
 async function login(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
   const data ={ "userName": formData.name, "password": formData.password}
-  debugger
   var result: Fetchresult = await fetchLogin(data)
 
 if (result.user.name !== "") {
   setUser!(result.user)
-  sessionStorage.setItem("loggedIn", "true")
   sessionStorage.setItem("role", result.user.role)
-  debugger
   if(result.user.role === "Admin"){
     navigate('/admin/home')
   } 
