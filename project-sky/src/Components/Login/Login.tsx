@@ -3,10 +3,20 @@ import { Row, Col, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom"
 import { UserContext, User } from "../../shared/Context/UserContext";
 import { fetchLogin } from "../../shared/Fetch/LoginFetch";
+import { AxiosError } from "axios";
 
 const LoginPage = () => {
   
   var {user, setUser } = useContext(UserContext)
+
+  const [loginFetch, setLoginFetch] = useState<Fetchresult>({
+    token: "",
+    user: {
+      id: "",
+      name: "",
+      role: ""
+    }
+  })
 
   const [formData, setformData] = useState({
     name: '',
@@ -28,21 +38,50 @@ const LoginPage = () => {
     user: User 
   }
 
-async function login(e: React.FormEvent<HTMLFormElement>) {
-  e.preventDefault();
-  const data ={ "userName": formData.name, "password": formData.password}
-  var result: Fetchresult = await fetchLogin(data)
+  async function login(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const data ={ "userName": formData.name, "password": formData.password}
+   
 
-if (result.user.name !== "") {
-  setUser!(result.user)
-  sessionStorage.setItem("role", result.user.role)
-  if(result.user.role === "Admin"){
-    navigate('/admin/home')
-  } 
-  else if (result.user.role === "User")
-    navigate('/start')
+    try {
+      var result = await fetchLogin(data)
+      .then((res) => {     
+        if(res.status == 200) {
+          var value = res.data as Fetchresult;
+          setLoginFetch(value);
+        }
+        else {
+          throw new Error();
+        }
+      })
+      .then(() => {
+        console.log("loginFetch", loginFetch)
+      })
+      
+
+      // if (result.user.name !== "") {
+      //   setUser!(result.user)
+      //   sessionStorage.setItem("role", result.user.role)
+      //   if(result.user.role === "Admin"){
+      //     navigate('/admin/home')
+      //   } 
+      //   else if (result.user.role === "User")
+      //     navigate('/start')
+      // }
+    }
+    catch (err) {
+      console.log(err)
+    }
+
+    console.log(loginFetch);
   }
-  } 
+  
+  var CreateLoginToken = (data: any) => {
+    const token = data.token
+    const expires = new Date(Date.now() + 86400 * 1000).toUTCString();
+    document.cookie =  `token=${token};expires=${expires + 86400}`
+    // document.cookie =  `token=${token}`
+  }
  
   return (
     <Container>
