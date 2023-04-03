@@ -3,20 +3,12 @@ import { Row, Col, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom"
 import { UserContext, User } from "../../shared/Context/UserContext";
 import { fetchLogin } from "../../shared/Fetch/LoginFetch";
-import { AxiosError } from "axios";
 
 const LoginPage = () => {
   
   var {user, setUser } = useContext(UserContext)
 
-  const [loginFetch, setLoginFetch] = useState<Fetchresult>({
-    token: "",
-    user: {
-      id: "",
-      name: "",
-      role: ""
-    }
-  })
+  const [error, setError] = useState(0);
 
   const [formData, setformData] = useState({
     name: '',
@@ -42,38 +34,21 @@ const LoginPage = () => {
     e.preventDefault();
     const data ={ "userName": formData.name, "password": formData.password}
    
-
     try {
-      var result = await fetchLogin(data)
-      .then((res) => {     
-        if(res.status == 200) {
-          var value = res.data as Fetchresult;
-          setLoginFetch(value);
-        }
-        else {
-          throw new Error();
-        }
-      })
-      .then(() => {
-        console.log("loginFetch", loginFetch)
-      })
-      
+      var result = await fetchLogin(data);
 
-      // if (result.user.name !== "") {
-      //   setUser!(result.user)
-      //   sessionStorage.setItem("role", result.user.role)
-      //   if(result.user.role === "Admin"){
-      //     navigate('/admin/home')
-      //   } 
-      //   else if (result.user.role === "User")
-      //     navigate('/start')
-      // }
+      if (result.status == 200) {
+        setUser!(result.data.user);
+        sessionStorage.setItem("role", result.data.user.role);
+        CreateLoginToken(result.data);
+        result.data.user.role === "Admin" ? navigate('/admin/home') : navigate('/start')
+      }
     }
-    catch (err) {
-      console.log(err)
+    catch (err: any) {
+      console.log(err.response.status);
+      setError(err.response.status);
     }
 
-    console.log(loginFetch);
   }
   
   var CreateLoginToken = (data: any) => {
@@ -96,6 +71,9 @@ const LoginPage = () => {
               <br/>
               <input className="primaryButton roomsPageSubmitButton" type="submit" id="submit" ></input>
             </form>
+            <div>
+              {error == 500 ? <span className="text-danger">Username and/or password incorrect</span> : <></>}
+            </div>
           </div>
         </Col>
       </Row>
