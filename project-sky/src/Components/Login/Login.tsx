@@ -8,6 +8,8 @@ const LoginPage = () => {
   
   var {user, setUser } = useContext(UserContext)
 
+  const [error, setError] = useState(0);
+
   const [formData, setformData] = useState({
     name: '',
     password: ''
@@ -28,27 +30,39 @@ const LoginPage = () => {
     user: User 
   }
 
-async function login(e: React.FormEvent<HTMLFormElement>) {
-  e.preventDefault();
-  const data ={ "userName": formData.name, "password": formData.password}
-  var result: Fetchresult = await fetchLogin(data)
+  async function login(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const data ={ "userName": formData.name, "password": formData.password}
+   
+    try {
+      var result = await fetchLogin(data);
 
-if (result.user.name !== "") {
-  setUser!(result.user)
-  sessionStorage.setItem("role", result.user.role)
-  if(result.user.role === "Admin"){
-    navigate('/admin/home')
-  } 
-  else if (result.user.role === "User")
-    navigate('/start')
+      if (result.status == 200) {
+        setUser!(result.data.user);
+        sessionStorage.setItem("role", result.data.user.role);
+        CreateLoginToken(result.data);
+        result.data.user.role === "Admin" ? navigate('/admin/home') : navigate('/start')
+      }
+    }
+    catch (err: any) {
+      console.log(err.response.status);
+      setError(err.response.status);
+    }
+
   }
-  } 
+  
+  var CreateLoginToken = (data: any) => {
+    const token = data.token
+    const expires = new Date(Date.now() + 86400 * 1000).toUTCString();
+    document.cookie =  `token=${token};expires=${expires + 86400}`
+    // document.cookie =  `token=${token}`
+  }
  
   return (
     <Container>
-      <Row className='d-flex align-items-center justify-content-center'>
+      <Row>
         <Col className="text-center" md={6} >
-          <div className="d-flex align-items-center justify-content-center flex-column room-info-col pt-2 pb-2 p-4 loginRow">
+          <div className="d-flex flex-column room-info-col pt-3 p-4 loginRow">
             <h2>Log In</h2>
             <form className="form-inline" onSubmit={(e) => login(e)}>
               <input className="form-control m-1" type="text" name="name" id="name" placeholder="Username" onChange={handleChange} value={formData.name} required/> 
@@ -57,6 +71,9 @@ if (result.user.name !== "") {
               <br/>
               <input className="primaryButton roomsPageSubmitButton" type="submit" id="submit" ></input>
             </form>
+            <div>
+              {error == 500 ? <p className="text-danger m-0">Username and/or password incorrect</p> : <></>}
+            </div>
           </div>
         </Col>
       </Row>
