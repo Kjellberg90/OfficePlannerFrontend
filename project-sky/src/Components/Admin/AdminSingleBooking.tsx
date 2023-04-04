@@ -1,6 +1,5 @@
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { id } from "date-fns/locale";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { fetchAdminRooms } from "../../shared/Fetch/AdminRoomFetches";
@@ -83,10 +82,8 @@ const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
     ...formData,
     [e.target.name]: e.target.value
   })
-  console.log(formData)
 }
 
-console.log(currentBooking)
 
     return (
         <Container>

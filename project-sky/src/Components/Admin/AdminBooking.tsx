@@ -23,10 +23,6 @@ const AdminBooking = () => {
     },[scheduleId])
 
     useEffect(() => {
-        console.log(weeks);
-    },[weeks])
-
-    useEffect(() => {
         GetSchedules();
     },[])
 
@@ -56,10 +52,6 @@ const AdminBooking = () => {
             items.push(<li key={i}><NavLink to="week" onClick={() => setWeek(i)}>Week {i}</NavLink></li>);
         }
         return items;
-    }
-
-    const GetSchedule = () => {
-
     }
 
     return (
