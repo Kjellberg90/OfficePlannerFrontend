@@ -60,9 +60,9 @@ const LoginPage = () => {
  
   return (
     <Container>
-      <Row className='d-flex align-items-center justify-content-center'>
+      <Row>
         <Col className="text-center" md={6} >
-          <div className="d-flex align-items-center justify-content-center flex-column room-info-col pt-2 pb-2 p-4 loginRow">
+          <div className="d-flex flex-column room-info-col pt-3 p-4 loginRow">
             <h2>Log In</h2>
             <form className="form-inline" onSubmit={(e) => login(e)}>
               <input className="form-control m-1" type="text" name="name" id="name" placeholder="Username" onChange={handleChange} value={formData.name} required/> 
@@ -72,7 +72,7 @@ const LoginPage = () => {
               <input className="primaryButton roomsPageSubmitButton" type="submit" id="submit" ></input>
             </form>
             <div>
-              {error == 500 ? <span className="text-danger">Username and/or password incorrect</span> : <></>}
+              {error == 500 ? <p className="text-danger m-0">Username and/or password incorrect</p> : <></>}
             </div>
           </div>
         </Col>
