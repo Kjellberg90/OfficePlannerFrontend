@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Container} from "react-bootstrap";
 import { useOutletContext } from "react-router-dom";
-import { useWeek } from "./AdminBooking";
 import EditTable from "./AdminComponents/EditTable";
 import WeekTable from "./AdminComponents/WeekTable";
 

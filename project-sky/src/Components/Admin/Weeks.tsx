@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import { useOutletContext } from "react-router-dom";
-import { useWeek } from "./AdminBooking";
 import WeekTable from "./AdminComponents/WeekTable";
 
 const Weeks = () => {
@@ -9,9 +8,6 @@ const Weeks = () => {
         weekTotal: number;
         scheduleId: number;
     }
-
-    // const week: number = useWeek();
-    const weeks: any = useWeek();
     const context: ContextType = useOutletContext();
 
     const WeekLoop = () => {

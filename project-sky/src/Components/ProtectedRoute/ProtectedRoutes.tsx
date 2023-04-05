@@ -1,7 +1,3 @@
-import React, { useContext } from "react"
-import { UserContext } from "../../shared/Context/UserContext";
-
-
 import { Navigate, Outlet } from 'react-router-dom'
 import { GetCookie } from "../../shared/CookieHandler/Cookiehandler";
 

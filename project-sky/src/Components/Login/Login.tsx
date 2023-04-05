@@ -3,12 +3,13 @@ import { Row, Col, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom"
 import { UserContext, User } from "../../shared/Context/UserContext";
 import { fetchLogin } from "../../shared/Fetch/LoginFetch";
+import axios from "axios";
 
 const LoginPage = () => {
   
   var {user, setUser } = useContext(UserContext)
 
-  const [error, setError] = useState(0);
+  const [error, setError] = useState<string | undefined>("");
 
   const [formData, setformData] = useState({
     name: '',
@@ -44,11 +45,14 @@ const LoginPage = () => {
         result.data.user.role === "Admin" ? navigate('/admin/home') : navigate('/start')
       }
     }
-    catch (err: any) {
-      console.log(err.response.status);
-      setError(err.response.status);
+    catch (err) {
+      if (axios.isAxiosError(err)){
+        console.log(err);
+        setError(err.message);
+      } else {
+        console.log(err);
+      }      
     }
-
   }
   
   var CreateLoginToken = (data: any) => {
@@ -72,7 +76,7 @@ const LoginPage = () => {
               <input className="primaryButton roomsPageSubmitButton" type="submit" id="submit" ></input>
             </form>
             <div>
-              {error == 500 ? <p className="text-danger m-0">Username and/or password incorrect</p> : <></>}
+              {error !== "" ? <p className="text-danger m-0">Username and/or password incorrect</p> : <></>}
             </div>
           </div>
         </Col>

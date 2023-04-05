@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react"
+import { Fragment } from "react"
 import { Link, Outlet, useLocation } from "react-router-dom"
 import epirocLogo from '../../shared/epiroclogo.svg'
 import { useState, useEffect } from "react"
