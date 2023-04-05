@@ -487,11 +487,11 @@ div {
   .groupInfoCard {
     /* background-color: red; */
     margin-top: -2rem;
-    border-radius: 10%;
+  
   }
 
   .group-room-info-col {
-    border-radius: 10%;
+
     margin-bottom: -7rem;
   }
 }
@@ -500,12 +500,12 @@ div {
 
   .groupInfoCard {
     /* background-color: blue; */
-    border-radius: 10%;
+   
     margin-top: -2rem;
   }
 
   .group-room-info-col {
-    border-radius: 10%;
+
     margin-bottom: -3rem;
   }
 }
@@ -519,7 +519,7 @@ div {
 
   .groupInfoCard {
     /* background-color: yellow; */
-    border-radius: 40px 40px 35px 35px;
+  
   }
 
   .togglebtn {
@@ -527,9 +527,6 @@ div {
     margin-bottom: 5px;
   }
 
-  .group-room-info-col {
-    border-radius: 40px 40px 35px 35px;
-  }
 }
 
 @media (min-width: 992px) {
@@ -537,12 +534,9 @@ div {
   .groupInfoCard {
     margin-top: 3rem;
     /* background-color: violet; */
-    border-radius: 40px 40px 35px 35px;
+
   }
 
-  .group-room-info-col {
-    border-radius: 40px 40px 35px 35px;
-  }
 
   .epirocLogo {
     margin-left: 60px;
@@ -557,11 +551,11 @@ div {
   .groupInfoCard {
     margin-top: -2rem;
     /* background-color: turquoise; */
-    border-radius: 40px 40px 35px 35px;
+
   }
 
   .group-room-info-col {
-    border-radius: 40px 40px 35px 35px;
+
     margin-bottom: -4rem;
   }
 
