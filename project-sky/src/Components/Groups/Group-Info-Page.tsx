@@ -30,7 +30,7 @@ const GroupInfoPage = () => {
   useEffect(() => {
     const roomName = group?.bookedRoom?.name.toLowerCase();
     setRoomName(roomName)
-  }, [group?.bookedRoom?.name])
+  }, [group?.bookedRoom?.name, groupId])
 
   async function getGroupInfo(currentDate: string, groupId: string) {
     const response: any = await fetchGroupInfo(currentDate, groupId)
@@ -39,7 +39,7 @@ const GroupInfoPage = () => {
 
   useEffect(() => {
     getGroupInfo(currentDate, groupId)
-  }, [currentDate])
+  }, [currentDate, groupId])
 
   async function getWeeklyRoomSchedule(currentDate: string, groupId: string) {
     const response: any = await fetchWeeklyGroupSchedule(currentDate, groupId)
@@ -48,7 +48,7 @@ const GroupInfoPage = () => {
 
   useEffect(() => {
     getWeeklyRoomSchedule(currentDate, groupId)
-  }, [currentDate])
+  }, [currentDate, groupId])
 
 
   async function getWeekAndDay(currentDate: string) {
