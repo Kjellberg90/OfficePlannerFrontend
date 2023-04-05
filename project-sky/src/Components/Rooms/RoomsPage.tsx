@@ -108,7 +108,7 @@ const RoomsPage = () => {
 
 
   return (
-    <Container>
+    <Container className="px-4">
       <div id="test" className="d-flex justify-content-center">
         <div id="subTest">
           <span className="status"></span>
@@ -196,6 +196,11 @@ const RoomsPage = () => {
             </Row>
           )
         })}
+        <Row>
+          <Col className="mapBtnCol d-flex mt-0">
+            <button className="mapBtn" onClick={handleOpenMap}>Show Map</button>
+          </Col>
+        </Row>
       </Stack>
       <DeleteSingleBookingModal
         show={show}
@@ -209,9 +214,6 @@ const RoomsPage = () => {
         show={showMap}
         onHide={() => { setShowMap(false); }}
       />
-      <Col className="mapBtnCol d-flex">
-        <button className="mapBtn" onClick={handleOpenMap}>Show Map</button>
-      </Col>
     </Container>
   )
 }
