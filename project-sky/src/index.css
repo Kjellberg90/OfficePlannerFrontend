@@ -36,16 +36,20 @@ a :hover {
 /* -------------- LoginPage Styling --------------------*/
 
 .loginRow {
-  max-height: 100%;
   align-items: center;
 }
 
 .formlogin {
   display: flex;
-  flex-direction: column;
-  height: 150px;
-  margin-top: 10px;
-  width: 250px;
+  margin-top: 5px;
+}
+
+.loginbutton {
+  margin: 5px 0px 0px 0px;
+}
+
+.text-danger {
+  padding-top: 5px;
 }
 
 
@@ -183,12 +187,14 @@ input[type="search"]::-webkit-search-cancel-button:hover {
   color: var(--primary-color);
   background-color: var(--secondary-color);
   border: none;
+  padding: 10px 10px 0px 10px;
 }
 
 .dropSeatModalBody {
   color: var(--primary-color);
   background-color: var(--secondary-color);
   border: none;
+  padding: 0px 10px 0px 10px;
 }
 
 .dropSeatModalFooter {

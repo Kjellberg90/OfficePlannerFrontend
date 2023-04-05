@@ -34,11 +34,11 @@ export const DeleteSingleBookingModal = ({
           <h4>Drop Booked Seat for {user.name}</h4>
         </Modal.Body>
         <Modal.Footer className="dropSeatModalFooter d-flex justify-content-center flex-column">
-          <div className="d-flex justify-content-center pt-0">
+          <div className="d-flex justify-content-center pt-0 flex-column">
             <form id="deleteSingleSeatForm" className="d-flex justify-content-center gap-2" onSubmit={(e) => handleDelete(e)}>
               <input className="pinInput form-control" type="password" placeholder="Password" onChange={(e) => handleChange(e)} />
-              <button className="dropButton" type="submit">Drop Booking</button>
             </form>
+            <button form="deleteSingleSeatForm" className="dropButton mt-2" type="submit">Drop Booking</button>
           </div>
           <div className="text-alignt-center">
             <span className="errorMessage text-danger">{errorMessage}</span>
