@@ -68,13 +68,13 @@ const LoginPage = () => {
         <Col className="text-center" md={6} >
           <div className="d-flex flex-column room-info-col pt-3 p-5 loginRow">
             <h2>Log In</h2>
-            <form className="form-inline formlogin" onSubmit={(e) => login(e)}>
+            <form id="loginform" className="form-inline formlogin" onSubmit={(e) => login(e)}>
               <input className="form-control m-1" type="text" name="name" id="name" placeholder="Username" onChange={handleChange} value={formData.name} required/> 
               <br/>
               <input className="form-control m-1" type="password" onChange={handleChange} placeholder="Password" name="password" id="password" value={formData.password} required/>
               <br/>
-              <input className="primaryButton roomsPageSubmitButton" type="submit" id="submit" ></input>
             </form>
+              <input form="loginform" className="primaryButton loginbutton" type="submit" id="submit" ></input>
             <div>
               {error !== "" ? <p className="text-danger m-0">Username and/or password incorrect</p> : <></>}
             </div>
