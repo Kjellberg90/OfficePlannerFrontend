@@ -59,10 +59,10 @@ const GroupInfoPage = () => {
   useEffect(() => {
     getWeekAndDay(currentDate)
   }, [currentDate])
-
+  
   const name = roomName!;
   return (
-    <div className="groupInfoWrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div className="groupInfoWrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0 20px' }}>
       <Container>
         <Stack gap={5} style={{ marginTop: '5rem', marginBottom: "8rem" }}>
           <Row>

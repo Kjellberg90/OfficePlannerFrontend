@@ -7,10 +7,14 @@ import { useEffect, useState } from "react";
 import Groups from './groupsInterface'
 import IdleUser from '../../shared/IdleUser/IdleUser';
 import { fetchGroups } from '../../shared/Fetch/GroupFetches';
+import { useMediaQuery } from '@react-hook/media-query';
+
 
 const Group = () => {  
     
   const [groupNames, setGroups] = useState([]);
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const gap = isMobile ? 4 : 5;
 
   IdleUser(); //Sets Idle Timer
       
@@ -27,7 +31,7 @@ useEffect(() => {
     <Container>
       <Row className="d-flex align-items-center justify-content-center">
         <Col  md={6}>
-          <Stack gap={5}>
+          <Stack gap={gap}>
               {
               groupNames.map((name: Groups) => {
                 return(
