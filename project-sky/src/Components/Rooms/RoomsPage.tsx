@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, ChangeEvent } from "react";
+import React, { useContext, useEffect, useState, ChangeEvent, useCallback } from "react";
 import RoomInfo from "./RoomInfo";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
@@ -30,14 +30,20 @@ const RoomsPage = () => {
 
   IdleUser(); //Sets Idle Timer
 
-  async function getRoomInfo() {
-    const response: any = await fetchRooms(currentDate)
-    setRooms(response)
-  }
+  const getRoomInfo = useCallback(async () => {
+    const response = await fetchRooms(currentDate);
+    setRooms(response);
+  }, [currentDate]);
 
   useEffect(() => {
     getRoomInfo()
+  }, [getRoomInfo])
+  
+  useEffect(() => {
     setisOpenBook(NaN)
+  }, [currentDate])
+  
+  useEffect(() => {
     setisOpenDrop(NaN)
   }, [currentDate])
 
