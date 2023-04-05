@@ -33,6 +33,22 @@ a :hover {
   color: var(--secondary-color);
 }
 
+/* -------------- LoginPage Styling --------------------*/
+
+.loginRow {
+  max-height: 100%;
+  align-items: center;
+}
+
+.formlogin {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  margin-top: 10px;
+  width: 250px;
+}
+
+
 /* -------------- Startpage Styling --------------------*/
 
 .selectionBox {
