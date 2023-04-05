@@ -183,12 +183,14 @@ input[type="search"]::-webkit-search-cancel-button:hover {
   color: var(--primary-color);
   background-color: var(--secondary-color);
   border: none;
+  padding: 10px 10px 0px 10px;
 }
 
 .dropSeatModalBody {
   color: var(--primary-color);
   background-color: var(--secondary-color);
   border: none;
+  padding: 0px 10px 0px 10px;
 }
 
 .dropSeatModalFooter {
