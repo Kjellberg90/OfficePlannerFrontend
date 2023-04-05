@@ -66,9 +66,9 @@ const LoginPage = () => {
     <Container>
       <Row>
         <Col className="text-center" md={6} >
-          <div className="d-flex flex-column room-info-col pt-3 p-4 loginRow">
+          <div className="d-flex flex-column room-info-col pt-3 p-5 loginRow">
             <h2>Log In</h2>
-            <form className="form-inline" onSubmit={(e) => login(e)}>
+            <form className="form-inline formlogin" onSubmit={(e) => login(e)}>
               <input className="form-control m-1" type="text" name="name" id="name" placeholder="Username" onChange={handleChange} value={formData.name} required/> 
               <br/>
               <input className="form-control m-1" type="password" onChange={handleChange} placeholder="Password" name="password" id="password" value={formData.password} required/>
