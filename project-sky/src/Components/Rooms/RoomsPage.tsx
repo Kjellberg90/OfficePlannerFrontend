@@ -95,22 +95,21 @@ const RoomsPage = () => {
     setdeleteUser({ date: currentDate, name: userName, roomId: roomId, password: pin })
   }
 
-  const deleteSingleBooking = (e: any) => {
-    e.preventDefault();
-    const delUser = {"roomId": deleteUser.roomId, "date": currentDate, "name": deleteUser.name, "password": pin}
-
-    fetchDeleteSingleBookings(delUser)
-    .then(() => {
+  const deleteSingleBooking = async (e: any) => {
+    try{
+      e.preventDefault();
+      const delUser = {"roomId": deleteUser.roomId, "date": currentDate, "name": deleteUser.name, "password": pin};
+      
+      await fetchDeleteSingleBookings(delUser);
       setShow(false); 
       setisOpenDrop(NaN);
       getRoomInfo();
       setError("");
-    })
-    .catch(err => {
-      console.log("error:",err);
-      setError(err.response.data);
-    })
-    setPin("");
+      setPin("");
+     } catch (error: any) {
+      console.error("error: ", error);
+      setError(error.response.data);
+     }
   }
   
 
