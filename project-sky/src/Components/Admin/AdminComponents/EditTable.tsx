@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, SyntheticEvent } from "react";
+import { useState, useEffect, useCallback, ChangeEvent, SyntheticEvent } from "react";
 import Group from "../../Groups/GroupInterfaces/Group";
 import RoomOverview from "../../Rooms/RoomOverview";
 import { fetchGroupsOverviewWeek } from "../../../shared/Fetch/AdminHomeFetches";
@@ -9,29 +9,24 @@ const EditTable = (props: { weekNumber: number; scheduleId: number }) => {
     const [rooms, setRooms] = useState<RoomOverview[]>([]);
     const [groups, setGroups] = useState<string[]>([]);
 
-    useEffect(() => {
-        RoomOverviewFetch();
-        GroupFetch();
-    }, [])
+    
+    
+    const RoomOverviewFetch = useCallback(async () => {
+        const data = await fetchGroupsOverviewWeek(props.weekNumber, props.scheduleId);
+        setRooms(data);
+      }, [props.weekNumber, props.scheduleId]);
+      
+      const GroupFetch = useCallback(async () => {
+        const data = await fetchGroups();
+        const nameList: string[] = data.map((group: Group) => group.name);
+        setGroups(nameList);
+      }, [setGroups]);
 
-
-
-    const RoomOverviewFetch = async () => {
-        await fetchGroupsOverviewWeek(props.weekNumber, props.scheduleId)
-            .then((data) => {
-                setRooms(data)
-            })
-    }
-
-    const GroupFetch = async () => {
-        await fetchGroups()
-            .then((data) => {
-                var nameList: string[] = data.map((group: Group) => {
-                    return group.name
-                })
-                setGroups(nameList)
-            })
-    }
+        useEffect(() => {
+            RoomOverviewFetch();
+            GroupFetch();
+        }, [RoomOverviewFetch, GroupFetch])
+    
 
     const HandleChange = (e: ChangeEvent<HTMLSelectElement>, roomIndex: number, dayIndex: number) => {
         const value = e.target.value;
