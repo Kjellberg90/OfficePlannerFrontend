@@ -1,9 +1,7 @@
-import { group } from "console";
 import { DetailedHTMLProps, Fragment, HTMLAttributes, ReactNode, RefObject, useEffect, useState } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader, ModalProps } from "react-bootstrap";
 import { BsPrefixProps, Omit } from "react-bootstrap/esm/helpers";
 import Groups from "../../Groups/GroupInterfaces/groupsInterface";
-import Room from "../../Rooms/Room";
 
 interface AdminRoom {
   id: number;
@@ -41,7 +39,7 @@ export const AddBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detai
   useEffect(() => {
     setGroups(props.groups)
     setRooms(props.rooms)
-  })
+  }, [props.groups, props.rooms]);
 
   return (
     <Fragment>
@@ -89,7 +87,7 @@ export const EditBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Deta
   useEffect(() => {
     setGroups(props.groups)
     setRooms(props.rooms)
-  })
+  }, [props.groups, props.rooms]);
 
   return (
     <Fragment>
