@@ -11,6 +11,7 @@ import IdleUser from "../../shared/IdleUser/IdleUser";
 import { RoomMapModal } from "./Modals/RoomsMapModal";
 import { DateContext } from "../../shared/DateContext";
 import { fetchRooms, fetchSingleBookings, fetchDeleteSingleBookings, fetchPostSingleBookings } from "../../shared/Fetch/RoomFetches";
+import { couldStartTrivia } from "typescript";
 
 const RoomsPage = () => {
 
@@ -19,12 +20,12 @@ const RoomsPage = () => {
   const [isOpenBook, setisOpenBook] = useState<number>();
   const [isOpenDrop, setisOpenDrop] = useState<number>();
   const [id, setid] = useState<number>();
-  const [name, setname] = useState("");
-  const [pin, setPin] = useState("");
+  const [name, setname] = useState<string>("");
+  const [pin, setPin] = useState<string>("");
   const [deleteUser, setdeleteUser] = useState({ date: '', name: '', roomId: 0, password: pin });
   const [show, setShow] = useState(false);
   const [showMap, setShowMap] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
 
   var { currentDate } = useContext(DateContext)
 
@@ -79,14 +80,15 @@ const RoomsPage = () => {
     postSingleBooking()
   }
 
-
-  const postSingleBooking = () => {
+  const postSingleBooking = async () => {
     const postData = { "roomId": id, "date": currentDate, "name": name, "password": pin }
-    fetchPostSingleBookings(postData)
-      .then(() => {
-        getRoomInfo();
-        setPin("");
-      })
+    try {
+      await fetchPostSingleBookings(postData)
+      getRoomInfo();
+      setPin("");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const userToDelete = (userName: string, roomId: number) => {
