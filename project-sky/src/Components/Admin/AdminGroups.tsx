@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Group from "../Groups/Group";
+import Group from "../Groups/GroupInterfaces/Group";
 import { AddGroupModal, UpdateGroupModal, DeleteGroupModal } from "./AdminModals";
 import { fetchGroups } from "../../shared/Fetch/GroupFetches";
 import { fetchDeleteGroup, fetchPostNewGroup, fetchPutGroup } from "../../shared/Fetch/AdminGroupFetches";
@@ -11,19 +11,21 @@ import { fetchDeleteGroup, fetchPostNewGroup, fetchPutGroup } from "../../shared
 const AdminGroups = () => {
     const [groups, setGroups] = useState<Group[]>([]);
     const [currentGroup, setCurrentGroup] = useState<Group>();
-    const [newValues, setNewValues] = useState<{name: string | undefined; groupSize: number | undefined; division: string | undefined}>
-        ({name: "", 
-        groupSize: 0,
-        division: ""});
+    const [newValues, setNewValues] = useState<{ name: string | undefined; groupSize: number | undefined; division: string | undefined }>
+        ({
+            name: "",
+            groupSize: 0,
+            division: ""
+        });
     const [showAddGroup, setShowAddGroup] = useState(false);
     const [showUppdateGroup, setShowUpdateGroup] = useState(false);
     const [showDeleteGroup, setShowDeleteGroup] = useState(false);
-        
+
     async function GetGroups() {
-      const response: any = await fetchGroups()
-      setGroups(response)
+        const response: any = await fetchGroups()
+        setGroups(response)
     }
-    
+
     useEffect(() => {
         GetGroups()
     }, [])
@@ -40,7 +42,7 @@ const AdminGroups = () => {
             return;
         }
 
-         
+
         setNewValues({
             ...newValues,
             [e.target.name]: value
@@ -57,26 +59,26 @@ const AdminGroups = () => {
     }, [currentGroup])
 
     async function PostGroup() {
-      const data = newValues
-      await fetchPostNewGroup(data)
-    }    
+        const data = newValues
+        await fetchPostNewGroup(data)
+    }
 
     async function UpdateGroup() {
-      const groupId: any = currentGroup?.id
-      if(newValues.division === undefined || newValues.division === null || newValues.division === ""){
-        setNewValues({
-            ...newValues,
-            division: currentGroup?.department
-        })
+        const groupId: any = currentGroup?.id
+        if (newValues.division === undefined || newValues.division === null || newValues.division === "") {
+            setNewValues({
+                ...newValues,
+                division: currentGroup?.department
+            })
+        }
+        await fetchPutGroup(newValues, groupId)
     }
-      await fetchPutGroup(newValues, groupId)
-    }   
 
     async function DeleteGroup() {
-      const Id: any = currentGroup?.id
-      await fetchDeleteGroup(Id)
-        .then(() => GetGroups())
-    } 
+        const Id: any = currentGroup?.id
+        await fetchDeleteGroup(Id)
+            .then(() => GetGroups())
+    }
 
     const GetOrderedGroups = () => {
         var divisionA: string[] = []
@@ -87,7 +89,7 @@ const AdminGroups = () => {
         var newArr: Array<string[]> = [];
 
         groups.map((group: Group) => {
-            switch(group.department){
+            switch (group.department) {
                 case "A":
                     divisionA.push(group.name)
                     break;
@@ -105,22 +107,22 @@ const AdminGroups = () => {
         var str: number = Math.max(...arr.map(x => x.length));
 
         arr.map((group: string[]) => {
-            if(group.length < 4) {
+            if (group.length < 4) {
                 group.push("");
             }
         })
 
-        for(let i = 0; i < str; i++) {
+        for (let i = 0; i < str; i++) {
             newArr.push([divisionA[i], divisionB[i], divisionC[i]])
         }
 
         return (
             <tbody className="adminTableBody">
                 {newArr.map((groups, i) => {
-                    return(
+                    return (
                         <tr key={i}>
                             {groups.map((names, i) => {
-                                return(
+                                return (
                                     <td key={i}>{names}</td>
                                 )
                             })}
@@ -130,8 +132,8 @@ const AdminGroups = () => {
             </tbody>
         )
     }
-    
-    
+
+
     return (
         <Container>
             <Row className="mb-3">
@@ -139,7 +141,7 @@ const AdminGroups = () => {
                     <h3 className="headerSecondaryColor">Groups</h3>
                 </Col>
                 <Col>
-                <h3 className="headerSecondaryColor">R&D teams</h3>
+                    <h3 className="headerSecondaryColor">R&D teams</h3>
                 </Col>
             </Row>
             <Row>
@@ -154,24 +156,25 @@ const AdminGroups = () => {
                             </tr>
                         </thead>
                         <tbody className="adminTableBody">
-                            {groups.map((group: Group) => { 
-                                return(
-                                <tr key={group.name}>
-                                    <td>{group.id}</td>
-                                    <td>{group.name}</td>
-                                    <td>{group.groupSize}</td>
-                                    <td>
-                                        <button type="button" className="btn btn-primary" onClick={() => {
-                                            setCurrentGroup(group); 
-                                            setShowUpdateGroup(true);
-                                        }}><FontAwesomeIcon icon={faPenToSquare} /></button>
-                                        <button className="btn btn-danger" onClick={() => {
-                                            setCurrentGroup(group);
-                                            setShowDeleteGroup(true);
-                                        }}><FontAwesomeIcon icon={faTrash} /></button>
-                                    </td>
-                                </tr>
-                            )})}
+                            {groups.map((group: Group) => {
+                                return (
+                                    <tr key={group.name}>
+                                        <td>{group.id}</td>
+                                        <td>{group.name}</td>
+                                        <td>{group.groupSize}</td>
+                                        <td>
+                                            <button type="button" className="btn btn-primary" onClick={() => {
+                                                setCurrentGroup(group);
+                                                setShowUpdateGroup(true);
+                                            }}><FontAwesomeIcon icon={faPenToSquare} /></button>
+                                            <button className="btn btn-danger" onClick={() => {
+                                                setCurrentGroup(group);
+                                                setShowDeleteGroup(true);
+                                            }}><FontAwesomeIcon icon={faTrash} /></button>
+                                        </td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                 </Col>
@@ -182,7 +185,7 @@ const AdminGroups = () => {
                                 <th scope="col" className="col-2">R&D A - Petra</th>
                                 <th scope="col" className="col-2">R&D B - Johan</th>
                                 <th scope="col" className="col-2">R&D C - Andreas</th>
-                            </tr>   
+                            </tr>
                         </thead>
                         {GetOrderedGroups()}
                     </table>
@@ -195,11 +198,11 @@ const AdminGroups = () => {
             </Row>
             <AddGroupModal
                 show={showAddGroup}
-                onHide={() => {setShowAddGroup(false)}}
+                onHide={() => { setShowAddGroup(false) }}
                 updatedvalue={HandleChange}
                 onSubmit={PostGroup}
             />
-            <UpdateGroupModal 
+            <UpdateGroupModal
                 show={showUppdateGroup}
                 onHide={() => setShowUpdateGroup(false)}
                 updatedvalue={HandleChange}
@@ -208,11 +211,11 @@ const AdminGroups = () => {
                 groupsize={currentGroup?.groupSize}
                 groupdivision={currentGroup?.department}
             />
-            <DeleteGroupModal 
+            <DeleteGroupModal
                 show={showDeleteGroup}
                 onHide={() => setShowDeleteGroup(false)}
                 groupname={currentGroup?.name}
-                delete={() => {DeleteGroup(); setShowDeleteGroup(false)}}
+                delete={() => { DeleteGroup(); setShowDeleteGroup(false) }}
             />
         </Container>
     )

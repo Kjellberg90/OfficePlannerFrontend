@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react"
 import { useLocation } from 'react-router-dom';
 import { Container, Row, Col, Stack } from 'react-bootstrap'
-import Groups from './groupsInterface'
+import Groups from './GroupInterfaces/groupsInterface'
 import WeeklySchedule from "./weeklyscheduleInterface";
 import IdleUser from "../../shared/IdleUser/IdleUser";
 import SmallerMap from "../../shared/Map/SmallerMap";
@@ -9,7 +9,7 @@ import { DateContext } from "../../shared/DateContext";
 import { fetchGroupInfo, fetchWeekAndDay, fetchWeeklyGroupSchedule } from "../../shared/Fetch/GroupFetches";
 
 const GroupInfoPage = () => {
-  
+
   const [group, setGroup] = useState<Groups>();
   const [weeklySchedule, setweeklySchedule] = useState([]);
   const [currentWeek, setcurrentWeek] = useState<Week>();
@@ -30,7 +30,7 @@ const GroupInfoPage = () => {
   useEffect(() => {
     const roomName = group?.bookedRoom?.name.toLowerCase();
     setRoomName(roomName)
-  }, [group?.bookedRoom?.name])
+  }, [group?.bookedRoom?.name, groupId])
 
   async function getGroupInfo(currentDate: string, groupId: string) {
     const response: any = await fetchGroupInfo(currentDate, groupId)
@@ -39,16 +39,20 @@ const GroupInfoPage = () => {
 
   useEffect(() => {
     getGroupInfo(currentDate, groupId)
-  }, [currentDate])
+  }, [currentDate, groupId])
 
   async function getWeeklyRoomSchedule(currentDate: string, groupId: string) {
-    const response: any = await fetchWeeklyGroupSchedule(currentDate, groupId)
-    setweeklySchedule(response)
+    try {
+      const response: any = await fetchWeeklyGroupSchedule(currentDate, groupId);
+      setweeklySchedule(response);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   useEffect(() => {
     getWeeklyRoomSchedule(currentDate, groupId)
-  }, [currentDate])
+  }, [currentDate, groupId])
 
 
   async function getWeekAndDay(currentDate: string) {
@@ -59,7 +63,7 @@ const GroupInfoPage = () => {
   useEffect(() => {
     getWeekAndDay(currentDate)
   }, [currentDate])
-  
+
   const name = roomName!;
   return (
     <div className="groupInfoWrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0 20px' }}>
