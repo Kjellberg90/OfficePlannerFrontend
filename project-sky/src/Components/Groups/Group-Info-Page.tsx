@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react"
 import { useLocation } from 'react-router-dom';
 import { Container, Row, Col, Stack } from 'react-bootstrap'
-import Groups from './groupsInterface'
+import Groups from './GroupInterfaces/groupsInterface'
 import WeeklySchedule from "./weeklyscheduleInterface";
 import IdleUser from "../../shared/IdleUser/IdleUser";
 import SmallerMap from "../../shared/Map/SmallerMap";
@@ -9,7 +9,7 @@ import { DateContext } from "../../shared/DateContext";
 import { fetchGroupInfo, fetchWeekAndDay, fetchWeeklyGroupSchedule } from "../../shared/Fetch/GroupFetches";
 
 const GroupInfoPage = () => {
-  
+
   const [group, setGroup] = useState<Groups>();
   const [weeklySchedule, setweeklySchedule] = useState([]);
   const [currentWeek, setcurrentWeek] = useState<Week>();
@@ -63,7 +63,7 @@ const GroupInfoPage = () => {
   useEffect(() => {
     getWeekAndDay(currentDate)
   }, [currentDate])
-  
+
   const name = roomName!;
   return (
     <div className="groupInfoWrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0 20px' }}>
