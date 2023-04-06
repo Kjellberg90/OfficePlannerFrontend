@@ -1,6 +1,5 @@
-import { DetailedHTMLProps, Fragment, HTMLAttributes, ReactNode, RefObject, useEffect, useState } from "react";
-import { Modal, ModalBody, ModalFooter, ModalHeader, ModalProps } from "react-bootstrap";
-import { BsPrefixProps, Omit } from "react-bootstrap/esm/helpers";
+import { FormEvent, Fragment, ChangeEvent, useEffect, useState } from "react";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
 import Groups from "../../Groups/GroupInterfaces/groupsInterface";
 
 interface AdminRoom {
@@ -36,6 +35,15 @@ type AdminDeleteBookingModalProps = {
   handleDelete: () => void;
   booking?: AdminBookingProps;
 }
+
+type EditBookingModalProps = {
+  show: boolean;
+  groups: Groups[];
+  rooms: AdminRoom[];
+  updatedvalue: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onSubmit: () => void;
+  onHide: () => void;
+};
 
 export const DeleteBookingModal = ({
   show,
@@ -123,19 +131,27 @@ export const AddBookingModal = ({
   )
 }
 
-export const EditBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
-
-  const [groups, setGroups] = useState([]);
-  const [rooms, setRooms] = useState([]);
+export const EditBookingModal = ({ 
+  show,
+  groups, 
+  rooms, 
+  updatedvalue, 
+  onSubmit, 
+  onHide, 
+  ...props }: EditBookingModalProps) => {
+  const [selectedGroups, setSelectedGroups] = useState<Groups[]>([]);
+  const [selectedRooms, setSelectedRooms] = useState<AdminRoom[]>([]);
 
   useEffect(() => {
-    setGroups(props.groups)
-    setRooms(props.rooms)
-  }, [props.groups, props.rooms]);
+    setSelectedGroups(groups);
+    setSelectedRooms(rooms);
+  }, [groups, rooms]);
 
   return (
     <Fragment>
-      <Modal {...props}
+      <Modal
+        show={show}
+        onHide={onHide}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -145,29 +161,37 @@ export const EditBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Deta
         </ModalHeader>
         <ModalBody>
           <form id="EditSingleBookingModalForm">
-            <select placeholder="Select Group" name="groupId" id="groupId" onChange={props.updatedvalue}>
-              {
-                groups.map((group: Groups) => {
-                  return <option id="groupName" key={group.id} value={group.id} >{group.name}</option>
-                })
-              }
+            <select placeholder="Select Group" name="groupId" id="groupId" onChange={updatedvalue}>
+              {selectedGroups.map((group: Groups) => (
+                <option id="groupName" key={group.id} value={group.id}>
+                  {group.name}
+                </option>
+              ))}
             </select>
-            <select placeholder="Select Room" name="roomId" id="roomId" onChange={props.updatedvalue}>
-              {
-                rooms.map((room: AdminRoom) => {
-                  return <option key={room.id} value={room.id}>{room.name}</option>
-                })
-              }
+            <select placeholder="Select Room" name="roomId" id="roomId" onChange={updatedvalue}>
+              {selectedRooms.map((room: AdminRoom) => (
+                <option key={room.id} value={room.id}>
+                  {room.name}
+                </option>
+              ))}
             </select>
-            <input type="date" name="date" onChange={props.updatedvalue} />
+            <input type="date" name="date" onChange={updatedvalue} />
           </form>
         </ModalBody>
         <ModalFooter>
-          <button form="EditSingleBookingModalForm" type="submit" className="btn btn-primary" onClick={() => props.onsubmit()}>Update</button>
-          <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
-
+          <button
+            form="EditSingleBookingModalForm"
+            type="submit"
+            className="btn btn-primary"
+            onClick={onSubmit}
+          >
+            Update
+          </button>
+          <button type="button" onClick={onHide} className="btn btn-danger">
+            Cancel
+          </button>
         </ModalFooter>
       </Modal>
     </Fragment>
-  )
-}
+  );
+};
