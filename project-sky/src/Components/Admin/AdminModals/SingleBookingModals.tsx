@@ -9,6 +9,10 @@ interface AdminRoom {
   seats: number;
 }
 
+type AdminGroup = {
+  id: number;
+  name: string;
+}
 
 type AdminBookingProps = {
   id: number;
@@ -16,6 +20,15 @@ type AdminBookingProps = {
   groupName: string;
   roomName: string;
 }
+
+type AddBookingModalProps = {
+  show: boolean;
+  onHide: () => void;
+  adminGroups: AdminGroup[];
+  adminRooms: AdminRoom[];
+  updatedvalue: (event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
+  onSubmit: () => void;
+};
 
 type AdminDeleteBookingModalProps = {
   show: boolean;
@@ -55,18 +68,26 @@ export const DeleteBookingModal = ({
   )
 }
 
-export const AddBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: RefObject<HTMLDivElement> | ((instance: HTMLDivElement | null) => void) | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode; }) => {
-  const [groups, setGroups] = useState([]);
-  const [rooms, setRooms] = useState([]);
+export const AddBookingModal = ({
+  show,
+  onHide,
+  adminGroups,
+  adminRooms,
+  updatedvalue,
+  onSubmit,
+  ...props
+}: AddBookingModalProps) => {
+  const [groups, setGroups] = useState<AdminGroup[]>([]);
+  const [rooms, setRooms] = useState<AdminRoom[]>([]);
 
   useEffect(() => {
-    setGroups(props.groups)
-    setRooms(props.rooms)
-  }, [props.groups, props.rooms]);
+    setGroups(adminGroups);
+    setRooms(adminRooms);
+  }, [adminGroups, adminRooms]);
 
   return (
     <Fragment>
-      <Modal {...props}
+      <Modal show={show} onHide={onHide} {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -76,26 +97,26 @@ export const AddBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detai
         </ModalHeader>
         <ModalBody>
           <form id="addSingleBookingModalForm">
-            <select placeholder="Select Group" name="groupId" id="groupId" onChange={props.updatedvalue}>
+            <select placeholder="Select Group" name="groupId" id="groupId" onChange={updatedvalue}>
               {
-                groups.map((group: Groups) => {
+                groups.map((group: AdminGroup) => {
                   return <option id="groupName" key={group.id} value={group.id} >{group.name}</option>
                 })
               }
             </select>
-            <select placeholder="Select Room" name="roomId" id="roomId" onChange={props.updatedvalue}>
+            <select placeholder="Select Room" name="roomId" id="roomId" onChange={updatedvalue}>
               {
                 rooms.map((room: AdminRoom) => {
                   return <option key={room.id} value={room.id}>{room.name}</option>
                 })
               }
             </select>
-            <input type="date" name="date" onChange={props.updatedvalue} />
+            <input type="date" name="date" onChange={updatedvalue} />
           </form>
         </ModalBody>
         <ModalFooter>
-          <button form="addSingleBookingModalForm" type="submit" className="btn btn-primary" onClick={() => { props.onsubmit() }}>Book</button>
-          <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
+          <button form="addSingleBookingModalForm" type="submit" className="btn btn-primary" onClick={onSubmit}>Book</button>
+          <button type="button" onClick={onHide} className="btn btn-danger">Cancel</button>
         </ModalFooter>
       </Modal>
     </Fragment>

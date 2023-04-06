@@ -77,7 +77,7 @@ const [formData, setFormData] = useState({
   date: ""
 })
 
-const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
+const HandleChange =  (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
   setFormData({
     ...formData,
     [e.target.name]: e.target.value
@@ -134,8 +134,8 @@ const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
             <AddBookingModal
                 show={showAddBooking}
                 onHide={() => {setshowAddBooking(false)}}
-                groups={groups}
-                rooms={rooms}
+                adminGroups={groups}
+                adminRooms={rooms}
                 onSubmit={() => AddBooking()}
                 updatedvalue={HandleChange}
             />
