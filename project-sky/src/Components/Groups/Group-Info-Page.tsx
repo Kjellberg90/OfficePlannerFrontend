@@ -42,8 +42,12 @@ const GroupInfoPage = () => {
   }, [currentDate, groupId])
 
   async function getWeeklyRoomSchedule(currentDate: string, groupId: string) {
-    const response: any = await fetchWeeklyGroupSchedule(currentDate, groupId)
-    setweeklySchedule(response)
+    try {
+      const response: any = await fetchWeeklyGroupSchedule(currentDate, groupId);
+      setweeklySchedule(response);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   useEffect(() => {
