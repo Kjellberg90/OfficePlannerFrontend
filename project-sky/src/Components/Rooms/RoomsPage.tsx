@@ -11,7 +11,6 @@ import IdleUser from "../../shared/IdleUser/IdleUser";
 import { RoomMapModal } from "./Modals/RoomsMapModal";
 import { DateContext } from "../../shared/DateContext";
 import { fetchRooms, fetchSingleBookings, fetchDeleteSingleBookings, fetchPostSingleBookings } from "../../shared/Fetch/RoomFetches";
-import { couldStartTrivia } from "typescript";
 
 const RoomsPage = () => {
 
