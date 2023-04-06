@@ -9,10 +9,33 @@ interface AdminRoom {
   seats: number;
 }
 
-export const DeleteBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
+
+type AdminBookingProps = {
+  id: number;
+  date: string;
+  groupName: string;
+  roomName: string;
+}
+
+type AdminDeleteBookingModalProps = {
+  show: boolean;
+  onHide: () => void;
+  handleDelete: () => void;
+  booking?: AdminBookingProps;
+}
+
+export const DeleteBookingModal = ({
+  show,
+  onHide,
+  booking,
+  handleDelete,
+}: AdminDeleteBookingModalProps) => {
   return (
     <Fragment>
-      <Modal {...props}
+      <Modal
+        show={show} 
+        onHide={onHide}
+        booking={booking}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -21,11 +44,11 @@ export const DeleteBookingModal = (props: JSX.IntrinsicAttributes & Omit<Pick<De
           <h3>Delete Booking</h3>
         </ModalHeader>
         <ModalBody>
-          <h6>Are you sure you want to delete booking<b>{props.roomname}?</b></h6>
+          <h6>Are you sure you want to delete booking?</h6>
         </ModalBody>
         <ModalFooter>
-          <button type="button" className="btn btn-primary" onClick={props.delete}>Delete</button>
-          <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
+          <button type="button" className="btn btn-primary" onClick={handleDelete}>Delete</button>
+          <button type="button" onClick={onHide} className="btn btn-danger">Cancel</button>
         </ModalFooter>
       </Modal>
     </Fragment>

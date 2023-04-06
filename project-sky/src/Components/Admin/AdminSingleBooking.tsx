@@ -128,7 +128,8 @@ const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
               show={showDeleteBooking}
               onHide={() => setShowDeleteBooking(false)}
               booking={currentBooking}
-              delete={() => {DeleteBooking(); setShowDeleteBooking(false)}}
+              handleDelete={() => {DeleteBooking(); setShowDeleteBooking(false)}}
+            
               />
             <AddBookingModal
                 show={showAddBooking}
