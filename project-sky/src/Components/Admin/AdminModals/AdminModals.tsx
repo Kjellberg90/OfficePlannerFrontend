@@ -7,7 +7,10 @@ import { Omit, BsPrefixProps } from "react-bootstrap/esm/helpers"
 
 
 
+type AddGroupModalProps = {
+    updatedValue: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;,
 
+}
 
 
 
