@@ -10,7 +10,7 @@ function App() {
   return (
     <UserProvider>
       <DateProvider>
-        <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
           <AppRouter />
         </BrowserRouter>
       </DateProvider>
