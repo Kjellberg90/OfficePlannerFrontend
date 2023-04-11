@@ -3,14 +3,12 @@ import { GetCookie } from "../CookieHandler/Cookiehandler"
 import instance from "./baseURL"
 
 export const FetchPutBookings = (data: any, weekNumber: number) => {
-    var result = axios.put(`${instance}api/Booking/UpdateBookings/${weekNumber}`, data, {
+    var result = axios.put(`${instance}api/Schedule/UpdateBookings/${weekNumber}`, data, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + GetCookie("token"),
       }
     })
-    .catch(err => console.log(err))
-  
     return result
 }
 
@@ -30,7 +28,7 @@ export const FetchGetSchedules = () => {
 }
 
 export const FetchGetTotalWeeks = (scheduleId: number) => {
-  var result = axios.get(`https://localhost:7054/api/Schedule/schedule-weeks/${scheduleId}`, {
+  var result = axios.get(`${instance}api/Schedule/schedule-weeks/${scheduleId}`, {
     headers: {
       "Content-Type": "application/json"
     } 

@@ -58,25 +58,9 @@ const AdminBooking = () => {
         <Container>
             <Row>
                 <Col className="col-2">
-                    <Row className="adminBookingNav mb-3">
-                        <Nav className="d-flex flex-column">
-                            <h5>Schedule</h5>
-                            <ul className="">
-                                {schedules.map((schedule: Schedule) => {
-                                    return (
-                                        <li key={schedule.id}><a onClick={() => setScheduleId(schedule.id)}>{schedule.name}</a></li>
-                                    )
-                                })}
-                            </ul>
-                        </Nav>
-                    </Row>
                     <Row className="adminBookingNav">
                         <Nav className="d-flex flex-column">
-                            <h5>{schedules.map((schedule: Schedule) => {
-                                if(schedule.id == scheduleId) {
-                                    return (schedule.name)
-                                }
-                            })}</h5>
+                            <h5>Schedule</h5>
                             <ul>
                                 <li><NavLink to="weeks">All weeks</NavLink></li>
                                 {WeekLoop().map((item) => {
