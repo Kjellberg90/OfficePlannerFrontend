@@ -25,11 +25,6 @@ const LoginPage = () => {
   }
   
   const navigate= useNavigate();
-  
-  interface Fetchresult {
-    token: string,
-    user: User 
-  }
 
   async function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -59,14 +54,13 @@ const LoginPage = () => {
     const token = data.token
     const expires = new Date(Date.now() + 86400 * 1000).toUTCString();
     document.cookie =  `token=${token};expires=${expires + 86400}`
-    // document.cookie =  `token=${token}`
   }
  
   return (
     <Container>
       <Row>
         <Col className="text-center" md={6} >
-          <div className="d-flex flex-column room-info-col pt-3 p-5 loginRow">
+          <div className="d-flex flex-column room-info-col p-3 pb-4 loginRow">
             <h2>Log In</h2>
             <form id="loginform" className="form-inline formlogin" onSubmit={(e) => login(e)}>
               <input className="form-control m-1" type="text" name="name" id="name" placeholder="Username" onChange={handleChange} value={formData.name} required/> 

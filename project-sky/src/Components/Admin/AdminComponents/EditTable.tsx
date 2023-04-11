@@ -55,8 +55,15 @@ const EditTable = (props: { weekNumber: number; scheduleId: number }) => {
         setRooms(roomList);
     }
 
-    const HandleSubmit = (e: SyntheticEvent) => {
+    const HandleSubmit = () => {
         FetchPutBookings(rooms, props.weekNumber)
+        .then((res) => {
+            console.log("response:", res)
+        })
+        .catch((err) => {
+            console.log("error:", err)
+        })
+        debugger
     }
 
 
