@@ -2,6 +2,15 @@ import { DetailedHTMLProps, Fragment, HTMLAttributes, ReactNode, RefObject, useS
 import { Modal, ModalBody, ModalFooter, ModalHeader, ModalProps } from "react-bootstrap"
 import { Omit, BsPrefixProps } from "react-bootstrap/esm/helpers"
 
+
+
+
+
+
+
+
+
+
 export const AddGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
     return (
         <Fragment>
@@ -33,6 +42,26 @@ export const AddGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detaile
         </Fragment>
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const UpdateGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
     return (

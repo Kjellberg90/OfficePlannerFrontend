@@ -3,7 +3,7 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Group from "../Groups/GroupInterfaces/Group";
-import { AddGroupModal, UpdateGroupModal, DeleteGroupModal } from "./AdminModals";
+import { AddGroupModal, UpdateGroupModal, DeleteGroupModal } from "./AdminModals/AdminModals";
 import { fetchGroups } from "../../shared/Fetch/GroupFetches";
 import { fetchDeleteGroup, fetchPostNewGroup, fetchPutGroup } from "../../shared/Fetch/AdminGroupFetches";
 
