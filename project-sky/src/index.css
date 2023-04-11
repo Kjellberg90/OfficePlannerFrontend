@@ -33,6 +33,26 @@ a :hover {
   color: var(--secondary-color);
 }
 
+/* -------------- LoginPage Styling --------------------*/
+
+.loginRow {
+  align-items: center;
+}
+
+.formlogin {
+  display: flex;
+  margin-top: 5px;
+}
+
+.loginbutton {
+  margin: 5px 0px 0px 0px;
+}
+
+.text-danger {
+  padding-top: 5px;
+}
+
+
 /* -------------- Startpage Styling --------------------*/
 
 .selectionBox {
@@ -167,12 +187,14 @@ input[type="search"]::-webkit-search-cancel-button:hover {
   color: var(--primary-color);
   background-color: var(--secondary-color);
   border: none;
+  padding: 10px 10px 0px 10px;
 }
 
 .dropSeatModalBody {
   color: var(--primary-color);
   background-color: var(--secondary-color);
   border: none;
+  padding: 0px 10px 0px 10px;
 }
 
 .dropSeatModalFooter {
@@ -220,11 +242,6 @@ input[type="search"]::-webkit-search-cancel-button:hover {
 .hrDivider {
   border-top: 1px solid #42556340;
   min-height: 3.5rem;
-}
-/* -------------- Login Page --------------------*/
-
-.loginRow {
-  height: 9.5rem;
 }
 
 /* -------------- Admin Page --------------------*/
@@ -434,7 +451,16 @@ div {
 }
 
 .modalMap {
-  height: 400px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalMap > * {
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .mapModalBody {
@@ -456,6 +482,12 @@ div {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px 3px, rgba(0, 0, 0, 0.2) 0px 0px inset;
 }
 
+tspan {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+/*-------------- Group Info Page  -------------------------*/
 
 .group-room-info-col {
   background-color: var(--secondary-color);
@@ -470,11 +502,11 @@ div {
   .groupInfoCard {
     /* background-color: red; */
     margin-top: -2rem;
-    border-radius: 0%;
+  
   }
 
   .group-room-info-col {
-    border-radius: 0%;
+
     margin-bottom: -7rem;
   }
 }
@@ -483,12 +515,12 @@ div {
 
   .groupInfoCard {
     /* background-color: blue; */
-    border-radius: 0%;
+   
     margin-top: -2rem;
   }
 
   .group-room-info-col {
-    border-radius: 0%;
+
     margin-bottom: -3rem;
   }
 }
@@ -502,7 +534,7 @@ div {
 
   .groupInfoCard {
     /* background-color: yellow; */
-    border-radius: 40px 40px 35px 35px;
+  
   }
 
   .togglebtn {
@@ -510,9 +542,6 @@ div {
     margin-bottom: 5px;
   }
 
-  .group-room-info-col {
-    border-radius: 40px 40px 35px 35px;
-  }
 }
 
 @media (min-width: 992px) {
@@ -520,12 +549,9 @@ div {
   .groupInfoCard {
     margin-top: 3rem;
     /* background-color: violet; */
-    border-radius: 40px 40px 35px 35px;
+
   }
 
-  .group-room-info-col {
-    border-radius: 40px 40px 35px 35px;
-  }
 
   .epirocLogo {
     margin-left: 60px;
@@ -540,11 +566,11 @@ div {
   .groupInfoCard {
     margin-top: -2rem;
     /* background-color: turquoise; */
-    border-radius: 40px 40px 35px 35px;
+
   }
 
   .group-room-info-col {
-    border-radius: 40px 40px 35px 35px;
+
     margin-bottom: -4rem;
   }
 

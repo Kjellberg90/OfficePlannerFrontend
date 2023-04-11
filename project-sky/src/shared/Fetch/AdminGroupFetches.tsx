@@ -46,7 +46,7 @@ export const fetchDeleteGroup = (currentGroupId: number) => {
 }
 
 export const fetchPutGroup = (data: any, groupId: number) => {
-  var result = axios.put(`${instance}api/Group/UpdateGroup/${groupId}`, data, {
+  var result = axios.put(`${instance}api/AdminGroup/UpdateGroup/${groupId}`, data, {
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + GetCookie("token"),

@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "/subscriptions/d7817df5-ba43-471b-961f-5820a849b5b6/resourceGroups/officeplannergui-weeu-dev-rg/providers/Microsoft.Web/sites/epiroc-office-planner",
+  "appService.deploySubpath": "project-sky\\build"
+}

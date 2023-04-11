@@ -1,6 +1,5 @@
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { id } from "date-fns/locale";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { fetchAdminRooms } from "../../shared/Fetch/AdminRoomFetches";
@@ -78,15 +77,13 @@ const [formData, setFormData] = useState({
   date: ""
 })
 
-const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
+const HandleChange =  (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
   setFormData({
     ...formData,
     [e.target.name]: e.target.value
   })
-  console.log(formData)
 }
 
-console.log(currentBooking)
 
     return (
         <Container>
@@ -131,13 +128,14 @@ console.log(currentBooking)
               show={showDeleteBooking}
               onHide={() => setShowDeleteBooking(false)}
               booking={currentBooking}
-              delete={() => {DeleteBooking(); setShowDeleteBooking(false)}}
+              handleDelete={() => {DeleteBooking(); setShowDeleteBooking(false)}}
+            
               />
             <AddBookingModal
                 show={showAddBooking}
                 onHide={() => {setshowAddBooking(false)}}
-                groups={groups}
-                rooms={rooms}
+                adminGroups={groups}
+                adminRooms={rooms}
                 onSubmit={() => AddBooking()}
                 updatedvalue={HandleChange}
             />

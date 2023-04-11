@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, ChangeEvent } from "react";
+import React, { useContext, useEffect, useState, ChangeEvent, useCallback } from "react";
 import RoomInfo from "./RoomInfo";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
@@ -19,25 +19,31 @@ const RoomsPage = () => {
   const [isOpenBook, setisOpenBook] = useState<number>();
   const [isOpenDrop, setisOpenDrop] = useState<number>();
   const [id, setid] = useState<number>();
-  const [name, setname] = useState("");
-  const [pin, setPin] = useState("");
+  const [name, setname] = useState<string>("");
+  const [pin, setPin] = useState<string>("");
   const [deleteUser, setdeleteUser] = useState({ date: '', name: '', roomId: 0, password: pin });
   const [show, setShow] = useState(false);
   const [showMap, setShowMap] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
 
   var { currentDate } = useContext(DateContext)
 
   IdleUser(); //Sets Idle Timer
 
-  async function getRoomInfo() {
-    const response: any = await fetchRooms(currentDate)
-    setRooms(response)
-  }
+  const getRoomInfo = useCallback(async () => {
+    const response = await fetchRooms(currentDate);
+    setRooms(response);
+  }, [currentDate]);
 
   useEffect(() => {
     getRoomInfo()
+  }, [getRoomInfo])
+  
+  useEffect(() => {
     setisOpenBook(NaN)
+  }, [currentDate])
+  
+  useEffect(() => {
     setisOpenDrop(NaN)
   }, [currentDate])
 
@@ -73,42 +79,42 @@ const RoomsPage = () => {
     postSingleBooking()
   }
 
-
-  const postSingleBooking = () => {
+  const postSingleBooking = async () => {
     const postData = { "roomId": id, "date": currentDate, "name": name, "password": pin }
-    fetchPostSingleBookings(postData)
-      .then(() => {
-        getRoomInfo();
-        setPin("");
-      })
+    try {
+      await fetchPostSingleBookings(postData)
+      getRoomInfo();
+      setPin("");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const userToDelete = (userName: string, roomId: number) => {
     setdeleteUser({ date: currentDate, name: userName, roomId: roomId, password: pin })
   }
 
-  const deleteSingleBooking = (e: any) => {
-    e.preventDefault();
-    const delUser = {"roomId": deleteUser.roomId, "date": currentDate, "name": deleteUser.name, "password": pin}
-
-    fetchDeleteSingleBookings(delUser)
-    .then(() => {
+  const deleteSingleBooking = async (e: any) => {
+    try{
+      e.preventDefault();
+      const delUser = {"roomId": deleteUser.roomId, "date": currentDate, "name": deleteUser.name, "password": pin};
+      
+      await fetchDeleteSingleBookings(delUser);
       setShow(false); 
       setisOpenDrop(NaN);
       getRoomInfo();
       setError("");
-    })
-    .catch(err => {
-      console.log("error:",err);
-      setError(err.response.data);
-    })
-    setPin("");
+      setPin("");
+     } catch (error: any) {
+      console.error("error: ", error);
+      setError(error.response.data);
+     }
   }
   
 
 
   return (
-    <Container>
+    <Container className="px-4">
       <div id="test" className="d-flex justify-content-center">
         <div id="subTest">
           <span className="status"></span>
@@ -196,6 +202,11 @@ const RoomsPage = () => {
             </Row>
           )
         })}
+        <Row>
+          <Col className="mapBtnCol d-flex mt-0">
+            <button className="mapBtn" onClick={handleOpenMap}>Show Map</button>
+          </Col>
+        </Row>
       </Stack>
       <DeleteSingleBookingModal
         show={show}
@@ -209,9 +220,6 @@ const RoomsPage = () => {
         show={showMap}
         onHide={() => { setShowMap(false); }}
       />
-      <Col className="mapBtnCol d-flex">
-        <button className="mapBtn" onClick={handleOpenMap}>Show Map</button>
-      </Col>
     </Container>
   )
 }

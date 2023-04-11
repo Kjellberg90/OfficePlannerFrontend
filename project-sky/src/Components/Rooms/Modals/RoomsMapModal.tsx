@@ -3,13 +3,14 @@ import { Modal, ModalProps } from "react-bootstrap";
 import { Omit, BsPrefixProps } from "react-bootstrap/esm/helpers";
 import Map from "../../../shared/Map/Map";
 import { Row } from "react-bootstrap";
-
+import MobileMap from "../../../shared/Map/MobileMap";
 
 export const RoomMapModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode; }) => {
 
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
   return (
-  <Fragment>
+    <Fragment>
       <Modal
         {...props}
         size="lg"
@@ -20,10 +21,10 @@ export const RoomMapModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detailed
         </Modal.Header>
         <Modal.Body  className="d-flex justify-content-center mapModalBody">
             <Row className="d-flex justify-content-center align-items-center modalMap">
-          <Map />
+              {isMobile ? <MobileMap style={{ height: "80vh", width: "100%" }} /> : <Map />} {}
             </Row>
         </Modal.Body>
       </Modal>
-  </Fragment>
+    </Fragment>
   )
 }
