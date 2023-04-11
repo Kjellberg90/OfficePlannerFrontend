@@ -96,3 +96,9 @@ export type EditBookingModalProps = {
     rooms: AdminRoom[];
     groups: Groups[];
   };
+
+export type AdminDeleteAllBookingsModalProps = {
+    show: boolean;
+    onHide: () => void;
+    handleDelete: () => void;
+  }
