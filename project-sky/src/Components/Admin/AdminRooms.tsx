@@ -121,22 +121,22 @@ const AdminRooms = () => {
             <AddRoomModal
                 show={showAddRoom}
                 onHide={() => { setShowAddRoom(false) }}
-                updatedvalue={HandleChange}
+                updatedValue={HandleChange}
                 onSubmit={AddRoom}
             />
             <UpdateRoomModal
                 show={showUppdateRoom}
                 onHide={() => setShowUpdateRoom(false)}
-                updatedvalue={HandleChange}
+                updatedValue={HandleChange}
                 onSubmit={UpdateRoom}
-                roomname={currentRoom?.name}
+                roomName={currentRoom?.name}
                 seats={currentRoom?.seats}
             />
             <DeleteRoomModal
                 show={showDeleteRoom}
                 onHide={() => setShowDeleteRoom(false)}
                 room={currentRoom}
-                delete={() => { DeleteRoom(); setShowDeleteRoom(false) }}
+                handleDelete={() => { DeleteRoom(); setShowDeleteRoom(false) }}
             />
         </Container>
     )

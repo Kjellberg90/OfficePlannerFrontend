@@ -39,10 +39,10 @@ export const DeleteBookingModal = ({
 export const AddBookingModal = ({
   show,
   onHide,
-  adminGroups,
-  adminRooms,
-  updatedvalue,
   onSubmit,
+  updatedvalue,
+  adminRooms,
+  adminGroups,
   ...props
 }: AddBookingModalProps) => {
   const [groups, setGroups] = useState<AdminGroup[]>([]);
@@ -93,11 +93,11 @@ export const AddBookingModal = ({
 
 export const EditBookingModal = ({ 
   show,
-  groups, 
-  rooms, 
-  updatedvalue, 
-  onSubmit, 
   onHide, 
+  onSubmit, 
+  updatedvalue, 
+  rooms, 
+  groups, 
   ...props }: EditBookingModalProps) => {
   const [selectedGroups, setSelectedGroups] = useState<Groups[]>([]);
   const [selectedRooms, setSelectedRooms] = useState<AdminRoom[]>([]);

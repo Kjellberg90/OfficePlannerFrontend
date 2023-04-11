@@ -1,23 +1,20 @@
-import { DetailedHTMLProps, Fragment, HTMLAttributes, ReactNode, RefObject, useState } from "react"
-import { Modal, ModalBody, ModalFooter, ModalHeader, ModalProps } from "react-bootstrap"
-import { Omit, BsPrefixProps } from "react-bootstrap/esm/helpers"
+import { Fragment} from "react"
+import { Modal, ModalBody, ModalFooter, ModalHeader} from "react-bootstrap"
+import { AdminAddGroupModalProps, AdminUpdateGroupModalProps, AdminDeleteGroupModalProps, AdminAddRoomModalProps, AdminUpdateRoomModalProps, AdminDeleteRoomModalProps } from "../AdminComponents/AdminModalTypes"
 
-
-
-
-
-
-type AddGroupModalProps = {
-    updatedValue: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;,
-
-}
-
-
-
-export const AddGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
+export const AddGroupModal = ({
+    show,
+    onHide,
+    onSubmit,
+    updatedValue,
+    ...props
+}: AdminAddGroupModalProps) => {
     return (
         <Fragment>
-            <Modal {...props}
+            <Modal 
+            show={show}
+            onHide={onHide}
+            {...props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -27,9 +24,9 @@ export const AddGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detaile
                 </Modal.Header>
                 <Modal.Body>
                     <form id="addForm">
-                        <input type="text" required placeholder="Name" name="name" onChange={props.updatedvalue}></input>
-                        <input type="number" required placeholder="Team size" name="groupSize" onChange={props.updatedvalue}></input>
-                        <select name="division" required onChange={props.updatedvalue}>
+                        <input type="text" required placeholder="Name" name="name" onChange={updatedValue}></input>
+                        <input type="number" required placeholder="Team size" name="groupSize" onChange={updatedValue}></input>
+                        <select name="division" required onChange={updatedValue}>
                             <option value="A">R&D A</option>
                             <option value="B">R&D B</option>
                             <option value="C">R&D C</option>
@@ -37,8 +34,8 @@ export const AddGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detaile
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button form="addForm" type="submit" className="btn btn-primary" onClick={props.onsubmit}>Add group</button>
-                    <button type="button" className="btn btn-danger" onClick={props.onHide}>Cancel</button>
+                    <button form="addForm" type="submit" className="btn btn-primary" onClick={onSubmit}>Add group</button>
+                    <button type="button" className="btn btn-danger" onClick={onHide}>Cancel</button>
                 </Modal.Footer>
 
             </Modal>
@@ -46,30 +43,22 @@ export const AddGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detaile
     )
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export const UpdateGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
+export const UpdateGroupModal = ({
+    show,
+    onHide,
+    onSubmit,
+    updatedValue,
+    groupName,
+    groupSize,
+    groupDivision,
+    ...props
+}: AdminUpdateGroupModalProps) => {
     return (
         <Fragment>
-            <Modal {...props}
+            <Modal
+            show={show}
+            onHide={onHide}
+            {...props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -79,9 +68,9 @@ export const UpdateGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Deta
                 </ModalHeader>
                 <ModalBody>
                     <form id="updateGroupForm">
-                        <input type="text" placeholder={props.groupname} onChange={props.updatedvalue} name="name"/>
-                        <input type="number" placeholder={props.groupsize} onChange={props.updatedvalue} name="groupSize"/>
-                        <select name="division" placeholder={props.groupdivision} onChange={props.updatedvalue}>
+                        <input type="text" placeholder={groupName} onChange={updatedValue} name="name"/>
+                        <input type="number" placeholder={groupSize?.toString()} onChange={updatedValue} name="groupSize"/>
+                        <select name="division" placeholder={groupDivision} onChange={updatedValue}>
                             <option>Choose R&D</option>
                             <option value="A">R&D A</option>
                             <option value="B">R&D B</option>
@@ -90,19 +79,27 @@ export const UpdateGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Deta
                     </form>
                 </ModalBody>
                 <ModalFooter>
-                    <button form="updateGroupForm" type="submit" className="btn btn-primary" onClick={props.onsubmit}>Update group</button>
-                    <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
-
+                    <button form="updateGroupForm" type="submit" className="btn btn-primary" onClick={onSubmit}>Update group</button>
+                    <button type="button" onClick={onHide} className="btn btn-danger">Cancel</button>
                 </ModalFooter>
             </Modal>
         </Fragment>
     )
 }
 
-export const DeleteGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
+export const DeleteGroupModal = ({
+    show,
+    onHide,
+    groupName,
+    handleDelete,
+    ...props
+}: AdminDeleteGroupModalProps) => {
     return (
         <Fragment>
-            <Modal {...props}
+            <Modal 
+            show={show}
+            onHide={onHide}
+            {...props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -111,21 +108,30 @@ export const DeleteGroupModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Deta
                     <h3>Delete group</h3>
                 </ModalHeader>
                 <ModalBody>
-                    <h6>Are you sure you want to delete group <b>{props.groupName}?</b></h6>
+                    <h6>Are you sure you want to delete group</h6>
                 </ModalBody>
                 <ModalFooter>
-                    <button type="button" className="btn btn-primary" onClick={props.delete}>Delete group</button>
-                    <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
+                    <button type="button" className="btn btn-primary" onClick={handleDelete}>Delete group</button>
+                    <button type="button" onClick={onHide} className="btn btn-danger">Cancel</button>
                 </ModalFooter>
             </Modal>
         </Fragment>
     )
 }
 
-export const AddRoomModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
+export const AddRoomModal = ({
+    show,
+    onHide,
+    onSubmit,
+    updatedValue,
+    ...props
+}: AdminAddRoomModalProps) => {
   return (
       <Fragment>
-          <Modal {...props}
+          <Modal 
+          show={show}
+          onHide={onHide}
+          {...props}
               size="lg"
               aria-labelledby="contained-modal-title-vcenter"
               centered
@@ -135,13 +141,13 @@ export const AddRoomModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detailed
               </Modal.Header>
               <Modal.Body>
                   <form id="addForm">
-                      <input type="text" required placeholder="Name" name="name" onChange={props.updatedvalue}></input>
-                      <input type="number" required placeholder="Number of seats" name="seats" onChange={props.updatedvalue}></input>
+                      <input type="text" required placeholder="Name" name="name" onChange={updatedValue}></input>
+                      <input type="number" required placeholder="Number of seats" name="seats" onChange={updatedValue}></input>
                   </form>
               </Modal.Body>
               <Modal.Footer>
-                  <button form="addForm" type="submit" className="btn btn-primary" onClick={props.onsubmit}>Add room</button>
-                  <button type="button" className="btn btn-danger" onClick={props.onHide}>Cancel</button>
+                  <button form="addForm" type="submit" className="btn btn-primary" onClick={onSubmit}>Add room</button>
+                  <button type="button" className="btn btn-danger" onClick={onHide}>Cancel</button>
               </Modal.Footer>
 
           </Modal>
@@ -149,10 +155,21 @@ export const AddRoomModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detailed
   )
 }
 
-export const UpdateRoomModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
+export const UpdateRoomModal = ({
+    show,
+    onHide,
+    onSubmit,
+    updatedValue,
+    roomName,
+    seats,
+    ...props
+}: AdminUpdateRoomModalProps) => {
   return (
       <Fragment>
-          <Modal {...props}
+          <Modal 
+          show={show}
+          onHide={onHide}
+          {...props}
               size="lg"
               aria-labelledby="contained-modal-title-vcenter"
               centered
@@ -162,24 +179,32 @@ export const UpdateRoomModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detai
               </ModalHeader>
               <ModalBody>
                   <form id="updateGroupForm">
-                      <input type="text" placeholder={props.roomname} onChange={props.updatedvalue} name="name"/>
-                      <input type="number" placeholder={props.seats} onChange={props.updatedvalue} name="seats"/>
+                      <input type="text" placeholder={roomName} onChange={updatedValue} name="name"/>
+                      <input type="number" placeholder={seats?.toString()} onChange={updatedValue} name="seats"/>
                   </form>
               </ModalBody>
               <ModalFooter>
-                  <button form="updateGroupForm" type="submit" className="btn btn-primary" onClick={props.onsubmit}>Update room</button>
-                  <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
-
+                  <button form="updateGroupForm" type="submit" className="btn btn-primary" onClick={onSubmit}>Update room</button>
+                  <button type="button" onClick={onHide} className="btn btn-danger">Cancel</button>
               </ModalFooter>
           </Modal>
       </Fragment>
   )
 }
 
-export const DeleteRoomModal = (props: JSX.IntrinsicAttributes & Omit<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode }) => {
+export const DeleteRoomModal = ({
+    show,
+    onHide,
+    room,
+    handleDelete,
+    ...props
+}: AdminDeleteRoomModalProps) => {
   return (
       <Fragment>
-          <Modal {...props}
+          <Modal 
+          show={show}
+          onHide={onHide}
+          {...props}
               size="lg"
               aria-labelledby="contained-modal-title-vcenter"
               centered
@@ -188,11 +213,11 @@ export const DeleteRoomModal = (props: JSX.IntrinsicAttributes & Omit<Pick<Detai
                   <h3>Delete room</h3>
               </ModalHeader>
               <ModalBody>
-                  <h6>Are you sure you want to delete room <b>{props.roomname}?</b></h6>
+                  <h6>Are you sure you want to delete room?</h6>
               </ModalBody>
               <ModalFooter>
-                  <button type="button" className="btn btn-primary" onClick={props.delete}>Delete room</button>
-                  <button type="button" onClick={props.onHide} className="btn btn-danger">Cancel</button>
+                  <button type="button" className="btn btn-primary" onClick={handleDelete}>Delete room</button>
+                  <button type="button" onClick={onHide} className="btn btn-danger">Cancel</button>
               </ModalFooter>
           </Modal>
       </Fragment>

@@ -30,7 +30,7 @@ const AdminGroups = () => {
         GetGroups()
     }, [])
 
-    const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const HandleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
         let intValue = 0;
         if (e.target.type === "number") {
@@ -199,23 +199,23 @@ const AdminGroups = () => {
             <AddGroupModal
                 show={showAddGroup}
                 onHide={() => { setShowAddGroup(false) }}
-                updatedvalue={HandleChange}
+                updatedValue={HandleChange}
                 onSubmit={PostGroup}
             />
             <UpdateGroupModal
                 show={showUppdateGroup}
                 onHide={() => setShowUpdateGroup(false)}
-                updatedvalue={HandleChange}
+                updatedValue={HandleChange}
                 onSubmit={UpdateGroup}
-                groupname={currentGroup?.name}
-                groupsize={currentGroup?.groupSize}
-                groupdivision={currentGroup?.department}
+                groupName={currentGroup?.name}
+                groupSize={currentGroup?.groupSize}
+                groupDivision={currentGroup?.department}
             />
             <DeleteGroupModal
                 show={showDeleteGroup}
                 onHide={() => setShowDeleteGroup(false)}
-                groupname={currentGroup?.name}
-                delete={() => { DeleteGroup(); setShowDeleteGroup(false) }}
+                groupName={currentGroup?.name}
+                handleDelete={() => { DeleteGroup(); setShowDeleteGroup(false) }}
             />
         </Container>
     )

@@ -1,14 +1,7 @@
-import { ChangeEvent, Fragment } from "react";
+import { Fragment } from "react";
 import { Modal} from "react-bootstrap";
+import { DeleteSingleBookingModalProps } from "./ModalProps";
 
-type DeleteSingleBookingModalProps = {
-  show: boolean;
-  onHide: () => void;
-  user: { date: string; name: string; roomId: number; password: string; };
-  delete: (e: any) =>  void;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  errorMessage: string;
-};
 
 export const DeleteSingleBookingModal = ({
   show,
