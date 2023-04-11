@@ -1,9 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
-import { AdminDeleteBookingModalProps, AdminGroup, AddBookingModalProps, AdminRoom, EditBookingModalProps, } from "../AdminComponents/AdminModalTypes";
+import { AdminDeleteBookingModalProps, AdminGroup, AddBookingModalProps, AdminRoom, EditBookingModalProps, AdminDeleteAllBookingsModalProps} from "../AdminComponents/AdminModalTypes";
 import Groups from "../../Groups/GroupInterfaces/groupsInterface";
-
-
 
 export const DeleteBookingModal = ({
   show,
@@ -155,3 +153,32 @@ export const EditBookingModal = ({
     </Fragment>
   );
 };
+
+export const DeleteAllBookinsgModal = ({
+  show,
+  onHide,
+  handleDelete,
+}: AdminDeleteAllBookingsModalProps) => {
+  return (
+    <Fragment>
+      <Modal
+        show={show} 
+        onHide={onHide}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <ModalHeader>
+          <h3>Delete Booking</h3>
+        </ModalHeader>
+        <ModalBody>
+          <h6>Are you sure you want to delete all old bookings?</h6>
+        </ModalBody>
+        <ModalFooter>
+          <button type="button" className="btn btn-primary" onClick={handleDelete}>Delete</button>
+          <button type="button" onClick={onHide} className="btn btn-danger">Cancel</button>
+        </ModalFooter>
+      </Modal>
+    </Fragment>
+  )
+}
