@@ -26,24 +26,22 @@ const AdminBooking = () => {
         GetSchedules();
     },[])
 
-    const GetWeeksTotal = () => {
-        FetchGetTotalWeeks(scheduleId)
-        .then((response) => {
-            setWeeks(response)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+    async function GetWeeksTotal() {
+        try {
+            const response: any = await FetchGetTotalWeeks(scheduleId);
+            setWeeks(response);
+            } catch(error) {
+                console.error(error);
+            }
     }
 
-    const GetSchedules = () => {
-        FetchGetSchedules()
-        .then((response) => {
+    async function GetSchedules() {
+        try {
+            const response: any = await FetchGetSchedules();
             setSchedules(response);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+        } catch(error) {
+            console.error(error);
+        }
     }
 
     const WeekLoop = () => {
