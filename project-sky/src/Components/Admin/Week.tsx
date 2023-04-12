@@ -20,7 +20,6 @@ const Week = () => {
                 <div className="d-flex gap-1">
                     <button className="adminButton" disabled={useEdit} type="button"onClick={() => setUseEdit(true)}>Edit</button>
                     <button className="adminButton" disabled={!useEdit} type="button" onClick={() => setUseEdit(false)}>Cancel</button>
-                    <button className="adminButton" disabled={true} type="button">Undo</button>
                     <button className="adminButton" disabled={!useEdit} form="editForm" type="submit" >Save changes</button>
                     <button className="adminButton" disabled={!useEdit} form="editForm" type="reset">Clear Table</button>
                 </div>

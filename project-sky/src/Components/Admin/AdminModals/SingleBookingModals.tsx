@@ -1,49 +1,7 @@
-import { FormEvent, Fragment, ChangeEvent, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
+import { AdminDeleteBookingModalProps, AdminGroup, AddBookingModalProps, AdminRoom, EditBookingModalProps, AdminDeleteAllBookingsModalProps} from "../AdminComponents/AdminModalTypes";
 import Groups from "../../Groups/GroupInterfaces/groupsInterface";
-
-interface AdminRoom {
-  id: number;
-  name: string;
-  seats: number;
-}
-
-type AdminGroup = {
-  id: number;
-  name: string;
-}
-
-type AdminBookingProps = {
-  id: number;
-  date: string;
-  groupName: string;
-  roomName: string;
-}
-
-type AddBookingModalProps = {
-  show: boolean;
-  onHide: () => void;
-  adminGroups: AdminGroup[];
-  adminRooms: AdminRoom[];
-  updatedvalue: (event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
-  onSubmit: () => void;
-};
-
-type AdminDeleteBookingModalProps = {
-  show: boolean;
-  onHide: () => void;
-  handleDelete: () => void;
-  booking?: AdminBookingProps;
-}
-
-type EditBookingModalProps = {
-  show: boolean;
-  groups: Groups[];
-  rooms: AdminRoom[];
-  updatedvalue: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
-  onSubmit: () => void;
-  onHide: () => void;
-};
 
 export const DeleteBookingModal = ({
   show,
@@ -79,10 +37,10 @@ export const DeleteBookingModal = ({
 export const AddBookingModal = ({
   show,
   onHide,
-  adminGroups,
-  adminRooms,
-  updatedvalue,
   onSubmit,
+  updatedvalue,
+  adminRooms,
+  adminGroups,
   ...props
 }: AddBookingModalProps) => {
   const [groups, setGroups] = useState<AdminGroup[]>([]);
@@ -133,11 +91,11 @@ export const AddBookingModal = ({
 
 export const EditBookingModal = ({ 
   show,
-  groups, 
-  rooms, 
-  updatedvalue, 
-  onSubmit, 
   onHide, 
+  onSubmit, 
+  updatedvalue, 
+  rooms, 
+  groups, 
   ...props }: EditBookingModalProps) => {
   const [selectedGroups, setSelectedGroups] = useState<Groups[]>([]);
   const [selectedRooms, setSelectedRooms] = useState<AdminRoom[]>([]);
@@ -195,3 +153,32 @@ export const EditBookingModal = ({
     </Fragment>
   );
 };
+
+export const DeleteAllBookinsgModal = ({
+  show,
+  onHide,
+  handleDelete,
+}: AdminDeleteAllBookingsModalProps) => {
+  return (
+    <Fragment>
+      <Modal
+        show={show} 
+        onHide={onHide}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <ModalHeader>
+          <h3>Delete Booking</h3>
+        </ModalHeader>
+        <ModalBody>
+          <h6>Are you sure you want to delete all old bookings?</h6>
+        </ModalBody>
+        <ModalFooter>
+          <button type="button" className="btn btn-primary" onClick={handleDelete}>Delete</button>
+          <button type="button" onClick={onHide} className="btn btn-danger">Cancel</button>
+        </ModalFooter>
+      </Modal>
+    </Fragment>
+  )
+}

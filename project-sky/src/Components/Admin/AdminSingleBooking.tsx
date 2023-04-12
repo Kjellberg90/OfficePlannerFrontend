@@ -5,7 +5,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { fetchAdminRooms } from "../../shared/Fetch/AdminRoomFetches";
 import { fetchAdminSingleRoomBooking, fetchDeleteBooking, fetchDeleteOldBookings, fetchPostNewBooking, fetchPutBooking } from "../../shared/Fetch/AdminSingleRoomBooking";
 import { fetchGroups } from "../../shared/Fetch/GroupFetches";
-import { AddBookingModal, DeleteBookingModal, EditBookingModal } from "./AdminModals/SingleBookingModals";
+import { AddBookingModal, DeleteAllBookinsgModal, DeleteBookingModal, EditBookingModal } from "./AdminModals/SingleBookingModals";
 
 
 interface SingleRoomBooking {
@@ -21,6 +21,7 @@ const AdminSingleBooking = () => {
   const [bookings, setbookings] = useState<SingleRoomBooking[]>([]);
   const [currentBooking, setcurrentBooking] = useState<SingleRoomBooking>();
   const [showDeleteBooking, setShowDeleteBooking] = useState(false);
+  const [showDeleteAllBookings, setShowDeleteAllBookings] = useState(false);
   const [showAddBooking, setshowAddBooking] = useState(false);
   const [showEditBooking, setshowEditBooking] = useState(false);
   const [groups, setGroups] = useState([]);
@@ -121,7 +122,9 @@ const HandleChange =  (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => 
                         </tbody>
                     </table>
                     <button type="button" className="btn btn-primary mt-3 mb-3  " onClick={() => setshowAddBooking(true)}>Add Booking</button>
-                    <button type="button" className="btn btn-danger mt-3 mb-3 ms-3" onClick={() => {DeleteOldBookings();}}>Delete Old Bookings</button>
+                    <button type="button" className="btn btn-danger mt-3 mb-3 ms-3" onClick={() => {
+                      setShowDeleteAllBookings(true);
+                    }}>Delete Old Bookings</button>
                 </Col>
             </Row>
             <DeleteBookingModal 
@@ -146,6 +149,11 @@ const HandleChange =  (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => 
                 rooms={rooms}
                 onSubmit={() => EditBooking()}
                 updatedvalue={HandleChange}
+            />
+            <DeleteAllBookinsgModal 
+            show={showDeleteAllBookings}
+            onHide={() => {setShowDeleteAllBookings(false)}}
+            handleDelete={() => {DeleteOldBookings(); setShowDeleteAllBookings(false)}}
             />
         </Container>
     )
