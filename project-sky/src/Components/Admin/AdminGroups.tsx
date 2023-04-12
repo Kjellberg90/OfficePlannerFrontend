@@ -60,7 +60,12 @@ const AdminGroups = () => {
 
     async function PostGroup() {
         const data = newValues
-        await fetchPostNewGroup(data)
+        try {
+            await fetchPostNewGroup(data);
+        } 
+        catch (ex){
+            console.log(ex);
+        }
     }
 
     async function UpdateGroup() {
@@ -71,7 +76,12 @@ const AdminGroups = () => {
                 division: currentGroup?.department
             })
         }
-        await fetchPutGroup(newValues, groupId)
+        try {
+            await fetchPutGroup(newValues, groupId)
+        }
+        catch (ex){
+            console.log(ex)
+        }
     }
 
     async function DeleteGroup() {
