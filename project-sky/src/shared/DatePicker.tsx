@@ -10,10 +10,11 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const Datepicker = () => {
 
-  const { currentDate, setcurrentDate } = useContext(DateContext)
+  const { currentDate, setcurrentDate } = useContext(DateContext);
+  const [ toggle, setToggle] = useState(true);
 
   const [showToggleBtn, setShowToggleBtn] = useState(false);
-  const { toggle, toggleView } = useContext(DateContext)
+  // const { toggle, toggleView } = useContext(DateContext)
   const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {
@@ -64,7 +65,7 @@ const Datepicker = () => {
 
   const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    toggleView!();
+    setToggle(!toggle);
   }
 
   const toggleButton = () => {
