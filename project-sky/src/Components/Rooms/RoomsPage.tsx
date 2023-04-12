@@ -5,7 +5,7 @@ import { Col, Row } from "react-bootstrap";
 import Stack from "react-bootstrap/esm/Stack";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faXmark, faTrash } from "@fortawesome/free-solid-svg-icons"
-import SingleUser from "./SingleUser";
+import SingleUser from "./RoomsInterfaces/SingleUser";
 import { DeleteSingleBookingModal } from "./Modals/DeleteSingleBookingModal";
 import IdleUser from "../../shared/IdleUser/IdleUser";
 import { RoomMapModal } from "./Modals/RoomsMapModal";
