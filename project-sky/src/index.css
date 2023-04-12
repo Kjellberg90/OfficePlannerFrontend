@@ -81,6 +81,8 @@ a :hover {
 }
 
 .epirocLogo {
+  background-color: var(--primary-color);
+  color: var(--primary-color);
   filter: drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.3))
 }
 
