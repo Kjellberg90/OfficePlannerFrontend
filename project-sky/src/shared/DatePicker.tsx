@@ -10,10 +10,10 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const Datepicker = () => {
 
-  const { currentDate, setcurrentDate } = useContext(DateContext)
+  const { currentDate, setcurrentDate } = useContext(DateContext);
+  const [ toggle, setToggle] = useState(true);
 
   const [showToggleBtn, setShowToggleBtn] = useState(false);
-  const { toggle, toggleView } = useContext(DateContext)
   const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const Datepicker = () => {
 
   const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    toggleView!();
+    setToggle(!toggle);
   }
 
   const toggleButton = () => {
@@ -74,12 +74,12 @@ const Datepicker = () => {
         {toggle ?
           <>
             <FontAwesomeIcon icon={faToggleOff} />
-            <label className="givemespace toggle-off">Day</label>
+            <span className="givemespace toggle-off">Day</span>
           </>
           :
           <>
             <FontAwesomeIcon icon={faToggleOn} />
-            <label className="givemespace2 toggle-on">Week</label>
+            <span className="givemespace2 toggle-on">Week</span>
           </>
         }
       </button>
@@ -89,6 +89,9 @@ const Datepicker = () => {
 
   return (
     <Row className="flex-wrap">
+      <Col xs={12} md={3} className="d-flex align-items-center mr-md-2">
+        {showToggleBtn ? toggleButton() : ""}
+      </Col>
       <Col className="picker justify-content-center align-self-center d-flex order-md-2" xs={12} md={7} lg={5} xl={3}>
         <FontAwesomeIcon icon={faSquareCaretLeft} className="fa-2xl calBtn" onClick={decrementDate} />
         <DatePicker
@@ -101,9 +104,6 @@ const Datepicker = () => {
           calendarClassName="calendarInput"
         />
         <FontAwesomeIcon icon={faSquareCaretRight} className="fa-2xl calBtn" onClick={incrementDate} />
-      </Col>
-      <Col xs={12} md={3} className="d-flex align-items-center mr-md-2">
-        {showToggleBtn ? toggleButton() : ""}
       </Col>
     </Row>
   )
