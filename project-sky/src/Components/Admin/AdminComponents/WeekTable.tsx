@@ -1,19 +1,19 @@
 import { Fragment, useEffect, useState } from "react";
 import { fetchGroupsOverviewWeek } from "../../../shared/Fetch/AdminHomeFetches";
-import RoomOverview from "../../Rooms/RoomOverview";
+import RoomOverview from "../../Rooms/RoomsInterfaces/RoomOverview";
 
-const WeekOverview = (props: {weekNumber: number, scheduleId: number}) => {
+const WeekOverview = (props: { weekNumber: number, scheduleId: number }) => {
     const [rooms, setRooms] = useState([]);
 
     useEffect(() => {
         RoomOverviewFetch();
-    },[props.weekNumber])
+    }, [props.weekNumber])
 
     async function RoomOverviewFetch() {
-      const response: any = await fetchGroupsOverviewWeek(props.weekNumber, props.scheduleId)
-      setRooms(response)
+        const response: any = await fetchGroupsOverviewWeek(props.weekNumber, props.scheduleId)
+        setRooms(response)
     }
-    
+
     return (
         <Fragment>
             <table className="adminTable adminHomePageTable">
@@ -28,16 +28,18 @@ const WeekOverview = (props: {weekNumber: number, scheduleId: number}) => {
                     </tr>
                 </thead>
                 <tbody className="adminTableBody">
-                    {rooms.map((room: RoomOverview) => { return (
-                        <tr key={room.roomName}>
-                            <th className="adminHomeTableRooms" scope="row">{room.roomName}</th>
-                            <td>{room.groupNames[0]}</td>
-                            <td>{room.groupNames[1]}</td>
-                            <td>{room.groupNames[2]}</td>
-                            <td>{room.groupNames[3]}</td>
-                            <td>{room.groupNames[4]}</td>
-                        </tr>                                
-                    )})}
+                    {rooms.map((room: RoomOverview) => {
+                        return (
+                            <tr key={room.roomName}>
+                                <th className="adminHomeTableRooms" scope="row">{room.roomName}</th>
+                                <td>{room.groupNames[0]}</td>
+                                <td>{room.groupNames[1]}</td>
+                                <td>{room.groupNames[2]}</td>
+                                <td>{room.groupNames[3]}</td>
+                                <td>{room.groupNames[4]}</td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </table>
         </Fragment>

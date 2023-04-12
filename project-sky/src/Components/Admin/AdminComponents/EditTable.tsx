@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, ChangeEvent, SyntheticEvent } from "react";
 import Group from "../../Groups/GroupInterfaces/Group";
-import RoomOverview from "../../Rooms/RoomOverview";
+import RoomOverview from "../../Rooms/RoomsInterfaces/RoomOverview";
 import { fetchGroupsOverviewWeek } from "../../../shared/Fetch/AdminHomeFetches";
 import { fetchGroups } from "../../../shared/Fetch/AdminGroupFetches";
 import { FetchPutBookings } from "../../../shared/Fetch/AdminBookingFetches";
@@ -9,24 +9,24 @@ const EditTable = (props: { weekNumber: number; scheduleId: number }) => {
     const [rooms, setRooms] = useState<RoomOverview[]>([]);
     const [groups, setGroups] = useState<string[]>([]);
 
-    
-    
+
+
     const RoomOverviewFetch = useCallback(async () => {
         const data = await fetchGroupsOverviewWeek(props.weekNumber, props.scheduleId);
         setRooms(data);
-      }, [props.weekNumber, props.scheduleId]);
-      
-      const GroupFetch = useCallback(async () => {
+    }, [props.weekNumber, props.scheduleId]);
+
+    const GroupFetch = useCallback(async () => {
         const data = await fetchGroups();
         const nameList: string[] = data.map((group: Group) => group.name);
         setGroups(nameList);
-      }, [setGroups]);
+    }, [setGroups]);
 
-        useEffect(() => {
-            RoomOverviewFetch();
-            GroupFetch();
-        }, [RoomOverviewFetch, GroupFetch])
-    
+    useEffect(() => {
+        RoomOverviewFetch();
+        GroupFetch();
+    }, [RoomOverviewFetch, GroupFetch])
+
 
     const HandleChange = (e: ChangeEvent<HTMLSelectElement>, roomIndex: number, dayIndex: number) => {
         const value = e.target.value;
@@ -57,12 +57,12 @@ const EditTable = (props: { weekNumber: number; scheduleId: number }) => {
 
     const HandleSubmit = () => {
         FetchPutBookings(rooms, props.weekNumber)
-        .then((res) => {
-            console.log("response:", res)
-        })
-        .catch((err) => {
-            console.log("error:", err)
-        })
+            .then((res) => {
+                console.log("response:", res)
+            })
+            .catch((err) => {
+                console.log("error:", err)
+            })
         debugger
     }
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import RoomOverview from "../Rooms/RoomOverview";
+import RoomOverview from "../Rooms/RoomsInterfaces/RoomOverview";
 import { format } from "date-fns";
 import { fetchGroupsOverviewDate } from "../../shared/Fetch/AdminHomeFetches";
 
@@ -10,15 +10,15 @@ const AdminHomePage = () => {
 
     const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"))
 
-      async function RoomOverviewFetch() {
+    async function RoomOverviewFetch() {
         const response: any = await fetchGroupsOverviewDate(date, 1)
         setRooms(response)
-      }
+    }
 
     useEffect(() => {
         RoomOverviewFetch();
-    },[])
-        
+    }, [])
+
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         RoomOverviewFetch();
@@ -33,7 +33,7 @@ const AdminHomePage = () => {
                 </Col>
                 <Col>
                     <form onSubmit={onSubmit} className="d-flex w-100 justify-content-end">
-                        <input type="text" value={date} onChange={(e) => {setDate(e.target.value)}} className="adminDateInput"></input>
+                        <input type="text" value={date} onChange={(e) => { setDate(e.target.value) }} className="adminDateInput"></input>
                         <button type="submit" className="btn btn-secondary">Enter</button>
                     </form>
                 </Col>
@@ -54,24 +54,26 @@ const AdminHomePage = () => {
                             </tr>
                         </thead>
                         <tbody className="adminTableBody">
-                            {rooms.map((room: RoomOverview) => { return (
-                                <tr key={room.roomName}>
-                                    <th className="adminHomeTableRooms" scope="row">{room.roomName}</th>
-                                    <td>{room.groupNames[0]}</td>
-                                    <td>{room.groupNames[1]}</td>
-                                    <td>{room.groupNames[2]}</td>
-                                    <td>{room.groupNames[3]}</td>
-                                    <td>{room.groupNames[4]}</td>
-                                    <td>{room.groupNames[5]}</td>
-                                    <td>{room.groupNames[6]}</td>
-                                </tr>                                
-                            )})}
+                            {rooms.map((room: RoomOverview) => {
+                                return (
+                                    <tr key={room.roomName}>
+                                        <th className="adminHomeTableRooms" scope="row">{room.roomName}</th>
+                                        <td>{room.groupNames[0]}</td>
+                                        <td>{room.groupNames[1]}</td>
+                                        <td>{room.groupNames[2]}</td>
+                                        <td>{room.groupNames[3]}</td>
+                                        <td>{room.groupNames[4]}</td>
+                                        <td>{room.groupNames[5]}</td>
+                                        <td>{room.groupNames[6]}</td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                 </Col>
             </Row>
         </Container>
-        
+
     )
 }
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, ChangeEvent, useCallback } from "react";
-import RoomInfo from "./RoomInfo";
+import RoomInfo from "./RoomsInterfaces/RoomInfo";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
 import Stack from "react-bootstrap/esm/Stack";
@@ -31,25 +31,33 @@ const RoomsPage = () => {
   IdleUser(); //Sets Idle Timer
 
   const getRoomInfo = useCallback(async () => {
-    const response = await fetchRooms(currentDate);
-    setRooms(response);
+    try {
+      const response = await fetchRooms(currentDate);
+      setRooms(response);
+    } catch (error) {
+      console.error(error);
+    }
   }, [currentDate]);
 
   useEffect(() => {
     getRoomInfo()
-  }, [getRoomInfo])
+  }, [getRoomInfo]);
   
   useEffect(() => {
     setisOpenBook(NaN)
-  }, [currentDate])
+  }, [currentDate]);
   
   useEffect(() => {
     setisOpenDrop(NaN)
-  }, [currentDate])
+  }, [currentDate]);
 
-  async function getSingleBookings(roomId: number) {
-    const response: any = await fetchSingleBookings(currentDate, roomId)
-    setUsers(response)
+  async function GetSingleBookings(roomId: number) {
+    try {
+      const response: any = await fetchSingleBookings(currentDate, roomId);
+      setUsers(response);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const handleOpenBook = (roomId: number) => {
@@ -60,7 +68,7 @@ const RoomsPage = () => {
   const handleOpenDrop = (roomId: number) => {
     setisOpenDrop(roomId)
     setisOpenBook(NaN)
-    getSingleBookings(roomId)
+    GetSingleBookings(roomId)
   }
 
   const handleOpenMap = () => {
@@ -76,10 +84,10 @@ const RoomsPage = () => {
     e.preventDefault()
     setisOpenBook(NaN)
 
-    postSingleBooking()
+    PostSingleBooking()
   }
 
-  const postSingleBooking = async () => {
+ async function PostSingleBooking() {
     const postData = { "roomId": id, "date": currentDate, "name": name, "password": pin }
     try {
       await fetchPostSingleBookings(postData)
