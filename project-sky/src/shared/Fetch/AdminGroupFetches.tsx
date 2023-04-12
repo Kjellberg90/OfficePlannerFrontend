@@ -18,21 +18,19 @@ export const fetchGroups = () => {
 }
 
 export const fetchPostNewGroup = (data: any) => {
-  var result = axios.post(`${instance}api/Group/AddGroup`, data, {
+  var result = axios.post(`${instance}api/AdminGroup/AddGroup`, data, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       Authorization: "Bearer " + GetCookie("token"),
     }
-  }
-  )
-    .catch(err => console.log(err))
+  })
   
-    return result
+  return result
 }
 
 export const fetchDeleteGroup = (currentGroupId: number) => {
-  var result = axios.delete(`${instance}api/Group/DeleteGroup/${currentGroupId}`, {
+  var result = axios.delete(`${instance}api/AdminGroup/DeleteGroup/${currentGroupId}`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -52,8 +50,7 @@ export const fetchPutGroup = (data: any, groupId: number) => {
       Authorization: "Bearer " + GetCookie("token"),
     }
   })
-  .catch(err => console.log(err))
 
-  return result
+  return result;
 }
 
