@@ -19,8 +19,8 @@ const GroupInfoPage = () => {
   const [roomName, setRoomName] = useState<string>();
 
   interface Week {
-    week: number
-    day: string
+    week: number;
+    day: string;
   }
 
   var { currentDate } = useContext(DateContext)
