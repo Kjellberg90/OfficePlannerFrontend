@@ -27,6 +27,7 @@ export const AddGroupModal = ({
                         <input type="text" required placeholder="Name" name="name" onChange={updatedValue}></input>
                         <input type="number" required placeholder="Team size" name="groupSize" onChange={updatedValue}></input>
                         <select name="division" required onChange={updatedValue}>
+                            <option disabled selected>R&D team</option>
                             <option value="A">R&D A</option>
                             <option value="B">R&D B</option>
                             <option value="C">R&D C</option>
