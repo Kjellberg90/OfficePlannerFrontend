@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Group from "../Groups/GroupInterfaces/Group";
 import { AddGroupModal, UpdateGroupModal, DeleteGroupModal } from "./AdminModals/AdminModals";
@@ -63,8 +63,8 @@ const AdminGroups = () => {
         try {
             await fetchPostNewGroup(data);
         } 
-        catch (ex){
-            console.log(ex);
+        catch (error){
+            console.error(error);
         }
     }
 
@@ -74,20 +74,24 @@ const AdminGroups = () => {
             setNewValues({
                 ...newValues,
                 division: currentGroup?.department
-            })
+            });
         }
         try {
-            await fetchPutGroup(newValues, groupId)
+            await fetchPutGroup(newValues, groupId);
         }
-        catch (ex){
-            console.log(ex)
+        catch (error){
+            console.error(error);
         }
     }
 
     async function DeleteGroup() {
-        const Id: any = currentGroup?.id
-        await fetchDeleteGroup(Id)
-            .then(() => GetGroups())
+        try {
+            const Id: any = currentGroup?.id;
+            await fetchDeleteGroup(Id);
+            await GetGroups();
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     const GetOrderedGroups = () => {

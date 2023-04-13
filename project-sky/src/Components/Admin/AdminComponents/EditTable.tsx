@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, ChangeEvent, SyntheticEvent } from "react";
+import { useState, useEffect, useCallback, ChangeEvent } from "react";
 import Group from "../../Groups/GroupInterfaces/Group";
 import RoomOverview from "../../Rooms/RoomOverview";
 import { fetchGroupsOverviewWeek } from "../../../shared/Fetch/AdminHomeFetches";
@@ -9,26 +9,28 @@ const EditTable = (props: { weekNumber: number; scheduleId: number }) => {
     const [rooms, setRooms] = useState<RoomOverview[]>([]);
     const [groups, setGroups] = useState<string[]>([]);
 
-    
-    
     const RoomOverviewFetch = useCallback(async () => {
         const data = await fetchGroupsOverviewWeek(props.weekNumber, props.scheduleId);
         setRooms(data);
-      }, [props.weekNumber, props.scheduleId]);
-      
-      const GroupFetch = useCallback(async () => {
-        const data = await fetchGroups();
-        const nameList: string[] = data.map((group: Group) => group.name);
-        setGroups(nameList);
-      }, [setGroups]);
+    }, [props.weekNumber, props.scheduleId]);
 
-        useEffect(() => {
-            RoomOverviewFetch();
-            GroupFetch();
-        }, [RoomOverviewFetch, GroupFetch])
-    
+    const GroupFetch = useCallback(async () => {
+        try {
+            const data = await fetchGroups();
+            const nameList: string[] = data.map((group: Group) => group.name);
+            setGroups(nameList);
+        } catch (error) {
+            console.error(error);
+        }
+    }, [setGroups]);
 
-    const HandleChange = (e: ChangeEvent<HTMLSelectElement>, roomIndex: number, dayIndex: number) => {
+    useEffect(() => {
+        RoomOverviewFetch();
+        GroupFetch();
+    }, [RoomOverviewFetch, GroupFetch])
+
+
+    const handleChange = (e: ChangeEvent<HTMLSelectElement>, roomIndex: number, dayIndex: number) => {
         const value = e.target.value;
 
         var newValues = rooms[roomIndex];
@@ -39,7 +41,7 @@ const EditTable = (props: { weekNumber: number; scheduleId: number }) => {
         setRooms(newRooms);
     }
 
-    const HandleReset = (e: ChangeEvent<HTMLFormElement>) => {
+    const handleReset = (e: ChangeEvent<HTMLFormElement>) => {
         var roomList = new Array<RoomOverview>();
 
         for (let i = 0; i < rooms.length; i++) {
@@ -48,27 +50,23 @@ const EditTable = (props: { weekNumber: number; scheduleId: number }) => {
                 roomName: rooms[i].roomName,
                 groupNames: ["", "", "", "", ""]
             }
-
-
             roomList.push(room);
         }
         setRooms(roomList);
     }
 
-    const HandleSubmit = () => {
-        FetchPutBookings(rooms, props.weekNumber)
-        .then((res) => {
-            console.log("response:", res)
-        })
-        .catch((err) => {
-            console.log("error:", err)
-        })
-        debugger
+    async function handleSubmit() {
+        try {
+            const res = await FetchPutBookings(rooms, props.weekNumber);
+            console.log("response:", res);
+            //   debugger;
+        } catch (err) {
+            console.log("error:", err);
+        }
     }
 
-
     return (
-        <form id="editForm" onReset={HandleReset} onSubmit={HandleSubmit}>
+        <form id="editForm" onReset={handleReset} onSubmit={handleSubmit}>
             <table className="adminTable adminHomePageTable">
                 <thead>
                     <tr className="adminTableHeader">
@@ -89,7 +87,7 @@ const EditTable = (props: { weekNumber: number; scheduleId: number }) => {
                                 {room.groupNames.map((group: string, dayIndex: number) => {
                                     return (
                                         <td key={dayIndex}>
-                                            <select name="groupNames" value={group} onChange={(e: ChangeEvent<HTMLSelectElement>) => HandleChange(e, roomIndex, dayIndex)}>
+                                            <select name="groupNames" value={group} onChange={(e: ChangeEvent<HTMLSelectElement>) => handleChange(e, roomIndex, dayIndex)}>
                                                 <option value={""}></option>
                                                 {groups.map((groupName: string) => {
                                                     return (

@@ -10,8 +10,12 @@ const WeekOverview = (props: {weekNumber: number, scheduleId: number}) => {
     },[props.weekNumber])
 
     async function RoomOverviewFetch() {
-      const response: any = await fetchGroupsOverviewWeek(props.weekNumber, props.scheduleId)
-      setRooms(response)
+        try {
+            const response: any = await fetchGroupsOverviewWeek(props.weekNumber, props.scheduleId)
+            setRooms(response);
+        } catch (error) {
+            console.error(error);
+        }
     }
     
     return (
