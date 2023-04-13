@@ -42,7 +42,8 @@ export const FetchGetTotalWeeks = async (scheduleId: number) => {
       `${instance}api/Schedule/schedule-weeks/${scheduleId}`, 
     {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + GetCookie("token"),
       }
     } 
     );
