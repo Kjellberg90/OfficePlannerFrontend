@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, ChangeEvent } from "react";
 import Group from "../../Groups/GroupInterfaces/Group";
-import RoomOverview from "../../Rooms/RoomOverview";
+import RoomOverview from "../../Rooms/RoomsInterfaces/RoomOverview";
 import { fetchGroupsOverviewWeek } from "../../../shared/Fetch/AdminHomeFetches";
 import { fetchGroups } from "../../../shared/Fetch/AdminGroupFetches";
 import { FetchPutBookings } from "../../../shared/Fetch/AdminBookingFetches";

@@ -51,7 +51,7 @@ const LoginPage = () => {
   }
   
   var CreateLoginToken = (data: any) => {
-    const token = data.token
+    const token = data.token;
     const expires = new Date(Date.now() + 86400 * 1000).toUTCString();
     document.cookie =  `token=${token};expires=${expires + 86400}`
   }

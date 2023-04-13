@@ -1,14 +1,14 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
 
 export type User = {
-  id: string,
-  name: string,
-  role: string
+  id: string;
+  name: string;
+  role: string;
 }
 
 export interface UserContextInterface {
-  user: User,
-  setUser: Dispatch<SetStateAction<User>>
+  user: User;
+  setUser: Dispatch<SetStateAction<User>>;
 }
 
 
@@ -16,7 +16,7 @@ export interface UserContextInterface {
 export const UserContext = createContext<Partial<UserContextInterface>>({})
 
 type UserProvideProps = {
-  children : ReactNode
+  children : ReactNode;
 }
 
 export default function UserProvider({children}: UserProvideProps){
