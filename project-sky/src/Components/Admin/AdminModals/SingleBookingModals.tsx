@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, ChangeEvent } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
 import { AdminDeleteBookingModalProps, AdminGroup, AddBookingModalProps, AdminRoom, EditBookingModalProps, AdminDeleteAllBookingsModalProps } from "./AdminModalTypes";
 import Groups from "../../Groups/GroupInterfaces/groupsInterface";
@@ -45,11 +45,25 @@ export const AddBookingModal = ({
 }: AddBookingModalProps) => {
   const [groups, setGroups] = useState<AdminGroup[]>([]);
   const [rooms, setRooms] = useState<AdminRoom[]>([]);
+  const [dateValidation, setDateValidation] = useState<boolean>(true);
+  const [dateValidationMessage, setDateValidationMessage] = useState<string>('');
 
   useEffect(() => {
     setGroups(adminGroups);
     setRooms(adminRooms);
   }, [adminGroups, adminRooms]);
+
+const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const date = e.target.value;
+  const isValid = !!date; //Date is not empty
+  setDateValidation(isValid);
+  updatedvalue(e);
+  if (!isValid) {
+    setDateValidationMessage('Date is required.');
+  } else {
+    setDateValidationMessage('');
+  }
+}
 
   return (
     <Fragment>
@@ -77,7 +91,10 @@ export const AddBookingModal = ({
                 })
               }
             </select>
-            <input type="date" name="date" onChange={updatedvalue} />
+            <input type="date" name="date" onChange={handleDateChange} />
+            {!dateValidation && (
+              <div style={{ color: 'red' }}>{dateValidationMessage}</div>
+            )}
           </form>
         </ModalBody>
         <ModalFooter>
