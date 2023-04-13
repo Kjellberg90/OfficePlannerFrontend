@@ -1,7 +1,8 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, ChangeEvent } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
 import { AdminDeleteBookingModalProps, AdminGroup, AddBookingModalProps, AdminRoom, EditBookingModalProps, AdminDeleteAllBookingsModalProps } from "./AdminModalTypes";
 import Groups from "../../Groups/GroupInterfaces/groupsInterface";
+import { useOutlet } from "react-router-dom";
 
 export const DeleteBookingModal = ({
   show,
@@ -77,7 +78,7 @@ export const AddBookingModal = ({
                 })
               }
             </select>
-            <input type="date" name="date" onChange={updatedvalue} />
+            <input required type="date" name="date" onChange={updatedvalue} />
           </form>
         </ModalBody>
         <ModalFooter>
