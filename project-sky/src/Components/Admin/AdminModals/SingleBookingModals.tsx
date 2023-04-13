@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState, ChangeEvent } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
 import { AdminDeleteBookingModalProps, AdminGroup, AddBookingModalProps, AdminRoom, EditBookingModalProps, AdminDeleteAllBookingsModalProps } from "./AdminModalTypes";
 import Groups from "../../Groups/GroupInterfaces/groupsInterface";
+import { useOutlet } from "react-router-dom";
 
 export const DeleteBookingModal = ({
   show,
@@ -45,19 +46,11 @@ export const AddBookingModal = ({
 }: AddBookingModalProps) => {
   const [groups, setGroups] = useState<AdminGroup[]>([]);
   const [rooms, setRooms] = useState<AdminRoom[]>([]);
-  const [, setDateValidation] = useState<boolean>(true);
 
   useEffect(() => {
     setGroups(adminGroups);
     setRooms(adminRooms);
   }, [adminGroups, adminRooms]);
-
-const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-  const date = e.target.value;
-  const isValid = !!date; //Date is not empty
-  setDateValidation(isValid);
-  updatedvalue(e);
-}
 
   return (
     <Fragment>
@@ -85,7 +78,7 @@ const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
                 })
               }
             </select>
-            <input required type="date" name="date" onChange={handleDateChange} />
+            <input required type="date" name="date" onChange={updatedvalue} />
           </form>
         </ModalBody>
         <ModalFooter>
