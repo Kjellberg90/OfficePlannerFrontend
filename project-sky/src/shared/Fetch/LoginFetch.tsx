@@ -11,5 +11,5 @@ export const fetchLogin = async (data: any) => {
       }
     }
   );
-    return response.data;
+    return response;
 }
