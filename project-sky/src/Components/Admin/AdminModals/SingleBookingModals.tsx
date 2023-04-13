@@ -45,8 +45,7 @@ export const AddBookingModal = ({
 }: AddBookingModalProps) => {
   const [groups, setGroups] = useState<AdminGroup[]>([]);
   const [rooms, setRooms] = useState<AdminRoom[]>([]);
-  const [dateValidation, setDateValidation] = useState<boolean>(true);
-  const [dateValidationMessage, setDateValidationMessage] = useState<string>('');
+  const [, setDateValidation] = useState<boolean>(true);
 
   useEffect(() => {
     setGroups(adminGroups);
@@ -58,11 +57,6 @@ const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
   const isValid = !!date; //Date is not empty
   setDateValidation(isValid);
   updatedvalue(e);
-  if (!isValid) {
-    setDateValidationMessage('Date is required.');
-  } else {
-    setDateValidationMessage('');
-  }
 }
 
   return (
@@ -91,10 +85,7 @@ const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
                 })
               }
             </select>
-            <input type="date" name="date" onChange={handleDateChange} />
-            {!dateValidation && (
-              <div style={{ color: 'red' }}>{dateValidationMessage}</div>
-            )}
+            <input required type="date" name="date" onChange={handleDateChange} />
           </form>
         </ModalBody>
         <ModalFooter>
