@@ -134,7 +134,7 @@ export const EditBookingModal = ({
                 </option>
               ))}
             </select>
-            <input type="date" name="date" onChange={updatedvalue} />
+            <input required type="date" name="date" onChange={updatedvalue} />
           </form>
         </ModalBody>
         <ModalFooter>

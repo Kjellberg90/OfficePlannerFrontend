@@ -87,7 +87,7 @@ const GroupInfoPage = () => {
               <h5>{currentWeek?.day}</h5>
               <Col className="d-flex align-items-center">
                 {roomName &&
-                  <SmallerMap name={name} />
+                  <SmallerMap name={name} style={{ height: "100%", width: "100%" }} />
                 }
               </Col>
 
