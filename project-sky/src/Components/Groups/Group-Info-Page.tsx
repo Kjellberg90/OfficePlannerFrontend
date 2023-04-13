@@ -19,8 +19,8 @@ const GroupInfoPage = () => {
   const [roomName, setRoomName] = useState<string>();
 
   interface Week {
-    week: number
-    day: string
+    week: number;
+    day: string;
   }
 
   var { currentDate } = useContext(DateContext)
@@ -41,7 +41,7 @@ const GroupInfoPage = () => {
     getGroupInfo(currentDate, groupId)
   }, [currentDate, groupId])
 
-  async function getWeeklyRoomSchedule(currentDate: string, groupId: string) {
+  async function GetWeeklyRoomSchedule(currentDate: string, groupId: string) {
     try {
       const response: any = await fetchWeeklyGroupSchedule(currentDate, groupId);
       setweeklySchedule(response);
@@ -51,17 +51,17 @@ const GroupInfoPage = () => {
   }
 
   useEffect(() => {
-    getWeeklyRoomSchedule(currentDate, groupId)
+    GetWeeklyRoomSchedule(currentDate, groupId)
   }, [currentDate, groupId])
 
 
-  async function getWeekAndDay(currentDate: string) {
+  async function GetWeekAndDay(currentDate: string) {
     const response: any = await fetchWeekAndDay(currentDate)
     setcurrentWeek(response)
   }
 
   useEffect(() => {
-    getWeekAndDay(currentDate)
+    GetWeekAndDay(currentDate)
   }, [currentDate])
 
   const name = roomName!;

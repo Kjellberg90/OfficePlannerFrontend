@@ -8,12 +8,16 @@ const AdminHomePage = () => {
 
     const [rooms, setRooms] = useState([]);
 
-    const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"))
+    const [date, setDate] = useState(format(new Date, "yyyy-MM-dd"));
 
-    async function RoomOverviewFetch() {
-        const response: any = await fetchGroupsOverviewDate(date, 1)
-        setRooms(response)
-    }
+      async function RoomOverviewFetch() {
+        try {
+            const response: any = await fetchGroupsOverviewDate(date, 1);
+            setRooms(response);
+        } catch (error) {
+            console.error(error);
+        }
+      }
 
     useEffect(() => {
         RoomOverviewFetch();
@@ -23,7 +27,6 @@ const AdminHomePage = () => {
         e.preventDefault();
         RoomOverviewFetch();
     }
-
 
     return (
         <Container className="adminHomePageContainer">
@@ -73,7 +76,6 @@ const AdminHomePage = () => {
                 </Col>
             </Row>
         </Container>
-
     )
 }
 

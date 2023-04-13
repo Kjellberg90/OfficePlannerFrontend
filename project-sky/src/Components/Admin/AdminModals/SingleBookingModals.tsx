@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
-import { AdminDeleteBookingModalProps, AdminGroup, AddBookingModalProps, AdminRoom, EditBookingModalProps, AdminDeleteAllBookingsModalProps} from "../AdminComponents/AdminModalTypes";
+import { AdminDeleteBookingModalProps, AdminGroup, AddBookingModalProps, AdminRoom, EditBookingModalProps, AdminDeleteAllBookingsModalProps } from "./AdminModalTypes";
 import Groups from "../../Groups/GroupInterfaces/groupsInterface";
 
 export const DeleteBookingModal = ({
@@ -12,7 +12,7 @@ export const DeleteBookingModal = ({
   return (
     <Fragment>
       <Modal
-        show={show} 
+        show={show}
         onHide={onHide}
         booking={booking}
         size="lg"
@@ -89,13 +89,13 @@ export const AddBookingModal = ({
   )
 }
 
-export const EditBookingModal = ({ 
+export const EditBookingModal = ({
   show,
-  onHide, 
-  onSubmit, 
-  updatedvalue, 
-  rooms, 
-  groups, 
+  onHide,
+  onSubmit,
+  updatedvalue,
+  rooms,
+  groups,
   ...props }: EditBookingModalProps) => {
   const [selectedGroups, setSelectedGroups] = useState<Groups[]>([]);
   const [selectedRooms, setSelectedRooms] = useState<AdminRoom[]>([]);
@@ -162,7 +162,7 @@ export const DeleteAllBookinsgModal = ({
   return (
     <Fragment>
       <Modal
-        show={show} 
+        show={show}
         onHide={onHide}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
