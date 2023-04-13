@@ -1,12 +1,11 @@
-import React from "react";
-import { FunctionComponent } from "react";
-import { Col } from "react-bootstrap";
+import React, { SVGProps } from "react";
 
-interface NameProp {
+interface NameProp extends SVGProps<SVGSVGElement>{
     name: string,
+    style?: React.CSSProperties;
 }
 
-const SmallerMap: FunctionComponent<NameProp> = ({name}) => {
+const SmallerMap = ({name, style}: NameProp) => {
 
 let room = document.getElementsByClassName(`${name}`)
 for (let i = 0; room[i]; i++) {
