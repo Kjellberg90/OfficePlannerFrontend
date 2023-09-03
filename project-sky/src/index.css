@@ -80,7 +80,7 @@ a :hover {
   align-items: center;
 }
 
-.epirocLogo {
+.companyLogo {
   filter: drop-shadow(2px 3px 1.5px rgba(0, 0, 0, 0.3))
 }
 
@@ -553,7 +553,7 @@ tspan {
   }
 
 
-  .epirocLogo {
+  .companyLogo {
     margin-left: 60px;
   }
 
@@ -574,7 +574,7 @@ tspan {
     margin-bottom: -4rem;
   }
 
-  .epirocLogo {
+  .companyLogo {
     margin-left: 60px;
   }
 

@@ -1,6 +1,6 @@
 {
   "short_name": "Office Planner",
-  "name": "Epiroc Office Planner",
+  "name": "Office Planner",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,7 +8,7 @@
       "type": "image/x-icon"
     },
     {
-      "src": "epiroclogo.svg",
+      "src": "companylogo.svg",
       "type": "image/svg+xml"
     }
   ],
