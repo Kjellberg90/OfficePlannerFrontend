@@ -21,7 +21,7 @@ const Datepicker = () => {
   }, [currentDate])
 
   useEffect(() => {
-    if (window.location.href === "https://epiroc-office-planner.azurewebsites.net/info") {
+    if (window.location.href === "https://company-office-planner.azurewebsites.net/info") {
       setShowToggleBtn(true);
     }
     else {

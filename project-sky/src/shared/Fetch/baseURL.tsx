@@ -1,3 +1,2 @@
-//const instance =  'https://localhost:7054/'
-const instance =  'https://epiroc-office-planner-backend.azurewebsites.net/'
+const instance =  'https://localhost:7054/'
 export default instance
